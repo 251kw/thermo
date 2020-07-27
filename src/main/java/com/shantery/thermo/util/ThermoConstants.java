@@ -15,11 +15,23 @@ public class ThermoConstants {
 	/** 起動時やTOPページに戻るときに使う変数 **/
 	public static final String TOP = "/";
 	/** ユーザー一括登録ボタンを押された時  **/
-	public static final String USERS_INPUT_MULTI = "/userInfoMultiInpu";
+	public static final String USERS_MULTI_SET = "/users_multi_set";
+	/** ユーザー一括登録でファイルをアップロードした時  **/
+	public static final String USERS_MULTI_GET = "/users_multi_get";
+	/** ユーザー一括登録の確認画面で確定したとき  **/
+	public static final String USERS_MULTI_CONF_SUC = "/users_multi_conf_suc";
+	/** ユーザー一括登録の確認画面でキャンセルしたとき  **/
+	public static final String USERS_MULTI_CONF_BACK = "/users_multi_conf_back";
 	
 	// 遷移先を示す変数
 	/** TOPページの遷移先 **/
 	public static final String TO_TOP = "index";
+	/** ユーザー一括登録のINPUTへの遷移 **/
+	public static final String TO_USERS_MULTI_INP = "userInfoMultiInput";
+	/** ユーザー一括登録のCONFIRMへの遷移 **/
+	public static final String TO_USERS_MULTI_CONF = "userInfoMultiConfirm";
+	/** ユーザー一括登録のRESULTへの遷移 **/
+	public static final String TO_USERS_MULTI_RES = "userInfoMultiResult";
 	
 	// キーを示す変数
 	/** ユーザー情報のCSVファイルをinputするときのキー **/
