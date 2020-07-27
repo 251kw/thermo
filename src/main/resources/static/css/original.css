@@ -1,0 +1,72 @@
+@charset "UTF-8";
+a.disabled {
+	pointer-events: none;
+}
+
+.sampleTable {
+	width: 1125px;
+	margin-bottom: 15px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.sampleTable th, .sampleTable td {
+	border: 1px solid #CCCCCC;
+	padding: 10px 10px;
+	text-align: left;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	 display: block;
+}
+
+.sampleTable th {
+	background-color: #F9FAFB;
+}
+
+.sampleTable td:first-child {
+  background: #fbf5f5;
+}
+
+.header {
+	background-color:#ffe600;
+	color:#0db8d9;
+	text-shadow:
+       2px  2px 1px #ffffff,
+      -2px  2px 1px #ffffff,
+       2px -2px 1px #ffffff,
+      -2px -2px 1px #ffffff,
+       2px  0px 1px #ffffff,
+       0px  2px 1px #ffffff,
+      -2px  0px 1px #ffffff,
+       0px -2px 1px #ffffff;
+	font-size: 40px;
+	padding: 0px 2px;
+}
+
+.header i{
+	color:#f08a37;
+	transform: rotate( 30deg );
+}
+
+.komidasi h3 {
+  color:#a2ca0e;/*文字色*/
+  padding: 0.5em 0;/*上下の余白*/
+  text-align: center;/*中央揃え*/
+  border-top: solid 3px #ffe600;/*上線*/
+  border-bottom: solid 3px #ffe600;/*下線*/
+
+}
+
+@media screen and (max-width: 640px){
+ .sampleTable{
+ 	display:none!important;
+ }
+
+}
+
+.alert {
+	font-size: 18px;
+	color: red;
+}
