@@ -14,6 +14,8 @@ public class ThermoConstants {
 	// URLのパラメータを示す変数
 	/** 起動時やTOPページに戻るときに使う変数 **/
 	public static final String TOP = "/";
+	/** ログインボタンを押された時 **/
+	public static final String LOGIN = "/login";
 	/** ユーザー一括登録ボタンを押された時  **/
 	public static final String USERS_MULTI_SET = "/users_multi_set";
 	/** ユーザー一括登録でファイルをアップロードした時  **/
