@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.search.title}"></title>
+		<link rel="stylesheet" href="./css/semantic.min.css">
+		<link rel="stylesheet" href="./css/header.css">
+		<script src="./js/jquery-3.4.1.min.js"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div id="atama"></div> <!-- ここに出力 -->
+		<script>
+			$(function(){
+				$("#atama").load("header.html");
+			});
+		</script>
+​
+		<!-- 小見出しを各々のページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>ページタイトル</h3>
+		</div>
+	</body>
+</html>
