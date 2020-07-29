@@ -1,4 +1,4 @@
-package com.shantery.thermo.Entity;
+package com.shantery.thermo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
