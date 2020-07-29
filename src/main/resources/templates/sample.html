@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.searchInput.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+		<!--外部ヘッダーファイル読み込み-->
+		<div th:insert="header :: header"></div>
+​
+		<!--ページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>検温情報検索</h3>
+		</div>
+		
+		<!-------------------------------------------本体始まり ----------------------------------------------------->
+		<div class="ui container">
+​
+			<p></p>
+			<button type="submit" class="ui inverted primary button">
+					<p th:text="#{view.btn.thermoinfo}"></p>
+			</button>
+
+			<div class="ui horizontal divider"><!-- 線を引いてテキストを入れれる --><p th:text="#{view.label.searchinfo}"></div>
+			<p></p>
+			
+			<form method="post" action="/#">
+			<div class="ui form">
+			<div class="ui segments"  >
+				<div class="ui segment">
+				  <div class="ui radio checkbox">
+						<input type="radio" name="data" checked=""  tabindex="0" class="hidden">
+						<label>日付</label><p class="ui input"><input type="date" name="date"></p>
+					</div>
+				</div>
+				<div class="ui segment">
+				 <div class="ui radio checkbox">
+				        <input type="radio" name="name" checked="" tabindex="0" class="hidden">
+				        <label>名前</label><span class="ui input"> <input type="text" name="name"></span>
+					</div>
+				</div>
+				<div class="ui segment">
+				  <div class="ui radio checkbox">
+						<input type="radio" name="lev"  tabindex="0" class="hidden">
+						<label>学年</label>
+						<span class="ui input select">
+							<select name="lev">
+								<option value="0">なし</option>
+								<option value="1">1年生</option>
+								<option value="2">2年生</option>
+								<option value="3">3年生</option>
+							</select>
+						</span>
+					</div>
+				</div>
+				<div class="ui segment">
+				  <div class="ui radio checkbox">
+						  <input type="radio" name="high" tabindex="0" class="hidden">
+						  <label>体温が高い人</label>
+					</div>
+				</div>
+				</div>
+			</div><p></p>
+				      	<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.search}"></button>
+				      	<button type="reset" class="ui inverted primary button"><p th:text="#{view.btn.clear}"></button>
+				      	<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.copy}"></button>
+			</form>
+			
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
+​
+			<table class="ui celled table">
+				<thead>
+					<tr class="thead">
+						<th></th>
+						<th th:text="#{view.tablelabel.name}"></th>
+						<th th:text="#{view.tablelabel.gender}"></th>
+						<th>学年</th>
+						<th th:text="#{view.tablelabel.age}"></th>
+						<th th:text="#{view.tablelabel.thermo}"></th>
+						<th th:text="#{view.tablelabel.taste}"></th>
+						<th th:text="#{view.tablelabel.smell}"></th>
+						<th th:text="#{view.tablelabel.cough}"></th>
+						<th th:text="#{view.tablelabel.other}"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="error">
+						<td>1</td>
+						<td data-label="名前">佐藤由莉枝</td>
+						<td data-label="性別">女</td>
+						<td data-label="学年">なし</td>
+						<td data-label="年齢"><p th:text="#{view.tablelabel.ageage(${23})}"></td>
+						<td data-label="体温">38.5度</td>
+						<td data-label="味覚障害">なし</td>
+						<td data-label="嗅覚障害">あり</td>
+						<td data-label="咳">なし</td>
+						<td data-label="その他">肩こり</td>
+					</tr>
+					<tr class="warning">
+						<td>2</td>
+						<td data-label="名前">佐藤由莉枝</td>
+						<td data-label="性別">女</td>
+						<td data-label="学年">なし</td>
+						<td data-label="年齢"><p th:text="#{view.tablelabel.ageage(${23})}"></td>
+						<td data-label="体温">38.5度</td>
+						<td data-label="味覚障害">なし</td>
+						<td data-label="嗅覚障害">あり</td>
+						<td data-label="咳">なし</td>
+						<td data-label="その他">肩こり</td>
+					</tr>
+					<tr>
+						<td>#</td>
+						<td>佐藤由莉枝</td>
+						<td>女</td>
+						<td>なし</td>
+						<td><p th:text="#{view.tablelabel.ageage(${23})}"></td>
+						<td>38.5度</td>
+						<td>なし</td>
+						<td>あり</td>
+						<td>なし</td>
+						<td>肩こり</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
