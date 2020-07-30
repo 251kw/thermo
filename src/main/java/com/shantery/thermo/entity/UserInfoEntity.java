@@ -21,7 +21,7 @@ public class UserInfoEntity{
 	/** ID **/
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	/** ユーザID **/
 	@Column(length=32)
@@ -50,13 +50,12 @@ public class UserInfoEntity{
 	/** 更新時間 **/
 	@Column
 	private String updateTime;
-		
-	
-	public Long getId() {
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
