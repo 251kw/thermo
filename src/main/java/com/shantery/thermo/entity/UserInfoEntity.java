@@ -18,23 +18,20 @@ import javax.persistence.Table;
 @Table(name = "user_info") 
 public class UserInfoEntity{
 
-	/** ID **/
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)	
 	/** ユーザID **/
 	@Column(length=32)
-	private String userId;
+	private String user_id;
 	/** グループID **/
 	@Column(length=32)
-	private String groupId;
+	private String group_id;
 	/** ユーザパスワード **/
 	@Column(length=16)
-	private String userPassword;
+	private String user_password;
 	/** ユーザ名 **/
 	@Column(length=64)
-	private String userName;
+	private String user_name;
 	/** 性別 **/
 	@Column(length=1)
 	private String gender;
@@ -46,41 +43,49 @@ public class UserInfoEntity{
 	private String grade;
 	/** 管理者フラグ **/
 	@Column(length=1)
-	private String adminFlg;
+	private String admin_flg;
 	/** 更新時間 **/
 	@Column
-	private String updateTime;
+	private String update_time;
 
-	public String getId() {
-		return id;
+
+	public String getUser_id() {
+		return user_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
-	public String getGroupId() {
-		return groupId;
+
+	public String getGroup_id() {
+		return group_id;
 	}
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+
+	public void setGroup_id(String group_id) {
+		this.group_id = group_id;
 	}
 
-	public String getUserId() {
-		return userId;
+
+	public String getUser_password() {
+		return user_password;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
 	}
 
-	public String getUserName() {
-		return userName;
+
+	public String getUser_name() {
+		return user_name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
 
@@ -88,50 +93,51 @@ public class UserInfoEntity{
 		return gender;
 	}
 
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
 
 	public String getBirthday() {
 		return birthday;
 	}
 
+
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
 
 	public String getGrade() {
 		return grade;
 	}
 
+
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 
-	public String getAdminFlg() {
-		return adminFlg;
+
+	public String getAdmin_flg() {
+		return admin_flg;
 	}
 
-	public void setAdminFlg(String adminFlg) {
-		this.adminFlg = adminFlg;
+
+	public void setAdmin_flg(String admin_flg) {
+		this.admin_flg = admin_flg;
 	}
 
-	public String getUpdateTime() {
-		return updateTime;
+
+	public String getUpdate_time() {
+		return update_time;
 	}
 
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
+
+	public void setUpdate_time(String update_time) {
+		this.update_time = update_time;
 	}
-	
+
 
 	/**
 	 * DBから取得したエンティティをList型で返却する
@@ -139,15 +145,15 @@ public class UserInfoEntity{
 	 */
 	public List<String> getUserInfoList() {
 		List<String> userInfoList = new ArrayList<>();
-		userInfoList.add(getUserId());
-		userInfoList.add(getGroupId());
-		userInfoList.add(getUserPassword());
-		userInfoList.add(getUserName());
+		userInfoList.add(getUser_id());
+		userInfoList.add(getGroup_id());
+		userInfoList.add(getUser_password());
+		userInfoList.add(getUser_name());
 		userInfoList.add(getGender());
 		userInfoList.add(getBirthday());
 		userInfoList.add(getGrade());
-		userInfoList.add(getAdminFlg());
-		userInfoList.add(getUpdateTime());
+		userInfoList.add(getAdmin_flg());
+		userInfoList.add(getUpdate_time());
 		
 		return userInfoList;
 	}
