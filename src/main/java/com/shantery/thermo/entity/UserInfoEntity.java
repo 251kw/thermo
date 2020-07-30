@@ -16,10 +16,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user_info") 
-public class UserInfoEntity{
+public class UserInfoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	/** ユーザID **/
 	@Column(length=32)
 	private String user_id;
@@ -28,7 +28,7 @@ public class UserInfoEntity{
 	private String group_id;
 	/** ユーザパスワード **/
 	@Column(length=16)
-	private String user_password;
+	private String user_pass;
 	/** ユーザ名 **/
 	@Column(length=64)
 	private String user_name;
@@ -69,13 +69,13 @@ public class UserInfoEntity{
 	}
 
 
-	public String getUser_password() {
-		return user_password;
+	public String getUser_pass() {
+		return user_pass;
 	}
 
 
-	public void setUser_password(String user_password) {
-		this.user_password = user_password;
+	public void setUser_pass(String user_pass) {
+		this.user_pass = user_pass;
 	}
 
 
@@ -147,7 +147,7 @@ public class UserInfoEntity{
 		List<String> userInfoList = new ArrayList<>();
 		userInfoList.add(getUser_id());
 		userInfoList.add(getGroup_id());
-		userInfoList.add(getUser_password());
+		userInfoList.add(getUser_pass());
 		userInfoList.add(getUser_name());
 		userInfoList.add(getGender());
 		userInfoList.add(getBirthday());
