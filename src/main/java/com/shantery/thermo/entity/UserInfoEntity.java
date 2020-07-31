@@ -1,7 +1,6 @@
 package com.shantery.thermo.entity;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -48,6 +47,22 @@ public class UserInfoEntity {
 	@Column
 	private String update_time;
 
+	
+	/**
+	 * ユーザー情報をまとめてsetする
+	 * @param userInfo ユーザー情報
+	 */
+	public UserInfoEntity(String[] userInfo) {
+		this.user_id = userInfo[0];
+		this.group_id = userInfo[1];
+		this.user_pass = userInfo[2];
+		this.user_name = userInfo[3];
+		this.gender = userInfo[4];
+		this.birthday = userInfo[5];
+		this.grade = userInfo[6];
+		this.admin_flg = userInfo[7];
+		this.update_time = userInfo[8];
+	}
 
 	public String getUser_id() {
 		return user_id;
