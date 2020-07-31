@@ -138,7 +138,7 @@ public class UserInfoEntity {
 
 
 	/**
-	 * DBから取得したエンティティをList型で返却する
+	 * DBから取得したエンティティをList型で返却
 	 * @return エンティティリスト
 	 */
 	public List<String> getUserInfoList() {
