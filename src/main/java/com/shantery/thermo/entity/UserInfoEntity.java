@@ -156,4 +156,10 @@ public class UserInfoEntity {
 		return userInfoList;
 	}
 	
+	public String[] getHead() {
+		String[] head = {"a"};
+	
+	return head;
+	
+	}
 }
