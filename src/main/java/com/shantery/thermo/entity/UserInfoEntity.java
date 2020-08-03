@@ -1,6 +1,8 @@
 package com.shantery.thermo.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -170,14 +172,17 @@ public class UserInfoEntity {
 	public void setUserInfo(String[] userInfo) {
 		
 		this.user_id = userInfo[2];
-		this.group_id = userInfo[2];
-		this.user_pass = userInfo[2];
-		this.user_name = userInfo[2];
-		this.gender = userInfo[2];
-		this.birthday = userInfo[2];
-		this.grade = userInfo[2];
-		this.admin_flg = userInfo[2];
-		this.update_time = userInfo[2];
+		this.group_id = userInfo[0];
+		this.user_pass = userInfo[3];
+		this.user_name = userInfo[4];
+		this.gender = userInfo[5];
+		this.birthday = userInfo[6];
+		this.grade = userInfo[7];
+		this.admin_flg = userInfo[8];
+		//現在日時の取得と日付の書式設定
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		this.update_time = sdf.format(calendar.getTime());
 		
 	}
 }
