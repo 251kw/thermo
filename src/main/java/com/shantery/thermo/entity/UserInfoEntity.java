@@ -20,7 +20,6 @@ import javax.persistence.Table;
 public class UserInfoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	/** ユーザID **/
 	@Column(length=32)
 	private String user_id;
