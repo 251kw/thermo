@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.searchInput.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+		<!--外部ヘッダーファイル読み込み-->
+		<div th:insert="header :: header"></div>
+​
+		<!--ページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>検温情報検索</h3>
+		</div>
+		
+		<!-------------------------------------------本体始まり ----------------------------------------------------->
+		<div class="ui container">
+			
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
+​
+
+			<p></p>
+
+			<table  class="ui celled table">
+				<thead>
+					<tr >
+						<td th:each="val:${users_head_info}" width="100" th:text="${val}"></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="list : ${users_info}">
+						<th:block th:each="line:${list}">
+							<td  th:text="${line}"></td>
+						</th:block>
+					</tr>
+				</tbody>
+			</table>
+			
+			<form action="#" th:action="@{./users_multi_conf_suc}" method="post">
+				<input type="submit" class="ui inverted primary button" value="確定">
+			</form>		
+			
+			<form action="#" th:action="@{./users_multi_set}" method="post">
+				<input type="submit" class="ui inverted primary button" value="キャンセル">
+			</form>	
+			
+		</div>
+	</body>
+</html>
