@@ -162,4 +162,22 @@ public class UserInfoEntity {
 	return head;
 	
 	}
+	
+	/**
+	 * 一括登録された情報をセットする
+	 * @param userInfo ユーザー情報
+	 */
+	public void setUserInfo(String[] userInfo) {
+		
+		this.user_id = userInfo[2];
+		this.group_id = userInfo[2];
+		this.user_pass = userInfo[2];
+		this.user_name = userInfo[2];
+		this.gender = userInfo[2];
+		this.birthday = userInfo[2];
+		this.grade = userInfo[2];
+		this.admin_flg = userInfo[2];
+		this.update_time = userInfo[2];
+		
+	}
 }
