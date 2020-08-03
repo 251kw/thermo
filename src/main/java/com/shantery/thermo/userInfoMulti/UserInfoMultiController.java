@@ -57,8 +57,8 @@ public class UserInfoMultiController {
 	 */
 	@RequestMapping(value = USERS_MULTI_GET , method = RequestMethod.POST)
 	public ModelAndView getCSVfile(@RequestParam(name = USERS_CSV) MultipartFile usersInfo,  ModelAndView mav) throws ParseException {
-		if (session.getAttribute("usersInfoSes") != null) { // もしsessionスコープ内にデータがあるなら削除する
-			session.removeAttribute("usersInfoSes");
+		if (session.getAttribute(USERS_INFO_SES) != null) { // もしsessionスコープ内にデータがあるなら削除する
+			session.removeAttribute(USERS_INFO_SES);
 		}
 		mav.setViewName(TO_USERS_MULTI_INP);
 		List<String[]> users = uMService.toStringList(usersInfo);
@@ -105,9 +105,9 @@ public class UserInfoMultiController {
 		}
 		
 		if (CollectionUtils.isEmpty(errmsg)) {
-			session.setAttribute("usersInfoSes", users);
+			session.setAttribute(USERS_INFO_SES, users);
 			mav.addObject(USERS_HEAD, ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
-			mav.addObject("columnlength", ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
+			mav.addObject(USERS_HEAD_LENG, ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
 			mav.addObject(USERS_INFO, users);
 			mav.setViewName(TO_USERS_MULTI_CONF);
 		}else {
@@ -128,9 +128,9 @@ public class UserInfoMultiController {
 	public ModelAndView userInfoConfirm(ModelAndView mav) throws ParseException {
 		mav.setViewName(TO_USERS_MULTI_RES);
 		mav.addObject(USERS_HEAD, ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
-		mav.addObject("columnlength", ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
+		mav.addObject(USERS_HEAD_LENG, ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
 		@SuppressWarnings("unchecked")  //TODO 川原さんに確認
-		List<String[]> users = (List<String[]>)session.getAttribute("usersInfoSes");
+		List<String[]> users = (List<String[]>)session.getAttribute(USERS_INFO_SES);
 		mav.addObject(USERS_INFO, users);
 		UserInfoEntity uEntity = new UserInfoEntity();
 		for (String[] userInfo : users) {

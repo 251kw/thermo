@@ -38,10 +38,14 @@ public class ThermoConstants {
 	// キーを示す変数
 	/** ユーザー情報のCSVファイルをinputするときのキー **/
 	public static final String USERS_CSV = "users_csv";
+	/** ユーザー情報をセッションにいれるときのキー **/
+	public static final String USERS_INFO_SES = "usersInfoSes";
 	/** ユーザー情報をモデルにいれるときのキー **/
 	public static final String USERS_INFO = "users_info";
-	/** ユーザー情報のheadをモデルに入れるするのキー **/
+	/** ユーザー情報のheadをモデルに入れるときのキー **/
 	public static final String USERS_HEAD = "users_head_info";
+	/** ユーザー情報のheadの長さをモデルに入れるときのキー **/
+	public static final String USERS_HEAD_LENG = "columnlength";
 	/** ユーザー情報のエラーメッセージをモデルに入れるするのキー **/
 	public static final String USERS_ERR = "users_err_info";
 	
