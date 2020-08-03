@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+</head>
+<body>
+	<form action="/test"  method="post">
+	<input type="text" name="text"  th:value="${value}">
+	<button class="ui mini inverted primary button">
+	<p>検索</p></button>
+	</form>
+	
+	<table>
+		<tr><th>user_name</th><th>gender</th><th>grade</th><th>birthday<th></tr>
+		<tr th:each="obj : ${list}">
+			<td th:text="${obj.user_name}"></td>
+			<td th:text="${obj.gender}"></td>
+			<td th:text="${obj.grade}"></td>
+			<td th:text="${obj.birthday}"></td>
+			<!--td th:text="${obj.thermo}"></td-->
+		</tr>
+	</table>
+</body>
+</html>
