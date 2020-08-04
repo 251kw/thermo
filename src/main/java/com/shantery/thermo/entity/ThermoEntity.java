@@ -23,21 +23,21 @@ public class ThermoEntity {
 		/** ユーザーID **/
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
-		@Column(length=32)
-		private String user_id;
+		@Column(length=32,name="user_id")
+		private String userId;
 		/** サーモID **/
 		@Id
-		@Column(length=32)
-		private String thermo_id;
+		@Column(length=32,name="thermo_id")
+		private String thermoId;
 		/** 体温 **/
 		@Column
 		private String thermo;
 		/** 味覚障害 **/
-		@Column(length=1)
-		private String taste_disorder;
+		@Column(length=1,name="taste_disorder")
+		private String tasteDisorder;
 		/** 嗅覚障害 **/
-		@Column(length=1)
-		private String olfactory_disorder;
+		@Column(length=1,name="olfactory_disorder")
+		private String olfactoryDisorder;
 		/** 咳 **/
 		@Column(length=1)
 		private String cough;
@@ -45,29 +45,29 @@ public class ThermoEntity {
 		@Column(length=128)
 		private String other;
 		/** 登録日 **/
-		@Column
-		private String regist_date;
+		@Column(name="regist_date")
+		private String registDate;
 		/** 登録者 **/
-		@Column(length=32)
-		private String update_user;
+		@Column(length=32,name="update_user")
+		private String updateUser;
 		/** 登録時間 **/
-		@Column
-		private String update_time;
+		@Column(name="update_time")
+		private String updateTime;
 		
 		public String getUser_id() {
-			return user_id;
+			return userId;
 		}
 
 		public void setUser_id(String user_id) {
-			this.user_id = user_id;
+			this.userId = user_id;
 		}
 
 		public String getThermo_id() {
-			return thermo_id;
+			return thermoId;
 		}
 
 		public void setThermo_id(String thermo_id) {
-			this.thermo_id = thermo_id;
+			this.thermoId = thermo_id;
 		}
 
 		public String getThermo() {
@@ -79,19 +79,19 @@ public class ThermoEntity {
 		}
 
 		public String getTaste_disorder() {
-			return taste_disorder;
+			return tasteDisorder;
 		}
 
 		public void setTaste_disorder(String taste_disorder) {
-			this.taste_disorder = taste_disorder;
+			this.tasteDisorder = taste_disorder;
 		}
 
 		public String getOlfactory_disorder() {
-			return olfactory_disorder;
+			return olfactoryDisorder;
 		}
 
 		public void setOlfactory_disorder(String olfactory_disorder) {
-			this.olfactory_disorder = olfactory_disorder;
+			this.olfactoryDisorder = olfactory_disorder;
 		}
 
 		public String getCough() {
@@ -111,27 +111,27 @@ public class ThermoEntity {
 		}
 
 		public String getRegist_date() {
-			return regist_date;
+			return registDate;
 		}
 
 		public void setRegist_date(String regist_date) {
-			this.regist_date = regist_date;
+			this.registDate = regist_date;
 		}
 
 		public String getUpdate_user() {
-			return update_user;
+			return updateUser;
 		}
 
 		public void setUpdate_user(String update_user) {
-			this.update_user = update_user;
+			this.updateUser = update_user;
 		}
 
 		public String getUpdate_time() {
-			return update_time;
+			return updateTime;
 		}
 
 		public void setUpdate_time(String update_time) {
-			this.update_time = update_time;
+			this.updateTime = update_time;
 		}
 
 		/**

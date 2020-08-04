@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 public class ThermoKey implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String user_id;
-	private String thermo_id;
+	private String userId;
+	private String thermoId;
 	
 	
 	//TODO 不具合起きなかったら下記メソッド消す
