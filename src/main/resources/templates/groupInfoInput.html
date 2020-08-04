@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title>新規登録入力画面</title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+	<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>グループ新規登録！</h3>
+		</div>
+		<div class="ui container">
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->		
+			<form action="#" th:action="@{/groupInfoConfirm}" th:object="${groupInfoForm}" method="post">
+				<table class="ui celled table">
+					<tbody>
+						<tr>
+							<td>グループID</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}"/></span></td>
+							<td>
+								<span th:if="${#fields.hasErrors('groupId')}" th:errors="*{groupId}">groupId error</span>
+								<span th:if="${uGrError}" th:text=${uGrError}></span>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>グループ名</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupName}"/></span></td>
+							<td><span th:if="${#fields.hasErrors('groupName')}" th:errors="*{groupName}">groupName error</span></td>
+						</tr>
+						<tr>
+							<td>グループパスワード</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupPass}"/></span></td>
+							<td><span th:if="${#fields.hasErrors('groupPass')}" th:errors="*{groupPass}">groupPass error</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="submit" class="ui primary basic button">確認</button>
+			</form>
+		</div>
+	</body>
+</html>
