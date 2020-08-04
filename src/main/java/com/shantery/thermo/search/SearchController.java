@@ -36,8 +36,8 @@ class SearchController {
 	 * @return
 	 */
 	
-	@RequestMapping(value =TOP , method = RequestMethod.GET) //初めて検索画面に来た時
-	public ModelAndView index(ModelAndView mav){
+	@RequestMapping(value ="/search", method = RequestMethod.GET) //初めて検索画面に来た時
+	public ModelAndView test(ModelAndView mav){
 		mav.setViewName("test");
 		List<SearchEntity> list = schRepository.searchCurDate("2");	//今日の日付で検索	//group_idで絞る
 		mav.addObject("list", list);
