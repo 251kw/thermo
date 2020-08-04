@@ -6,24 +6,28 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+//import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SearchRepository extends JpaRepository<UserInfo, Long> {
+public interface SearchRepository extends JpaRepository<SearchEntity, String> {
 	
-//	@Query("SELECT t.regist_date, u.user_name, u.gender, u.grade, TIMESTAMPDIFF(YEAR, u.birthday, curdate()) AS age, t.thermo, t.taste_disorder, t.olfactory_disorder, t.cough, t.other\r\n" + 
-//			"FROM sns.user_info u, sns.thermo_info t\r\n" + 
-//			"WHERE u.user_id = t.user_id\r\n" + 
-//			"AND t.regist_date = curdate()")
-//	public  List<ThermoInfo> searchCurDate();	//今日のデータ取得
+//	@Query("SELECT DISTINCT t FROM thermo_info t INNER JOIN t.user_info WHERE t.regist_date = '2020-08-03'")
+//	List<ThermoInfo> searchCurDate();	//今日のデータ取得
+	
+	@Query(value="SELECT t.regist_date, u.user_name, u.gender, u.grade, TIMESTAMPDIFF(YEAR, u.birthday, curdate()) AS age"
+			+" FROM user_info u, thermo_info t"
+			+" WHERE u.user_id = t.user_id"
+			+" AND u.group_id = :group_id"
+			+" AND t.regist_date = curdate()", nativeQuery = true)
+	List<SearchEntity> searchCurDate(@Param("group_id") String group_id);	//今日のデータ取得
 	
 //	public List<UserInfo> findByGroupId(String group_id);
 	
-	@Query(value="SELECT * FROM sns.user_info WHERE group_id='1'", nativeQuery = true)
-	public List<UserInfo> find();
+//	public List<ThermoInfo> find();
 	
-	public List<UserInfo> findByGender(String gender);
+//	public List<UserInfo> findByGender(String gender);
 	
 	
 	
