@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+.error {
+	color: red;
+}
+
+.askinput {
+	color:#a2ca0e;/*文字色*/
+}
+.registtable {
+	margin: 0 0 0 auto;
+}
+
+.loginbtn {
+	text-align: center;
+vertical-align: top;
+}
+
+.fieldError {
+  background-color: red;
+}
+
+@media screen and (max-width: 959px) {
+	/* 959px以下に適用されるCSS（タブレット用） */
+	.registtable {
+		    margin-left: auto;
+    		margin-right: auto;
+	}
+}
+@media screen and (max-width: 480px) {
+	/* 480px以下に適用されるCSS（スマホ用） */
+	.registtable {
+	    margin-left: auto;
+    	margin-right: auto;
+	}
+}

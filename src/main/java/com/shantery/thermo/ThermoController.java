@@ -4,8 +4,11 @@ import static com.shantery.thermo.util.ThermoConstants.*;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.shantery.thermo.entity.UserInfoEntity;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 
 /**
@@ -27,13 +32,24 @@ class ThermoController {
 	
 	@Autowired
 	ThermoRepository repository;
+	
+	@Autowired
+	HttpSession session; 
 
 	/**
 	 * アプリケーションを起動させたとき、もしくはURL直接入力で動く
 	 * @return ログイン画面 
 	 */
 	@RequestMapping(value = TOP, method = RequestMethod.GET)
-	public String index(){
+	public String index(
+			@ModelAttribute("ThermoForm") 
+			ThermoForm FormValue){	// この時点では空
+		
+		// もしsessionスコープ内にデータがあるなら削除する
+		if (session.getAttribute("loginuser") != null) {
+			session.removeAttribute("loginuser");
+		}
+			
 		// トップページへ移動
 		return TO_TOP;
 	}
@@ -48,20 +64,18 @@ class ThermoController {
 	@RequestMapping(value = LOGIN, method = RequestMethod.POST)
 	public String checkUser(
 			// パラメータを受け取る
-			@RequestParam(value="userId")String userId,
-			@RequestParam(value="userpass")String userpass,
+			@ModelAttribute("ThermoForm")
+			@Validated
+			ThermoForm FormValue,
+			BindingResult result,
 			UserInfoEntity userinfo,
 			Model model){
-		
-		// 値を保持するための処理
-		model.addAttribute("userId", userId);
-		model.addAttribute("userpass", userpass);
 		
 		String logintransition = null;// 遷移先を格納する変数
 		Boolean check = null; // 登録されているユーザーかどうか識別するための変数
 		String errormessage = null;// エラーメッセージ用の変数
 		
-		Optional<UserInfoEntity> data = repository.findById(userId);// 入力されたIDでデータベースを検索
+		Optional<UserInfoEntity> data = repository.findById(FormValue.getUserId());// 入力されたIDでデータベースを検索
 		userinfo = thermoService.checkdata(userinfo,data);// 検索した情報をuserinfo型のオブジェクトに格納
 		
 		// IDが正常かどうかによって処理を振り分け
@@ -69,7 +83,12 @@ class ThermoController {
 			check = false;	// 該当するデータがなかった場合
 		}else {
 			// 該当するデータがある場合は、パスワードが正常かどうかを確認
-			check = thermoService.checkUser(userpass,userinfo.getUser_pass(),check);
+			check = thermoService.checkUser(FormValue.getUserpass(),userinfo.getUser_pass(),check);
+		}
+		
+		// ログイン中のユーザーの情報を保持
+		if(check==true) {
+			session.setAttribute("loginuser", userinfo);
 		}
 		
 		// checkの結果によって遷移先を振り分ける
