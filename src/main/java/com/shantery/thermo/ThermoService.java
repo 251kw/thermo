@@ -1,6 +1,7 @@
 package com.shantery.thermo;
 
 import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
+import static com.shantery.thermo.util.ThermoConstants.TO_USERS_MULTI_INP;
 
 import java.util.Optional;
 
@@ -64,7 +65,7 @@ public class ThermoService {
 		if(check == false) {	// 不適正ユーザーの場合
 			logintransition = TO_TOP;
 		}else if(check == true) {
-			logintransition = TO_TOP;// 適正ユーザーの場合
+			logintransition = "search";// 適正ユーザーの場合
 		}
 		return logintransition;
 	}
@@ -77,11 +78,11 @@ public class ThermoService {
 	 */
 	public String setRegistTransition(String regist,String registtransition) {
 		if(regist.equals("group")) {	// グループが選択されていた場合
-			registtransition = "test";
+			registtransition = "groupInfoInput";
 		}else if(regist.equals("user")){	// ユーザー（個人）が選択されていた場合
-			registtransition = "test";
+			registtransition = "userInfoInput";
 		}else if(regist.equals("multiuser")) {	// ユーザー（複数）が選択されていた場合
-			registtransition = "test";
+			registtransition = TO_USERS_MULTI_INP;
 		}
 		return registtransition;
 	}
