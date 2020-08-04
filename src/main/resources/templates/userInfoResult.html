@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title>新規登録結果画面</title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>登録完了</h3>
+		</div>
+		<div class="ui container">
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+				<form action="#" th:action="@{/login}" th:object="${userInfoForm}" method="post">
+					<p>下記の内容で登録しました！</p>
+					<table class="ui celled table">
+					<tbody>
+						<tr>
+							<td>グループID</td>
+							<td th:text="*{groupId}"/>
+						</tr>
+						<tr>
+							<td>グループパスワード</td>
+							<td th:text="*{groupPass}"/>
+						</tr>
+						<tr>
+							<td>ユーザーID</td>
+							<td th:text="*{userId}"/>
+						</tr>
+						<tr>
+							<td>ユーザーパスワード</td>
+							<td th:text="*{userPass}"/>
+						</tr>
+						<tr>
+							<td>氏名</td>
+							<td th:text="*{userName}"/>
+						</tr>
+						<tr>
+							<td>性別</td>
+							<td>
+								<div th:if="*{gender} == 'M'"><p th:text="男"/></div>
+								<div th:if="*{gender} == 'F'"><p th:text="女"/></div>
+							</td>
+						</tr>
+						<tr>
+							<td>生年月日</td>
+							<td th:text="*{birthday}"/>
+						</tr>
+						<tr>
+							<td>学年</td>
+							<td>
+								<div th:switch="*{grade}">
+									<p th:case="0" th:text="なし"></p>
+									<p th:case="1" th:text="小学校1年生"></p>
+									<p th:case="2" th:text="小学校2年生"></p>
+									<p th:case="3" th:text="小学校3年生"></p>
+									<p th:case="4" th:text="小学校4年生"></p>
+									<p th:case="5" th:text="小学校5年生"></p>
+									<p th:case="6" th:text="小学校6年生"></p>
+									<p th:case="A" th:text="中学校1年生"></p>
+									<p th:case="B" th:text="中学校2年生"></p>
+									<p th:case="C" th:text="中学校3年生"></p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>管理者</td>
+							<td>
+								<div th:if="*{adminFlg} == '0'"><p th:text="一般"/></div>
+								<div th:if="*{adminFlg} == '1'"><p th:text="管理者"/></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<button type="submit" class="ui primary basic button">TOPにもどる</button>
+			</form>
+		</div>
+	</body>
+</html>
