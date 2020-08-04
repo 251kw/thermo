@@ -21,17 +21,17 @@ public class UserInfoEntity {
 
 	@Id
 	/** ユーザID **/
-	@Column(length=32)
-	private String user_id;
+	@Column(length=32,name="user_id")
+	private String userId;
 	/** グループID **/
-	@Column(length=32)
-	private String group_id;
+	@Column(length=32,name="group_id")
+	private String groupId;
 	/** ユーザパスワード **/
-	@Column(length=16)
-	private String user_pass;
-	/** ユーザ名 **/
-	@Column(length=64)
-	private String user_name;
+	@Column(length=16,name="user_pass")
+	private String userPass;
+	/** 氏名 **/
+	@Column(length=64,name="user_name")
+	private String userName;
 	/** 性別 **/
 	@Column(length=1)
 	private String gender;
@@ -42,49 +42,49 @@ public class UserInfoEntity {
 	@Column(length=1)
 	private String grade;
 	/** 管理者フラグ **/
-	@Column(length=1)
-	private String admin_flg;
+	@Column(length=1,name="admin_flg")
+	private String adminFlg;
 	/** 更新時間 **/
-	@Column
-	private String update_time;
+	@Column(name="update_time")
+	private String updateTime;
 
 	public String getUser_id() {
-		return user_id;
+		return userId;
 	}
 
 
 	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+		this.userId = user_id;
 	}
 
 
 	public String getGroup_id() {
-		return group_id;
+		return groupId;
 	}
 
 
 	public void setGroup_id(String group_id) {
-		this.group_id = group_id;
+		this.groupId = group_id;
 	}
 
 
 	public String getUser_pass() {
-		return user_pass;
+		return userPass;
 	}
 
 
 	public void setUser_pass(String user_pass) {
-		this.user_pass = user_pass;
+		this.userPass = user_pass;
 	}
 
 
 	public String getUser_name() {
-		return user_name;
+		return userName;
 	}
 
 
 	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+		this.userName = user_name;
 	}
 
 
@@ -119,22 +119,22 @@ public class UserInfoEntity {
 
 
 	public String getAdmin_flg() {
-		return admin_flg;
+		return adminFlg;
 	}
 
 
 	public void setAdmin_flg(String admin_flg) {
-		this.admin_flg = admin_flg;
+		this.adminFlg = admin_flg;
 	}
 
 
 	public String getUpdate_time() {
-		return update_time;
+		return updateTime;
 	}
 
 
 	public void setUpdate_time(String update_time) {
-		this.update_time = update_time;
+		this.updateTime = update_time;
 	}
 
 
@@ -170,18 +170,18 @@ public class UserInfoEntity {
 	 */
 	public void setUserInfo(String[] userInfo) {
 		
-		this.user_id = userInfo[2];
-		this.group_id = userInfo[0];
-		this.user_pass = userInfo[3];
-		this.user_name = userInfo[4];
+		this.userId = userInfo[2];
+		this.groupId = userInfo[0];
+		this.userPass = userInfo[3];
+		this.userName = userInfo[4];
 		this.gender = userInfo[5];
 		this.birthday = userInfo[6];
 		this.grade = userInfo[7];
-		this.admin_flg = userInfo[8];
+		this.adminFlg = userInfo[8];
 		//現在日時の取得と日付の書式設定
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		this.update_time = sdf.format(calendar.getTime());
+		this.updateTime = sdf.format(calendar.getTime());
 		
 	}
 }
