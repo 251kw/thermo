@@ -13,49 +13,48 @@ import javax.persistence.Table;
 public class GroupMstEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(length=32)
-	private String group_id;
+	@Column(length=32,name="group_id")
+	private String groupId;
 	
-	@Column(length=64)
-	private String group_name;
+	@Column(length=64,name="group_name")
+	private String groupName;
 	
-	@Column(length=16)
-	private String group_pass;
+	@Column(length=16,name="group_pass")
+	private String groupPass;
 	
-	@Column
-	private String update_time;
+	@Column(name="update_time")
+	private String updateTime;
 
 	public String getGroup_id() {
-		return group_id;
+		return groupId;
 	}
 
 	public void setGroup_id(String group_id) {
-		this.group_id = group_id;
+		this.groupId = group_id;
 	}
 
 	public String getGroup_name() {
-		return group_name;
+		return groupName;
 	}
 
 	public void setGroup_name(String group_name) {
-		this.group_name = group_name;
+		this.groupName = group_name;
 	}
 
 	public String getGroup_pass() {
-		return group_pass;
+		return groupPass;
 	}
 
 	public void setGroup_pass(String group_pass) {
-		this.group_pass = group_pass;
+		this.groupPass = group_pass;
 	}
 
 	public String getUpdate_time() {
-		return update_time;
+		return updateTime;
 	}
 
 	public void setUpdate_time(String update_time) {
-		this.update_time = update_time;
+		this.updateTime = update_time;
 	}
 	
 	
