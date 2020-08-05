@@ -25,8 +25,6 @@ import com.shantery.thermo.search.SearchEntity;
 
 @Component
 public class ExcelView extends AbstractXlsxView {
-	@Autowired
-	ExcelRepository repository;
 
 	@SuppressWarnings("unchecked")
 	@Override
