@@ -1,62 +1,56 @@
 package com.shantery.thermo.search;
 
-import static com.shantery.thermo.util.ThermoConstants.*;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-//import javax.servlet.http.HttpSession;
-
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-//import org.springframework.web.bind.annotation.RequestParam;
-
-//import com.shantery.thermo.util.ThermoUtil;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 class SearchController {
 
-//	@Autowired
-//	private SearchService schService; //サービスクラス呼び出す
+	@Autowired
+	private SearchService schService; //サービスクラス呼び出す
 	
 	@Autowired
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
 //	@Autowired
 //	HttpSession session; //呼び出すクラス
-//	
-//	@PersistenceContext
-//	EntityManager	em;
-//	
+	
 	/**
 	 *
 	 * 
 	 * @return
 	 */
-	
+
 	@RequestMapping(value ="/search", method = RequestMethod.GET) //初めて検索画面に来た時
-	public ModelAndView test(ModelAndView mav){
-		mav.setViewName("test");
-		List<SearchEntity> list = schRepository.searchCurDate("2");	//今日の日付で検索	//group_idで絞る
-		mav.addObject("list", list);
+	public  String search(Model  m){
+		List<SearchEntity> list = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
 		
-		return mav;
+		m.addAttribute("searchInfo", new SearchInfoForm());
+		m.addAttribute("list", list);
+		
+		return "search";
 	}
 	
-//	@RequestMapping(value ="/test" , method = RequestMethod.POST) // 検索ボタンが押されたとき
-//	public ModelAndView search(@RequestParam("text") String text, ModelAndView mav) {
-//		mav.setViewName("test");
-//		List<UserInfo> list = schRepository.findByGroupId(text);
-//		mav.addObject("list", list);
-//		return mav;
-//	}
+	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
+	public String search_info(@ModelAttribute SearchInfoForm form, Model m) {
+		
+		String sch_date = form.getSch_date();
+		String sch_name = form.getSch_name();
+		String sch_grade = form.getSch_grade();
+		
+		List<SearchEntity> list = schService.createQuerySearch("1", sch_date, sch_name, sch_grade);
+		m.addAttribute("list", list);
 	
-//	@PostConstruct
-//	private void init() {
-//		dao = new DaoImpl(em);
-//	}
-
+		return "search";
+	}
+	
 	
 }

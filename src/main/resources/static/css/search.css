@@ -4,7 +4,7 @@
   .table {
     width: 80%;
   }
-  .ui .table .thead {
+  #id .table thead {
     display: none;
   }
   .table tr {
