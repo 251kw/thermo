@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
-import com.shantery.thermo.entity.ThermoEntity;
+import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.search.SearchEntity;
 
 @Component

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @IdClass(ThermoKey.class)
 @Table(name = "thermo_info")
-public class ThermoEntity {
+public class ThermoInfoEntity {
 	
 		/** ユーザーID **/
 		@Id
