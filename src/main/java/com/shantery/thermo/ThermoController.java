@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.groupInfo.GroupInfoForm;
-import com.shantery.thermo.search.SearchEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 import com.shantery.thermo.search.SearchRepository;
 import com.shantery.thermo.userInfo.UserInfoForm;
