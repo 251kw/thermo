@@ -1,7 +1,7 @@
 package com.shantery.thermo;
 
 import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
-import static com.shantery.thermo.util.ThermoConstants.TO_USERS_MULTI_INP;
+import static com.shantery.thermo.util.ThermoConstants.USERS_MULTI_SET;
 
 import java.util.Optional;
 
@@ -82,7 +82,7 @@ public class ThermoService {
 		}else if(regist.equals("user")){	// ユーザー（個人）が選択されていた場合
 			registtransition = "userInfoInput";
 		}else if(regist.equals("multiuser")) {	// ユーザー（複数）が選択されていた場合
-			registtransition = TO_USERS_MULTI_INP;
+			registtransition = USERS_MULTI_SET;
 		}
 		return registtransition;
 	}
