@@ -32,6 +32,10 @@ import com.shantery.thermo.entity.UserInfoEntity;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+/**
+ * @author h.komatsu
+ *ユーザー新規登録機能をまとめたクラス
+ */
 @Controller
 class UserInfoController {
 	@Autowired
@@ -50,9 +54,17 @@ class UserInfoController {
 	}
 	
 			
+	/**
+	 * 登録内容確認画面
+	 * @param userInfoForm 入力されたユーザ情報を保持
+	 * @param result
+	 * @param model
+	 * @param bindRes　入力エラー項目情報
+	 * @return　エラーがあればuserInfoInput.html、エラーがなければuserInfoConfirm.html
+	 */
 	@RequestMapping(value = "/userInfoConfirm", method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
-			BindingResult result, Model model,BindingResult bindRes) {
+			BindingResult result,Model model,BindingResult bindRes) {
 		
 		//入力されたユーザIDと同一のユーザIDないか調査
 		Optional<UserInfoEntity> test2List = uInfoService.getGrDate(userInfoForm.getUserId());
@@ -60,9 +72,7 @@ class UserInfoController {
 		Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());//TODO　ANDでできなかった
 		
 		if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.getAllErrors().isEmpty()) {
-			//入力エラーがないときtureの時に抜ける
-			
-			// && bindRes.getAllErrors().isEmpty()
+			//入力エラー、重複ユーザID、グループIDとグループパスが正常であればif文を抜ける
 			
 		}else {
 			
@@ -79,6 +89,7 @@ class UserInfoController {
 		
 		return "userInfoConfirm";
 	}
+	
 	
 	//入力確認画面から戻るボタンで戻った時
 	@RequestMapping(value = "/userInfoInput", method = RequestMethod.POST)

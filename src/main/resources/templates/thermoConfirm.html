@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title>検温情報確認</title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+​
+		<!-- 小見出しを各々のページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>ページタイトル</h3>
+		</div>
+	
+		<form action="/from_confirm" method="post" >
+			<table>
+				<tr>
+					<th>名前</th>
+					<th>性別</th>
+					<th>学年</th>
+					<th>年齢</th>
+					<th>体温</th>
+					<th>味覚障害</th>
+					<th>嗅覚障害</th>
+					<th>咳</th>
+					<th>その他</th>	
+				</tr>
+			    <tr th:each= "list:${list}">
+			    <td th:text="${list.temperature}"></td>
+			    <td th:text="${list.writing}"></td>
+		    	
+			    </tr>
+			    
+			     
+			  </table>
+			<button type="submit" name="input" >ok</button>
+			<a href="/return_input/">
+				<button type="button"  >戻る</button>
+			 </a>
+		</form>
+		
+	</body>
+</html>

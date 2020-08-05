@@ -39,13 +39,13 @@
 				<input type="hidden" th:field="*{groupId}"/>
 				<input type="hidden" th:field="*{groupName}"/>
 				<input type="hidden" th:field="*{groupPass}"/>
-				<button type="submit" class="ui primary basic button">登録</button>	
+				<button type="submit" class="ui inverted primary button">登録</button>	
 			</form>
 			<form action="#" th:action="@{/groupInfoInput}" th:object="${groupInfoForm}" method="post">
 				<input type="hidden" th:field="*{groupId}"/>
 				<input type="hidden" th:field="*{groupName}"/>
 				<input type="hidden" th:field="*{groupPass}"/>
-				<button type="submit" class="ui primary basic button">修正する</button>
+				<button type="submit" class="ui inverted primary button">修正する</button>
 			</form>
 		</div>
 	</body>

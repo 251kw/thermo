@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title>検温情報入力</title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+​
+		<!-- 小見出しを各々のページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>ページタイトル</h3>
+		</div>
+	
+		<form action="/from_input" method="post" th:object="${thForm}">
+			<table>
+				<tr>
+					<th>名前</th>
+					<th>性別</th>
+					<th>学年</th>
+					<th>年齢</th>
+					<th>体温</th>
+					<th>味覚障害</th>
+					<th>嗅覚障害</th>
+					<th>咳</th>
+					<th>その他</th>	
+				</tr>
+			    <tr>
+		    		<td>栗原</td>
+		    		<td>男</td>
+		    		<td>1</td>
+		    		<td>23</td>
+			       <td>
+			      
+			       <input type="text" th:attr="name='tList[0].temperature'"
+			           size="30" maxlength="20" />
+			       </td>
+			      <td><input type="checkbox" name="tList[0].taste" value="1" /></td>
+			      <td><input type="checkbox" name="tList[0].smell" value="1" /></td>
+			      <td><input type="checkbox" name="tList[0].cough" value="1" /></td>
+			      <td><input type="text" th:attr="name='tList[0].writing'"
+			          size="30" maxlength="20" />
+			          <input type="hidden" name="tList[0].userId" value="kurihara" >
+			          
+			          </td>
+			    </tr>
+			     <tr>
+		    		<td>小宮</td>
+		    		<td>女</td>
+		    		<td>1</td>
+		    		<td>23</td>
+			       <td>
+			       
+			      	 <input type="text" th:attr="name='tList[1].temperature'"
+			           size="30" maxlength="20" />
+			           </td>
+			      <td><input type="checkbox" name="tList[1].taste" value="1" /></td>
+			      <td><input type="checkbox" name="tList[1].smell" value="1"/></td>
+			      <td><input type="checkbox" name="tList[1].cough" value="1"/></td>
+			      <td><input type="text" th:attr="name='tList[1].writing'"
+			          size="30" maxlength="20" />
+			          <input type="hidden" name="tList[1].userId" value="kurihara" >
+			          </td>
+			    </tr>
+			     
+			  </table>
+			<button type="submit" name="input" >ok</button>
+		</form>
+		
+	</body>
+</html>

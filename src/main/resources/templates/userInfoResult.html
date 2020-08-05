@@ -18,7 +18,7 @@
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-				<form action="#" th:action="@{/login}" th:object="${userInfoForm}" method="post">
+				<form action="#" th:action="@{./}" th:object="${userInfoForm}" method="get">
 					<p>下記の内容で登録しました！</p>
 					<table class="ui celled table">
 					<tbody>
@@ -79,7 +79,7 @@
 						</tr>
 					</tbody>
 				</table>
-			<button type="submit" class="ui primary basic button">TOPにもどる</button>
+			<button type="submit" class="ui inverted primary button">TOPにもどる</button>
 			</form>
 		</div>
 	</body>
