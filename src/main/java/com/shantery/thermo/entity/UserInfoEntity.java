@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -47,6 +49,22 @@ public class UserInfoEntity {
 	/** 更新時間 **/
 	@Column(name="update_time")
 	private String updateTime;
+	
+	
+	/** ThermoInfoEntity **/
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private ThermoInfoEntity thermoInfoEntity;
+	
+	public ThermoInfoEntity getThermoInfoEntity() {
+		return thermoInfoEntity;
+	}
+
+	public void setThermoInfoEntity(ThermoInfoEntity thermoInfoEntity) {
+		this.thermoInfoEntity = thermoInfoEntity;
+	}
+
+
 
 	public String getUser_id() {
 		return userId;

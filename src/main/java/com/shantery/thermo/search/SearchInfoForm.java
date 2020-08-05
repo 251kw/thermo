@@ -9,6 +9,7 @@ public class SearchInfoForm {
 	private String sch_date;
 	private String sch_name;
 	private String sch_grade;
+	private String sch_high;
 	
 	
 	public String getSch_date() {
@@ -29,6 +30,11 @@ public class SearchInfoForm {
 	public void setSch_grade(String sch_grade) {
 		this.sch_grade = sch_grade;
 	}
-
+	public String getSch_high() {
+		return sch_high;
+	}
+	public void setSch_high(String sch_high) {
+		this.sch_high = sch_high;
+	}
 	
 }

@@ -2,6 +2,8 @@ package com.shantery.thermo.search;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shantery.thermo.entity.ThermoInfoEntity;
+import com.shantery.thermo.entity.UserInfoEntity;
+
 @Controller
 class SearchController {
 
@@ -20,8 +25,8 @@ class SearchController {
 	
 	@Autowired
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
-//	@Autowired
-//	HttpSession session; //呼び出すクラス
+	@Autowired
+	HttpSession session; //呼び出すクラス
 	
 	/**
 	 *
@@ -31,10 +36,15 @@ class SearchController {
 
 	@RequestMapping(value ="/search", method = RequestMethod.GET) //初めて検索画面に来た時
 	public  String search(Model  m){
-		List<SearchEntity> list = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
+//		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+//		String group_id = loginuser.getGroup_id();
+		
+		List<ThermoInfoEntity> schlist = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
 		
 		m.addAttribute("searchInfo", new SearchInfoForm());
-		m.addAttribute("list", list);
+		m.addAttribute("list", schlist);
+		
+		session.setAttribute("schlist", schlist);
 		
 		return "search";
 	}
@@ -45,11 +55,26 @@ class SearchController {
 		String sch_date = form.getSch_date();
 		String sch_name = form.getSch_name();
 		String sch_grade = form.getSch_grade();
+//		String sch_high = form.getSch_high();
 		
-		List<SearchEntity> list = schService.createQuerySearch("1", sch_date, sch_name, sch_grade);
+		List<ThermoInfoEntity> list = schService.createQuerySearch("1", sch_date, sch_name, sch_grade);
 		m.addAttribute("list", list);
 	
 		return "search";
+	}
+	
+	@RequestMapping(value = "/from"/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.POST)
+	public String Input() {
+		/*検索画面 からくる　多分佐藤が作る*/
+		/*model にグループIdが同じの人をもらう*/
+		
+//		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+//		String group_id = loginuser.getGroup_id();
+		
+		List<ThermoInfoEntity> userlist = schRepository.findUser("1");
+		session.setAttribute("userlist", userlist);
+		
+		return "thermoInput"/*TO_INPUT*/;
 	}
 	
 	

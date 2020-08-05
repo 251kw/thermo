@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shantery.thermo.entity.ThermoInfoEntity;
+
 @Service
 public class SearchService {
 
@@ -16,7 +18,7 @@ public class SearchService {
 	 * リポジトリをよびだして、ｓｑｌ実行
 	 * コントローラに結果のlistを返す
 	 */
-	public List<SearchEntity> createQuerySearch(String group_id, String date, String name, String grade) {
+	public List<ThermoInfoEntity> createQuerySearch(String group_id, String date, String name, String grade) {
 		
 		String query="SELECT u.user_id, t.regist_date, u.user_name, u.gender, u.grade, TIMESTAMPDIFF(YEAR, u.birthday, curdate()) AS age, t.thermo, t.taste_disorder, t.olfactory_disorder, t.cough, t.other" 
 				+" FROM user_info u, thermo_info t"
