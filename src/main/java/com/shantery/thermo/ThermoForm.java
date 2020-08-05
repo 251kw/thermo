@@ -4,6 +4,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * @author k.takahashi
+ * ログイン画面で入力されたパラメータを取得するためのクラス
+ */
 public class ThermoForm {
 
 	/** ユーザID **/
@@ -18,7 +22,7 @@ public class ThermoForm {
     @Pattern(regexp="[a-zA-Z0-9]*",message="※半角英数字で入力してください")
 	private String userpass;
 
-    
+    // getter・setter
 	public String getUserId() {
 		return userId;
 	}
