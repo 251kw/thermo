@@ -6,6 +6,7 @@
 		<title>新規登録入力画面</title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	</head>
 	<body>
@@ -19,7 +20,7 @@
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->		
 			<form action="#" th:action="@{/userInfoConfirm}" th:object="${userInfoForm}" method="post">
-				<p>登録情報を入力してください</p>
+				<h3 th:text="登録情報を入力してください"></h3>
 				<table class="ui celled table">
 					<tbody>
 						<tr>
@@ -55,16 +56,6 @@
 								<br><span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName error</span>
 							</td>
 						</tr>
-<!--  
-  						<tr>
-							<td>性別</td>
-							<td><span class="ui input"><select th:field="*{gender}">
-								<option th:each="selGen : ${selectGender}" 
-								th:value="${selGen}" 
-								th:text="${selGen}"></option>
-							</select></span></td>
-						</tr>
--->
 						<tr>
 							<td>性別</td>
 							<td>
@@ -78,50 +69,30 @@
 						</tr>
 
 						<tr>
-							<td>生年月日</td>
+							<td><p th:text="#{view.tablelabel.birthday}"></td>
 							<td><span class="ui input"><input type="date" class="form-control" th:field="*{birthday}"/></span>
 								<br><span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">birthday error</span>
 							</td>
 						</tr>
-<!--  						
 						<tr>
-							<td>学年</td>
-							<td><span class="ui input"><select th:field="*{grade}">
-								<option th:each="selGra : ${selectGrade}" 
-								th:value="${selGra}" 
-								th:text="${selGra}"></option></select>
-							</span></td>
-						</tr>
--->  
-						<tr>
-							<td>学年</td>
+							<td><p th:text="#{view.tablelabel.grade}"></p></td>
 							<td>
 								<span class="ui input select">
 									<select th:field="*{grade}">
-										<option value="0">なし</option>
-										<option value="1">小学校1年生</option>
-										<option value="2">小学校2年生</option>
-										<option value="3">小学校3年生</option>
-										<option value="4">小学校4年生</option>
-										<option value="5">小学校5年生</option>
-										<option value="6">小学校6年生</option>
-										<option value="A">中学校1年生</option>
-										<option value="B">中学校2年生</option>
-										<option value="C">中学校3年生</option>
+										<option value="0" th:text="#{view.select.grade0}"></option>
+										<option value="1" th:text="#{view.select.grade1}"></option>
+										<option value="2" th:text="#{view.select.grade2}"></option>
+										<option value="3" th:text="#{view.select.grade3}"></option>
+										<option value="4" th:text="#{view.select.grade4}"></option>
+										<option value="5" th:text="#{view.select.grade5}"></option>
+										<option value="6" th:text="#{view.select.grade6}"></option>
+										<option value="A" th:text="#{view.select.gradeA}"></option>
+										<option value="B" th:text="#{view.select.gradeB}"></option>
+										<option value="C" th:text="#{view.select.gradeC}"></option>
 									</select>
 								</span>
 							</td>
 						</tr>
-<!--  
-						<tr>
-							<td>管理者</td>
-							<td><span class="ui input"><select th:field="*{adminFlg}">
-								<option th:each="selAdFlg : ${selectAdFlg}" 
-								th:value="${selAdFlg}" 
-								th:text="${selAdFlg}"></option></select>
-							</span></td>
-						</tr>
--->
 						<tr>
 							<td>管理者</td>
 							<td>
@@ -133,11 +104,13 @@
 								</span>
 							</td>
 						</tr>
-
 					</tbody>
 				</table>
-				<button type="submit" class="ui primary basic button">確認</button>
+				<button type="submit" class="ui inverted primary button">確認</button>
 			</form>
+			<form action="#" th:action="@{./}" method="get">
+				<input type="submit" class="ui inverted primary button" value="戻る">
+			</form>	
 		</div>
 	</body>
 </html>
