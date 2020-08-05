@@ -75,9 +75,9 @@ public class UserInfoMultiController {
 		if (usersInfo.isEmpty()) { //ファイルが選択されていない場合
 			errmsg.add((msgPro.getMessage("view.errUserFileExisting", new String[] {}, Locale.JAPAN)));
 		} else if (uMService.checkUserinfo(users)) { //ファイルの形式が正しくない場合
-			errmsg.add("ファイルの配列が正しくありません");
+			errmsg.add((msgPro.getMessage("view.errUserFileExisting", new String[] {}, Locale.JAPAN)));
 		} else if (uMService.checkUserId(users)) { //一括登録するユーザーIDに重複がある場合
-			errmsg.add("ログインIdが重複しています");
+			errmsg.add((msgPro.getMessage("view.errUserFileDuplication", new String[] {}, Locale.JAPAN)));
 		} else {
 			//一括登録するユーザーの数だけ繰り返す
 			for (int i = 0; i < users.size(); i++) {
@@ -115,7 +115,7 @@ public class UserInfoMultiController {
 					}
 					//エラーメッセージに行数を追加しerrmsgに格納
 					for (String getErr : uMService.makeErrMsg(getVio)) {
-						errmsg.add((i + 1) + "行目の" + getErr);
+						errmsg.add((i + 1) + (msgPro.getMessage("view.errUserFileLine", new String[] {}, Locale.JAPAN)) + getErr);
 					}
 
 				}

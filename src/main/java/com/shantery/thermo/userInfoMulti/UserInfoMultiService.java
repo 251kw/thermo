@@ -8,7 +8,10 @@ import java.io.Reader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +20,9 @@ import com.shantery.thermo.entity.UserInfoEntity;
 
 @Service
 public class UserInfoMultiService {
+	
+	@Autowired
+	protected MessageSource msgPro;
 	
 	/**
 	 * @param usersInfo 登録ユーザー情報の入ったＣＳＶファイル
@@ -116,7 +122,7 @@ public class UserInfoMultiService {
 			}
 			
 			if(bool == true) { //ログインできないユーザー情報が見つかった場合
-				errmsg = ((i+1) + "行目のログインができませんでした");  //TODO 日本語の外部化
+				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAndPassCK", new String[] {}, Locale.JAPAN)));  //TODO 日本語の外部化
 			}
 		
 		return errmsg;
@@ -127,7 +133,7 @@ public class UserInfoMultiService {
 		String errmsg = null;
 		for (UserInfoEntity list : ulist) {
 			if(list.getUser_id().equals(usersInfo[2])) { 
-				errmsg = ((i+1) + "行目のユーザーIdは既に使われています");
+				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
 			}
 		}
 		
@@ -158,23 +164,23 @@ public class UserInfoMultiService {
 		//エラーの仕分けとメッセージの格納
 		for (String vio : vios) {
 			if(vio.equals("gId")) {
-				gId = "グループID：4文字以上、32文字以下の半角英数字で入力してください";
+				gId = (msgPro.getMessage("view.errUserFileGroupId", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("gpass")) {
-				gpass = "グループパスワード：4文字以上、16文字以下の半角英数字で入力してください";
+				gpass = (msgPro.getMessage("view.errUserFileGroupPass", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("uId")) {
-				uId = "ユーザーID：4文字以上、32文字以下の半角英数字で入力してください";
+				uId = (msgPro.getMessage("view.errUserFileUserId", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("uPass")) {
-				uPass = "ユーザーパスワード：4文字以上、16文字以下の半角英数字で入力してください";
+				uPass = (msgPro.getMessage("view.errUserFileUserPass", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("uName")) {
-				uName = "ユーザー名：1文字以上、64文字以下の記号以外の文字で入力してください";
+				uName = (msgPro.getMessage("view.errUserFileUserName", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("gender")) {
-				gender = "性別：Ｍ(男性)またはF(女性)で入力してください";
+				gender = (msgPro.getMessage("view.errUserFileUserGender", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("birthday")) {
-				birthday = "生年月日：　yyyyMMdd　の形式で入力してください";
+				birthday = (msgPro.getMessage("view.errUserFileUserBirthday", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("grade")) {
-				grade = "学年：数値で入力してください";
+				grade = (msgPro.getMessage("view.errUserFileUserGrade", new String[] {}, Locale.JAPAN));
 			}else if(vio.equals("flg")) {
-				flg = "管理者権限：数値で入力してください";
+				flg = (msgPro.getMessage("view.errUserFileUserFlg", new String[] {}, Locale.JAPAN));
 			}
 			
 		}
