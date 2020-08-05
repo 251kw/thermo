@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.groupInfo.GroupInfoForm;
 import com.shantery.thermo.search.SearchEntity;
@@ -99,10 +100,10 @@ class ThermoController {
 			// ログイン中のユーザーの情報を保持
 			session.setAttribute("loginuser", userinfo);
 			//今日の日付で検索	//group_idで絞る
-			List<SearchEntity> list = schRepository.searchCurDate("1");
+			//List<ThermoInfoEntity> list = schRepository.searchCurDate("1");
 			
 			model.addAttribute("searchInfo", new SearchInfoForm());
-			model.addAttribute("list", list);
+			//model.addAttribute("list", list);
 		}else {	 // 不正なユーザーの場合
 			// エラーメッセージを格納
 			errormessage = thermoService.setErrormessage(errormessage);
