@@ -6,7 +6,7 @@
 		<title th:text="#{view.searchInput.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
-    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	</head>
 	<body>
@@ -29,15 +29,15 @@
 			<p></p>
 
 			<table  class="ui fixed single line celled table">
-				<thead>
+				<thead class="delete">
 					<tr >
 						<td th:each="val:${users_head_info}" width="100" th:text="${val}"></td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list : ${users_info}">
+					<tr th:each="list,stat : ${users_info}">
 						<th:block th:each="line:${list}">
-							<td  th:text="${line}"></td>
+							<td th:text="${line}"></td>
 						</th:block>
 					</tr>
 				</tbody>
