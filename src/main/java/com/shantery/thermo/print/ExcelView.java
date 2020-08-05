@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.shantery.thermo.entity.ThermoEntity;
+import com.shantery.thermo.search.SearchEntity;
 
 @Component
 public class ExcelView extends AbstractXlsxView {
@@ -35,7 +36,7 @@ public class ExcelView extends AbstractXlsxView {
 		HttpSession session = request.getSession();
 
 		// 検索結果をリストで取得
-		List<ThermoEntity> list = (List<ThermoEntity>) session.getAttribute("samplelist");
+		List<SearchEntity> list = (List<SearchEntity>) session.getAttribute("samplelist");
 		// シート作成
 		Sheet sheet = workbook.createSheet("検温情報");
 		// 検温表の項目を配列化
@@ -70,55 +71,55 @@ public class ExcelView extends AbstractXlsxView {
 			} else {
 				//改行を行う
 				row = sheet.createRow(rowNum++);
-				//一列目に名前を挿入
+				//1列目に名前を挿入
 				Cell cell = row.createCell(0);
+				cell.setCellValue(list.get(i - 1).getUser_name());
+				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
+				cellstyle.setBorderRight(BorderStyle.MEDIUM);
+				cellstyle.setBorderTop(BorderStyle.MEDIUM);
+				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
+				cell.setCellStyle(cellstyle);
+				//2列目に性別を挿入
+				cell = row.createCell(1);
+				cell.setCellValue(list.get(i - 1).getGender());
+				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
+				cellstyle.setBorderRight(BorderStyle.MEDIUM);
+				cellstyle.setBorderTop(BorderStyle.MEDIUM);
+				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
+				cell.setCellStyle(cellstyle);
+				//3列目に学年を挿入
+				cell = row.createCell(2);
+				cell.setCellValue(list.get(i - 1).getGrade());
+				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
+				cellstyle.setBorderRight(BorderStyle.MEDIUM);
+				cellstyle.setBorderTop(BorderStyle.MEDIUM);
+				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
+				cell.setCellStyle(cellstyle);
+				//4列目に年齢を挿入
+				cell = row.createCell(3);
+				cell.setCellValue(list.get(i - 1).getAge());
+				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
+				cellstyle.setBorderRight(BorderStyle.MEDIUM);
+				cellstyle.setBorderTop(BorderStyle.MEDIUM);
+				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
+				cell.setCellStyle(cellstyle);
+				//5列目に体温を挿入
+				cell = row.createCell(4);
 				cell.setCellValue(list.get(i - 1).getThermo());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
-				cell = row.createCell(1);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
-				cell = row.createCell(2);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
-				cell = row.createCell(3);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
-				cell = row.createCell(4);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
+				//6列目に味覚障害を挿入
 				cell = row.createCell(5);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
+				cell.setCellValue(list.get(i - 1).getTaste_disorder());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
+				//7列目に嗅覚障害を挿入
 				cell = row.createCell(6);
 				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
@@ -126,15 +127,15 @@ public class ExcelView extends AbstractXlsxView {
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
+				//8列目に咳を挿入
 				cell = row.createCell(7);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
+				cell.setCellValue(list.get(i - 1).getCough());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//二列目に性別を挿入
+				//9列目に性別を挿入
 				cell = row.createCell(8);
 				cell.setCellValue(list.get(i - 1).getOther());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
