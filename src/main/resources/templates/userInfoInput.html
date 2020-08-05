@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title>新規登録入力画面</title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+	<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3>新規登録！</h3>
+		</div>
+		<div class="ui container">
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->		
+			<form action="#" th:action="@{/userInfoConfirm}" th:object="${userInfoForm}" method="post">
+				<p>登録情報を入力してください</p>
+				<table class="ui celled table">
+					<tbody>
+						<tr>
+							<td>グループID<br>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}"/></span>
+								<br><span th:if="${#fields.hasErrors('groupId')}" th:errors="*{groupId}">groupId error</span>
+							</td>
+						</tr>
+						<tr>
+							<td>グループパスワード<br>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupPass}"/></span>
+								<br><span th:if="${#fields.hasErrors('groupPass')}" th:errors="*{groupPass}">groupPass error</span>
+								<br><span th:if="${grError}" th:text=${grError}></span>
+							</td>
+						</tr>
+						<tr>
+							<td>ユーザーID<br>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}"/></span>
+								<br><span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId error</span>
+								<br><span th:if="${uIdError}" th:text=${uIdError}></span>
+							</td>	
+							
+						</tr>
+						<tr>
+							<td>ユーザーパスワード<br>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userPass}"/></span>
+								<br><span th:if="${#fields.hasErrors('userPass')}" th:errors="*{userPass}">userPass error</span>
+							</td>
+						</tr>
+						<tr>
+							<td>氏名<br>※使用可能：漢字、ひらがな、英数字(記号を除く)</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}"/></span>
+								<br><span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName error</span>
+							</td>
+						</tr>
+<!--  
+  						<tr>
+							<td>性別</td>
+							<td><span class="ui input"><select th:field="*{gender}">
+								<option th:each="selGen : ${selectGender}" 
+								th:value="${selGen}" 
+								th:text="${selGen}"></option>
+							</select></span></td>
+						</tr>
+-->
+						<tr>
+							<td>性別</td>
+							<td>
+								<span class="ui input select">
+									<select th:field="*{gender}">
+										<option value="M">男</option>
+										<option value="F">女</option>
+									</select>
+								</span>
+							</td>
+						</tr>
+
+						<tr>
+							<td>生年月日</td>
+							<td><span class="ui input"><input type="date" class="form-control" th:field="*{birthday}"/></span>
+								<br><span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">birthday error</span>
+							</td>
+						</tr>
+<!--  						
+						<tr>
+							<td>学年</td>
+							<td><span class="ui input"><select th:field="*{grade}">
+								<option th:each="selGra : ${selectGrade}" 
+								th:value="${selGra}" 
+								th:text="${selGra}"></option></select>
+							</span></td>
+						</tr>
+-->  
+						<tr>
+							<td>学年</td>
+							<td>
+								<span class="ui input select">
+									<select th:field="*{grade}">
+										<option value="0">なし</option>
+										<option value="1">小学校1年生</option>
+										<option value="2">小学校2年生</option>
+										<option value="3">小学校3年生</option>
+										<option value="4">小学校4年生</option>
+										<option value="5">小学校5年生</option>
+										<option value="6">小学校6年生</option>
+										<option value="A">中学校1年生</option>
+										<option value="B">中学校2年生</option>
+										<option value="C">中学校3年生</option>
+									</select>
+								</span>
+							</td>
+						</tr>
+<!--  
+						<tr>
+							<td>管理者</td>
+							<td><span class="ui input"><select th:field="*{adminFlg}">
+								<option th:each="selAdFlg : ${selectAdFlg}" 
+								th:value="${selAdFlg}" 
+								th:text="${selAdFlg}"></option></select>
+							</span></td>
+						</tr>
+-->
+						<tr>
+							<td>管理者</td>
+							<td>
+								<span class="ui input select">
+									<select th:field="*{adminFlg}">
+										<option value="0">一般</option>
+										<option value="1">管理者</option>
+									</select>
+								</span>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<button type="submit" class="ui primary basic button">確認</button>
+			</form>
+		</div>
+	</body>
+</html>
