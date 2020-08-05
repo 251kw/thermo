@@ -34,9 +34,9 @@ public class ThermoInputService {
 			thEn.setThermo_id(Integer.toString(thermoId));
 			thermoId++;
 			thEn.setThermo(list.get(i).getTemperature());
-			thEn.setTaste_disorder(list.get(i).getTaste());
-			thEn.setOlfactory_disorder(list.get(i).getSmell());
-			thEn.setCough(list.get(i).getCough());
+			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
+			thEn.setOlfactory_disorder(convertCheck(list.get(i).getSmell()));
+			thEn.setCough(convertCheck(list.get(i).getCough()));
 			thEn.setOther(list.get(i).getWriting());
 			thEn.setRegist_date(day.format(calendar.getTime()));
 			thEn.setUpdate_user("kurihara");//ログインID
@@ -50,7 +50,7 @@ public class ThermoInputService {
 	}
 	
 	public String convertCheck(String check) {
-		if(check.equals("on")) {
+		if(check != null) {
 			check = "1";
 		}else {
 			check = "0";

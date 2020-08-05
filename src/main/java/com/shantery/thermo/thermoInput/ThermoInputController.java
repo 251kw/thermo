@@ -104,7 +104,7 @@ class ThermoInputController {
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping(value = "/return_input/"/*FROM_RETURN_INPUT_BUTTON*/ , method = RequestMethod.POST)
+	@RequestMapping(value = "/return_input/"/*FROM_RETURN_INPUT_BUTTON*/ , method = RequestMethod.GET)
 	public String InputReturn() {
 		
 		
@@ -118,7 +118,7 @@ class ThermoInputController {
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping(value = "/return_search/"/*FROM_RETURN_SEARCH_BUTTON*/ , method = RequestMethod.GET)
+	@RequestMapping(value = "/return_search/"/*FROM_RETURN_SEARCH_BUTTON*/ , method = RequestMethod.POST)
 	public String SearchReturn() {
 		
 		
