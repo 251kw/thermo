@@ -6,13 +6,19 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,13 +62,12 @@ public class UserInfoMultiController {
 	 * @throws ParseException
 	 */
 	@RequestMapping(value = USERS_MULTI_GET , method = RequestMethod.POST)
-	public ModelAndView getCSVfile(@RequestParam(name = USERS_CSV) MultipartFile usersInfo,  ModelAndView mav) throws ParseException {
+	public String getCSVfile(@RequestParam(name = USERS_CSV) MultipartFile usersInfo,  Model model) throws ParseException {
 		if (session.getAttribute(USERS_INFO_SES) != null) { // もしsessionスコープ内にデータがあるなら削除する
 			session.removeAttribute(USERS_INFO_SES);
 		}
-		mav.setViewName(TO_USERS_MULTI_INP);
+		String rtn = TO_USERS_MULTI_INP;
 		List<String[]> users = uMService.toStringList(usersInfo);
-		List<UserInfoEntity> setUsers = new ArrayList<>();
 		Iterable<GroupMstEntity> glist = gimr.findAll();
 		Iterable<UserInfoEntity> ulist = uimr.findAll();
 		List<String> errmsg = new ArrayList<>();
@@ -86,36 +91,38 @@ public class UserInfoMultiController {
 					errmsg.add(getmsg);
 				}
 				
-				//TODO 入力チェックとメッセージの追加
-				UserInfoEntity setUser = new UserInfoEntity();
-				setUser.setUser_id(users.get(i)[0]);
-				setUser.setGroup_id(users.get(i)[1]);
-				setUser.setUser_pass(users.get(i)[2]);
-				setUser.setUser_name(users.get(i)[3]);
-				setUser.setGender(users.get(i)[4]);
-				setUser.setBirthday(users.get(i)[5]);
-				setUser.setGrade(users.get(i)[6]);
-				setUser.setAdmin_flg(users.get(i)[7]);
-				setUser.setUpdate_time(users.get(i)[8]);
+				ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		        Validator validator = factory.getValidator();
 				
-				setUsers.add(setUser); 
+		        UserInfoMultiBeanValidation uimbv = new UserInfoMultiBeanValidation();
 				
+					uimbv.setAll(users.get(i));
+					  Set<ConstraintViolation<UserInfoMultiBeanValidation>> constraintViolations = validator.validate(uimbv);
+					  int errorCount = constraintViolations.size();
+					  if (errorCount > 0) {
+						  for (ConstraintViolation<UserInfoMultiBeanValidation> violation : constraintViolations) {
+							  errmsg.add((i+1) + "行目：" + violation.getMessage());
+						  }
+				        }
+				
+		        
+		        
 			}
 			
 		}
 		
 		if (CollectionUtils.isEmpty(errmsg)) {
 			session.setAttribute(USERS_INFO_SES, users);
-			mav.addObject(USERS_HEAD, ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
-			mav.addObject(USERS_HEAD_LENG, ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
-			mav.addObject(USERS_INFO, users);
-			mav.setViewName(TO_USERS_MULTI_CONF);
+			model.addAttribute(USERS_HEAD, ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
+			model.addAttribute(USERS_HEAD_LENG, ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
+			model.addAttribute(USERS_INFO, users);
+			rtn = TO_USERS_MULTI_CONF;
 		}else {
-			mav.addObject(USERS_ERR, errmsg);
-			mav.setViewName(TO_USERS_MULTI_INP);
+			model.addAttribute(USERS_ERR, errmsg);
+			rtn = TO_USERS_MULTI_INP;
 		}
 		
-		return mav ;
+		return rtn ;
 	}
 	
 	/**
