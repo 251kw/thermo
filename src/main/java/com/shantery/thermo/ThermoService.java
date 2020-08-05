@@ -76,6 +76,7 @@ public class ThermoService {
 	 * @param registtransition 遷移先を格納する変数 
 	 * @return registtransition
 	 */
+	// TODO 未使用のメソッド
 	public String setRegistTransition(String regist,String registtransition) {
 		if(regist.equals("group")) {	// グループが選択されていた場合
 			registtransition = "groupInfoInput";
