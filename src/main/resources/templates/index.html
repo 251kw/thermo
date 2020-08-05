@@ -21,7 +21,7 @@
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui text container">
-			<form action="/registoption" method="post" class="ui form" name="registform" onsubmit="return check()">
+			<form method="get" class="ui form" name="registform" onsubmit="return check()">
 				<table class="registtable">
 					<tr>
 						<td>
@@ -80,25 +80,26 @@
 		
 <script type="text/javascript"> 
 
+	// 送り先がgetかpostかどっちで受け取っているか確認しましょう
 	function check(){
 	 //actionメソッドに遷移先のURLを代入する
 	 
-	 	var select = document.getElementById("regist").value;
+	 	var select = document.getElementById("regist").value;// registはselect(html)のid属性
 	 	var transition;
 	 	
-		switch (select){
-		  case "group":
+		switch (select){	// selectは86行目で定義している変数
+		  case "group":		// caseにselect（html）のvalueを指定
 		    transition = "./groupInfoInput";
 		    break;
 		  case "user":
 			transition = "./userInfoInput";
 		    break;
 		  case "multiuser":
-		    transition = "./usersmultiset";
+		    transition = "./users_multi_set";
 		    break;
 		}
 		
-	 	document.registform.action = transition;
+	 	document.registform.action = transition;	// registformはformのname属性
 	}
 </script>
 		
