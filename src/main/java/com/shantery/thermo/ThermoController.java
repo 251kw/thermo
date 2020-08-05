@@ -3,6 +3,7 @@ package com.shantery.thermo;
 import static com.shantery.thermo.util.ThermoConstants.*;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.groupInfo.GroupInfoForm;
+import com.shantery.thermo.search.SearchEntity;
+import com.shantery.thermo.search.SearchInfoForm;
+import com.shantery.thermo.search.SearchRepository;
 import com.shantery.thermo.userInfo.UserInfoForm;
 
 import org.springframework.ui.Model;
@@ -36,6 +40,9 @@ class ThermoController {
 	
 	@Autowired
 	ThermoRepository repository;
+	
+	@Autowired
+	private SearchRepository schRepository;
 	
 	@Autowired
 	HttpSession session; 
@@ -102,6 +109,11 @@ class ThermoController {
 		errormessage = thermoService.setErrormessage(errormessage, check);
 		if(errormessage != null) {
 			model.addAttribute("error", errormessage);
+		}else {
+			List<SearchEntity> list = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
+			
+			model.addAttribute("searchInfo", new SearchInfoForm());
+			model.addAttribute("list", list);
 		}
 		
 		// ページを移動

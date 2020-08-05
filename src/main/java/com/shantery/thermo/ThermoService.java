@@ -95,7 +95,7 @@ public class ThermoService {
 	 */
 	public String setErrormessage(String message,Boolean check) {
 		if(check==true) {	// ログインに成功する場合（仮）
-			message = "ログインに成功するアカウント";
+			message = null;
 		}else {				// ログインに成功しない場合
 			message = "ログインIDまたはパスワードが間違っています";
 		}
