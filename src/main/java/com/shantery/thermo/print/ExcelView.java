@@ -38,13 +38,13 @@ public class ExcelView extends AbstractXlsxView {
 		// シート作成
 		Sheet sheet = workbook.createSheet("検温情報");
 		// 検温表の項目を配列化
-		String[] rowTmp = { "名前", "性別", "学年", "年齢", "体温", "味覚障害", "嗅覚障害", "咳", "その他" };
+		String[] rowTmp = {"日付", "名前", "性別", "学年", "年齢", "体温", "味覚障害", "嗅覚障害", "咳", "その他" };
 
- 		sheet.setColumnWidth(1, 1150);
- 		sheet.setColumnWidth(5, 1150);
+ 		sheet.setColumnWidth(2, 1150);
  		sheet.setColumnWidth(6, 1150);
  		sheet.setColumnWidth(7, 1150);
- 		sheet.setColumnWidth(8, 5500);
+ 		sheet.setColumnWidth(8, 1150);
+ 		sheet.setColumnWidth(9, 5500);
 		// セルスタイルを指定
 		CellStyle cellstyle = workbook.createCellStyle();
 
@@ -69,72 +69,80 @@ public class ExcelView extends AbstractXlsxView {
 			} else {
 				//改行を行う
 				row = sheet.createRow(rowNum++);
-				//1列目に名前を挿入
+				//1列目に日付を挿入
 				Cell cell = row.createCell(0);
+				cell.setCellValue(list.get(i - 1).getRegist_date());
+				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
+				cellstyle.setBorderRight(BorderStyle.MEDIUM);
+				cellstyle.setBorderTop(BorderStyle.MEDIUM);
+				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
+				cell.setCellStyle(cellstyle);
+				//2列目に名前を挿入
+				cell = row.createCell(1);
 				cell.setCellValue(list.get(i - 1).getUser_name());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//2列目に性別を挿入
-				cell = row.createCell(1);
+				//3列目に性別を挿入
+				cell = row.createCell(2);
 				cell.setCellValue(list.get(i - 1).getGender());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//3列目に学年を挿入
-				cell = row.createCell(2);
+				//4列目に学年を挿入
+				cell = row.createCell(3);
 				cell.setCellValue(list.get(i - 1).getGrade());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//4列目に年齢を挿入
-				cell = row.createCell(3);
+				//5列目に年齢を挿入
+				cell = row.createCell(4);
 				cell.setCellValue(list.get(i - 1).getAge());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//5列目に体温を挿入
-				cell = row.createCell(4);
+				//6列目に体温を挿入
+				cell = row.createCell(5);
 				cell.setCellValue(list.get(i - 1).getThermo());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//6列目に味覚障害を挿入
-				cell = row.createCell(5);
+				//7列目に味覚障害を挿入
+				cell = row.createCell(6);
 				cell.setCellValue(list.get(i - 1).getTaste_disorder());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//7列目に嗅覚障害を挿入
-				cell = row.createCell(6);
+				//8列目に嗅覚障害を挿入
+				cell = row.createCell(7);
 				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//8列目に咳を挿入
-				cell = row.createCell(7);
+				//9列目に咳を挿入
+				cell = row.createCell(8);
 				cell.setCellValue(list.get(i - 1).getCough());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
-				//9列目に性別を挿入
-				cell = row.createCell(8);
+				//10列目にその他を挿入
+				cell = row.createCell(9);
 				cell.setCellValue(list.get(i - 1).getOther());
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
