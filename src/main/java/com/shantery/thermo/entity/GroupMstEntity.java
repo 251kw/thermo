@@ -2,29 +2,33 @@ package com.shantery.thermo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+/**
+ * @author k.takahashi
+ * group_mstテーブル用のエンティティ
+ */
 @Entity
 @Table(name="group_mst")
 public class GroupMstEntity {
 
 	@Id
+	/** グループID **/
 	@Column(length=32,name="group_id")
 	private String groupId;
-	
+	/** グループ名 **/
 	@Column(length=64,name="group_name")
 	private String groupName;
-	
+	/** グループパスワード **/
 	@Column(length=16,name="group_pass")
 	private String groupPass;
-	
+	/** 登録時間 **/
 	@Column(name="update_time")
 	private String updateTime;
 
+	// getter・setter
 	public String getGroup_id() {
 		return groupId;
 	}
