@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.search.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript"  th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	
+	<body>
+		<!--外部ヘッダーファイル読み込み-->
+		<div th:insert="header :: header"></div>
+​
+		<!--ページで書き換え -->
+		<p></p>
+		<div class="komidasi">
+			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
+		</div>
+		
+		<p></p>
+		<form method="post" action="/from_search">
+			<button type="submit" class="ui inverted primary button">
+					<p th:text="#{view.btn.thermoinfo}"></p>
+			</button>
+		</form>
+
+		<!-------------------------------------------本体始まり ----------------------------------------------------->
+		<form th:action="@{/search_info}" th:object="${searchInfo}" method="post">
+			<div class="ui container">
+​
+			<div class="ui horizontal divider"><!-- 線を引いてテキストを入れれる --><p th:text="#{view.label.searchinfo}"></div>
+			<p></p>
+			
+			<div class="ui input">
+				
+					<p th:text="#{view.tablelabel.regist_date}"></p>
+					<input type="date" th:field="*{sch_date}"><!-- コントローラで受け取るname指定 -->
+				
+					<p th:text="#{view.tablelabel.name}"></p>
+						<input type="text" th:field="*{sch_name}">		<!-- コントローラで受け取るname指定 -->
+				
+					<p th:text="#{view.tablelabel.grade}"></p>
+						<span class="ui input select">
+							<select name="search_grade">		<!-- コントローラで受け取るname指定 -->
+								<option value="0" th:text="#{view.select.grade0}"></option>
+								<option value="1" th:text="#{view.select.grade1}"></option>
+								<option value="2" th:text="#{view.select.grade2}"></option>
+								<option value="3" th:text="#{view.select.grade3}"></option>
+								<option value="4" th:text="#{view.select.grade4}"></option>
+								<option value="5" th:text="#{view.select.grade5}"></option>
+								<option value="6" th:text="#{view.select.grade6}"></option>
+								<option value="A" th:text="#{view.select.gradeA}"></option>
+								<option value="B" th:text="#{view.select.gradeB}"></option>
+								<option value="C" th:text="#{view.select.gradeC}"></option>
+							</select>
+						</span>
+				
+					<span class="ui checkbox">
+						<input type="checkbox" name="highthermo" value="highthermo">
+						<label th:text="#{view.label.searchthermo}"></label>
+					</span>
+
+				</div>
+				
+			</div>
+			
+		<p></p>
+		<div class="ui center aligned container"><!-- 中央寄せ -->
+			<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.search}"></button>
+			<button type="reset" class="ui inverted primary button"><p th:text="#{view.btn.clear}"></button>
+		</div>
+		
+		</form>
+		
+		<div class="ui container">
+			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
+		</div>
+		
+		<div class="ui right aligned  container"><!-- 右寄せ -->
+		<form method="post" action="/excel">
+			<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.copy}"></button>
+		</form>
+		</div>
+		
+		<div class="ui container">
+​
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th th:text="#{view.tablelabel.regist_date}"></th>
+						<th th:text="#{view.tablelabel.name}"></th>
+						<th th:text="#{view.tablelabel.gender}"></th>
+						<th th:text="#{view.tablelabel.grade}"></th>
+						<th th:text="#{view.tablelabel.age}"></th>
+						<th th:text="#{view.tablelabel.thermo}"></th>
+						<th th:text="#{view.tablelabel.taste}"></th>
+						<th th:text="#{view.tablelabel.smell}"></th>
+						<th th:text="#{view.tablelabel.cough}"></th>
+						<th th:text="#{view.tablelabel.other}"></th>
+					</tr>
+				</thead>
+				<th:block th:each="list : ${list}">
+				<tbody>
+						<th:block th:if="${list.thermo == 38.0}">
+					<tr class="error"></th:block>
+						<th:block th:unless="${list.thermo == 38.0}">
+					<tr>
+						<td data-label="計測日" th:text="${list.regist_date}"></td>
+						<td data-label="名前" th:text="${list.user_name}"></td>
+						<td data-label="性別"  th:text="${list.gender}">
+							<th:block th:if="${list.gender == M}">男性</th:block>
+							<th:block th:unless="${list.gender == M}">女性</th:block></td>
+						<td data-label="学年" th:text="${list.grade}"></td>
+						<td data-label="年齢"><p th:text="#{view.tablelabel.ageage(${list.age})}"></td>
+						<td data-label="体温"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
+						<td data-label="味覚障害" th:text="${list.taste_disorder}"></td>
+						<td data-label="嗅覚障害" th:text="${list. olfactory_disorder}"></td>
+						<td data-label="咳">
+							<th:block th:if="${list.cough == 0}">なし</th:block>
+							<th:block th:unless="${list.cough == 0}">あり</th:block></td>
+						<td data-label="その他" th:text="${list.other}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
