@@ -15,21 +15,21 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 public class ExcelController {
 	
 	//リポジトリクラス呼出し
-	@Autowired
-	ExcelRepository repository;
+//	@Autowired
+//	ExcelRepository repository;
 	
 	@Autowired
 	HttpSession session; //呼び出すクラス
 	
-	@RequestMapping("/excel")
-	public String exsample(Model model) {
-		model.addAttribute("msg", "sample");
-		List<ThermoInfoEntity> list = repository.findAll();
-		model.addAttribute("list", list);
-		session.setAttribute("samplelist",list);
-
-		return "extest";
-	}
+//	@RequestMapping("/excel")
+//	public String exsample(Model model) {
+//		model.addAttribute("msg", "sample");
+//		List<ThermoInfoEntity> list = repository.findAll();
+//		model.addAttribute("list", list);
+//		session.setAttribute("samplelist",list);
+//
+//		return "extest";
+//	}
 	
 	@RequestMapping("/ex") 
 	public  ExcelView excel(ExcelView mav) {
