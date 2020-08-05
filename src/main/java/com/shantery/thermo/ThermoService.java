@@ -71,6 +71,20 @@ public class ThermoService {
 	}
 	
 	/**
+	 * エラーメッセージを取得するメソッド
+	 * @param message エラーメッセージを格納する変数
+	 * @param check 正常なパスワードならtrue、異常ならfalse
+	 * @return message
+	 */
+	public String setErrormessage(String message) {
+		
+		// エラーメッセージを代入
+		message = "ログインIDまたはパスワードが間違っています";
+			
+		return message;
+	}
+	
+	/**
 	 * 新規登録の種類によって遷移先を振り分けるメソッド
 	 * @param regist ログイン画面で選択された登録の種類
 	 * @param registtransition 遷移先を格納する変数 
@@ -88,18 +102,4 @@ public class ThermoService {
 		return registtransition;
 	}
 	
-	/**
-	 * エラーメッセージを取得するメソッド
-	 * @param message エラーメッセージを格納する変数
-	 * @param check 正常なパスワードならtrue、異常ならfalse
-	 * @return message
-	 */
-	public String setErrormessage(String message,Boolean check) {
-		if(check==true) {	// ログインに成功する場合（仮）
-			message = null;
-		}else {				// ログインに成功しない場合
-			message = "ログインIDまたはパスワードが間違っています";
-		}
-		return message;
-	}
 }

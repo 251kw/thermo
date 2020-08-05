@@ -7,45 +7,45 @@ import javax.validation.constraints.Size;
 public class UserInfoMultiBeanValidation {
 
 	/** グループID **/
-	@NotBlank(message = "　グループID：半角英数字で入力してください")
-	@Size(min = 4, max = 32,message="　グループID：4文字以上、32文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="　グループID：記号、スペースは入力できません")
+	@NotBlank(message = "gId")
+	@Size(min = 4, max = 32,message="gId")
+	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="gId")
 	private String group_id;
 	/** グループパスワード **/
-	@NotBlank(message = "　グループパスワード：半角英数字で入力してください")
-	@Size(min = 4, max = 16,message="　グループパスワード：4文字以上、16文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="　グループパスワード：記号、スペースは入力できません")
+	@NotBlank(message = "gpass")
+	@Size(min = 4, max = 16,message="gPass")
+	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="gPass")
 	private String group_pass;
 	/** ユーザID **/
-	@NotBlank(message = "　ユーザーID：半角英数字で入力してください")
-	@Size(min = 4, max = 32,message="　ユーザーID：4文字以上、32文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="　ユーザーID：記号、スペースは入力できません")
+	@NotBlank(message = "uId")
+	@Size(min = 4, max = 32,message="uId")
+	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="uId")
 	private String user_id;
 	/** ユーザパスワード **/
-	@NotBlank(message = "　ユーザパスワード：半角英数字で入力してください")
-	@Size(min = 4, max = 16,message="　ユーザパスワード：4文字以上、16文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="　ユーザパスワード：記号、スペースは入力できません")
+	@NotBlank(message = "uPass")
+	@Size(min = 4, max = 16,message="uPass")
+	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="uPass")
 	private String user_pass;
 	/** ユーザ名 **/
-	@NotBlank(message = "　ユーザ名：記号以外で入力してください")
-	@Size(min = 1, max = 64,message="　ユーザ名：1文字以上、64文字以下で入力してください")
-	//@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="　ユーザ名：記号、スペースは入力できません")
+	@NotBlank(message = "uName")
+	@Size(min = 1, max = 64,message="uName")
+	//@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="uName")
 	private String user_name;
 	/** 性別 **/
-	@NotBlank(message = "　性別：入力されていません")
-	@Size(min = 1,max = 1,message="　性別：1文字で入力してください")
-	@Pattern(regexp = "[MF]",message="　性別：M または F で入力してください")
+	@NotBlank(message = "gender")
+	@Size(min = 1,max = 1,message="gender")
+	@Pattern(regexp = "[MF]",message="gender")
 	private String gender;
 	/** 生年月日 **/
-	@NotBlank(message = "　生年月日：記号以外で入力してください")
+	@NotBlank(message = "birthday")
 	private String birthday;
 	/** 学年区分 **/
-	@NotBlank(message = "　学年：記号以外で入力してください")
-	@Size(min = 1,max = 1,message="1文字で入力してください")
+	@NotBlank(message = "grade")
+	@Size(min = 1,max = 1,message="grade")
 	private String grade;
 	/** 管理者フラグ **/
-	@NotBlank(message = "　管理者権限：記号以外で入力してください")
-	@Size(min = 1,max = 1,message="　管理者権限：1文字で入力してください")
+	@NotBlank(message = "flg")
+	@Size(min = 1,max = 1,message="flg")
 	private String admin_flg;
 	
 	
