@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
@@ -43,15 +42,16 @@ public class UserInfoMultiController {
 	@Autowired
 	HttpSession session; //呼び出すクラス
 
+	
 	/**
 	 * ユーザーを一括登録するファイルをアップロードする画面に遷移させる
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping(value = USERS_MULTI_SET, method = RequestMethod.POST)
-	public ModelAndView userInfoInput(ModelAndView mav) throws ParseException {
-		mav.setViewName(TO_USERS_MULTI_INP);
-		return mav;
+	@RequestMapping(value = USERS_MULTI_SET, method = RequestMethod.GET) // アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
+	public String userInfoInput(Model model) throws ParseException {
+	
+		return TO_USERS_MULTI_INP;
 	}
 	
 	/**
@@ -132,13 +132,12 @@ public class UserInfoMultiController {
 	 */
 	@RequestMapping(value = USERS_MULTI_CONF_SUC, method = RequestMethod.POST)
 	//@Transactional
-	public ModelAndView userInfoConfirm(ModelAndView mav) throws ParseException {
-		mav.setViewName(TO_USERS_MULTI_RES);
-		mav.addObject(USERS_HEAD, ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
-		mav.addObject(USERS_HEAD_LENG, ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
-		@SuppressWarnings("unchecked")  //TODO 川原さんに確認
+	public String userInfoConfirm(Model model) throws ParseException {
+		model.addAttribute(USERS_HEAD, ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
+		model.addAttribute(USERS_HEAD_LENG, ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));
+		@SuppressWarnings("unchecked")
 		List<String[]> users = (List<String[]>)session.getAttribute(USERS_INFO_SES);
-		mav.addObject(USERS_INFO, users);
+		model.addAttribute(USERS_INFO, users);
 		UserInfoEntity uEntity = new UserInfoEntity();
 		for (String[] userInfo : users) {
 			uEntity.setUserInfo(userInfo);
@@ -146,21 +145,7 @@ public class UserInfoMultiController {
 		}
 		
 		
-		return mav ;
-	}
-	
-	@RequestMapping(value = "aaa", method = RequestMethod.GET) // アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
-	public ModelAndView index(ModelAndView mav) throws ParseException {
-		mav.setViewName(TO_USERS_MULTI_INP);
-	
-		return mav;
-	}
-	
-	@RequestMapping(value = "bbb", method = RequestMethod.GET) // アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
-	public ModelAndView sample(ModelAndView mav) throws ParseException {
-		mav.setViewName("sample");
-	
-		return mav;
+		return TO_USERS_MULTI_RES ;
 	}
 	
 }

@@ -27,11 +27,19 @@ vertical-align: top;
 		    margin-left: auto;
     		margin-right: auto;
 	}
+	
+	.delete {
+		display:none;
+	}
 }
 @media screen and (max-width: 480px) {
 	/* 480px以下に適用されるCSS（スマホ用） */
 	.registtable {
 	    margin-left: auto;
     	margin-right: auto;
+	}
+	
+		.delete {
+		display:none;
 	}
 }

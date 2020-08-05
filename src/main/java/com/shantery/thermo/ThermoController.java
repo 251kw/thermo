@@ -2,6 +2,8 @@ package com.shantery.thermo;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.thermo.entity.UserInfoEntity;
+import com.shantery.thermo.groupInfo.GroupInfoForm;
+import com.shantery.thermo.search.SearchEntity;
+import com.shantery.thermo.search.SearchInfoForm;
+import com.shantery.thermo.search.SearchRepository;
+import com.shantery.thermo.userInfo.UserInfoForm;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +40,9 @@ class ThermoController {
 	
 	@Autowired
 	ThermoRepository repository;
+	
+	@Autowired
+	private SearchRepository schRepository;
 	
 	@Autowired
 	HttpSession session; 
@@ -98,6 +109,11 @@ class ThermoController {
 		errormessage = thermoService.setErrormessage(errormessage, check);
 		if(errormessage != null) {
 			model.addAttribute("error", errormessage);
+		}else {
+			List<SearchEntity> list = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
+			
+			model.addAttribute("searchInfo", new SearchInfoForm());
+			model.addAttribute("list", list);
 		}
 		
 		// ページを移動
@@ -116,10 +132,17 @@ class ThermoController {
 		String registtransition = null;// 遷移先を格納する変数
 		
 		// パラメータによって遷移先を格納
-		registtransition = thermoService.setRegistTransition(registoption, registtransition);
-
-		// 遷移先を格納
-		model.addAttribute("option", registoption);
+		// registtransition = thermoService.setRegistTransition(registoption, registtransition);
+		
+		if(registoption.equals("group")) {
+			model.addAttribute("groupInfoForm", new GroupInfoForm());
+			registtransition = "groupInfoInput";
+		}else if(registoption.equals("user")){
+			model.addAttribute("userInfoForm", new UserInfoForm());
+			registtransition = "userInfoInput";
+		}else if(registoption.equals("multiuser")) {
+			registtransition = TO_USERS_MULTI_INP;
+		}
 		
 		// ページを移動
 		return registtransition;
