@@ -105,7 +105,7 @@ class ThermoController {
 			model.addAttribute("list", list);
 		}else {	 // 不正なユーザーの場合
 			// エラーメッセージを格納
-			errormessage = thermoService.setErrormessage(errormessage, check);
+			errormessage = thermoService.setErrormessage(errormessage);
 			model.addAttribute("error", errormessage);
 		}
 		
@@ -121,7 +121,8 @@ class ThermoController {
 	 * @param registoption ログイン画面のselectで指定された値
 	 * @return
 	 */
-	@RequestMapping(value = "/registoption", method = RequestMethod.POST)
+	// TODO 未使用のクラス
+	/*@RequestMapping(value = "/registoption", method = RequestMethod.POST)
 	public String checkOption(@RequestParam(value="regist")String registoption,
 			Model model){	// パラメータを受け取る
 		
@@ -140,7 +141,7 @@ class ThermoController {
 		
 		// ページを移動
 		return registtransition;
-	}
+	}*/
 	
 }
 
