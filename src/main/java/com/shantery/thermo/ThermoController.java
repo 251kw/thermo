@@ -2,7 +2,6 @@ package com.shantery.thermo;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.groupInfo.GroupInfoForm;
@@ -97,24 +95,22 @@ class ThermoController {
 			check = thermoService.checkUser(FormValue.getUserpass(),userinfo.getUser_pass(),check);
 		}
 		
-		// ログイン中のユーザーの情報を保持
-		if(check==true) {
+		if(check==true) { // 正常なユーザーの場合
+			// ログイン中のユーザーの情報を保持
 			session.setAttribute("loginuser", userinfo);
+			//今日の日付で検索	//group_idで絞る
+			List<SearchEntity> list = schRepository.searchCurDate("1");
+			
+			model.addAttribute("searchInfo", new SearchInfoForm());
+			model.addAttribute("list", list);
+		}else {	 // 不正なユーザーの場合
+			// エラーメッセージを格納
+			errormessage = thermoService.setErrormessage(errormessage, check);
+			model.addAttribute("error", errormessage);
 		}
 		
 		// checkの結果によって遷移先を振り分ける
 		logintransition = thermoService.setLoginTransition(check, logintransition);
-		
-		// メッセージを格納
-		errormessage = thermoService.setErrormessage(errormessage, check);
-		if(errormessage != null) {
-			model.addAttribute("error", errormessage);
-		}else {
-			List<SearchEntity> list = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
-			
-			model.addAttribute("searchInfo", new SearchInfoForm());
-			model.addAttribute("list", list);
-		}
 		
 		// ページを移動
 		return logintransition;
@@ -131,9 +127,7 @@ class ThermoController {
 		
 		String registtransition = null;// 遷移先を格納する変数
 		
-		// パラメータによって遷移先を格納
-		// registtransition = thermoService.setRegistTransition(registoption, registtransition);
-		
+		// パラメータによって遷移先を格納		
 		if(registoption.equals("group")) {
 			model.addAttribute("groupInfoForm", new GroupInfoForm());
 			registtransition = "groupInfoInput";
