@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.GroupMstEntity;
+import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.groupInfo.GroupInfoRepository;
 
@@ -21,7 +22,7 @@ class UserInfoService {
 
 	
 	//入力されたgrId,uIdに一致するデータがDBにあるか調べる
-	public Optional<UserInfoEntity> getGrDate(String user_id){
+	public Optional<ThermoInfoEntity> getGrDate(String user_id){
 		return uInfoRepository.findById(user_id);
 		
 	}
@@ -36,7 +37,7 @@ class UserInfoService {
 
 	
 	//DBのなかみを全部取ってくる
-	public List<UserInfoEntity> getUserDate(){
+	public List<ThermoInfoEntity> getUserDate(){
 		return uInfoRepository.findAll();
 	}
 	
@@ -45,7 +46,7 @@ class UserInfoService {
 	//	return testR.findAll();
 	//}
 	
-	public void create(UserInfoEntity uInfoData) {		
+	public void create(ThermoInfoEntity uInfoData) {		
 		uInfoRepository.saveAndFlush(uInfoData);//Entityに登録
 	}
 

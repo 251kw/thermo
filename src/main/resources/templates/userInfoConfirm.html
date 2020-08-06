@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>新規登録確認画面</title>
+		<title th:text="#{view.userInfoCon.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -14,67 +14,67 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>入力情報確認</h3>
+			<h3 th:text="#{view.label.conf}"></h3>
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<form action="/" th:action="@{/userInfoResult}" th:object="${userInfoForm}" method="post">
-				<p>下記の内容で登録しますか？</p>
+				<h3 th:text="#{view.text.UGInfoCon}"></h3>
 				<table class="ui celled table">
 					<tbody>
 						<tr>
-							<td>グループID</td>
+							<td><p th:text="#{view.tablelabel.gId}"></td>
 							<td th:text="*{groupId}"/>
 						</tr>
 						<tr>
-							<td>グループパスワード</td>
+							<td><p th:text="#{view.tablelabel.gPass}"></td>
 							<td th:text="*{groupPass}"/>
 						</tr>
 						<tr>
-							<td>ユーザーID</td>
+							<td><p th:text="#{view.tablelabel.uId}"></td>
 							<td th:text="*{userId}"/>
 						</tr>
 						<tr>
-							<td>ユーザーパスワード</td>
+							<td><p th:text="#{view.tablelabel.uPass}"></td>
 							<td th:text="*{userPass}"/>
 						</tr>
 						<tr>
-							<td>氏名</td>
+							<td><p th:text="#{view.tablelabel.name}"></td>
 							<td th:text="*{userName}"/>
 						</tr>
 						<tr>
-							<td>性別</td>
+							<td><p th:text="#{view.tablelabel.gender}"></td>
 							<td>
-								<div th:if="*{gender} == 'M'"><p th:text="男"/></div>
-								<div th:if="*{gender} == 'F'"><p th:text="女"/></div>
+								<div th:if="*{gender} == 'M'"><p th:text="#{view.select.man}"/></div>
+								<div th:if="*{gender} == 'F'"><p th:text="#{view.select.woman}"/></div>
 							</td>
 						</tr>
 						<tr>
-							<td>生年月日</td>
+							<td><p th:text="#{view.tablelabel.birthday}"></td>
 							<td th:text="*{birthday}"/>
 						</tr>
 						<tr>
-							<td>学年</td>
+							<td><p th:text="#{view.tablelabel.grade}"></td>
 							<td>
 								<div th:switch="*{grade}">
-									<p th:case="0" th:text="なし"></p>
-									<p th:case="1" th:text="小学校1年生"></p>
-									<p th:case="2" th:text="小学校2年生"></p>
-									<p th:case="3" th:text="小学校3年生"></p>
-									<p th:case="4" th:text="小学校4年生"></p>
-									<p th:case="5" th:text="小学校5年生"></p>
-									<p th:case="6" th:text="小学校6年生"></p>
-									<p th:case="A" th:text="中学校1年生"></p>
-									<p th:case="B" th:text="中学校2年生"></p>
-									<p th:case="C" th:text="中学校3年生"></p>
+									<p th:case="0" th:text="#{view.select.grade0}"></p>
+									<p th:case="1" th:text="#{view.select.grade1}"></p>
+									<p th:case="2" th:text="#{view.select.grade2}"></p>
+									<p th:case="3" th:text="#{view.select.grade3}"></p>
+									<p th:case="4" th:text="#{view.select.grade4}"></p>
+									<p th:case="5" th:text="#{view.select.grade5}"></p>
+									<p th:case="6" th:text="#{view.select.grade6}"></p>
+									<p th:case="A" th:text="#{view.select.gradeA}"></p>
+									<p th:case="B" th:text="#{view.select.gradeB}"></p>
+									<p th:case="C" th:text="#{view.select.gradeC}"></p>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td>管理者</td>
+							<td><p th:text="#{view.tablelabel.adminFlg}"></td>
 							<td>
-								<div th:if="*{adminFlg} == '0'"><p th:text="一般"/></div>
-								<div th:if="*{adminFlg} == '1'"><p th:text="管理者"/></div>
+								<div th:if="*{adminFlg} == '0'"><p th:text="#{view.select.normal}"/></div>
+								<div th:if="*{adminFlg} == '1'"><p th:text="#{view.select.admin}"/></div>
 							</td>
 						</tr>
 					</tbody>
@@ -88,7 +88,7 @@
 				<input type="hidden" th:field="*{birthday}"/>
 				<input type="hidden" th:field="*{grade}"/>
 				<input type="hidden" th:field="*{adminFlg}"/>
-				<button type="submit" class="ui inverted primary button">登録</button>	
+				<button type="submit" class="ui inverted primary button" th:text="#{view.btn.reg}"></button>	
 			</form>
 			<form action="#" th:action="@{/userInfoInput}" th:object="${userInfoForm}" method="post">
 				<input type="hidden" th:field="*{groupId}"/>
@@ -100,7 +100,7 @@
 				<input type="hidden" th:field="*{birthday}"/>
 				<input type="hidden" th:field="*{grade}"/>
 				<input type="hidden" th:field="*{adminFlg}"/>
-				<button type="submit" class="ui inverted primary button">修正する</button>
+				<button type="submit" class="ui inverted primary button" th:text="#{view.btn.fix}"></button>
 			</form>
 		</div>
 	</body>

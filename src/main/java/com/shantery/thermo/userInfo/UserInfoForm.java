@@ -11,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 
 
@@ -143,9 +144,10 @@ public class UserInfoForm implements Serializable {
 		this.updateTime = updateTime;
 	}
 	
+	/*
 	//Formで受け取った情報をEntityに変換する
-	public UserInfoEntity _toConvertUserInfoEntity(){
-		UserInfoEntity uInEn = new UserInfoEntity();
+	public ThermoInfoEntity _toConvertUserInfoEntity(){
+		ThermoInfoEntity uInEn = new ThermoInfoEntity();
 		
 		uInEn.setGroup_id(getGroupId());
 		uInEn.setUser_id(getUserId());
@@ -158,6 +160,7 @@ public class UserInfoForm implements Serializable {
 		uInEn.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	    return uInEn ;
 	 }
+	 */
 
 	
 }

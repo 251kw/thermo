@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>新規登録入力画面</title>
+		<title th:text="#{view.userInfoIn.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
@@ -15,54 +15,54 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>新規登録！</h3>
+			<h3 th:text="#{view.userInfoIn.pagetitle}"></h3>
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->		
 			<form action="#" th:action="@{/userInfoConfirm}" th:object="${userInfoForm}" method="post">
-				<h3 th:text="登録情報を入力してください"></h3>
+				<h3 th:text="#{view.text.UGInfoTop}"></h3>
 				<table class="ui celled table">
 					<tbody>
 						<tr>
-							<td>グループID<br>※使用可能：半角英数字</td>
-							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}"/></span>
+							<td><p th:text="#{view.tablelabel.gId}"></p>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}"/></span>
 								<br><span th:if="${#fields.hasErrors('groupId')}" th:errors="*{groupId}">groupId error</span>
 							</td>
 						</tr>
 						<tr>
-							<td>グループパスワード<br>※使用可能：半角英数字</td>
-							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupPass}"/></span>
+							<td><p th:text="#{view.tablelabel.gPass}"></p>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}"/></span>
 								<br><span th:if="${#fields.hasErrors('groupPass')}" th:errors="*{groupPass}">groupPass error</span>
 								<br><span th:if="${grError}" th:text=${grError}></span>
 							</td>
 						</tr>
 						<tr>
-							<td>ユーザーID<br>※使用可能：半角英数字</td>
-							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}"/></span>
+							<td><p th:text="#{view.tablelabel.uId}"></p>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}"/></span>
 								<br><span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId error</span>
 								<br><span th:if="${uIdError}" th:text=${uIdError}></span>
 							</td>	
 							
 						</tr>
 						<tr>
-							<td>ユーザーパスワード<br>※使用可能：半角英数字</td>
-							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userPass}"/></span>
+							<td><p th:text="#{view.tablelabel.uPass}"></p>※使用可能：半角英数字</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userPass}" th:placeholder="#{view.userInfoph.userPass}"/></span>
 								<br><span th:if="${#fields.hasErrors('userPass')}" th:errors="*{userPass}">userPass error</span>
 							</td>
 						</tr>
 						<tr>
-							<td>氏名<br>※使用可能：漢字、ひらがな、英数字(記号を除く)</td>
-							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}"/></span>
+							<td><p th:text="#{view.tablelabel.name}"></p>※使用可能：漢字、ひらがな、英数字(記号を除く)</td>
+							<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.userInfoph.name}"/></span>
 								<br><span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName error</span>
 							</td>
 						</tr>
 						<tr>
-							<td>性別</td>
+							<td><p th:text="#{view.tablelabel.gender}"></td>
 							<td>
 								<span class="ui input select">
 									<select th:field="*{gender}">
-										<option value="M">男</option>
-										<option value="F">女</option>
+										<option value="M" th:text="#{view.select.man}"></option>
+										<option value="F" th:text="#{view.select.woman}"></option>
 									</select>
 								</span>
 							</td>
@@ -75,7 +75,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><p th:text="#{view.tablelabel.grade}"></p></td>
+							<td><p th:text="#{view.tablelabel.grade}"></td>
 							<td>
 								<span class="ui input select">
 									<select th:field="*{grade}">
@@ -94,22 +94,22 @@
 							</td>
 						</tr>
 						<tr>
-							<td>管理者</td>
+							<td><p th:text="#{view.tablelabel.adminFlg}"></td>
 							<td>
 								<span class="ui input select">
 									<select th:field="*{adminFlg}">
-										<option value="0">一般</option>
-										<option value="1">管理者</option>
+										<option value="0" th:text="#{view.select.normal}"></option>
+										<option value="1" th:text="#{view.select.admin}"></option>
 									</select>
 								</span>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class="ui inverted primary button">確認</button>
+				<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
 			</form>
 			<form action="#" th:action="@{./}" method="get">
-				<input type="submit" class="ui inverted primary button" value="戻る">
+				<input type="submit" class="ui inverted primary button" th:value="#{view.btn.return}">
 			</form>	
 		</div>
 	</body>
