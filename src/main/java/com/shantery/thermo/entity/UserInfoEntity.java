@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -52,15 +53,15 @@ public class UserInfoEntity {
 	
 	
 	/** ThermoInfoEntity **/
-	@OneToOne
+	@OneToMany
 	@JoinColumn(name="user_id")
-	private ThermoInfoEntity thermoInfoEntity;
+	private List<ThermoInfoEntity> thermoInfoEntity;
 	
-	public ThermoInfoEntity getThermoInfoEntity() {
+	public List<ThermoInfoEntity> getThermoInfoEntity() {
 		return thermoInfoEntity;
 	}
 
-	public void setThermoInfoEntity(ThermoInfoEntity thermoInfoEntity) {
+	public void setThermoInfoEntity(List<ThermoInfoEntity> thermoInfoEntity) {
 		this.thermoInfoEntity = thermoInfoEntity;
 	}
 
