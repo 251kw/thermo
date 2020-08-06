@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shantery.thermo.entity.ThermoInfoEntity;
+import com.shantery.thermo.entity.UserInfoEntity;
 
 
 /**
@@ -27,15 +27,15 @@ public class ThermoService {
 	 * @param data 入力されたuserIDを元に検索した結果を保持しているOptional型のオブジェクト
 	 * @return データをもらったUserInfoEntity型のオブジェクト
 	 */
-	public ThermoInfoEntity checkdata(ThermoInfoEntity thermoinfo,Optional<ThermoInfoEntity> data) {
+	public UserInfoEntity checkdata(UserInfoEntity userinfo,Optional<UserInfoEntity> data) {
 		
 		if(data.isPresent()==true) {	// dataがデータを持っている場合
 			// 値を取得するためにEntityに格納しなおす
-			thermoinfo = data.get();
+			userinfo = data.get();
 		}else {		// dataがデータを持っていない場合
-			thermoinfo = null;
+			userinfo = null;
 		}
-		return thermoinfo;
+		return userinfo;
 	}
 	
 	/**
