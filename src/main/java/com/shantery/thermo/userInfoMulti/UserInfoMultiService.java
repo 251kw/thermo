@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shantery.thermo.entity.GroupMstEntity;
-import com.shantery.thermo.entity.ThermoInfoEntity;
+import com.shantery.thermo.entity.UserInfoEntity;
 
 @Service
 public class UserInfoMultiService {
@@ -128,11 +128,11 @@ public class UserInfoMultiService {
 		return errmsg;
 	}
 	
-	public String checUserIdDB(Iterable<ThermoInfoEntity> ulist ,String[] usersInfo, int i) {
+	public String checUserIdDB(Iterable<UserInfoEntity> ulist ,String[] usersInfo, int i) {
 		
 		String errmsg = null;
-		for (ThermoInfoEntity list : ulist) {
-			if(list.getUserInfoEntity().getUser_id().equals(usersInfo[2])) { 
+		for (UserInfoEntity list : ulist) {
+			if(list.getUser_id().equals(usersInfo[2])) { 
 				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
 			}
 		}

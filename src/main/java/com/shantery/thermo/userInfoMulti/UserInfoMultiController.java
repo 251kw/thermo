@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shantery.thermo.entity.GroupMstEntity;
-import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.util.ThermoUtil;
 
@@ -70,7 +69,7 @@ public class UserInfoMultiController {
 		String rtn;  //遷移先の宣言
 		List<String[]> users = uMService.toStringList(usersInfo); //CSVファイルの解析
 		Iterable<GroupMstEntity> glist = gimr.findAll(); //DB内の
-		Iterable<ThermoInfoEntity> ulist = uimr.findAll();
+		Iterable<UserInfoEntity> ulist = uimr.findAll();
 		List<String> errmsg = new ArrayList<>();
 
 		if (usersInfo.isEmpty()) { //ファイルが選択されていない場合
@@ -157,12 +156,10 @@ public class UserInfoMultiController {
 		List<String[]> users = (List<String[]>) session.getAttribute(USERS_INFO_SES);  //セッションから登録するユーザー情報を取得
 		model.addAttribute(USERS_INFO, users);  //modelに登録するユーザー情報をいれる
 		//TODO サービスクラスへの移行
-		ThermoInfoEntity tEntity = new ThermoInfoEntity();
 		UserInfoEntity uEntity = new UserInfoEntity();  //DBに登録するエンティティクラスのインスタンス化
 		for (String[] userInfo : users) {  //登録するユーザー情報の数だけ繰り返す
 			uEntity.setUserInfo(userInfo);  //ユーザー情報をset
-			tEntity.setUserInfoEntity(uEntity);
-			uimr.save(tEntity);  //DBに登録
+			uimr.save(uEntity);  //DBに登録
 		}
 
 		return TO_USERS_MULTI_RES;
