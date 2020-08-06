@@ -44,7 +44,7 @@ class SearchController {
 		m.addAttribute("searchInfo", new SearchInfoForm());
 		m.addAttribute("list", schlist);
 		
-		session.setAttribute("schlist", schlist);
+		session.setAttribute("printlist", schlist);		//印刷用
 		
 		return "search";
 	}
@@ -57,24 +57,10 @@ class SearchController {
 		String sch_grade = form.getSch_grade();
 //		String sch_high = form.getSch_high();
 		
-		List<ThermoInfoEntity> list = schService.createQuerySearch("1", sch_date, sch_name, sch_grade);
+		List<ThermoInfoEntity> list = schService.querySearch("1", sch_date, sch_name, sch_grade);
 		m.addAttribute("list", list);
 	
 		return "search";
-	}
-	
-	@RequestMapping(value = "/from"/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.POST)
-	public String Input() {
-		/*検索画面 からくる　多分佐藤が作る*/
-		/*model にグループIdが同じの人をもらう*/
-		
-//		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
-//		String group_id = loginuser.getGroup_id();
-		
-		List<ThermoInfoEntity> userlist = schRepository.findUser("1");
-		session.setAttribute("userlist", userlist);
-		
-		return "thermoInput"/*TO_INPUT*/;
 	}
 	
 	

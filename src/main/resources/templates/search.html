@@ -7,9 +7,11 @@
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript"  th:src="@{/js/jquery-3.4.1.min.js}"></script>
     	
 	<body>
+	
 		<!--外部ヘッダーファイル読み込み-->
 		<div th:insert="header :: header"></div>
 ​
@@ -87,7 +89,7 @@
 		<div class="ui container">
 ​
 			<table class="ui celled table">
-				<thead>
+				<thead class="delete">
 					<tr>
 						<th th:text="#{view.tablelabel.regist_date}"></th>
 						<th th:text="#{view.tablelabel.name}"></th>
@@ -107,19 +109,23 @@
 					<tr class="error"></th:block>
 						<th:block th:unless="${list.thermo == 38.0}">
 					<tr>
-						<td data-label="計測日" th:text="${list.regist_date}"></td>
-						<td data-label="名前" th:text="${list.user_name}"></td>
-						<td data-label="性別"  th:text="${list.gender}">
-							<th:block th:if="${list.gender == M}">男性</th:block>
-							<th:block th:unless="${list.gender == M}">女性</th:block></td>
-						<td data-label="学年" th:text="${list.grade}"></td>
-						<td data-label="年齢"><p th:text="#{view.tablelabel.ageage(${list.age})}"></td>
+						<td data-label="#{view.tablelabel.other}" th:text="${list.regist_date}"></td>
+						<td data-label="名前" th:text="${list.userInfoEntity.user_name}"></td>
+						<td data-label="性別"  th:text="${list.userInfoEntity.gender}">
+							<th:block th:if="${list.userInfoEntity.gender == M}">男性</th:block>
+							<th:block th:unless="${list.userInfoEntity.gender == M}">女性</th:block></td>
+						<td data-label="学年" th:text="${list.userInfoEntity.grade}"></td>
+						<td data-label="年齢"><p th:text="#{view.tablelabel.ageage(${list.userInfoEntity.birthday})}"></td>
 						<td data-label="体温"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
-						<td data-label="味覚障害" th:text="${list.taste_disorder}"></td>
-						<td data-label="嗅覚障害" th:text="${list. olfactory_disorder}"></td>
+						<td data-label="味覚障害">
+							<p th:if="${list.taste_disorder}" th:text="あり"></p>
+							<p th:unless="${list.taste_disorder}" th:text="なし"></p></td>
+						<td data-label="嗅覚障害">
+							<p th:if="${list.olfactory_disorder}" th:text="あり"></p>
+							<p th:unless="${list.olfactory_disorder}" th:text="なし"></p></td>
 						<td data-label="咳">
-							<th:block th:if="${list.cough == 0}">なし</th:block>
-							<th:block th:unless="${list.cough == 0}">あり</th:block></td>
+							<p th:if="${list.cough}" th:text="あり"></p >
+							<p th:unless="${list.cough}" th:text="なし"></p></td>
 						<td data-label="その他" th:text="${list.other}"></td>
 					</tr>
 				</tbody>
