@@ -6,6 +6,7 @@
 		<title th:text="#{view.searchInput.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	</head>
@@ -28,17 +29,25 @@
 
 			<p></p>
 
-			<table  class="ui fixed single line celled table">
+			<table  class="ui compact celled definition table">
 				<thead class="delete">
 					<tr >
+						<td th:text="行番号"></td>
 						<td th:each="val:${users_head_info}" width="100" th:text="${val}"></td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list,stat : ${users_info}">
-						<th:block th:each="line:${list}">
-							<td th:text="${line}"></td>
-						</th:block>
+					<tr th:each="list,status : ${users_info}">
+							<td data-label="行番号" th:text="${status.count}"></td>
+							<td data-label="グループ名" th:text="${list[0]}"></td>
+							<td data-label="グループパスワード" th:text="${list[1]}"></td>
+							<td data-label="グループパスワード" th:text="${list[2]}"></td>
+							<td data-label="グループパスワード" th:text="${list[3]}"></td>
+							<td data-label="グループパスワード" th:text="${list[4]}"></td>
+							<td data-label="グループパスワード" th:text="${list[5]}"></td>
+							<td data-label="グループパスワード" th:text="${list[6]}"></td>
+							<td data-label="グループパスワード" th:text="${list[7]}"></td>
+							<td data-label="グループパスワード" th:text="${list[8]}"></td>
 					</tr>
 				</tbody>
 			</table>
