@@ -50,7 +50,7 @@ public class UserInfoMultiService {
         } catch (IOException e) { //解析中にエラーを検出した場合nullを返す
             lines = null;
         }
-        return lines;
+        return lines;  //性別、学年、管理者権限は画面で年齢に変換 ThermoReplaceValue.java を使う
 		
 	}
 	

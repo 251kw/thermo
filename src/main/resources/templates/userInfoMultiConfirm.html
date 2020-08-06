@@ -41,13 +41,13 @@
 							<td data-label="行番号" th:text="${status.count}"></td>
 							<td data-label="グループ名" th:text="${list[0]}"></td>
 							<td data-label="グループパスワード" th:text="${list[1]}"></td>
-							<td data-label="グループパスワード" th:text="${list[2]}"></td>
-							<td data-label="グループパスワード" th:text="${list[3]}"></td>
-							<td data-label="グループパスワード" th:text="${list[4]}"></td>
-							<td data-label="グループパスワード" th:text="${list[5]}"></td>
-							<td data-label="グループパスワード" th:text="${list[6]}"></td>
-							<td data-label="グループパスワード" th:text="${list[7]}"></td>
-							<td data-label="グループパスワード" th:text="${list[8]}"></td>
+							<td data-label="ユーザーID" th:text="${list[2]}"></td>
+							<td data-label="ユーザーパスワード" th:text="${list[3]}"></td>
+							<td data-label="ユーザー名" th:text="${list[4]}"></td>
+							<td data-label="性別" th:text="${list[5]}"></td>
+							<td data-label="生年月日" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list[6])}"></td>
+							<td data-label="学年" th:text="${list[7]}"></td>
+							<td data-label="管理権限" th:text="${list[8]}"></td>
 					</tr>
 				</tbody>
 			</table>
