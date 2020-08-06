@@ -77,32 +77,36 @@ class ThermoController {
 			@Validated
 			ThermoForm FormValue,
 			BindingResult result,
-			UserInfoEntity userinfo,
+			ThermoInfoEntity thermoinfo,
 			Model model){
 		
 		String logintransition = null;// 遷移先を格納する変数
 		Boolean check = null; // 登録されているユーザーかどうか識別するための変数
 		String errormessage = null;// エラーメッセージ用の変数
 		
-		Optional<UserInfoEntity> data = repository.findById(FormValue.getUserId());// 入力されたIDでデータベースを検索
-		userinfo = thermoService.checkdata(userinfo,data);// 検索した情報をuserinfo型のオブジェクトに格納
+		Optional<ThermoInfoEntity> data = repository.findById(FormValue.getUserId());// 入力されたIDでデータベースを検索
+		thermoinfo = thermoService.checkdata(thermoinfo,data);// 検索した情報をuserinfo型のオブジェクトに格納
 		
 		// IDが正常かどうかによって処理を振り分け
-		if(userinfo == null) {
+		if(thermoinfo == null) {
 			check = false;	// 該当するデータがなかった場合
 		}else {
 			// 該当するデータがある場合は、パスワードが正常かどうかを確認
-			check = thermoService.checkUser(FormValue.getUserpass(),userinfo.getUser_pass(),check);
+			check = thermoService.checkUser(FormValue.getUserpass(),thermoinfo.getUserInfoEntity().getUser_pass(),check);
 		}
 		
 		if(check==true) { // 正常なユーザーの場合
 			// ログイン中のユーザーの情報を保持
-			session.setAttribute("loginuser", userinfo);
+			session.setAttribute("loginuser", thermoinfo);
+			
 			//今日の日付で検索	//group_idで絞る
-			//List<ThermoInfoEntity> list = schRepository.searchCurDate("1");
+			List<ThermoInfoEntity> schlist = schRepository.searchCurDate(thermoinfo.getUserInfoEntity().getGroup_id());
 			
 			model.addAttribute("searchInfo", new SearchInfoForm());
-			//model.addAttribute("list", list);
+			model.addAttribute("list", schlist);
+			
+			session.setAttribute("schlist", schlist);
+			
 		}else {	 // 不正なユーザーの場合
 			// エラーメッセージを格納
 			errormessage = thermoService.setErrormessage(errormessage);
