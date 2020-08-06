@@ -1,13 +1,10 @@
 package com.shantery.thermo.util;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 
-import com.shantery.thermo.entity.ThermoInfoEntity;
 
 public class ThermoReplaceValue {
 
@@ -33,16 +30,58 @@ public class ThermoReplaceValue {
 
 		return str;
 	}
+	
+	public static String replaceGender(String gender) {
 
-	public ArrayList<ThermoInfoEntity> replaceGender(ArrayList<ThermoInfoEntity> list) {
-		// m or f
-		for (ThermoInfoEntity entity : list) {
-			if (entity.getUserInfoEntity().getGender().equals("M")) {
-				entity.getUserInfoEntity().setGender("男性");
-			} else if (entity.getUserInfoEntity().getGender().equals("F")) {
-				entity.getUserInfoEntity().setGender("女性");
-			}
+		if(gender.equals("M")) {
+			gender = "男性";
+		}else if(gender.equals("F")) {
+			gender = "女性";
 		}
-		return list;
+		return gender;
+	}
+	
+	public static String replaceGrade(String grade) {
+
+		switch(grade) {
+		case "1":
+			grade = "少学１年生";
+			break;
+		case "2":
+			grade = "少学2年生";
+			break;
+		case "3":
+			grade = "少学3年生";
+			break;
+		case "4":
+			grade = "少学4年生";
+			break;
+		case "5":
+			grade = "少学5年生";
+			break;
+		case "6":
+			grade = "少学6年生";
+			break;
+		case "A":
+			grade = "中学１年生";
+			break;
+		case "B":
+			grade = "中学2年生";
+			break;
+		case "C":
+			grade = "中学3年生";
+			break;
+		}
+		return grade;
+	}
+	
+	public static String replaceAdmin(String admin_flg) {
+
+		if(admin_flg.equals("1")) {
+			admin_flg = "あり";
+		}else if(admin_flg.equals("0")) {
+			admin_flg = "なし";
+		}
+		return admin_flg;
 	}
 }
