@@ -1,38 +1,16 @@
 package com.shantery.thermo.userInfo;
 
-/*
- * import static com.shantery.result2.util.Result2Constants.*;
-
- */
-
-import java.text.ParseException;
-
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.shantery.thermo.entity.GroupMstEntity;
-import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
-import com.shantery.thermo.util.ThermoUtil;
-import com.shantery.thermo.util.ThermoConstants;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -53,8 +31,6 @@ class UserInfoController {
 	@RequestMapping(value = "/userInfoInput", method = RequestMethod.GET)
 	public String input(Model model){
 		model.addAttribute("userInfoForm", new UserInfoForm());
-
-		
 		return "userInfoInput";
 	}
 	
@@ -72,7 +48,7 @@ class UserInfoController {
 			BindingResult result,Model model,BindingResult bindRes) {
 		
 		//入力されたユーザIDと同一のユーザIDないか調査
-		Optional<ThermoInfoEntity> test2List = uInfoService.getGrDate(userInfoForm.getUserId());
+		Optional<UserInfoEntity> test2List = uInfoService.getGrDate(userInfoForm.getUserId());
 		//入力されたGroupIDとGroupPassが合っているか調査
 		Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());//TODO　ANDでできなかった
 		
@@ -104,11 +80,11 @@ class UserInfoController {
 		return "userInfoInput";	
 	}
 	
-	/*
+	
 	//登録完了画面
 	@RequestMapping(value = "/userInfoResult", method = RequestMethod.POST)
 	public String userInfoResult(@Validated @ModelAttribute("userInfoForm") UserInfoForm uInfoData, 
-			Model model,ThermoInfoEntity uInEn) {
+			Model model,UserInfoEntity uInEn) {
 		
 		
 		//Formに入っているユーザ情報をEntityに変換
