@@ -18,69 +18,62 @@
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+			<div class="ui text container">
 				<form action="#" th:action="@{./}" th:object="${userInfoForm}" method="get">
-					<h3 th:text="#{view.text.userInfoRes}"></h3>
+					<div class="ui center aligned container">
+						<h3 class="askinput" th:text="#{view.text.userInfoRes}"></h3>
+					</div>
 					<table class="ui celled table">
-					<tbody>
-						<tr>
-							<td><p th:text="#{view.tablelabel.gId}"></td>
-							<td th:text="*{groupId}"/>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.gPass}"></td>
-							<td th:text="*{groupPass}"/>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.uId}"></td>
-							<td th:text="*{userId}"/>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.uPass}"></td>
-							<td th:text="*{userPass}"/>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.name}"></td>
-							<td th:text="*{userName}"/>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.gender}"></td>
-							<td>
-								<div th:if="*{gender} == 'M'"><p th:text="#{view.select.man}"/></div>
-								<div th:if="*{gender} == 'F'"><p th:text="#{view.select.woman}"/></div>
-							</td>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.birthday}"></td>
-							<td th:text="*{birthday}"/>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.grade}"></td>
-							<td>
-								<div th:switch="*{grade}">
-									<p th:case="0" th:text="#{view.select.grade0}"></p>
-									<p th:case="1" th:text="#{view.select.grade1}"></p>
-									<p th:case="2" th:text="#{view.select.grade2}"></p>
-									<p th:case="3" th:text="#{view.select.grade3}"></p>
-									<p th:case="4" th:text="#{view.select.grade4}"></p>
-									<p th:case="5" th:text="#{view.select.grade5}"></p>
-									<p th:case="6" th:text="#{view.select.grade6}"></p>
-									<p th:case="A" th:text="#{view.select.gradeA}"></p>
-									<p th:case="B" th:text="#{view.select.gradeB}"></p>
-									<p th:case="C" th:text="#{view.select.gradeC}"></p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-							<td>
-								<div th:if="*{adminFlg} == '0'"><p th:text="#{view.select.normal}"/></div>
-								<div th:if="*{adminFlg} == '1'"><p th:text="#{view.select.admin}"/></div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			<button type="submit" class="ui inverted primary button" th:text="#{view.btn.return}"></button>
-			</form>
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></td>
+								<td th:text="*{groupId}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></td>
+								<td th:text="*{groupPass}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uId}"></td>
+								<td th:text="*{userId}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uPass}"></td>
+								<td th:text="*{userPass}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.name}"></td>
+								<td th:text="*{userName}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gender}"></td>
+								<td>
+									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(userInfoForm.gender)}"></div>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.birthday}"></td>
+								<td th:text="*{birthday}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.grade}"></td>
+								<td>
+									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(userInfoForm.grade)}"></div>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.adminFlg}"></td>
+								<td>
+									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceAdmin(userInfoForm.adminFlg)}"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.return}"></button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

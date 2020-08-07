@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>グループ新規登録確認画面</title>
+		<title th:text="#{view.grInfoCon.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -14,39 +14,47 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>入力情報確認</h3>
+			<h3 th:text="#{view.label.conf}"></h3>
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			<form action="/" th:action="@{/groupInfoResult}" th:object="${groupInfoForm}" method="post">
-				<p>下記の内容で登録しますか？</p>
-				<table class="ui celled table">
-					<tbody>
-						<tr>
-							<td>グループID</td>
-							<td th:text="*{groupId}"/>
-						</tr>
-						<tr>
-							<td>グループ名</td>
-							<td th:text="*{groupName}"/>
-						</tr>
-						<tr>
-							<td>グループパスワード</td>
-							<td th:text="*{groupPass}"/>
-						</tr>
-					</tbody>
-				</table>		
-				<input type="hidden" th:field="*{groupId}"/>
-				<input type="hidden" th:field="*{groupName}"/>
-				<input type="hidden" th:field="*{groupPass}"/>
-				<button type="submit" class="ui inverted primary button">登録</button>	
-			</form>
-			<form action="#" th:action="@{/groupInfoInput}" th:object="${groupInfoForm}" method="post">
-				<input type="hidden" th:field="*{groupId}"/>
-				<input type="hidden" th:field="*{groupName}"/>
-				<input type="hidden" th:field="*{groupPass}"/>
-				<button type="submit" class="ui inverted primary button">修正する</button>
-			</form>
+			<div class="ui text container">
+				<form action="/" th:action="@{/groupInfoResult}" th:object="${groupInfoForm}" method="post">
+					<div class="ui center aligned container">
+						<h3 class="askinput" th:text="#{view.text.UGInfoCon}"></h3>
+					</div>
+					<table class="ui celled table">
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></td>
+								<td th:text="*{groupId}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gName}"></td>
+								<td th:text="*{groupName}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></td>
+								<td th:text="*{groupPass}"/>
+							</tr>
+						</tbody>
+					</table>	
+					<input type="hidden" th:field="*{groupId}"/>
+					<input type="hidden" th:field="*{groupName}"/>
+					<input type="hidden" th:field="*{groupPass}"/>
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.reg}"></button>	
+					</div>
+				</form>
+				<form action="#" th:action="@{/groupInfoInput}" th:object="${groupInfoForm}" method="post">
+					<input type="hidden" th:field="*{groupId}"/>
+					<input type="hidden" th:field="*{groupName}"/>
+					<input type="hidden" th:field="*{groupPass}"/>
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.fix}"></button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

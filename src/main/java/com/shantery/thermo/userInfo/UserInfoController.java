@@ -64,15 +64,21 @@ class UserInfoController {
 				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
 				model.addAttribute("grError", "グループIDが存在しないか、グループパスワードが間違っています");
 			}
-			
+			//入力画面に戻る
 			return "userInfoInput";
 		}
-		
+		//確認画面に進む
 		return "userInfoConfirm";
 	}
 	
 	
 	//入力確認画面から戻るボタンで戻った時
+	/**
+	 * @param userInfoForm　入力されたユーザ情報を保持
+	 * @param result
+	 * @param model
+	 * @return 入力画面
+	 */
 	@RequestMapping(value = "/userInfoInput", method = RequestMethod.POST)
 	public String returnUserInfoInput(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
 			BindingResult result, Model model) {
@@ -95,14 +101,6 @@ class UserInfoController {
 		return "userInfoResult";
 		
 	}
-
-	/*
-	public static List<String> getGradeList(){
-		List<String> gradeList = new ArrayList<>();
-		gradeList.add(DEFAULT_PEGE);
-		return gradeList;
-	}
-	*/
 	
 }
 

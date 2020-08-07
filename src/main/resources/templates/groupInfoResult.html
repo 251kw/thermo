@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>グループ新規登録結果画面</title>
+		<title  th:text="#{view.grInfoRes.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -14,30 +14,36 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>登録完了</h3>
+			<h3 th:text="#{view.label.grInfoConf}"></h3>
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+			<div class="ui text container">
 				<form action="#" th:action="@{./}" th:object="${groupInfoForm}" method="get">
-					<p>下記の内容で登録しました！</p>
+					<div class="ui center aligned container">
+						<h3 class="askinput" th:text="#{view.text.grInfoRes}"></h3>
+					</div>
 					<table class="ui celled table">
-					<tbody>
-						<tr>
-							<td>グループID</td>
-							<td th:text="*{groupId}"/>
-						</tr>
-						<tr>
-							<td>グループ名</td>
-							<td th:text="*{groupName}"/>
-						</tr>
-						<tr>
-							<td>グループパスワード</td>
-							<td th:text="*{groupPass}"/>
-						</tr>
-					</tbody>
-				</table>
-			<button type="submit" class="ui inverted primary button">TOPにもどる</button>
-			</form>
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></td>
+								<td th:text="*{groupId}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gName}"></td>
+								<td th:text="*{groupName}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></td>
+								<td th:text="*{groupPass}"/>
+							</tr>
+						</tbody>
+					</table>
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.return}"></button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
