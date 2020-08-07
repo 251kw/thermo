@@ -21,6 +21,54 @@ vertical-align: top;
   background-color: red;
 }
 
+.cp_ipselect {
+	overflow: hidden;
+	width: 90%;
+	margin: 2em auto;
+	text-align: center;
+}
+.cp_ipselect select {
+	width: 100% !important;
+	padding-right: 1em !important;
+	cursor: pointer !important;
+	text-indent: 0.01px !important;
+	text-overflow: ellipsis !important;
+	border: none !important;
+	outline: none !important;
+	background: transparent !important;
+	background-image: none !important;
+	box-shadow: none !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
+}
+.cp_ipselect select::-ms-expand {
+    display: none !important;
+}
+.cp_ipselect.cp_sl04 {
+	position: relative;
+	border-radius: 2px;
+	border: 2px solid #e0e1e2;
+  border-radius: 50px;
+	background: #ffffff;
+}
+.cp_ipselect.cp_sl04::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #da3c41;
+	pointer-events: none;
+}
+.cp_ipselect.cp_sl04 select {
+	padding: 8px 38px 8px 8px !important;
+	color: #000000!important;
+}
+
 @media screen and (max-width: 959px) {
 	/* 959px以下に適用されるCSS（タブレット用） */
 	.registtable {
