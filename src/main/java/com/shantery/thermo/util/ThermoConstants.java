@@ -16,14 +16,30 @@ public class ThermoConstants {
 	public static final String TOP = "/";
 	/** ログインボタンを押された時 **/
 	public static final String LOGIN = "/login";
-	/** ユーザー一括登録ボタンを押された時  **/
+	/** ユーザー一括登録ボタンを押された時 **/
 	public static final String USERS_MULTI_SET = "/users_multi_set";
-	/** ユーザー一括登録でファイルをアップロードした時  **/
+	/** ユーザー一括登録でファイルをアップロードした時 **/
 	public static final String USERS_MULTI_GET = "/users_multi_get";
-	/** ユーザー一括登録の確認画面で確定したとき  **/
+	/** ユーザー一括登録の確認画面で確定したとき **/
 	public static final String USERS_MULTI_CONF_SUC = "/users_multi_conf_suc";
-	/** ユーザー一括登録の確認画面でキャンセルしたとき  **/
+	/** ユーザー一括登録の確認画面でキャンセルしたとき **/
 	public static final String USERS_MULTI_CONF_BACK = "/users_multi_conf_back";
+	/** ユーザー新規登録の入力画面で確認ボタンを押されたとき **/
+	public static final String USER_INFO_INP_SUC = "/user_info_inp_suc";
+	/** ユーザー新規登録の入力画面で戻るボタンを押されたとき **/
+	public static final String USER_INFO_INP_BACK = "/user_info_inp_back";
+	/** ユーザー新規登録の確認画面で登録ボタンを押されたとき **/
+	public static final String USER_INFO_CONF_SUC = "/user_info_conf_suc";
+	/** ユーザー新規登録の確認画面で修正ボタンを押されたとき **/
+	public static final String USER_INFO_CONF_BACK = "/user_info_conf_back";
+	/** グループ新規登録の入力画面で確認ボタンを押されたとき **/
+	public static final String GROUP_INFO_INP_SUC = "/group_info_inp_suc";
+	/** グループ新規登録の入力画面で戻るボタンを押されたとき **/
+	public static final String GROUP_INFO_INP_BACK = "/group_info_inp_back";
+	/** グループ新規登録の確認画面で登録ボタンを押されたとき **/
+	public static final String GROUP_INFO_CONF_SUC = "/group_info_conf_suc";
+	/** グループ新規登録の確認画面で修正ボタンを押されたとき **/
+	public static final String GROUP_INFO_CONF_BACK = "/group_info_conf_back";
 	
 	// 遷移先を示す変数
 	/** TOPページの遷移先 **/
@@ -34,6 +50,18 @@ public class ThermoConstants {
 	public static final String TO_USERS_MULTI_CONF = "userInfoMultiConfirm";
 	/** ユーザー一括登録のRESULTへの遷移 **/
 	public static final String TO_USERS_MULTI_RES = "userInfoMultiResult";
+	/** ユーザー新規登録のINPUTへの遷移 **/
+	public static final String TO_USER_INFO_INP = "userInfoInput";
+	/** ユーザー新規登録のCONFIRMへの遷移 **/
+	public static final String TO_USER_INFO_CONF = "userInfoConfirm";
+	/** ユーザー新規登録のRESULTへの遷移 **/
+	public static final String TO_USER_INFO_RES = "userInfoResult";
+	/** グループ新規登録のINPUTへの遷移 **/
+	public static final String TO_GROUP_INFO_INP = "groupInfoInput";
+	/** グループ新規登録のCONFIRMへの遷移 **/
+	public static final String TO_GROUP_INFO_CONF = "groupInfoConfirm";
+	/** グループ新規登録のRESULTへの遷移 **/
+	public static final String TO_GROUP_INFO_RES = "groupInfoResult";
 	
 	// キーを示す変数
 	/** ユーザー情報のCSVファイルをinputするときのキー **/
