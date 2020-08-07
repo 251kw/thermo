@@ -22,33 +22,33 @@
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
 		<br>
-		<div class="ui container">
+		<div class="ui center aligned container">
+			<form action="#" th:action="@{./users_multi_get}" enctype="multipart/form-data" method="post">
+				
+				<div class="position center">
+				    <div class="uploadButton">
+				        ファイルを選択
+				        <input type="file"  name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
+				        <input type="text" id="uv" class="uploadValue" disabled />
+				    </div>    
+				</div>
+				
+				<input type="submit" class="ui inverted primary button center" value="送信">
+			</form>
 			
-		<form action="#" th:action="@{./users_multi_get}" enctype="multipart/form-data" method="post">
+			<th:block th:if="${users_err_info}">
+				<div class="ui negative message">
+					<th:block th:each="msg: ${users_err_info}">
+						<p th:text="${msg}" >
+					</th:block>
+				</div>
+			</th:block>
 			
-			<div class="position">
-			    <div class="uploadButton">
-			        ファイルを選択
-			        <input type="file"  name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
-			        <input type="text" id="uv" class="uploadValue" disabled />
-			    </div>    
-			</div>
+			<br>
 			
-			<input type="submit" class="ui inverted primary button" value="送信">
-		</form>
-
-		
-		<th:block th:if="${users_err_info}">
-		<div class="ui negative message">
-		<th:block th:each="msg: ${users_err_info}">
-			<p th:text="${msg}" >
-		</th:block>
-		</div>
-		</th:block>
-		
-		<form action="#" th:action="@{./}" method="get">
-			<input type="submit" class="ui inverted primary button" value="戻る">
-		</form>	
+			<form action="#" th:action="@{./}" method="get">
+				<input type="submit" class="ui inverted primary button" value="戻る">
+			</form>	
 			
 		</div>
 	</body>

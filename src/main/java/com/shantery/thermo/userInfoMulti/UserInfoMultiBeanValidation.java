@@ -4,6 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.shantery.thermo.util.IsbnValid;
+
 public class UserInfoMultiBeanValidation {
 
 	/** グループID **/
@@ -26,10 +28,10 @@ public class UserInfoMultiBeanValidation {
 	@Size(min = 4, max = 16,message="uPass")
 	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="uPass")
 	private String user_pass;
-	/** ユーザ名 **/
+	/** ユーザ名 **/   //TODO 自動で半角を全角に
 	@NotBlank(message = "uName")
 	@Size(min = 1, max = 64,message="uName")
-	//@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="uName")
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠　]+$",message="uName")
 	private String user_name;
 	/** 性別 **/
 	@NotBlank(message = "gender")
@@ -38,14 +40,17 @@ public class UserInfoMultiBeanValidation {
 	private String gender;
 	/** 生年月日 **/
 	@NotBlank(message = "birthday")
+	@IsbnValid(message = "birthday")
 	private String birthday;
 	/** 学年区分 **/
 	@NotBlank(message = "grade")
 	@Size(min = 1,max = 1,message="grade")
+	@Pattern(regexp = "[A-C0-6]",message="grade")
 	private String grade;
 	/** 管理者フラグ **/
 	@NotBlank(message = "flg")
 	@Size(min = 1,max = 1,message="flg")
+	@Pattern(regexp = "[0-1]",message="flg")
 	private String admin_flg;
 	
 	
