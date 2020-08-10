@@ -1,8 +1,10 @@
 package com.shantery.thermo.search;
 
 
-/*
+/**
+ * @author y.sato
  * 検索条件form
+ * 
  */
 public class SearchInfoForm {
 

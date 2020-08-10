@@ -21,52 +21,73 @@
 			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
 		</div>
 		
+		<div class="ui left aligned  container">
+			<p></p>
+			<form method="post" action="/from">
+					<button type="submit" class="ui inverted primary button">
+							<p th:text="#{view.btn.thermoinfo}"></p>
+					</button>
+			</form>
+			<form method="post" action="/from">
+					<button type="submit" class="ui inverted primary button">
+							<p th:text="ログアウト"></p>
+					</button>
+			</form>
+		</div>
 		<p></p>
-		<form method="post" action="/from">
-			<button type="submit" class="ui inverted primary button">
-					<p th:text="#{view.btn.thermoinfo}"></p>
-			</button>
-		</form>
-
+		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
-		<form th:action="@{/search_info}" th:object="${searchInfo}" method="post">
-			<div class="ui container">
+		<form class="ui form" th:action="@{/search_info}" th:object="${searchInfo}" method="post">
+		<div class="ui container">
 ​
 			<div class="ui horizontal divider"><!-- 線を引いてテキストを入れれる --><p th:text="#{view.label.searchinfo}"></div>
 			<p></p>
 			
-			<div class="ui input">
+			<table class="ui very basic table">
+				<thead class="delete">
+				<tr>
+					<th th:text="#{view.tablelabel.regist_date}">
+					<th th:text="#{view.tablelabel.name}">
+					<th th:text="#{view.tablelabel.grade}">
+					<th></th>
+				</tr>
+				<tbody>
+					<tr>
+						<td th:data-label="#{view.tablelabel.regist_date}">
+							<div class="ui input">
+							<input type="date" th:field="*{sch_date}"></div></td>
+						<td th:data-label="#{view.tablelabel.name}">
+							<div class="ui input">
+							<input type="text" th:field="*{sch_name}"></div></td>
+						
+						<td th:data-label="#{view.tablelabel.grade}">
+	  						<div class="field">
+								<select th:field="*{sch_grade}">
+									<option value=""></option>
+									<option value="0" th:text="#{view.select.grade0}"></option>
+									<option value="1" th:text="#{view.select.grade1}"></option>
+									<option value="2" th:text="#{view.select.grade2}"></option>
+									<option value="3" th:text="#{view.select.grade3}"></option>
+									<option value="4" th:text="#{view.select.grade4}"></option>
+									<option value="5" th:text="#{view.select.grade5}"></option>
+									<option value="6" th:text="#{view.select.grade6}"></option>
+									<option value="A" th:text="#{view.select.gradeA}"></option>
+									<option value="B" th:text="#{view.select.gradeB}"></option>
+									<option value="C" th:text="#{view.select.gradeC}"></option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<span class="ui checkbox">
+								<input type="checkbox" name="highthermo" value="highthermo">
+								<label th:text="#{view.label.searchthermo}"></label>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 				
-					<p th:text="#{view.tablelabel.regist_date}"></p>
-					<input type="date" th:field="*{sch_date}"><!-- コントローラで受け取るname指定 -->
-				
-					<p th:text="#{view.tablelabel.name}"></p>
-						<input type="text" th:field="*{sch_name}">		<!-- コントローラで受け取るname指定 -->
-				
-					<p th:text="#{view.tablelabel.grade}"></p>
-						<span class="ui input select">
-							<select name="search_grade">		<!-- コントローラで受け取るname指定 -->
-								<option value="0" th:text="#{view.select.grade0}"></option>
-								<option value="1" th:text="#{view.select.grade1}"></option>
-								<option value="2" th:text="#{view.select.grade2}"></option>
-								<option value="3" th:text="#{view.select.grade3}"></option>
-								<option value="4" th:text="#{view.select.grade4}"></option>
-								<option value="5" th:text="#{view.select.grade5}"></option>
-								<option value="6" th:text="#{view.select.grade6}"></option>
-								<option value="A" th:text="#{view.select.gradeA}"></option>
-								<option value="B" th:text="#{view.select.gradeB}"></option>
-								<option value="C" th:text="#{view.select.gradeC}"></option>
-							</select>
-						</span>
-				
-					<span class="ui checkbox">
-						<input type="checkbox" name="highthermo" value="highthermo">
-						<label th:text="#{view.label.searchthermo}"></label>
-					</span>
-
-				</div>
-				
-			</div>
 			
 		<p></p>
 		<div class="ui center aligned container"><!-- 中央寄せ -->
@@ -87,7 +108,8 @@
 		</div>
 		
 		<div class="ui container">
-​
+		<p th:text="${msg}"></p>
+​		<!--span th:if="${display == true}"-->
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
@@ -109,27 +131,28 @@
 					<tr class="error"></th:block>
 						<th:block th:unless="${list.thermo == 38.0}">
 					<tr>
-						<td data-label="#{view.tablelabel.other}" th:text="${list.regist_date}"></td>
-						<td data-label="名前" th:text="${list.userInfoEntity.user_name}"></td>
-						<td data-label="性別"  th:text="${list.userInfoEntity.gender}">
+						<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
+						<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
+						<td th:data-label="#{view.tablelabel.gender}"  th:text="${list.userInfoEntity.gender}">
 							<th:block th:if="${list.userInfoEntity.gender == M}">男性</th:block>
 							<th:block th:unless="${list.userInfoEntity.gender == M}">女性</th:block></td>
-						<td data-label="学年" th:text="${list.userInfoEntity.grade}"></td>
-						<td data-label="年齢"><p th:text="#{view.tablelabel.ageage(${list.userInfoEntity.birthday})}"></td>
-						<td data-label="体温"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
-						<td data-label="味覚障害">
+						<td th:data-label="#{view.tablelabel.grade}" th:text="${list.userInfoEntity.grade}"></td>
+						<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${list.userInfoEntity.birthday})}"></td>
+						<td th:data-label="#{view.tablelabel.thermo}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
+						<td th:data-label="#{view.tablelabel.taste}">
 							<p th:if="${list.taste_disorder}" th:text="あり"></p>
 							<p th:unless="${list.taste_disorder}" th:text="なし"></p></td>
-						<td data-label="嗅覚障害">
+						<td th:data-label="#{view.tablelabel.smell}">
 							<p th:if="${list.olfactory_disorder}" th:text="あり"></p>
 							<p th:unless="${list.olfactory_disorder}" th:text="なし"></p></td>
-						<td data-label="咳">
+						<td th:data-label="#{view.tablelabel.cough}">
 							<p th:if="${list.cough}" th:text="あり"></p >
 							<p th:unless="${list.cough}" th:text="なし"></p></td>
-						<td data-label="その他" th:text="${list.other}"></td>
+						<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
 					</tr>
 				</tbody>
 			</table>
+	
 		</div>
 	</body>
 </html>

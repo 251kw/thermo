@@ -14,9 +14,13 @@ import org.springframework.stereotype.Repository;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 
-
+/**
+ * @author y.sato
+ * 検索静的クエリ実行リポジトリ
+ * 
+ */
 @Repository
-public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String> {
+public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String>{
 	
 	
 	//今日のデータ取得
@@ -26,9 +30,6 @@ public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String
 			+" AND u.group_id = :group_id"
 			+" AND t.regist_date = curdate()", nativeQuery = true)
 	List<ThermoInfoEntity> searchCurDate(@Param("group_id") String group_id);	
-	
-	@Query(value=":query", nativeQuery = true)
-	List<ThermoInfoEntity> searchQuery(@Param("query") String query);
 	
 	
 }
