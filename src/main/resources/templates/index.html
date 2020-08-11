@@ -21,22 +21,21 @@
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui text container">
+
 			<form method="get" class="ui form" name="registform" onsubmit="return check()">
 				<table class="registtable">
 					<tr>
 						<td>
-							<span class="ui input select">
-								<select id="regist" name="regist">
-									<option value="group" th:text="#{view.indexselect.group}"></option>
-									<option value="user" th:text="#{view.indexselect.user}"></option>
-									<option value="multiuser" th:text="#{view.indexselect.multiuser}"></option>
-								</select>&nbsp;
+							<span class="ui input select">			
+								<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('regist')}">
+								</span>
 							</span> 
 							<input class="ui inverted blue button" type="submit" th:value="#{view.btn.signup}" />
 						</td>
 					</tr>
 				</table>
 			</form>
+			
 			<br>
 			<div class="ui center aligned container">
 				<h3 class="askinput" th:text="#{view.text.inputinfo}"></h3>
@@ -77,6 +76,7 @@
 				</table>
 			</form>
 		</div>
+		
 		
 <script type="text/javascript"> 
 

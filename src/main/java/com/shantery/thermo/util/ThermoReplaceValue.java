@@ -114,7 +114,7 @@ public class ThermoReplaceValue {
 		String keys[];
 		Map<String, String> map = new LinkedHashMap<>();
 		
-		String start = "<select name='" + division + "'" + ">";
+		String start = "<select name='" + division + "'" + " " + "id='" + division + "'" + ">";
 		String end = "</select>";
 		String option = "";
 		
