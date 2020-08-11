@@ -4,7 +4,7 @@ package com.shantery.thermo.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
@@ -16,9 +16,7 @@ public class ThermoReplaceValue {
 	public static String calcAge(String birthday) {
 
 		// birthday 数字８桁でもらう
-		birthday.replace("-", "/");
-
-		String birthdate = birthday;
+		String birthdate = birthday.replace("-", "/");
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
@@ -110,17 +108,34 @@ public class ThermoReplaceValue {
 	}
 	
 	// セレクトボックス生成メソッド
-	// 引数は区分の種類のみ　
-	public static Map<String, String> makeSelect(String division){
+	// 引数はselectのname属性　
+	public static String makeSelect(String division){
 		
 		String keys[];
-		keys = new String[2];
-		keys[0] = "グループ";
-		keys[1] = "ユーザー（個人）";
-		keys[2] = "ユーザー（複数）";
-	
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new LinkedHashMap<>();
 		
-		return map;
+		String start = "<select name='" + division + "'" + ">";
+		String end = "</select>";
+		String option = "";
+		
+		// とりあえず新規登録ボタンの場合
+		if(division.equals("regist")){
+			
+			keys = new String[3];
+			keys[0] = "グループ";
+			keys[1] = "ユーザー（個人）";
+			keys[2] = "ユーザー（複数）";
+			
+	        map.put("group", keys[0]);
+	        map.put("user", keys[1]);
+	        map.put("multiuser", keys[2]);
+		}
+		
+		for(Map.Entry<String, String> value : map.entrySet()) {
+			
+			option += "<option value='" + value.getKey() + "'>" + value.getValue() +"</option>";
+		}
+		
+		return start + option + end;
 	}
 }
