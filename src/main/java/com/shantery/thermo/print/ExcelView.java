@@ -1,4 +1,7 @@
 package com.shantery.thermo.print;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +20,8 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
@@ -26,8 +31,11 @@ import com.shantery.thermo.util.ThermoReplaceValue;
  * @author d.ito
  *検索結果をExcelに 
  */
+
 @Component
 public class ExcelView extends AbstractXlsxView {
+	@Autowired
+	protected MessageSource msgPro;
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
@@ -110,7 +118,7 @@ public class ExcelView extends AbstractXlsxView {
 				cell.setCellValue(ThermoReplaceValue.replaceGrade(list.get(i - 1).getUserInfoEntity().getGrade()));
 				//5列目に年齢を挿入
 				cell = row.getCell(4);
-				//cell.setCellValue(ThermoReplaceValue.calcAge(list.get(i - 1).getUserInfoEntity().getBirthday()));
+				cell.setCellValue(ThermoReplaceValue.calcAge(list.get(i - 1).getUserInfoEntity().getBirthday()) + "歳");
 				//6列目に体温を挿入
 				cell = row.getCell(5);
 				cell.setCellValue(list.get(i - 1).getThermo() + "度");
