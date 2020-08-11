@@ -34,7 +34,7 @@ class ThermoInputController {
 	@Autowired
 	ThermoInputRepository t_repository;
 	@Autowired
-	UserInfoRepository u_repository;
+	ThermoInputUserRepository u_repository;
 	
 	/**
 	 * テスト
@@ -44,7 +44,7 @@ class ThermoInputController {
 	@RequestMapping("/test")
 	public ModelAndView index(ModelAndView mav) {
 		Iterable<ThermoInfoEntity> list = t_repository.findAll();
-		Iterable<UserInfoEntity> ulist = u_repository.findAll();
+		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs("lol");
 		mav.addObject("date",list);
 		return mav;
 	}

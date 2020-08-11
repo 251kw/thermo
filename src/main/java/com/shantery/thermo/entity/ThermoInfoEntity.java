@@ -24,7 +24,6 @@ public class ThermoInfoEntity {
 
 	/** ユーザID **/
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length=32,name="user_id")
 	private String userId;
 	/** サーモID **/

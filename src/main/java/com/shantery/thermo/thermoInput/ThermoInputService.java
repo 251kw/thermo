@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class ThermoInputService {
 
 	@Autowired
 	ThermoInputRepository repository;
+	
 	
 	/**エンティティにセットして登録する
 	 * @param list Formに入った登録したい情報
@@ -50,6 +53,11 @@ public class ThermoInputService {
 			
 	}
 	
+	/**
+	 * チェックボックスの値を変換
+	 * @param check チェックボックスの値
+	 * @return 変換後の値
+	 */
 	public String convertCheck(String check) {
 		if(check != null) {
 			check = "1";
