@@ -15,63 +15,67 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>ページタイトル</h3>
+			<h3>検温情報入力フォーム</h3>
 		</div>
 	
 		<form action="/from_input" method="post" th:object="${thForm}">
-			<table>
+			<table class="ui celled table">
+				<thead class="delete">
+					<tr>
+						<th th:text="#{view.tablelabel.name}"></th>
+						<th th:text="#{view.tablelabel.gender}"></th>
+						<th th:text="#{view.tablelabel.grade}"></th>
+						<th th:text="#{view.tablelabel.age}"></th>
+						<th th:text="#{view.tablelabel.thermo}"></th>
+						<th th:text="#{view.tablelabel.taste}"></th>
+						<th th:text="#{view.tablelabel.smell}"></th>
+						<th th:text="#{view.tablelabel.cough}"></th>
+						<th th:text="#{view.tablelabel.other}"></th>
+					</tr>
+				</thead>
 				<tr>
-					<th>名前</th>
-					<th>性別</th>
-					<th>学年</th>
-					<th>年齢</th>
-					<th>体温</th>
-					<th>味覚障害</th>
-					<th>嗅覚障害</th>
-					<th>咳</th>
-					<th>その他</th>	
-				</tr>
-			    <tr>
 		    		<td>栗原</td>
 		    		<td>男</td>
 		    		<td>1</td>
 		    		<td>23</td>
-			       <td>
-			      
-			       <input type="text" th:attr="name='tList[0].temperature'"
-			           size="30" maxlength="20" />
-			       </td>
-			      <td><input type="checkbox" name="tList[0].taste" value="1" /></td>
-			      <td><input type="checkbox" name="tList[0].smell" value="1" /></td>
-			      <td><input type="checkbox" name="tList[0].cough" value="1" /></td>
-			      <td><input type="text" th:attr="name='tList[0].writing'"
-			          size="30" maxlength="20" />
-			          <input type="hidden" name="tList[0].userId" value="kurihara" >
-			          
-			          </td>
-			    </tr>
-			     <tr>
-		    		<td>小宮</td>
-		    		<td>女</td>
-		    		<td>1</td>
-		    		<td>23</td>
-			       <td>
-			       
-			      	 <input type="text" th:attr="name='tList[1].temperature'"
-			           size="30" maxlength="20" />
-			           </td>
-			      <td><input type="checkbox" name="tList[1].taste" value="1" /></td>
-			      <td><input type="checkbox" name="tList[1].smell" value="1"/></td>
-			      <td><input type="checkbox" name="tList[1].cough" value="1"/></td>
-			      <td><input type="text" th:attr="name='tList[1].writing'"
-			          size="30" maxlength="20" />
-			          <input type="hidden" name="tList[1].userId" value="kurihara" >
-			          </td>
-			    </tr>
-			     
-			  </table>
-			<button type="submit" name="input" >ok</button>
+					<td data-label="#{view.tablelabel.thermo}">
+						<input type="text" name="tList[0].temperature"
+						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
+					</td>
+					<td><input type="checkbox" name="tList[0].taste"  /></td>
+					<td><input type="checkbox" name="tList[0].smell"  /></td>
+					<td><input type="checkbox" name="tList[0].cough"  /></td>
+					<td>
+						<input type="text" name="tList[0].writing"
+						size="30" maxlength="40" />
+						<input type="hidden" name="tList[0].userId" value="kurihara" >
+					</td>
+				</tr>
+				<tr>
+					<td>小宮</td>
+					<td>女</td>
+					<td>1</td>
+					<td>23</td>
+					<td data-label="#{view.tablelabel.thermo}">
+						<input type="text" th:attr="name='tList[1].temperature'"
+						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
+					</td>
+					<td><input type="checkbox" name="tList[1].taste"  /></td>
+					<td><input type="checkbox" name="tList[1].smell" /></td>
+					<td><input type="checkbox" name="tList[1].cough" /></td>
+					<td>
+						<input type="text" th:attr="name='tList[1].writing'"
+						size="30" maxlength="40" />
+					<input type="hidden" name="tList[1].userId" value="kurihara" >
+					</td>
+				</tr>
+			</table>
+			<div align="center">
+				<button type="submit" name="input" class="ui inverted blue button " >ok</button>
+				<a href="/return_search">
+					<button type="button" class="ui inverted blue button" >戻る</button>
+				</a>
+			</div>
 		</form>
-		
 	</body>
 </html>
