@@ -144,8 +144,6 @@ public class UserInfoMultiController {
 		@SuppressWarnings("unchecked")  //未検査のキャストをするため
 		List<String[]> users = (List<String[]>) session.getAttribute(USERS_INFO_SES);  //セッションから登録するユーザー情報を取得
 		model.addAttribute(USERS_INFO, users);  //modelに登録するユーザー情報をいれる
-		
-		//TODO サービスクラスへの移行
 		uMService.saveUserInfo(users);  //DBに登録
 		return TO_USERS_MULTI_RES;
 	}

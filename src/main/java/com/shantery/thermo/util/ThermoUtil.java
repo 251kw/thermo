@@ -35,18 +35,4 @@ public class ThermoUtil {
 		return columnList;
 	}
 
-	/**
-	 * 表示する見出しの数を返却する
-	 * 列数名はapplication.propertiesより取得
-	 * @param columns 列名（当クラスで設定ファイルからインジェクションすることは不可の為、引数で受け取る）
-	 * @return 表示する見出しの個数
-	 */
-	public static int getColumnCount(String columns) {
-
-		// プロパティファイルから取得した項目をカンマで分割
-		String[] columnArrays = columns.split(COMMA);
-		// 表示する見出しの数を返却
-		return columnArrays.length;
-	}
-
 }
