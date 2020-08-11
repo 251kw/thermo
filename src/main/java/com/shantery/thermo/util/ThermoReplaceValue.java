@@ -4,6 +4,7 @@ package com.shantery.thermo.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 
 public class ThermoReplaceValue {
@@ -51,16 +52,16 @@ public class ThermoReplaceValue {
 			grade = "なし";
 			break;
 		case "1":
-			grade = "少学１年生";
+			grade = "小学１年生";
 			break;
 		case "2":
-			grade = "少学2年生";
+			grade = "小学2年生";
 			break;
 		case "3":
-			grade = "少学3年生";
+			grade = "小学3年生";
 			break;
 		case "4":
-			grade = "少学4年生";
+			grade = "小学4年生";
 			break;
 		case "5":
 			grade = "少学5年生";
@@ -96,12 +97,13 @@ public class ThermoReplaceValue {
 	public static String trimBlank(String param) {
 		
 		// 文字列中に全角スペースがあれば全て半角スペースに置き換える
-		param = param.replaceAll("　", " ");
+		param = param.replaceAll(FULL_SPACE, HALF_SPACE);
 		// 文字列前後の半角スペースを削除
 		param = param.trim();
 		// 文字列中に出現する半角スペースを全角スペースに置換する
-		param = param.replaceAll(" ", "　");
+		param = param.replaceAll(HALF_SPACE, FULL_SPACE);
 		
 		return param;
 	}
+	
 }

@@ -17,7 +17,6 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 import com.shantery.thermo.search.SearchRepository;
-import com.shantery.thermo.util.ThermoReplaceValue;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,8 +52,8 @@ class ThermoController {
 			ThermoForm FormValue){	// この時点では空
 		
 		// もしsessionスコープ内にデータがあるなら削除する
-		if (session.getAttribute("loginuser") != null) {
-			session.removeAttribute("loginuser");
+		if (session.getAttribute(LOGIN_USER) != null) {
+			session.removeAttribute(LOGIN_USER);
 		}
 			
 		// トップページへ移動
@@ -95,7 +94,7 @@ class ThermoController {
 		
 		if(check==true) { // 正常なユーザーの場合
 			// ログイン中のユーザーの情報を保持
-			session.setAttribute("loginuser", userinfo);
+			session.setAttribute(LOGIN_USER, userinfo);
 			
 			List<ThermoInfoEntity> schlist = schRepository.searchCurDate(userinfo.getGroup_id());	//今日の日付で検索	//group_idで絞る
 			
@@ -107,7 +106,7 @@ class ThermoController {
 		}else {	 // 不正なユーザーの場合
 			// エラーメッセージを格納
 			errormessage = thermoService.setErrormessage(errormessage);
-			model.addAttribute("error", errormessage);
+			model.addAttribute(LOGIN_ERROR, errormessage);
 		}
 		
 		// checkの結果によって遷移先を振り分ける
@@ -115,33 +114,6 @@ class ThermoController {
 		
 		// ページを移動
 		return logintransition;
-	}
-
-	
-	@RequestMapping(value = "/param", method = RequestMethod.GET)
-	public String param(Model model) {
-		
-			// 半角スペース全角スペース　半角スペース　半角タブ全角タブ
-		String param = " 　山田 太郎"		;
-		
-		model.addAttribute("param", param);
-		
-		// トップページへ移動
-		return "mytest";
-	}
-	
-	@RequestMapping(value = "/paramchange", method = RequestMethod.GET)
-	public String paramchange(Model model) {
-		
-			// 半角スペース全角スペース　半角スペース　半角タブ全角タブ
-		String param = " 　山田 太郎"		;
-		
-		param = ThermoReplaceValue.trimBlank(param);
-		
-		model.addAttribute("param", param);
-		
-		// トップページへ移動
-		return "mytest";
 	}
 }
 

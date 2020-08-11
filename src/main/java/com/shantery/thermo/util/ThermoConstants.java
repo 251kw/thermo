@@ -76,6 +76,10 @@ public class ThermoConstants {
 	public static final String USERS_HEAD_LENG = "columnlength";
 	/** ユーザー情報のエラーメッセージをモデルに入れるするのキー **/
 	public static final String USERS_ERR = "users_err_info";
+	/** ログイン中のユーザー情報をセッションに入れるときのキー **/
+	public static final String LOGIN_USER = "login_user";
+	/** ログイン画面に出すエラーメッセージをモデルに入れるときのキー **/
+	public static final String LOGIN_ERROR = "login_error";
 	
 	// @RequestParamのname属性
 	
@@ -108,4 +112,11 @@ public class ThermoConstants {
 		public static final String FINISHEMPTY = "[\\h]+$";
 		/** ページ番号の初期値 **/
 		public static final String DEFAULT_PEGE = "1";
+		
+	// trimBlankで使う定数
+		/** 半角スペース **/
+		public static final String HALF_SPACE = " ";
+		/** 全角スペース **/
+		public static final String FULL_SPACE = "　";
+		
 }
