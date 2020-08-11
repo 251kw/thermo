@@ -1,7 +1,5 @@
 package com.shantery.thermo.print;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +17,7 @@ import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -66,11 +65,11 @@ public class ExcelView extends AbstractXlsxView {
 		Cell cell = null;	//cellを指定する変数
 		
 		Header header = sheet.getHeader(); //ヘッダーの作成
-		header.setCenter("検温情報");
+		header.setCenter("検温情報"); 
 		header.setLeft(HeaderFooter.date()); //日付の指定
 	    Footer footer = sheet.getFooter(); //フッターの作成
 	    footer.setCenter(HeaderFooter.page() + "/" + HeaderFooter.numPages());
-	    //表作成に必要な分の罫線を自動作成
+	    //表に必要な分の罫線を作成
 	    for (int i = 0; i <= list.size(); i++) {	    	
 		    for (int j = 0; j < rowTmp.length; j++) {
 				cell = row.createCell(j);
@@ -80,7 +79,7 @@ public class ExcelView extends AbstractXlsxView {
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
 			}
-		    row = sheet.createRow(rowNum++);
+		    row = sheet.createRow(rowNum++); //改行
 	    }
 	    rowNum = 0;
 	    row = sheet.getRow(rowNum++); //行を先頭に戻す
@@ -93,8 +92,8 @@ public class ExcelView extends AbstractXlsxView {
 					cell = row.getCell(j);
 					cell.setCellValue(rowTmp[j]); //見出しの文字を出力
 					//背景色と枠線を出力
-					indexCellstyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-					indexCellstyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+					indexCellstyle.setFillPattern(FillPatternType.SOLID_FOREGROUND); //塗りつぶし
+					indexCellstyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex()); //背景色グレー
 					indexCellstyle.setBorderLeft(BorderStyle.MEDIUM);
 					indexCellstyle.setBorderRight(BorderStyle.MEDIUM);
 					indexCellstyle.setBorderTop(BorderStyle.MEDIUM);
@@ -137,5 +136,6 @@ public class ExcelView extends AbstractXlsxView {
 			}
 		}	
 		cellstyle.setWrapText(true); //改行を有効化
+		cellstyle.setVerticalAlignment(VerticalAlignment.TOP); //cellサイズを調節した際文字を上揃え
 	}
 }
