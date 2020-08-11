@@ -17,7 +17,7 @@
 		<!--ページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>th:text="#{view.userInfoMulCon.pagetitle}"</h3>
+			<h3><th:block th:text="#{view.userInfoMulCon.pagetitle}"></th:block></h3>
 		</div>
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
@@ -31,9 +31,9 @@
 
 			<table class="ui celled table">
 				<thead class="delete">
-					<tr >
-						<td th:text="#{view.usercount}"></td>
-						<td th:each="val:${users_head_info}" width="100" th:text="${val}"></td>
+					<tr>
+						<th th:text="#{view.usercount}"></th>
+						<th th:each="val:${users_head_info}" width="100" th:text="${val}"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -58,7 +58,7 @@
 			</table>
 			
 			<form action="#" th:action="@{./users_multi_conf_suc}" method="post">
-				<input type="submit" class="ui inverted primary button right aligned" th:value="#{view.label.conf}">
+				<input type="submit" class="ui inverted primary button right aligned" th:value="#{view.btn.reg}">
 			</form>		
 			
 			<br>

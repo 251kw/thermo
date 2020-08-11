@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shantery.thermo.entity.GroupMstEntity;
-import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.util.ThermoUtil;
 
 @Controller
@@ -33,10 +31,6 @@ public class UserInfoMultiController {
 
 	@Autowired
 	UserInfoMultiService uMService; //呼び出すクラス
-	@Autowired
-	UserInfoMultiRepository uimr;
-	@Autowired
-	GroupInfoMultiRepository gimr;
 	@Autowired
 	protected MessageSource msgPro;
 	@Autowired
@@ -68,9 +62,7 @@ public class UserInfoMultiController {
 		}
 		String rtn;  //遷移先の宣言
 		List<String[]> users = uMService.toStringList(usersInfo); //CSVファイルの解析
-		users = uMService.trimName(users);  //ユーザー名のトリム
-		Iterable<GroupMstEntity> glist = gimr.findAll(); //DB内の
-		Iterable<UserInfoEntity> ulist = uimr.findAll();
+		users = uMService.trimName(users);  //ユーザー名のトリミング
 		List<String> errmsg = new ArrayList<>();
 
 		if (usersInfo.isEmpty()) { //ファイルが選択されていない場合
@@ -83,12 +75,12 @@ public class UserInfoMultiController {
 			//一括登録するユーザーの数だけ繰り返す
 			for (int i = 0; i < users.size(); i++) {
 				String getmsg = null; //エラーメッセージの宣言
-				getmsg = uMService.loginGroup(glist, users.get(i), i); //グループにログインできるかチェック
+				getmsg = uMService.loginGroup(users.get(i), i); //グループにログインできるかチェック
 				if (getmsg != null) {
 					errmsg.add(getmsg); //nullじゃない場合エラーメッセージをadd
 				}
 				getmsg = null; //エラーメッセージの初期化
-				getmsg = uMService.checUserIdDB(ulist, users.get(i), i); //DBにログインIDの重複があるか調べる
+				getmsg = uMService.checUserIdDB(users.get(i), i); //DBにログインIDの重複があるか調べる
 				if (getmsg != null) {
 					errmsg.add(getmsg); //nullじゃない場合エラーメッセージをadd
 				}
@@ -129,8 +121,6 @@ public class UserInfoMultiController {
 			session.setAttribute(USERS_INFO_SES, users);  //ユーザー情報をセッションにいれる
 			model.addAttribute(USERS_HEAD,
 					ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));  //ヘッドをmodelにいれる
-			model.addAttribute(USERS_HEAD_LENG,
-					ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));  //ヘッドの長さをmodelに入れる TODO 不必要の可能性があるので削除予定
 			model.addAttribute(USERS_INFO, users);  //ユーザー情報をmodelにいれる
 			rtn = TO_USERS_MULTI_CONF;  //遷移先を確認画面に指定
 		} else {  //エラーメッセージがある場合
@@ -151,18 +141,12 @@ public class UserInfoMultiController {
 	public String userInfoConfirm(Model model) throws ParseException {
 		model.addAttribute(USERS_HEAD,
 				ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN))); //ヘッドをmodelにいれる
-		model.addAttribute(USERS_HEAD_LENG,
-				ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));  //ヘッドの長さをmodelに入れる TODO 不必要の可能性があるので削除予定
 		@SuppressWarnings("unchecked")  //未検査のキャストをするため
 		List<String[]> users = (List<String[]>) session.getAttribute(USERS_INFO_SES);  //セッションから登録するユーザー情報を取得
 		model.addAttribute(USERS_INFO, users);  //modelに登録するユーザー情報をいれる
+		
 		//TODO サービスクラスへの移行
-		UserInfoEntity uEntity = new UserInfoEntity();  //DBに登録するエンティティクラスのインスタンス化
-		for (String[] userInfo : users) {  //登録するユーザー情報の数だけ繰り返す
-			uEntity.setUserInfo(userInfo);  //ユーザー情報をset
-			uimr.save(uEntity);  //DBに登録
-		}
-
+		uMService.saveUserInfo(users);  //DBに登録
 		return TO_USERS_MULTI_RES;
 	}
 

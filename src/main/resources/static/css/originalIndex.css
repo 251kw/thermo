@@ -97,7 +97,7 @@ vertical-align: top;
     position:relative;
     overflow:hidden;
     border-radius:3px;
-    background:#099;
+    background:#5accfc;
     color:#fff;
     text-align:center;
     padding:10px;
@@ -106,7 +106,7 @@ vertical-align: top;
     cursor:pointer;
 }
 .uploadButton:hover {
-    background:#0aa;
+    background:#69c9f1;
 }
 .uploadButton input[type=file] {
     position:absolute;

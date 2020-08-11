@@ -25,6 +25,10 @@ public class UserInfoMultiService {
 	
 	@Autowired
 	protected MessageSource msgPro;
+	@Autowired
+	UserInfoMultiRepository uimr;
+	@Autowired
+	GroupInfoMultiRepository gimr;
 	
 	/**
 	 * @param usersInfo 登録ユーザー情報の入ったＣＳＶファイル
@@ -125,10 +129,10 @@ public class UserInfoMultiService {
 	 * @param i 行数
 	 * @return エラーメッセージ
 	 */
-	public String loginGroup(Iterable<GroupMstEntity> glist ,String[] usersInfo,int i) {
+	public String loginGroup(String[] usersInfo,int i) {
 		boolean bool = true;
 		String errmsg = null;
-		
+		Iterable<GroupMstEntity> glist = gimr.findAll(); //DB内の
 		
 			bool = true;
 			for (GroupMstEntity list : glist) {  //データベースにあるグループの長さ繰り返す
@@ -147,9 +151,10 @@ public class UserInfoMultiService {
 		return errmsg;
 	}
 	
-	public String checUserIdDB(Iterable<UserInfoEntity> ulist ,String[] usersInfo, int i) {
+	public String checUserIdDB(String[] usersInfo, int i) {
 		
 		String errmsg = null;
+		Iterable<UserInfoEntity> ulist = uimr.findAll();
 		for (UserInfoEntity list : ulist) {
 			if(list.getUser_id().equals(usersInfo[M_UID])) { 
 				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
@@ -234,6 +239,17 @@ public class UserInfoMultiService {
 		}
 		
 		return errmsg;
+	}
+	
+	public boolean saveUserInfo(List<String[]> users){
+		
+		UserInfoEntity uEntity = new UserInfoEntity();  //DBに登録するエンティティクラスのインスタンス化
+		for (String[] userInfo : users) {  //登録するユーザー情報の数だけ繰り返す
+			uEntity.setUserInfo(userInfo);  //ユーザー情報をset
+			uimr.save(uEntity);  //DBに登録
+		}
+		
+		return true;
 	}
 	
 }

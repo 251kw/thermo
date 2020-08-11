@@ -16,35 +16,47 @@
 		<!--ページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>検温情報検索</h3>
+			<h3><th:block th:text="#{view.userInfoMulRes.pagetitle}"></th:block></h3>
 		</div>
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
-		<div class="ui container">
+		<div class="ui container center aligned">
 			
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
 ​
-
-			<p></p>
+			<br>
 
 			<table class="ui celled table">
-				<thead>
-					<tr >
-						<td th:each="val:${users_head_info}" width="100" th:text="${val}"></td>
+				<thead class="delete">
+					<tr>
+						<th th:text="#{view.usercount}"></th>
+						<th th:each="val:${users_head_info}" width="100" th:text="${val}"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list : ${users_info}">
+					<tr th:each="list,status : ${users_info}">
+						<td data-label="#{view.usercount}" th:text="${status.count}"></td>
 						<th:block th:each="line:${list}">
-							<td  th:text="${line}"></td>
+							<th:block th:if="${lineStat.index != 5 && lineStat.index != 7 && lineStat.index != 8}" >
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${line}"></td>
+							</th:block>
+							<th:block th:if="${lineStat.index == 5}" >
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGender(line)}"></td>
+							</th:block>
+							<th:block th:if="${lineStat.index == 7}" >
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(line)}"></td>
+							</th:block>
+							<th:block th:if="${lineStat.index == 8}" >
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceAdmin(line)}"></td>
+							</th:block>
 						</th:block>
 					</tr>
 				</tbody>
 			</table>	
 			
 			<form action="#" th:action="@{./}" method="get">
-				<input type="submit" class="ui inverted primary button" value="戻る">
+				<input type="submit" class="ui inverted primary button" th:value="#{view.btn.returnLogin}">
 			</form>
 			
 		</div>
