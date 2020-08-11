@@ -153,7 +153,7 @@ public class UserInfoMultiController {
 				ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN))); //ヘッドをmodelにいれる
 		model.addAttribute(USERS_HEAD_LENG,
 				ThermoUtil.getColumnCount(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));  //ヘッドの長さをmodelに入れる TODO 不必要の可能性があるので削除予定
-		@SuppressWarnings("unchecked")  //未検査のキャストをするため  TODO 動作の安全確認
+		@SuppressWarnings("unchecked")  //未検査のキャストをするため
 		List<String[]> users = (List<String[]>) session.getAttribute(USERS_INFO_SES);  //セッションから登録するユーザー情報を取得
 		model.addAttribute(USERS_INFO, users);  //modelに登録するユーザー情報をいれる
 		//TODO サービスクラスへの移行

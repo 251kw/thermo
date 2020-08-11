@@ -1,5 +1,7 @@
 package com.shantery.thermo.userInfoMulti;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,9 +64,9 @@ public class UserInfoMultiService {
 	public List<String[]> trimName(List<String[]> usersInfo) throws ParseException {
 		
 		for (String[] line : usersInfo) {
-			line[4] = line[4].trim();
-			line[4] = line[4].replace(" ", "　");
-			line[4] = line[4].replace("	", "　");
+			line[M_UNAME] = line[M_UNAME].trim();
+			line[M_UNAME] = line[M_UNAME].replace(" ", "　");
+			line[M_UNAME] = line[M_UNAME].replace("	", "　");
 		}
 		
         return usersInfo;  //
@@ -106,7 +108,7 @@ public class UserInfoMultiService {
 			//1行目と二行目以降にログインIDに重複がないか調べる、その後ループに戻ると2行目と3行目以降を調べる..を繰り返す
 			for(int j = i + 1;j < usersInfo.size(); j++) {
 				String[] ckline = usersInfo.get(j);
-				if(line[2].equals(ckline[2])) {
+				if(line[M_UID].equals(ckline[M_UID])) {
 					bool = true;
 					break;
 				}
@@ -149,7 +151,7 @@ public class UserInfoMultiService {
 		
 		String errmsg = null;
 		for (UserInfoEntity list : ulist) {
-			if(list.getUser_id().equals(usersInfo[2])) { 
+			if(list.getUser_id().equals(usersInfo[M_UID])) { 
 				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
 			}
 		}

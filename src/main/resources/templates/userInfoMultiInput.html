@@ -27,7 +27,7 @@
 				
 				<div class="position center">
 				    <div class="uploadButton">
-				        ファイルを選択
+				        <th:block th:text="#{view.usercount}">
 				        <input type="file"  name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
 				        <input type="text" id="uv" class="uploadValue" disabled />
 				    </div>    
