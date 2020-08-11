@@ -31,7 +31,7 @@ public class UserInfoMultiBeanValidation {
 	/** ユーザ名 **/   //TODO 自動で半角を全角に
 	@NotBlank(message = "uName")
 	@Size(min = 1, max = 64,message="uName")
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠　]+$",message="uName")
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message="uName")
 	private String user_name;
 	/** 性別 **/
 	@NotBlank(message = "gender")

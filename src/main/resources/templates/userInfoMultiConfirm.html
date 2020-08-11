@@ -21,7 +21,7 @@
 		</div>
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
-		<div class="ui container right aligned">
+		<div class="ui container center aligned">
 			
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
@@ -29,7 +29,7 @@
 
 			<p></p>
 
-			<table  class="ui celled padded table">
+			<table class="ui celled table">
 				<thead class="delete">
 					<tr >
 						<td th:text="行番号"></td>
@@ -58,7 +58,7 @@
 			</table>
 			
 			<form action="#" th:action="@{./users_multi_conf_suc}" method="post">
-				<input type="submit" class="ui inverted primary button right aligned" value="確定">
+				<input type="submit" class="ui inverted primary button right aligned" th:value="#{view.label.conf}">
 			</form>		
 			
 			<br>

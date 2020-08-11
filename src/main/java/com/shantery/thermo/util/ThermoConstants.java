@@ -81,6 +81,17 @@ public class ThermoConstants {
 	/** ログイン画面に出すエラーメッセージをモデルに入れるときのキー **/
 	public static final String LOGIN_ERROR = "login_error";
 	
+	//ユーザー情報一括登録の配列を使うときの数値
+	public static final int M_GID = 0;
+	public static final int M_GPASS = 1;
+	public static final int M_UID = 2;
+	public static final int M_UPASS = 3;
+	public static final int M_UNAME = 4;
+	public static final int M_GENDER = 5;
+	public static final int M_BIRTH = 6;
+	public static final int M_GRADE = 7;
+	public static final int M_FLG = 8;
+	
 	// @RequestParamのname属性
 	
 	// その他よく使う文字の変数 TODO 不要なものを削除する

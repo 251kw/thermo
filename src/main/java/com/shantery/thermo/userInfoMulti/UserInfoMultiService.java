@@ -55,6 +55,23 @@ public class UserInfoMultiService {
 	}
 	
 	/**
+	 * @param usersInfo ユーザー情報
+	 * @return リプレースしたユーザー情報
+	 * @throws ParseException
+	 */
+	public List<String[]> trimName(List<String[]> usersInfo) throws ParseException {
+		
+		for (String[] line : usersInfo) {
+			line[4] = line[4].trim();
+			line[4] = line[4].replace(" ", "　");
+			line[4] = line[4].replace("	", "　");
+		}
+		
+        return usersInfo;  //
+		
+	}
+	
+	/**
 	 * CSVファイルの形式を調べる
 	 * @param usersInfo ユーザー情報
 	 * @return T/F CSVファイルの形式が正しくなければ T

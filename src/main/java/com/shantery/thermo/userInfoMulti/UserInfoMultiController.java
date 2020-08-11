@@ -68,6 +68,7 @@ public class UserInfoMultiController {
 		}
 		String rtn;  //遷移先の宣言
 		List<String[]> users = uMService.toStringList(usersInfo); //CSVファイルの解析
+		users = uMService.trimName(users);  //ユーザー名のトリム
 		Iterable<GroupMstEntity> glist = gimr.findAll(); //DB内の
 		Iterable<UserInfoEntity> ulist = uimr.findAll();
 		List<String> errmsg = new ArrayList<>();
@@ -75,7 +76,7 @@ public class UserInfoMultiController {
 		if (usersInfo.isEmpty()) { //ファイルが選択されていない場合
 			errmsg.add((msgPro.getMessage("view.errUserFileExisting", new String[] {}, Locale.JAPAN)));
 		} else if (uMService.checkUserinfo(users)) { //ファイルの形式が正しくない場合
-			errmsg.add((msgPro.getMessage("view.errUserFileExisting", new String[] {}, Locale.JAPAN)));
+			errmsg.add((msgPro.getMessage("view.errUserFileOrder", new String[] {}, Locale.JAPAN)));
 		} else if (uMService.checkUserId(users)) { //一括登録するユーザーIDに重複がある場合
 			errmsg.add((msgPro.getMessage("view.errUserFileDuplication", new String[] {}, Locale.JAPAN)));
 		} else {
