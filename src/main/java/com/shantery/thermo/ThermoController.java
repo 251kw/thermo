@@ -17,6 +17,7 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 import com.shantery.thermo.search.SearchRepository;
+import com.shantery.thermo.util.ThermoReplaceValue;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -116,5 +117,31 @@ class ThermoController {
 		return logintransition;
 	}
 
+	
+	@RequestMapping(value = "/param", method = RequestMethod.GET)
+	public String param(Model model) {
+		
+			// 半角スペース全角スペース　半角スペース　半角タブ全角タブ
+		String param = " 　山田 太郎"		;
+		
+		model.addAttribute("param", param);
+		
+		// トップページへ移動
+		return "mytest";
+	}
+	
+	@RequestMapping(value = "/paramchange", method = RequestMethod.GET)
+	public String paramchange(Model model) {
+		
+			// 半角スペース全角スペース　半角スペース　半角タブ全角タブ
+		String param = " 　山田 太郎"		;
+		
+		param = ThermoReplaceValue.trimBlank(param);
+		
+		model.addAttribute("param", param);
+		
+		// トップページへ移動
+		return "mytest";
+	}
 }
 

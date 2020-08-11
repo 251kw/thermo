@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class ThermoReplaceValue {
 
+	// 生年月日から年齢を割り出す
 	public static String calcAge(String birthday) {
 
 		// birthday 数字８桁でもらう
@@ -31,6 +32,7 @@ public class ThermoReplaceValue {
 		return str;
 	}
 	
+	// 性別
 	public static String replaceGender(String gender) {
 
 		if(gender.equals("M")) {
@@ -41,9 +43,13 @@ public class ThermoReplaceValue {
 		return gender;
 	}
 	
+	// 学年
 	public static String replaceGrade(String grade) {
 
 		switch(grade) {
+		case "0":
+			grade = "なし";
+			break;
 		case "1":
 			grade = "少学１年生";
 			break;
@@ -75,6 +81,7 @@ public class ThermoReplaceValue {
 		return grade;
 	}
 	
+	// 管理者フラグ
 	public static String replaceAdmin(String admin_flg) {
 
 		if(admin_flg.equals("1")) {
@@ -83,5 +90,18 @@ public class ThermoReplaceValue {
 			admin_flg = "なし";
 		}
 		return admin_flg;
+	}
+	
+	// 空白チェック
+	public static String trimBlank(String param) {
+		
+		// 文字列中に全角スペースがあれば全て半角スペースに置き換える
+		param = param.replaceAll("　", " ");
+		// 文字列前後の半角スペースを削除
+		param = param.trim();
+		// 文字列中に出現する半角スペースを全角スペースに置換する
+		param = param.replaceAll(" ", "　");
+		
+		return param;
 	}
 }
