@@ -107,35 +107,83 @@ public class ThermoReplaceValue {
 		return param;
 	}
 	
-	// セレクトボックス生成メソッド
-	// 引数はselectのname属性　
+	
+	/**
+	 * htmlに直接セレクトボックスを出力するメソッド
+	 * @param division selectのname属性、またはid属性
+	 * @return セレクトボックスを生成するString
+	 */
+	// 使い方：<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('引数')}"></span>
 	public static String makeSelect(String division){
-		
+
+		// 配列とマップを定義
 		String keys[];
 		Map<String, String> map = new LinkedHashMap<>();
 		
-		String start = "<select name='" + division + "'" + " " + "id='" + division + "'" + ">";
+		// htmlを構成するパーツ
+		String start = "<select name='" + division + "'" + ">";
+		String startWithId = "<select name='" + division + "'" + " " + "id='" + division + "'" + ">";
 		String end = "</select>";
 		String option = "";
+		String comp = null;
 		
-		// とりあえず新規登録ボタンの場合
-		if(division.equals("regist")){
-			
+		// 区分の種類によって処理を分岐
+		switch(division) {
+		
+		// 新規登録
+		case "regist":
+				
 			keys = new String[3];
 			keys[0] = "グループ";
 			keys[1] = "ユーザー（個人）";
 			keys[2] = "ユーザー（複数）";
+				
+		    map.put("group", keys[0]);
+		    map.put("user", keys[1]);
+		    map.put("multiuser", keys[2]);
+		    
+		    break;
+		    
+		// 学年
+		case "grade":
 			
-	        map.put("group", keys[0]);
-	        map.put("user", keys[1]);
-	        map.put("multiuser", keys[2]);
+			keys = new String[10];
+			keys[0] = "なし";
+			keys[1] = "小学1年";
+			keys[2] = "小学2年";
+			keys[3] = "小学3年";
+			keys[4] = "小学4年";
+			keys[5] = "小学5年";
+			keys[6] = "小学6年";
+			keys[7] = "中学1年";
+			keys[8] = "中学2年";
+			keys[9] = "中学3年";
+				
+		    map.put("0", keys[0]);
+		    map.put("1", keys[1]);
+		    map.put("2", keys[2]);
+		    map.put("3", keys[3]);
+		    map.put("4", keys[4]);
+		    map.put("5", keys[5]);
+		    map.put("6", keys[6]);
+		    map.put("A", keys[7]);
+		    map.put("B", keys[8]);
+		    map.put("C", keys[9]);
+		    
+		    break;
 		}
-		
-		for(Map.Entry<String, String> value : map.entrySet()) {
 			
+		for(Map.Entry<String, String> value : map.entrySet()) {
+				
 			option += "<option value='" + value.getKey() + "'>" + value.getValue() +"</option>";
 		}
+			
+		if(division.equals("regist")) {
+			comp = startWithId + option + end;
+		}else {
+			comp = start + option + end;
+		}
 		
-		return start + option + end;
+		return comp;
 	}
 }
