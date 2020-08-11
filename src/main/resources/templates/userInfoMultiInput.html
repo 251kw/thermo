@@ -17,7 +17,7 @@
 		<!--ページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>検温情報検索</h3>
+			<h3>th:text="#{view.userInfoMulIn.pagetitle}"</h3>
 		</div>
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
@@ -27,13 +27,13 @@
 				
 				<div class="position center">
 				    <div class="uploadButton">
-				        <th:block th:text="#{view.usercount}">
+				        <th:block th:text="#{view.selectFile}">
 				        <input type="file"  name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
 				        <input type="text" id="uv" class="uploadValue" disabled />
 				    </div>    
 				</div>
 				
-				<input type="submit" class="ui inverted primary button center" value="送信">
+				<input type="submit" class="ui inverted primary button center" th:value="#{view.selectSend}">
 			</form>
 			
 			<th:block th:if="${users_err_info}">
@@ -47,7 +47,7 @@
 			<br>
 			
 			<form action="#" th:action="@{./}" method="get">
-				<input type="submit" class="ui inverted primary button" value="戻る">
+				<input type="submit" class="ui inverted primary button" th:value="#{view.btn.return}">
 			</form>	
 			
 		</div>

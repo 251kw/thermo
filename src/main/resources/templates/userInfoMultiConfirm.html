@@ -17,7 +17,7 @@
 		<!--ページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>検温情報検索</h3>
+			<h3>th:text="#{view.userInfoMulCon.pagetitle}"</h3>
 		</div>
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
@@ -32,13 +32,13 @@
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr >
-						<td th:text="行番号"></td>
+						<td th:text="#{view.usercount}"></td>
 						<td th:each="val:${users_head_info}" width="100" th:text="${val}"></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="list,status : ${users_info}">
-						<td data-label="行番号" th:text="${status.count}"></td>
+						<td data-label="#{view.usercount}" th:text="${status.count}"></td>
 						<th:block th:each="line:${list}">
 							<th:block th:if="${lineStat.index != 5 && lineStat.index != 7 && lineStat.index != 8}" >
 								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${line}"></td>
@@ -64,7 +64,7 @@
 			<br>
 			
 			<form action="#" th:action="@{./users_multi_set}" method="get">
-				<input type="submit" class="ui inverted primary button" value="キャンセル">
+				<input type="submit" class="ui inverted primary button" th:value=#{view.btn.cancel}>
 			</form>	
 			
 		</div>
