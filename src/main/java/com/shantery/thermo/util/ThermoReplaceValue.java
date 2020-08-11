@@ -12,7 +12,11 @@ import static com.shantery.thermo.util.ThermoConstants.*;
 
 public class ThermoReplaceValue {
 
-	// 生年月日から年齢を割り出す
+	/**
+	 * 生年月日から年齢を割り出すメソッド
+	 * @param birthday 生年月日
+	 * @return 年齢
+	 */
 	public static String calcAge(String birthday) {
 
 		// birthday 数字８桁でもらう
@@ -34,7 +38,11 @@ public class ThermoReplaceValue {
 		return str;
 	}
 	
-	// 性別
+	/**
+	 * 性別の表記を変換するメソッド
+	 * @param gender
+	 * @return 男性or女性
+	 */
 	public static String replaceGender(String gender) {
 
 		if(gender.equals("M")) {
@@ -45,7 +53,11 @@ public class ThermoReplaceValue {
 		return gender;
 	}
 	
-	// 学年
+	/**
+	 * 学年の表記を変換するメソッド
+	 * @param grade DB上の値
+	 * @return 出力用の値
+	 */
 	public static String replaceGrade(String grade) {
 
 		switch(grade) {
@@ -65,10 +77,10 @@ public class ThermoReplaceValue {
 			grade = "小学4年生";
 			break;
 		case "5":
-			grade = "少学5年生";
+			grade = "小学5年生";
 			break;
 		case "6":
-			grade = "少学6年生";
+			grade = "小学6年生";
 			break;
 		case "A":
 			grade = "中学１年生";
@@ -83,7 +95,11 @@ public class ThermoReplaceValue {
 		return grade;
 	}
 	
-	// 管理者フラグ
+	/**
+	 * 管理者権限を変換するメソッド
+	 * @param admin_flg DB上の値
+	 * @return 出力用の値
+	 */
 	public static String replaceAdmin(String admin_flg) {
 
 		if(admin_flg.equals("1")) {
@@ -94,7 +110,11 @@ public class ThermoReplaceValue {
 		return admin_flg;
 	}
 	
-	// 空白チェック
+	/**
+	 * 文字列の前後の空白を取り除く& 文字列中の半角スペースを全角スぺースに置換する
+	 * @param param
+	 * @return
+	 */
 	public static String trimBlank(String param) {
 		
 		// 文字列中に全角スペースがあれば全て半角スペースに置き換える
@@ -106,7 +126,6 @@ public class ThermoReplaceValue {
 		
 		return param;
 	}
-	
 	
 	/**
 	 * htmlに直接セレクトボックスを出力するメソッド
