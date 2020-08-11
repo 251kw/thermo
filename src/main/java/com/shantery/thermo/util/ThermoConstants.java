@@ -77,7 +77,7 @@ public class ThermoConstants {
 	/** ユーザー情報のエラーメッセージをモデルに入れるするのキー **/
 	public static final String USERS_ERR = "users_err_info";
 	/** ログイン中のユーザー情報をセッションに入れるときのキー **/
-	public static final String LOGIN_USER = "login_user";
+	public static final String LOGIN_USER = "loginuser";
 	/** ログイン画面に出すエラーメッセージをモデルに入れるときのキー **/
 	public static final String LOGIN_ERROR = "login_error";
 	

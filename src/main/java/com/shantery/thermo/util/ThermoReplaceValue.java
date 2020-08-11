@@ -4,6 +4,9 @@ package com.shantery.thermo.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.shantery.thermo.util.ThermoConstants.*;
 
 
@@ -106,4 +109,18 @@ public class ThermoReplaceValue {
 		return param;
 	}
 	
+	// セレクトボックス生成メソッド
+	// 引数は区分の種類のみ　
+	public static Map<String, String> makeSelect(String division){
+		
+		String keys[];
+		keys = new String[2];
+		keys[0] = "グループ";
+		keys[1] = "ユーザー（個人）";
+		keys[2] = "ユーザー（複数）";
+	
+		Map<String, String> map = new HashMap<>();
+		
+		return map;
+	}
 }
