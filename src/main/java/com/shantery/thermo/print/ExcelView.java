@@ -10,8 +10,10 @@ import org.apache.poi.hssf.usermodel.HeaderFooter;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Footer;
 import org.apache.poi.ss.usermodel.Header;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -19,21 +21,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
+import com.shantery.thermo.util.ThermoReplaceValue;
 /**
  * @author d.ito
  *検索結果をExcelに 
  */
 @Component
 public class ExcelView extends AbstractXlsxView {
-	public String flagCheck(String flag) {
-		String text = null;
-		if(flag.equals("0")) {
-			text = "なし";
-		}else {
-			text = "あり";
-		}
-		return text;
-	}
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
@@ -41,140 +35,99 @@ public class ExcelView extends AbstractXlsxView {
 		// セッションに接続
 		HttpSession session = request.getSession();
 		// 検索結果をリストで取得
-		List<ThermoInfoEntity> list = (List<ThermoInfoEntity>) session.getAttribute("samplelist");	
+		List<ThermoInfoEntity> list = (List<ThermoInfoEntity>) session.getAttribute("schlist");	
 		Sheet sheet = workbook.createSheet("検温情報"); // シート作成
 		// 検温表の項目を配列化
 		String[] rowTmp = {"計測日", "名前", "性別", "学年", "年齢", "体温", "味覚障害", "嗅覚障害", "咳", "その他" };
 		//列の幅を設定する
 		sheet.setColumnWidth(0, 2800); //計測日の幅
  		sheet.setColumnWidth(2, 1150); //性別の幅
+ 		sheet.setColumnWidth(3, 2500); //学年の幅
  		sheet.setColumnWidth(4, 1150); //年齢の幅
- 		sheet.setColumnWidth(5, 1150); //体温の幅
+ 		sheet.setColumnWidth(5, 1600); //体温の幅
  		sheet.setColumnWidth(6, 1150); //味覚障害の幅
  		sheet.setColumnWidth(7, 1150); //嗅覚障害の幅
  		sheet.setColumnWidth(8, 1150); //咳の幅
- 		sheet.setColumnWidth(9, 5500); //その他の幅
+ 		sheet.setColumnWidth(9, 5000); //その他の幅
 		// セルスタイルを指定
 		CellStyle cellstyle = workbook.createCellStyle();
+		CellStyle indexCellstyle = workbook.createCellStyle();
 		
-		int rowNum = 0;
-		String text = null;
-		Row row = sheet.createRow(rowNum++);
-		Cell cell = null;	
+		int rowNum = 0; //何行目かを指定する変数
+		Row row = sheet.createRow(rowNum++); //先頭行を作成
+		Cell cell = null;	//cellを指定する変数
 		
 		Header header = sheet.getHeader(); //ヘッダーの作成
 		header.setCenter("検温情報");
 		header.setLeft(HeaderFooter.date()); //日付の指定
 	    Footer footer = sheet.getFooter(); //フッターの作成
 	    footer.setCenter(HeaderFooter.page() + "/" + HeaderFooter.numPages());
-		
-		for (int i = 0; i <= list.size(); i++) {
-			if (i == 0) {
-				for (int j = 0; j < rowTmp.length; j++) {
-					cell = row.createCell(j);
-					cell.setCellValue(rowTmp[j]);
-					cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-					cellstyle.setBorderRight(BorderStyle.MEDIUM);
-					cellstyle.setBorderTop(BorderStyle.MEDIUM);
-					cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-					cell.setCellStyle(cellstyle);
-				}
-			} else {
-				//改行を行う
-				row = sheet.createRow(rowNum++);
-				//1列目に日付を挿入
-				cell = row.createCell(0);
-				cell.setCellValue(list.get(i - 1).getRegist_date());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//2列目に名前を挿入
-				cell = row.createCell(1);
-				cell.setCellValue(list.get(i - 1).getCough());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//3列目に性別を挿入
-				cell = row.createCell(2);
-				cell.setCellValue(list.get(i - 1).getThermo());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//4列目に学年を挿入
-				cell = row.createCell(3);
-				cell.setCellValue(list.get(i - 1).getOlfactory_disorder());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//5列目に年齢を挿入
-				cell = row.createCell(4);
-				cell.setCellValue(list.get(i - 1).getThermo_id());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//6列目に体温を挿入
-				cell = row.createCell(5);
-				cell.setCellValue(list.get(i - 1).getThermo());
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//7列目に味覚障害を挿入
-				cell = row.createCell(6);
-				if(list.get(i - 1).getTaste_disorder().equals("0")) {
-					text = "なし";
-				}else {
-					text = "あり";
-				}
-				cell.setCellValue(text);
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//8列目に嗅覚障害を挿入
-				cell = row.createCell(7);
-				cell.setCellValue(flagCheck(list.get(i - 1).getTaste_disorder()));
-				cell.setCellValue(text);
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//9列目に咳を挿入
-				cell = row.createCell(8);
-				if(list.get(i - 1).getCough().equals("0")) {
-					text = "なし";
-				}else {
-					text = "あり";
-				}
-				cell.setCellValue(text);
-				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
-				cellstyle.setBorderRight(BorderStyle.MEDIUM);
-				cellstyle.setBorderTop(BorderStyle.MEDIUM);
-				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
-				cell.setCellStyle(cellstyle);
-				//10列目にその他を挿入
-				cell = row.createCell(9);
-				cell.setCellValue(list.get(i - 1).getOther());
+	    //表作成に必要な分の罫線を自動作成
+	    for (int i = 0; i <= list.size(); i++) {	    	
+		    for (int j = 0; j < rowTmp.length; j++) {
+				cell = row.createCell(j);
 				cellstyle.setBorderLeft(BorderStyle.MEDIUM);
 				cellstyle.setBorderRight(BorderStyle.MEDIUM);
 				cellstyle.setBorderTop(BorderStyle.MEDIUM);
 				cellstyle.setBorderBottom(BorderStyle.MEDIUM);
 				cell.setCellStyle(cellstyle);
 			}
-		}
+		    row = sheet.createRow(rowNum++);
+	    }
+	    rowNum = 0;
+	    row = sheet.getRow(rowNum++); //行を先頭に戻す
+	    //枠内に書き込む内容を反映する
+	    //行の繰り返し
+	    for (int i = 0; i <= list.size(); i++) {
+	    	//1行目は見出しを出力
+			if (i == 0) {
+				for (int j = 0; j < rowTmp.length; j++) {
+					cell = row.getCell(j);
+					cell.setCellValue(rowTmp[j]); //見出しの文字を出力
+					//背景色と枠線を出力
+					indexCellstyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+					indexCellstyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+					indexCellstyle.setBorderLeft(BorderStyle.MEDIUM);
+					indexCellstyle.setBorderRight(BorderStyle.MEDIUM);
+					indexCellstyle.setBorderTop(BorderStyle.MEDIUM);
+					indexCellstyle.setBorderBottom(BorderStyle.MEDIUM);
+					cell.setCellStyle(indexCellstyle);
+				}
+			} else {
+				//改行を行う
+				row = sheet.getRow(rowNum++);
+				//1列目に日付を挿入
+				cell = row.getCell(0);
+				cell.setCellValue(list.get(i - 1).getRegist_date());
+				//2列目に名前を挿入
+				cell = row.getCell(1);
+				cell.setCellValue(list.get(i - 1).getUserInfoEntity().getUser_name());
+				//3列目に性別を挿入
+				cell = row.getCell(2);
+				cell.setCellValue(ThermoReplaceValue.replaceGender(list.get(i - 1).getUserInfoEntity().getGender()));
+				//4列目に学年を挿入
+				cell = row.getCell(3);
+				cell.setCellValue(ThermoReplaceValue.replaceGrade(list.get(i - 1).getUserInfoEntity().getGrade()));
+				//5列目に年齢を挿入
+				cell = row.getCell(4);
+				//cell.setCellValue(ThermoReplaceValue.calcAge(list.get(i - 1).getUserInfoEntity().getBirthday()));
+				//6列目に体温を挿入
+				cell = row.getCell(5);
+				cell.setCellValue(list.get(i - 1).getThermo() + "度");
+				//7列目に味覚障害を挿入
+				cell = row.getCell(6);
+				cell.setCellValue(ThermoReplaceValue.replaceAdmin(list.get(i - 1).getTaste_disorder()));
+				//8列目に嗅覚障害を挿入
+				cell = row.getCell(7);
+				cell.setCellValue(ThermoReplaceValue.replaceAdmin(list.get(i - 1).getTaste_disorder()));
+				//9列目に咳を挿入
+				cell = row.getCell(8);
+				cell.setCellValue(ThermoReplaceValue.replaceAdmin(list.get(i - 1).getCough()));
+				//10列目にその他を挿入
+				cell = row.getCell(9);
+				cell.setCellValue(list.get(i - 1).getOther());
+			}
+		}	
 		cellstyle.setWrapText(true); //改行を有効化
 	}
 }
