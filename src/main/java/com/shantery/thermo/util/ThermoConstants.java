@@ -101,6 +101,8 @@ public class ThermoConstants {
 		public static final String END_PERCENT = "%'";
 		/** 空文字 **/
 		public static final String EMPTY = "";
+		/** NULL **/
+		public static final String NULL = null;
 		/** ページングに使う 0 **/
 		public static final int ZERO = 0;
 		/** ページングに使う 1 **/
@@ -125,6 +127,12 @@ public class ThermoConstants {
 		public static final String DEFAULT_PEGE = "1";
 		
 	// ThermoReplaceValueで使う定数
+		// calcAge
+		public static final String HYPHEN = "-";
+		public static final String SLASH = "/";
+		public static final String DATE_PATTERN = "yyyy/MM/dd";
+		
+		// VtoN
 		/** 区分の種類 **/
 		public static final String KBN_TYPE_GRADE = "grade";
 		public static final String KBN_TYPE_ADMIN = "admin";
@@ -163,17 +171,61 @@ public class ThermoConstants {
 		public static final String KBN_NAME_ADMIN_OFF = "なし";
 		
 		/** 性別の区分値 **/
-		public static final String KBN_VALUE_GRNDER_MALE = "M";
-		public static final String KBN_VALUE_GRNDER_FEMALE = "F";
+		public static final String KBN_VALUE_GENDER_MALE = "M";
+		public static final String KBN_VALUE_GENDER_FEMALE = "F";
 		
 		/** 性別の区分名 **/
-		public static final String KBN_NAME_GRNDER_MALE = "男性";
-		public static final String KBN_NAME_GRNDER_FEMALE = "女性";
+		public static final String KBN_NAME_GENDER_MALE = "男性";
+		public static final String KBN_NAME_GENDER_FEMALE = "女性";
 		
-	// trimBlankで使う定数
+		// trimBlank
 		/** 半角スペース **/
 		public static final String HALF_SPACE = " ";
 		/** 全角スペース **/
 		public static final String FULL_SPACE = "　";
 		
+		// makeSelect
+		/** セレクトボックスの種類を決めるdivisionの値 **/
+		public static final String SELECT_TYPE_GRADE = "grade";
+		public static final String SELECT_TYPE_REGIST = "regist";
+		
+		/** mapのvalue **/
+		public static final String SELECT_REGIST_VALUE_GROUP = "グループ";
+		public static final String SELECT_REGIST_VALUE_USER = "ユーザー（個人）";
+		public static final String SELECT_REGIST_VALUE_MULTIUSER = "ユーザー（複数）";
+		public static final String SELECT_GRADE_VALUE_ZERO = "なし";
+		public static final String SELECT_GRADE_VALUE_ONE = "小学１年";
+		public static final String SELECT_GRADE_VALUE_TWO = "小学２年";
+		public static final String SELECT_GRADE_VALUE_THREE = "小学３年";
+		public static final String SELECT_GRADE_VALUE_FOUR = "小学４年";
+		public static final String SELECT_GRADE_VALUE_FIVE = "小学５年";
+		public static final String SELECT_GRADE_VALUE_SIX = "小学６年";
+		public static final String SELECT_GRADE_VALUE_A = "中学１年";
+		public static final String SELECT_GRADE_VALUE_B = "中学２年";
+		public static final String SELECT_GRADE_VALUE_C = "中学３年";
+		
+		/** mapのkey **/
+		public static final String SELECT_REGIST_KEY_GROUP = "group";
+		public static final String SELECT_REGIST_KEY_USER = "user";
+		public static final String SELECT_REGIST_KEY_MULTIUSER = "multiuser";
+		public static final String SELECT_GRADE_KEY_ZERO = "0";
+		public static final String SELECT_GRADE_KEY_ONE = "1";
+		public static final String SELECT_GRADE_KEY_TWO = "2";
+		public static final String SELECT_GRADE_KEY_THREE = "3";
+		public static final String SELECT_GRADE_KEY_FOUR = "4";
+		public static final String SELECT_GRADE_KEY_FIVE = "5";
+		public static final String SELECT_GRADE_KEY_SIX = "6";
+		public static final String SELECT_GRADE_KEY_A = "A";
+		public static final String SELECT_GRADE_KEY_B = "B";
+		public static final String SELECT_GRADE_KEY_C = "C";
+		
+		public static final String SELECT_HTML_PARTS_A = "<select name='";
+		public static final String SELECT_HTML_PARTS_B = "'";
+		public static final String SELECT_HTML_PARTS_C = ">";
+		public static final String SELECT_HTML_PARTS_D = " ";
+		public static final String SELECT_HTML_PARTS_E = "id='";
+		public static final String SELECT_HTML_PARTS_F = "</select>";
+		public static final String SELECT_HTML_PARTS_G = "<option value='";
+		public static final String SELECT_HTML_PARTS_H = "'>";
+		public static final String SELECT_HTML_PARTS_I = "</option>";
 }
