@@ -28,7 +28,7 @@ public class UserInfoMultiBeanValidation {
 	@Size(min = 4, max = 16,message="uPass")
 	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="uPass")
 	private String user_pass;
-	/** ユーザ名 **/   //TODO 自動で半角を全角に
+	/** ユーザ名 **/
 	@NotBlank(message = "uName")
 	@Size(min = 1, max = 64,message="uName")
 	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message="uName")
@@ -109,6 +109,10 @@ public class UserInfoMultiBeanValidation {
 		this.admin_flg = admin_flg;
 	}
 	
+	/**
+	 * まとめて登録する
+	 * @param info 登録ユーザー情報
+	 */
 	public void setAll(String[] info){
 		this.group_id = info[0];
 		this.group_pass = info[1];

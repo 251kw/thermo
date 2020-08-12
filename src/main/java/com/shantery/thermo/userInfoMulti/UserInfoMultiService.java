@@ -23,10 +23,12 @@ import com.shantery.thermo.entity.UserInfoEntity;
 @Service
 public class UserInfoMultiService {
 	
+	 //メッセージプロパティから情報を取得するためのクラスのインスタンス化
 	@Autowired
 	protected MessageSource msgPro;
+	//リポジトリークラスのインスタンス化
 	@Autowired
-	UserInfoMultiRepository uimr;
+	UserInfoMultiRepository uimr; 
 	@Autowired
 	GroupInfoMultiRepository gimr;
 	
@@ -151,6 +153,12 @@ public class UserInfoMultiService {
 		return errmsg;
 	}
 	
+	/**
+	 * データベース上に重複したユーザーIdがないか調べる
+	 * @param usersInfo 登録ユーザー情報
+	 * @param i 行番号
+	 * @return エラーメッセージ
+	 */
 	public String checUserIdDB(String[] usersInfo, int i) {
 		
 		String errmsg = null;
@@ -241,7 +249,11 @@ public class UserInfoMultiService {
 		return errmsg;
 	}
 	
-	public boolean saveUserInfo(List<String[]> users){
+	/**
+	 * データベースに登録する
+	 * @param users 登録ユーザー情報
+	 */
+	public void saveUserInfo(List<String[]> users){
 		
 		UserInfoEntity uEntity = new UserInfoEntity();  //DBに登録するエンティティクラスのインスタンス化
 		for (String[] userInfo : users) {  //登録するユーザー情報の数だけ繰り返す
@@ -249,7 +261,6 @@ public class UserInfoMultiService {
 			uimr.save(uEntity);  //DBに登録
 		}
 		
-		return true;
 	}
 	
 }
