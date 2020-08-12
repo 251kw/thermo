@@ -163,8 +163,8 @@ public class ThermoConstants {
 		public static final String KBN_NAME_ADMIN_OFF = "なし";
 		
 		/** 性別の区分値 **/
-		public static final String KBN_VALUE_GRNDER_MALE = "M";
-		public static final String KBN_VALUE_GRNDER_FEMALE = "F";
+		public static final String KBN_VALUE_GENDER_MALE = "M";
+		public static final String KBN_VALUE_GENDER_FEMALE = "F";
 		
 		/** 性別の区分名 **/
 		public static final String KBN_NAME_GRNDER_MALE = "男性";
