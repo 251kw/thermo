@@ -36,11 +36,11 @@
 			</form>
 			
 			<th:block th:if="${users_err_info}">
-				<div class="ui negative message">
+			<div class="example">
 					<th:block th:each="msg: ${users_err_info}">
 						<p th:text="${msg}" >
 					</th:block>
-				</div>
+			</div>
 			</th:block>
 			
 			<br>

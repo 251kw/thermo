@@ -124,3 +124,10 @@ vertical-align: top;
     padding:3px;
     color:#ffffff;
 }
+
+div.example {
+  width: auto;
+  height: 300px;
+  background-color: #ffe8e6;
+  overflow: scroll !important;
+}

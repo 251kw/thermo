@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+import com.shantery.thermo.util.ThermoReplaceValue;
 
 @Service
 public class UserInfoMultiService {
@@ -70,12 +71,10 @@ public class UserInfoMultiService {
 	public List<String[]> trimName(List<String[]> usersInfo) throws ParseException {
 		
 		for (String[] line : usersInfo) {
-			line[M_UNAME] = line[M_UNAME].trim();
-			line[M_UNAME] = line[M_UNAME].replace(" ", "　");
-			line[M_UNAME] = line[M_UNAME].replace("	", "　");
+			line[M_UNAME] = ThermoReplaceValue.trimBlank(line[M_UNAME]);
 		}
 		
-        return usersInfo;  //
+        return usersInfo; 
 		
 	}
 	
