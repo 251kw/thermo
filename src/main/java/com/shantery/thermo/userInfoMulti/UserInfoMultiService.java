@@ -145,7 +145,7 @@ public class UserInfoMultiService {
 			}
 			
 			if(bool == true) { //ログインできないユーザー情報が見つかった場合
-				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAndPassCK", new String[] {}, Locale.JAPAN)));  //TODO 日本語の外部化
+				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAndPassCK", new String[] {}, Locale.JAPAN)));  //メッセージプロパティからエラーメッセージの取得
 			}
 		
 		return errmsg;
@@ -171,7 +171,7 @@ public class UserInfoMultiService {
 	 */
 	public List<String> makeErrMsg(List<String> vios){
 		
-		//エアラーメッセージのリストの宣言
+		//エラーメッセージのリストの宣言
 		List<String> errmsg = new ArrayList<String>();
 		
 		//調べる受け取ったエラー該当する場合にaddするための変数の宣言
@@ -209,7 +209,7 @@ public class UserInfoMultiService {
 			
 		}
 		
-		//nullでない場合のみadd
+		//nullでない場合のみadd(順序の保障も兼ねる)
 		if(gId != null) {
 			errmsg.add(gId);
 		}
