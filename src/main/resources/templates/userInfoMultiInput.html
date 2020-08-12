@@ -22,32 +22,41 @@
 		
 		<!-------------------------------------------本体始まり ----------------------------------------------------->
 		<br>
-		<div class="ui center aligned container">
+		<div class="ui text container">
+		
 			<form action="#" th:action="@{./users_multi_get}" enctype="multipart/form-data" method="post">
-			<div class="position center">
-				<div class="uploadButton">
-					<th:block th:text="#{view.selectFile}"></th:block>
-					<input type="file" name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
-					<input type="text" id="uv" class="uploadValue" disabled />
-				</div>
-			</div>
-
-			<input type="submit" class="ui inverted primary button center" th:value="#{view.selectSend}">
-			</form>
-			
-			<th:block th:if="${users_err_info}">
-			<div class="example">
+				<table class="inner">
+					<tr>
+						<td>
+							<div class="position center">
+								<div class="uploadButton">
+									<th:block th:text="#{view.selectFile}"></th:block>
+									<input type="file" name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
+									<input type="text" id="uv" class="uploadValue" disabled />
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>	
+						<td class="rightorigin">
+							<input type="submit" class="ui inverted primary button center" th:value="#{view.selectSend}">
+							<a href="./">
+								<button type="button" class="ui inverted primary button center">
+									<th:block th:text="#{view.btn.return}"></th:block>
+								</button>
+							</a>
+						</td>
+					</tr>
+				</table>
+	        </form>
+	        <th:block th:if="${users_err_info}">
+				<br>
+				<div class="example">
 					<th:block th:each="msg: ${users_err_info}">
 						<p th:text="${msg}" >
 					</th:block>
-			</div>
+				</div>
 			</th:block>
-			
-			<br>
-			
-			<form action="#" th:action="@{./}" method="get">
-				<input type="submit" class="ui inverted primary button" th:value="#{view.btn.return}">
-			</form>	
 			
 		</div>
 	</body>
