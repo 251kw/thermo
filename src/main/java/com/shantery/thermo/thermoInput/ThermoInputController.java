@@ -54,12 +54,15 @@ class ThermoInputController {
 	 * @param model
 	 * @return 入力画面
 	 */
-	@RequestMapping(value = "/from_search"/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.GET)
+	@RequestMapping(value = "/from"/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.POST)
 	public String Input(Model model) {
 		
-		//TODO グループIdが同じの人をとる
 		//TODO スマホ版に変更したときの見出しの付け方を佐藤に聞く
 		
+		//ログインユーザーと同じグループIDのユーザー情報受け取る
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs(loginuser.getGroup_id());
+		model.addAttribute("ulist", ulist);
 		model.addAttribute("thForm", new ThermoInputForm());
 		return "thermoInput"/*TO_INPUT*/;
 	}
@@ -87,7 +90,6 @@ class ThermoInputController {
 	public String InputResult() {
 		ArrayList<ThermoInputForm.Detail> list = (ArrayList<ThermoInputForm.Detail>)session.getAttribute("list");
 		
-		//TODO そもそも登録できない、プライマリキー問題かも エラー文：Unknown integral data type for ids
 		service.registAll(list);//登録実行
 		
 		

@@ -33,40 +33,22 @@
 						<th th:text="#{view.tablelabel.other}"></th>
 					</tr>
 				</thead>
-				<tr>
-		    		<td>栗原</td>
-		    		<td>男</td>
-		    		<td>1</td>
-		    		<td>23</td>
+				<tr th:each= "ul,status : ${ulist}">
+		    		<td th:text="${ul.user_name}"></td>
+		    		<td th:text="${ul.gender}"></td>
+		    		<td th:text="${ul.grade}"></td>
+		    		<td></td>
 					<td data-label="#{view.tablelabel.thermo}">
-						<input type="text" name="tList[0].temperature"
+						<input type="text" name="tList[_${status.index}_].temperature"
 						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
 					</td>
-					<td><input type="checkbox" name="tList[0].taste"  /></td>
-					<td><input type="checkbox" name="tList[0].smell"  /></td>
-					<td><input type="checkbox" name="tList[0].cough"  /></td>
+					<td><input type="checkbox" name="tList[_${status.index}_].taste"  /></td>
+					<td><input type="checkbox" name="tList[_${status.index}_].smell"  /></td>
+					<td><input type="checkbox" name="tList[_${status.index}_].cough"  /></td>
 					<td>
-						<input type="text" name="tList[0].writing"
+						<input type="text" name="tList[_${status.index}_].writing"
 						size="30" maxlength="40" />
-						<input type="hidden" name="tList[0].userId" value="kurihara" >
-					</td>
-				</tr>
-				<tr>
-					<td>小宮</td>
-					<td>女</td>
-					<td>1</td>
-					<td>23</td>
-					<td data-label="#{view.tablelabel.thermo}">
-						<input type="text" th:attr="name='tList[1].temperature'"
-						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
-					</td>
-					<td><input type="checkbox" name="tList[1].taste"  /></td>
-					<td><input type="checkbox" name="tList[1].smell" /></td>
-					<td><input type="checkbox" name="tList[1].cough" /></td>
-					<td>
-						<input type="text" th:attr="name='tList[1].writing'"
-						size="30" maxlength="40" />
-					<input type="hidden" name="tList[1].userId" value="kurihara" >
+						<input type="hidden" name="tList[_${status.index}_].userId" value="${ul.user_id}" >
 					</td>
 				</tr>
 			</table>
