@@ -49,12 +49,12 @@ public class ThermoReplaceValue {
 	 * @param kbn_value DBに登録されている区分値
 	 * @return 区分名
 	 */
-	public static String VtoN(String kbn_type, String kbn_value){
+	public static String valueToName(String kbn_type, String kbn_value){
 
 		// return用のString
 		String kbn_name = NULL;
 		
-		// 管理者権限
+		// 管理者
 		if(kbn_type.equals(KBN_TYPE_ADMIN)) {
 			
 			switch (kbn_value) {
@@ -114,6 +114,18 @@ public class ThermoReplaceValue {
 				break;
 			case KBN_VALUE_GRADE_C:
 				kbn_name = KBN_NAME_GRADE_C;
+				break;
+			}
+		}else if(kbn_type.equals(KBN_TYPE_EXISTENCE)) {
+			
+			switch(kbn_value) {
+			
+			case KBN_VALUE_WITH:
+				kbn_name = KBN_NAME_WITH;
+				break;
+				
+			case KBN_VALUE_WITHOUT:
+				kbn_name = KBN_NAME_WITHOUT;
 				break;
 			}
 		}

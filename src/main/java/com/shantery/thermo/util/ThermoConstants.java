@@ -137,6 +137,7 @@ public class ThermoConstants {
 		public static final String KBN_TYPE_GRADE = "grade";
 		public static final String KBN_TYPE_ADMIN = "admin";
 		public static final String KBN_TYPE_GENDER = "gender";
+		public static final String KBN_TYPE_EXISTENCE = "exist";
 		
 		/** 学年区分の区分値 **/
 		public static final String KBN_VALUE_GRADE_ZERO = "0";
@@ -167,8 +168,16 @@ public class ThermoConstants {
 		public static final String KBN_VALUE_ADMIN_OFF = "0";
 		
 		/** 管理者権限の区分名 **/
-		public static final String KBN_NAME_ADMIN_ON = "あり";
-		public static final String KBN_NAME_ADMIN_OFF = "なし";
+		public static final String KBN_NAME_ADMIN_ON = "管理者";
+		public static final String KBN_NAME_ADMIN_OFF = "一般";
+		
+		/** 有無の区分値 **/
+		public static final String KBN_VALUE_WITH = "1";
+		public static final String KBN_VALUE_WITHOUT = "0";
+		
+		/** 有無の区分名 **/
+		public static final String KBN_NAME_WITH = "あり";
+		public static final String KBN_NAME_WITHOUT = "なし";
 		
 		/** 性別の区分値 **/
 		public static final String KBN_VALUE_GENDER_MALE = "M";
