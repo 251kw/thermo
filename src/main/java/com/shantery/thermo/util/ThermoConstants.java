@@ -124,6 +124,52 @@ public class ThermoConstants {
 		/** ページ番号の初期値 **/
 		public static final String DEFAULT_PEGE = "1";
 		
+	// ThermoReplaceValueで使う定数
+		/** 区分の種類 **/
+		public static final String KBN_TYPE_GRADE = "grade";
+		public static final String KBN_TYPE_ADMIN = "admin";
+		public static final String KBN_TYPE_GENDER = "gender";
+		
+		/** 学年区分の区分値 **/
+		public static final String KBN_VALUE_GRADE_ZERO = "0";
+		public static final String KBN_VALUE_GRADE_ONE = "1";
+		public static final String KBN_VALUE_GRADE_TWO = "2";
+		public static final String KBN_VALUE_GRADE_THREE = "3";
+		public static final String KBN_VALUE_GRADE_FOUR = "4";
+		public static final String KBN_VALUE_GRADE_FIVE = "5";
+		public static final String KBN_VALUE_GRADE_SIX = "6";
+		public static final String KBN_VALUE_GRADE_A = "A";
+		public static final String KBN_VALUE_GRADE_B = "B";
+		public static final String KBN_VALUE_GRADE_C = "C";
+		
+		/** 学年区分の区分名 **/
+		public static final String KBN_NAME_GRADE_ZERO = "なし";
+		public static final String KBN_NAME_GRADE_ONE = "小学１年";
+		public static final String KBN_NAME_GRADE_TWO = "小学２年";
+		public static final String KBN_NAME_GRADE_THREE = "小学３年";
+		public static final String KBN_NAME_GRADE_FOUR = "小学４年";
+		public static final String KBN_NAME_GRADE_FIVE = "小学５年";
+		public static final String KBN_NAME_GRADE_SIX = "小学６年";
+		public static final String KBN_NAME_GRADE_A = "中学１年";
+		public static final String KBN_NAME_GRADE_B = "中学２年";
+		public static final String KBN_NAME_GRADE_C = "中学３年";
+		
+		/** 管理者権限の区分値 **/
+		public static final String KBN_VALUE_ADMIN_ON = "1";
+		public static final String KBN_VALUE_ADMIN_OFF = "0";
+		
+		/** 管理者権限の区分名 **/
+		public static final String KBN_NAME_ADMIN_ON = "あり";
+		public static final String KBN_NAME_ADMIN_OFF = "なし";
+		
+		/** 性別の区分値 **/
+		public static final String KBN_VALUE_GRNDER_MALE = "M";
+		public static final String KBN_VALUE_GRNDER_FEMALE = "F";
+		
+		/** 性別の区分名 **/
+		public static final String KBN_NAME_GRNDER_MALE = "男性";
+		public static final String KBN_NAME_GRNDER_FEMALE = "女性";
+		
 	// trimBlankで使う定数
 		/** 半角スペース **/
 		public static final String HALF_SPACE = " ";
