@@ -114,6 +114,14 @@ class ThermoController {
 		
 		// ページを移動
 		return logintransition;
+		
+	}
+	
+	// 自分用のテストメソッド
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+			
+		return "mytest";
 	}
 }
 

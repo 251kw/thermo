@@ -4,18 +4,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
+import com.shantery.thermo.entity.UserInfoEntity;
 
 @Service
 public class ThermoInputService {
 
 	@Autowired
 	ThermoInputRepository repository;
+	@Autowired
+	HttpSession session;
 	
 	
 	/**エンティティにセットして登録する
@@ -31,6 +34,8 @@ public class ThermoInputService {
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		//thermoIDを自動採番で決める
 		int thermoId = (1+(int)repository.count());
+		//updateuserとしてsessionからログインユーザーをとってくる
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		
 		for(int i=0; i<list.size(); i++) {
 			ThermoInfoEntity thEn = new ThermoInfoEntity();
@@ -43,7 +48,7 @@ public class ThermoInputService {
 			thEn.setCough(convertCheck(list.get(i).getCough()));
 			thEn.setOther(list.get(i).getWriting());
 			thEn.setRegist_date(day.format(calendar.getTime()));
-			thEn.setUpdate_user("kurihara");//sessionからとってきたログインID
+			thEn.setUpdate_user(loginuser.getUser_id());			
 			thEn.setUpdate_time(time.format(calendar.getTime()));
 			
 			repository.save(thEn);
