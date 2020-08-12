@@ -39,16 +39,19 @@
 		    		<td th:text="${ul.grade}"></td>
 		    		<td></td>
 					<td data-label="#{view.tablelabel.thermo}">
-						<input type="text" name="tList[_${status.index}_].temperature"
+						<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
 						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
 					</td>
-					<td><input type="checkbox" name="tList[_${status.index}_].taste"  /></td>
-					<td><input type="checkbox" name="tList[_${status.index}_].smell"  /></td>
-					<td><input type="checkbox" name="tList[_${status.index}_].cough"  /></td>
+					<td><input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'"/></td>
+					<td><input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'"/></td>
+					<td><input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'"/></td>
 					<td>
-						<input type="text" name="tList[_${status.index}_].writing"
+						<input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
 						size="30" maxlength="40" />
-						<input type="hidden" name="tList[_${status.index}_].userId" value="${ul.user_id}" >
+						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
+						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
+						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
+						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
 					</td>
 				</tr>
 			</table>
