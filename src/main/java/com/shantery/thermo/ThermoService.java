@@ -1,7 +1,6 @@
 package com.shantery.thermo;
 
-import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
-import static com.shantery.thermo.util.ThermoConstants.USERS_MULTI_SET;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 import java.util.Optional;
 
@@ -79,7 +78,7 @@ public class ThermoService {
 	public String setErrormessage(String message) {
 		
 		// エラーメッセージを代入
-		message = "ログインIDまたはパスワードが間違っています";
+		message = LOGIN_ERROR_MESSAGE;
 			
 		return message;
 	}
@@ -92,12 +91,12 @@ public class ThermoService {
 	 */
 	// TODO 未使用のメソッド
 	public String setRegistTransition(String regist,String registtransition) {
-		if(regist.equals("group")) {	// グループが選択されていた場合
+		if(regist.equals(SELECT_REGIST_VALUE_GROUP)) {	// グループが選択されていた場合
 			registtransition = "groupInfoInput";
-		}else if(regist.equals("user")){	// ユーザー（個人）が選択されていた場合
-			registtransition = "userInfoInput";
-		}else if(regist.equals("multiuser")) {	// ユーザー（複数）が選択されていた場合
-			registtransition = USERS_MULTI_SET;
+		}else if(regist.equals(SELECT_REGIST_VALUE_USER)){	// ユーザー（個人）が選択されていた場合
+			registtransition = TO_USER_INFO_INP;
+		}else if(regist.equals(SELECT_REGIST_VALUE_MULTIUSER)) {	// ユーザー（複数）が選択されていた場合
+			registtransition = TO_USERS_MULTI_INP;
 		}
 		return registtransition;
 	}

@@ -228,4 +228,9 @@ public class ThermoConstants {
 		public static final String SELECT_HTML_PARTS_G = "<option value='";
 		public static final String SELECT_HTML_PARTS_H = "'>";
 		public static final String SELECT_HTML_PARTS_I = "</option>";
+		
+	// その他thermoパッケージでしか使わなさそうな定数
+		/** ログイン画面から受け取るパラメータを格納する **/
+		public static final String THERMO_FORM = "ThermoForm";
+		public static final String LOGIN_ERROR_MESSAGE = "ログインIDまたはパスワードが間違っています";
 }

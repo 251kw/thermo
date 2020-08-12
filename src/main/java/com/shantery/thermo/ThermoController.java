@@ -48,7 +48,7 @@ class ThermoController {
 	 */
 	@RequestMapping(value = TOP, method = RequestMethod.GET)
 	public String index(
-			@ModelAttribute("ThermoForm") 
+			@ModelAttribute(THERMO_FORM) 
 			ThermoForm FormValue){	// この時点では空
 		
 		// もしsessionスコープ内にデータがあるなら削除する
@@ -70,16 +70,16 @@ class ThermoController {
 	@RequestMapping(value = LOGIN, method = RequestMethod.POST)
 	public String checkUser(
 			// パラメータを受け取る
-			@ModelAttribute("ThermoForm")
+			@ModelAttribute(THERMO_FORM)
 			@Validated
 			ThermoForm FormValue,
 			BindingResult result,
 			UserInfoEntity userinfo,
 			Model model){
 		
-		String logintransition = null;// 遷移先を格納する変数
+		String logintransition = NULL;// 遷移先を格納する変数
 		Boolean check = null; // 登録されているユーザーかどうか識別するための変数
-		String errormessage = null;// エラーメッセージ用の変数
+		String errormessage = NULL;// エラーメッセージ用の変数
 		
 		Optional<UserInfoEntity> data = repository.findById(FormValue.getUserId());// 入力されたIDでデータベースを検索
 		userinfo = thermoService.checkdata(userinfo,data);// 検索した情報をuserinfo型のオブジェクトに格納
