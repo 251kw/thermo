@@ -10,6 +10,11 @@ import java.util.Map;
 import static com.shantery.thermo.util.ThermoConstants.*;
 
 
+/**
+ * @author k.takahashi
+ * 年齢計算、区分値から区分名への変換、空白の調整、セレクトボックスの生成
+ */
+
 public class ThermoReplaceValue {
 
 	/**
@@ -20,9 +25,9 @@ public class ThermoReplaceValue {
 	public static String calcAge(String birthday) {
 
 		// birthday 数字８桁でもらう
-		String birthdate = birthday.replace("-", "/");
+		String birthdate = birthday.replace(HYPHEN, SLASH);
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
 		// 生年月日を表す文字列から、LocalDateを生成
 		LocalDate localBirdhdate = LocalDate.parse(birthdate, formatter);
@@ -37,6 +42,184 @@ public class ThermoReplaceValue {
 
 		return str;
 	}
+	
+	/**
+	 * 区分の種類と区分値から区分名を取得するメソッド
+	 * @param kbn_type 区分の種類
+	 * @param kbn_value DBに登録されている区分値
+	 * @return 区分名
+	 */
+	public static String VtoN(String kbn_type, String kbn_value){
+
+		// return用のString
+		String kbn_name = NULL;
+		
+		// 管理者権限
+		if(kbn_type.equals(KBN_TYPE_ADMIN)) {
+			
+			switch (kbn_value) {
+			
+			case KBN_VALUE_ADMIN_ON:
+				kbn_name = KBN_NAME_ADMIN_ON;
+				break;
+				
+			case KBN_VALUE_ADMIN_OFF:
+				kbn_name = KBN_NAME_ADMIN_OFF;
+				break;
+			}
+		// 性別
+		}else if(kbn_type.equals(KBN_TYPE_GENDER)) {
+			
+			switch (kbn_value) {
+			
+			case KBN_VALUE_GENDER_MALE:
+				kbn_name = KBN_NAME_GENDER_MALE;
+				break;
+				
+			case KBN_VALUE_GENDER_FEMALE:
+				kbn_name = KBN_NAME_GENDER_FEMALE;
+				break;
+			}
+		// 学年
+		}else if(kbn_type.equals(KBN_TYPE_GRADE)) {
+			
+			switch(kbn_value) {
+			
+			case KBN_VALUE_GRADE_ZERO:
+				kbn_name = KBN_NAME_GRADE_ZERO;
+				break;
+			case KBN_VALUE_GRADE_ONE:
+				kbn_name = KBN_NAME_GRADE_ONE;
+				break;
+			case KBN_VALUE_GRADE_TWO:
+				kbn_name = KBN_NAME_GRADE_TWO;
+				break;
+			case KBN_VALUE_GRADE_THREE:
+				kbn_name = KBN_NAME_GRADE_THREE;
+				break;
+			case KBN_VALUE_GRADE_FOUR:
+				kbn_name = KBN_NAME_GRADE_FOUR;
+				break;
+			case KBN_VALUE_GRADE_FIVE:
+				kbn_name = KBN_NAME_GRADE_FIVE;
+				break;
+			case KBN_VALUE_GRADE_SIX:
+				kbn_name = KBN_NAME_GRADE_SIX;
+				break;
+			case KBN_VALUE_GRADE_A:
+				kbn_name = KBN_NAME_GRADE_A;
+				break;
+			case KBN_VALUE_GRADE_B:
+				kbn_name = KBN_NAME_GRADE_B;
+				break;
+			case KBN_VALUE_GRADE_C:
+				kbn_name = KBN_NAME_GRADE_C;
+				break;
+			}
+		}
+		// 区分名を返す
+		return kbn_name;
+	}
+	
+	/**
+	 * 文字列の前後の空白を取り除く& 文字列中の半角スペースを全角スぺースに置換する
+	 * @param param
+	 * @return
+	 */
+	public static String trimBlank(String param) {
+		
+		// 文字列中に全角スペースがあれば全て半角スペースに置き換える
+		param = param.replaceAll(FULL_SPACE, HALF_SPACE);
+		// 文字列前後の半角スペースを削除
+		param = param.trim();
+		// 文字列中に出現する半角スペースを全角スペースに置換する
+		param = param.replaceAll(HALF_SPACE, FULL_SPACE);
+		
+		return param;
+	}
+	
+	/**
+	 * htmlに直接セレクトボックスを出力するメソッド
+	 * @param division selectのname属性、またはid属性
+	 * @return セレクトボックスを生成するString
+	 */
+	/** 使い方：<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('引数')}"></span> **/
+	public static String makeSelect(String division){
+
+		// 配列とマップを定義
+		String keys[];
+		Map<String, String> map = new LinkedHashMap<>();
+		
+		// htmlを構成するパーツ
+		String start = SELECT_HTML_PARTS_A + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
+		String startWithId = SELECT_HTML_PARTS_A + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_D + SELECT_HTML_PARTS_E + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
+		String end = SELECT_HTML_PARTS_F;
+		String option = EMPTY;
+		String comp = NULL;
+		
+		// 区分の種類によって処理を分岐
+		switch(division) {
+		
+		// 新規登録
+		case SELECT_TYPE_REGIST:
+				
+			keys = new String[3];
+			keys[0] = SELECT_REGIST_VALUE_GROUP;
+			keys[1] = SELECT_REGIST_VALUE_USER;
+			keys[2] = SELECT_REGIST_VALUE_MULTIUSER;
+				
+		    map.put(SELECT_REGIST_KEY_GROUP, keys[0]);
+		    map.put(SELECT_REGIST_KEY_USER, keys[1]);
+		    map.put(SELECT_REGIST_KEY_MULTIUSER, keys[2]);
+		    
+		    break;
+		    
+		// 学年
+		case SELECT_TYPE_GRADE:
+			
+			keys = new String[10];
+			keys[0] = SELECT_GRADE_VALUE_ZERO;
+			keys[1] = SELECT_GRADE_VALUE_ONE;
+			keys[2] = SELECT_GRADE_VALUE_TWO;
+			keys[3] = SELECT_GRADE_VALUE_THREE;
+			keys[4] = SELECT_GRADE_VALUE_FOUR;
+			keys[5] = SELECT_GRADE_VALUE_FIVE;
+			keys[6] = SELECT_GRADE_VALUE_SIX;
+			keys[7] = SELECT_GRADE_VALUE_A;
+			keys[8] = SELECT_GRADE_VALUE_B;
+			keys[9] = SELECT_GRADE_VALUE_C;
+				
+		    map.put(SELECT_GRADE_KEY_ZERO, keys[0]);
+		    map.put(SELECT_GRADE_KEY_ONE, keys[1]);
+		    map.put(SELECT_GRADE_KEY_TWO, keys[2]);
+		    map.put(SELECT_GRADE_KEY_THREE, keys[3]);
+		    map.put(SELECT_GRADE_KEY_FOUR, keys[4]);
+		    map.put(SELECT_GRADE_KEY_FIVE, keys[5]);
+		    map.put(SELECT_GRADE_KEY_SIX, keys[6]);
+		    map.put(SELECT_GRADE_KEY_A, keys[7]);
+		    map.put(SELECT_GRADE_KEY_B, keys[8]);
+		    map.put(SELECT_GRADE_KEY_C, keys[9]);
+		    
+		    break;
+		}
+			
+		for(Map.Entry<String, String> value : map.entrySet()) {
+				
+			option += SELECT_HTML_PARTS_G + value.getKey() + SELECT_HTML_PARTS_H + value.getValue() + SELECT_HTML_PARTS_I;
+		}
+			
+		if(division.equals(SELECT_TYPE_REGIST)) {
+			comp = startWithId + option + end;
+		}else {
+			comp = start + option + end;
+		}
+		
+		return comp;
+	}
+	
+	
+//----------------------------------------------------------------------------------------	
+//----------------------------------------------------------------------------------------
 	
 	/**
 	 * 性別の表記を変換するメソッド
@@ -108,101 +291,5 @@ public class ThermoReplaceValue {
 			admin_flg = "なし";
 		}
 		return admin_flg;
-	}
-	
-	/**
-	 * 文字列の前後の空白を取り除く& 文字列中の半角スペースを全角スぺースに置換する
-	 * @param param
-	 * @return
-	 */
-	public static String trimBlank(String param) {
-		
-		// 文字列中に全角スペースがあれば全て半角スペースに置き換える
-		param = param.replaceAll(FULL_SPACE, HALF_SPACE);
-		// 文字列前後の半角スペースを削除
-		param = param.trim();
-		// 文字列中に出現する半角スペースを全角スペースに置換する
-		param = param.replaceAll(HALF_SPACE, FULL_SPACE);
-		
-		return param;
-	}
-	
-	/**
-	 * htmlに直接セレクトボックスを出力するメソッド
-	 * @param division selectのname属性、またはid属性
-	 * @return セレクトボックスを生成するString
-	 */
-	// 使い方：<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('引数')}"></span>
-	public static String makeSelect(String division){
-
-		// 配列とマップを定義
-		String keys[];
-		Map<String, String> map = new LinkedHashMap<>();
-		
-		// htmlを構成するパーツ
-		String start = "<select name='" + division + "'" + ">";
-		String startWithId = "<select name='" + division + "'" + " " + "id='" + division + "'" + ">";
-		String end = "</select>";
-		String option = "";
-		String comp = null;
-		
-		// 区分の種類によって処理を分岐
-		switch(division) {
-		
-		// 新規登録
-		case "regist":
-				
-			keys = new String[3];
-			keys[0] = "グループ";
-			keys[1] = "ユーザー（個人）";
-			keys[2] = "ユーザー（複数）";
-				
-		    map.put("group", keys[0]);
-		    map.put("user", keys[1]);
-		    map.put("multiuser", keys[2]);
-		    
-		    break;
-		    
-		// 学年
-		case "grade":
-			
-			keys = new String[10];
-			keys[0] = "なし";
-			keys[1] = "小学1年";
-			keys[2] = "小学2年";
-			keys[3] = "小学3年";
-			keys[4] = "小学4年";
-			keys[5] = "小学5年";
-			keys[6] = "小学6年";
-			keys[7] = "中学1年";
-			keys[8] = "中学2年";
-			keys[9] = "中学3年";
-				
-		    map.put("0", keys[0]);
-		    map.put("1", keys[1]);
-		    map.put("2", keys[2]);
-		    map.put("3", keys[3]);
-		    map.put("4", keys[4]);
-		    map.put("5", keys[5]);
-		    map.put("6", keys[6]);
-		    map.put("A", keys[7]);
-		    map.put("B", keys[8]);
-		    map.put("C", keys[9]);
-		    
-		    break;
-		}
-			
-		for(Map.Entry<String, String> value : map.entrySet()) {
-				
-			option += "<option value='" + value.getKey() + "'>" + value.getValue() +"</option>";
-		}
-			
-		if(division.equals("regist")) {
-			comp = startWithId + option + end;
-		}else {
-			comp = start + option + end;
-		}
-		
-		return comp;
 	}
 }
