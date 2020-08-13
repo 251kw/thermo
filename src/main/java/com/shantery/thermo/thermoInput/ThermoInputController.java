@@ -50,7 +50,7 @@ class ThermoInputController {
 	}
 
 	/**
-	 * 検温情報入力ボタンから入力画面へ
+	 * 検索のボタンから入力画面へ
 	 * @param model
 	 * @return 入力画面
 	 */
@@ -62,7 +62,10 @@ class ThermoInputController {
 		//ログインユーザーと同じグループIDのユーザー情報受け取る
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs(loginuser.getGroup_id());
+		
+		//for(int i=0; i< ulist)
 		model.addAttribute("ulist", ulist);
+		session.setAttribute("ulist", ulist);
 		model.addAttribute("thForm", new ThermoInputForm());
 		return "thermoInput"/*TO_INPUT*/;
 	}
@@ -87,11 +90,11 @@ class ThermoInputController {
 	 * @return 結果画面
 	 */
 	@RequestMapping(value =  "/from_confirm"/*FROM_INPUT_CONFIRM_BUTTON*/ , method = RequestMethod.POST)
-	public String InputResult() {
+	public String InputResult(Model model) {
 		ArrayList<ThermoInputForm.Detail> list = (ArrayList<ThermoInputForm.Detail>)session.getAttribute("list");
 		
 		service.registAll(list);//登録実行
-		
+		model.addAttribute("list", list);
 		
 		return "thermoResult"/*TO_INPUT_RESULT*/;
 	}
@@ -101,21 +104,13 @@ class ThermoInputController {
 	 * @return 入力画面
 	 */
 	@RequestMapping(value = "/return_input"/*FROM_RETURN_INPUT_BUTTON*/ , method = RequestMethod.GET)
-	public String InputReturn() {
+	public String InputReturn(@ModelAttribute("list")ArrayList<ThermoInputForm.Detail> list, Model model) {
 		
+		model.addAttribute("list", list);
+		model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
 		//TODO 値の保持考える
 		return "thermoInput" /*TO_INPUT*/;
 	}
 	
-	/**
-	 * 検索画面へ戻る
-	 * @return 検索画面
-	 */
-	@RequestMapping(value = "/return_search"/*FROM_RETURN_SEARCH_BUTTON*/ , method = RequestMethod.POST)
-	public String SearchReturn() {
-		
-		//TODO 結合で佐藤と話す
-		return "search"/*TO_SEARCH*/;
-	}
 	
 }
