@@ -22,6 +22,7 @@ import com.shantery.thermo.thermoInput.ThermoInputService;
 import com.shantery.thermo.userInfo.UserInfoForm;
 import com.shantery.thermo.userInfo.UserInfoRepository;
 import com.shantery.thermo.util.ThermoReplaceValue;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 import antlr.collections.List;
 
@@ -65,10 +66,11 @@ class ThermoInputController {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs(loginuser.getGroup_id());
 		
+		//データベースからとってきた情報を表示用に変換する 外部化する
 		ArrayList<String> birth = new ArrayList<String>();
 		for(UserInfoEntity ul : ulist) {
-			ul.setGender(ThermoReplaceValue.replaceGender(ul.getGender()));
-			ul.setGrade(ThermoReplaceValue.replaceGrade(ul.getGrade()));
+			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
+			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
 			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday()));
 			
 		}
@@ -102,6 +104,7 @@ class ThermoInputController {
 	 */
 	@RequestMapping(value =  "/from_confirm"/*FROM_INPUT_CONFIRM_BUTTON*/ , method = RequestMethod.POST)
 	public String InputResult(Model model) {
+		
 		ArrayList<ThermoInputForm.Detail> list = (ArrayList<ThermoInputForm.Detail>)session.getAttribute("list");
 		
 		service.registAll(list);//登録実行
@@ -115,9 +118,9 @@ class ThermoInputController {
 	 * @return 入力画面
 	 */
 	@RequestMapping(value = "/return_input"/*FROM_RETURN_INPUT_BUTTON*/ , method = RequestMethod.GET)
-	public String InputReturn(@ModelAttribute("list")ArrayList<ThermoInputForm.Detail> list, Model model) {
+	public String InputReturn(Model model) {
 		
-		model.addAttribute("list", list);
+		model.addAttribute("list", (ArrayList<ThermoInputForm.Detail>)session.getAttribute("list"));
 		model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
 		model.addAttribute("birth", (ArrayList<String>)session.getAttribute("birth"));
 		//TODO 値の保持考える

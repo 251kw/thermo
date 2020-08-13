@@ -42,7 +42,7 @@ public class ThermoInputService {
 			thEn.setUser_id(list.get(i).getUserId());
 			thEn.setThermo_id("t_"+Integer.toString(thermoId));
 			thermoId++;
-			thEn.setThermo(list.get(i).getTemperature());
+			thEn.setThermo(convertNull(list.get(i).getTemperature()));
 			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
 			thEn.setOlfactory_disorder(convertCheck(list.get(i).getSmell()));
 			thEn.setCough(convertCheck(list.get(i).getCough()));
@@ -71,6 +71,19 @@ public class ThermoInputService {
 		}
 		
 		return check;
+	}
+	
+	/**
+	 * 体温未入力時にnullを返す
+	 * @param thermo 体温
+	 * @return そのままの値かnull
+	 */
+	public String convertNull(String thermo) {
+		if(thermo == "") {
+			thermo = null;
+		}
+		
+		return thermo;
 	}
 }
 

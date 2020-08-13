@@ -38,22 +38,69 @@
 		    		<td th:text="${ul.gender}"></td>
 		    		<td th:text="${ul.grade}"></td>
 		    		<td th:text="${birth[status.index]}"></td>
-					<td data-label="#{view.tablelabel.thermo}">
-						<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
-					</td>
-					<td><input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'"/></td>
-					<td><input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'"/></td>
-					<td><input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'"/></td>
-					<td>
-						<input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-						size="30" maxlength="40" />
-						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
-						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
-						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
-						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
-						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
-					</td>
+					<th:block th:unless="${list}">
+						<td data-label="#{view.tablelabel.thermo}">
+							<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
+							size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
+						</td>
+						<td>
+							<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
+						</td>
+						<td>
+							<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
+						</td>
+						<td>
+							<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
+						</td>
+						<td>
+							<input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
+							size="30" maxlength="40" />
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
+						</td>
+					</th:block>
+					<th:block th:if="${list}">
+						<td data-label="#{view.tablelabel.thermo}">
+							<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
+							th:value="${list[status.index].temperature}" size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
+						</td>
+						<td>
+							<div th:unless="${list[status.index].taste}">
+								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
+							</div>
+							<div th:if="${list[status.index].taste}">
+								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
+							</div>
+						</td>
+						<td>
+							<div th:unless="${list[status.index].smell}">
+								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
+							</div>
+							<div th:if="${list[status.index].smell}">
+								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
+							</div>
+						</td>
+						<td>
+							<div th:unless="${list[status.index].cough}">
+								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
+							</div>
+							<div th:if="${list[status.index].cough}">
+								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
+							</div>
+						</td>
+						<td>
+							<input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
+							th:value="${list[status.index].writing}" size="30" maxlength="40" />
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
+							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
+						</td>
+					</th:block>
 				</tr>
 			</table>
 			<div align="center">
