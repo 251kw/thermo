@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.util.ThermoReplaceValue;
+import com.shantery.thermo.util.ThermoUtil;
 
 @Service
 public class UserInfoMultiService {
@@ -34,11 +35,18 @@ public class UserInfoMultiService {
 	GroupInfoMultiRepository gimr;
 	
 	/**
+	 * CSVファイルをList<String[]>に変換、ユーザー名のトリミング
 	 * @param usersInfo 登録ユーザー情報の入ったＣＳＶファイル
 	 * @return カンマで区切られた情報の配列
 	 * @throws ParseException
 	 */
 	public List<String[]> toStringList(MultipartFile usersInfo) throws ParseException {
+		
+		String name = usersInfo.getOriginalFilename();
+		
+		if(!ThermoUtil.getSuffix(name).equals("csv")) {
+			return null;
+		}
 		
 		//戻り値に設定する変数の宣言
 		List<String[]> lines = new ArrayList<String[]>();
@@ -52,29 +60,17 @@ public class UserInfoMultiService {
             //解析したファイルをコンマで分割
             while((division = buf.readLine()) != null) {
             	String[] line = division.split(",", 0);
+            	line[M_UNAME] = ThermoReplaceValue.trimBlank(line[M_UNAME]);  //ユーザー名のトリミング
             	//戻り値に分割した情報をadd
             	lines.add(line);
             }
 
         } catch (IOException e) { //解析中にエラーを検出した場合nullを返す
             lines = null;
+        } catch (RuntimeException e) { //解析中にエラーを検出した場合nullを返す
+            lines = null;
         }
         return lines;  //性別、学年、管理者権限は画面で年齢に変換 ThermoReplaceValue.java を使う
-		
-	}
-	
-	/**
-	 * @param usersInfo ユーザー情報
-	 * @return リプレースしたユーザー情報
-	 * @throws ParseException
-	 */
-	public List<String[]> trimName(List<String[]> usersInfo) throws ParseException {
-		
-		for (String[] line : usersInfo) {
-			line[M_UNAME] = ThermoReplaceValue.trimBlank(line[M_UNAME]);
-		}
-		
-        return usersInfo; 
 		
 	}
 	
@@ -85,6 +81,10 @@ public class UserInfoMultiService {
 	 */
 	public boolean checkUserinfo(List<String[]> usersInfo) {
 		boolean bool = false;
+		
+		if(usersInfo == null) {
+			return false;
+		}
 		
 		//一括登録するユーザーの長さ繰り返す
 		for (int i = 0; i < usersInfo.size(); i++) {
