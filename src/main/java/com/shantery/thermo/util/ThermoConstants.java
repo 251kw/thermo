@@ -244,5 +244,5 @@ public class ThermoConstants {
 	// その他thermoパッケージでしか使わなさそうな定数
 		/** ログイン画面から受け取るパラメータを格納する **/
 		public static final String THERMO_FORM = "ThermoForm";
-		public static final String LOGIN_ERROR_MESSAGE = "ログインIDまたはパスワードが間違っています";
+		public static final String THERMO_REGEX_PATTERN = "[a-zA-Z0-9]*";
 }

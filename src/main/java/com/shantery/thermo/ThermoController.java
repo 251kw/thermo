@@ -118,6 +118,7 @@ class ThermoController {
 	}
 	
 	// 自分用のテストメソッド
+	// TODO あとで削除
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 			

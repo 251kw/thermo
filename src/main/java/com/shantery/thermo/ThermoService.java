@@ -2,10 +2,12 @@ package com.shantery.thermo;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
 
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.context.MessageSource;
 
 import com.shantery.thermo.entity.UserInfoEntity;
 
@@ -19,6 +21,8 @@ public class ThermoService {
 
 	@Autowired
 	ThermoRepository repository;
+	@Autowired
+	protected MessageSource msgPro;
 	
 	/**
 	 * Optional型のデータをUserInfoEntity型のオブジェクトに入れなおすメソッド
@@ -78,7 +82,7 @@ public class ThermoService {
 	public String setErrormessage(String message) {
 		
 		// エラーメッセージを代入
-		message = LOGIN_ERROR_MESSAGE;
+		message = msgPro.getMessage("view.errLoginUser", new String[] {}, Locale.JAPAN);
 			
 		return message;
 	}

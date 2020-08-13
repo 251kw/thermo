@@ -42,7 +42,7 @@
 				<h3 class="askinput" th:text="#{view.text.inputinfo}"></h3>
 			</div>
 			<div class="ui center aligned container">
-				<h3 class="error" th:text="${error}"></h3>
+				<h3 class="error" th:text="${login_error}"></h3>
 			</div>
 			<br>
 			<form action="/login" method="post" class="ui large form" th:object="${ThermoForm}">

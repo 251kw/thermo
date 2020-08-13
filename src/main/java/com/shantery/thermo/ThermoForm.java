@@ -3,6 +3,7 @@ package com.shantery.thermo;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 /**
  * @author k.takahashi
@@ -13,13 +14,13 @@ public class ThermoForm {
 	/** ユーザID **/
     @NotBlank
     @Size(min = 4, max = 32)
-    @Pattern(regexp="[a-zA-Z0-9]*")
+    @Pattern(regexp=THERMO_REGEX_PATTERN)
 	private String userId;
     
 	/** ユーザパスワード **/
     @NotBlank
     @Size(min = 4, max = 16)
-    @Pattern(regexp="[a-zA-Z0-9]*")
+    @Pattern(regexp=THERMO_REGEX_PATTERN)
 	private String userpass;
 
     // getter・setter
