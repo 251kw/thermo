@@ -52,7 +52,7 @@ public class ThermoReplaceValue {
 	public static String valueToName(String kbn_type, String kbn_value){
 
 		// return用のString
-		String kbn_name = NULL;
+		String kbn_name = null;
 		
 		// 管理者
 		if(kbn_type.equals(KBN_TYPE_ADMIN)) {
@@ -167,7 +167,7 @@ public class ThermoReplaceValue {
 		String startWithId = SELECT_HTML_PARTS_A + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_D + SELECT_HTML_PARTS_E + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
 		String end = SELECT_HTML_PARTS_F;
 		String option = EMPTY;
-		String comp = NULL;
+		String comp = null;
 		
 		// 区分の種類によって処理を分岐
 		switch(division) {
@@ -183,6 +183,18 @@ public class ThermoReplaceValue {
 		    map.put(SELECT_REGIST_KEY_GROUP, keys[0]);
 		    map.put(SELECT_REGIST_KEY_USER, keys[1]);
 		    map.put(SELECT_REGIST_KEY_MULTIUSER, keys[2]);
+		    
+		    break;
+		    
+		// 性別
+		case SELECT_TYPE_GENDER:
+			
+			keys = new String[2];
+			keys[0] = SELECT_GENDER_VALUE_MALE;
+			keys[1] = SELECT_GENDER_VALUE_FEMALE;
+				
+		    map.put(SELECT_GENDER_KEY_MALE, keys[0]);
+		    map.put(SELECT_GENDER_KEY_FEMALE, keys[1]);
 		    
 		    break;
 		    

@@ -20,8 +20,10 @@
 			<h3 th:text="#{view.label.index}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+		
 		<div class="ui text container">
-
 			<form method="get" class="ui form" name="registform" onsubmit="return check()">
 				<table class="registtable">
 					<tr>
@@ -35,7 +37,6 @@
 					</tr>
 				</table>
 			</form>
-			
 			<br>
 			<div class="ui center aligned container">
 				<h3 class="askinput" th:text="#{view.text.inputinfo}"></h3>
@@ -48,22 +49,20 @@
 				<table class="ui table">
 					<tr>
 						<td>
-						<div class="field">
-    						<label th:text="#{view.tablelabel.uId}"></label>
-    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}">
-    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="error">
-    						</div>
-  						</div>
+							<div class="field">
+	    						<label th:text="#{view.tablelabel.uId}"></label>
+	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}">
+	    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="error"></div>
+	  						</div>
   						</td>
 					</tr>
 					<tr>
 						<td>
-						<div class="field">
-    						<label th:text="#{view.tablelabel.pass}"></label>
-    						<input type="password" name="userpass" th:placeholder="#{view.inputph.userpass}" th:value="*{userpass}">
-    						<div th:if="${#fields.hasErrors('userpass')}" th:errors="*{userpass}" th:errorclass="error">
-    						</div>
-  						</div>
+							<div class="field">
+	    						<label th:text="#{view.tablelabel.pass}"></label>
+	    						<input type="password" name="userpass" th:placeholder="#{view.inputph.userpass}" th:value="*{userpass}">
+	    						<div th:if="${#fields.hasErrors('userpass')}" th:errors="*{userpass}" th:errorclass="error"></div>
+	  						</div>
   						</td>
 					</tr>
 					<tr>
@@ -77,7 +76,8 @@
 			</form>
 		</div>
 		
-		
+<!---------------------------- 以下、javascript ----------------------------------->
+
 <script type="text/javascript"> 
 
 	// 送り先がgetかpostかどっちで受け取っているか確認しましょう

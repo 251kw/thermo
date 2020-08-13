@@ -11,15 +11,15 @@ import javax.validation.constraints.Size;
 public class ThermoForm {
 
 	/** ユーザID **/
-    @NotBlank(message="※空白は入力できません")
-    @Size(min = 4, max = 32, message="※４～３２文字以内で入力してください")
-    @Pattern(regexp="[a-zA-Z0-9]*",message="※半角英数字で入力してください")
+    @NotBlank
+    @Size(min = 4, max = 32)
+    @Pattern(regexp="[a-zA-Z0-9]*")
 	private String userId;
     
 	/** ユーザパスワード **/
-    @NotBlank(message="※空白は入力できません")
-    @Size(min = 4, max = 16, message="※４～３２文字以内で入力してください")
-    @Pattern(regexp="[a-zA-Z0-9]*",message="※半角英数字で入力してください")
+    @NotBlank
+    @Size(min = 4, max = 16)
+    @Pattern(regexp="[a-zA-Z0-9]*")
 	private String userpass;
 
     // getter・setter
