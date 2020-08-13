@@ -64,9 +64,9 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     		}
     	}
     	
-//    	if(nameFlg) { //TODO 名前検索のときのデータ総数制御
-//    		sql.append("AND ");
-//    	}
+    	if(!dateFlg&&nameFlg) { //TODO 名前検索のときのデータ総数制御
+    		sql.append("AND t.registDate BETWEEN CURRENT_DATE AND '2020-08-03' ");
+    	}
     	
     	Query query = entityManager.createQuery(sql.toString());
     	

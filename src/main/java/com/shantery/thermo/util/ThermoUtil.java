@@ -34,5 +34,22 @@ public class ThermoUtil {
 		// 表示する見出しを返却
 		return columnList;
 	}
+	
+	/**
+	 * ファイル名から拡張子を返します。
+	 * @param fileName ファイル名
+	 * @return ファイルの拡張子
+	 */
+	public static String getSuffix(String fileName) {
+	    if (fileName == null) {
+	        return null;
+	    }
+	    int point = fileName.lastIndexOf(".");
+	    if (point != -1) {
+	    	String rtn =  fileName.substring(point + 1);
+	        return rtn;
+	    }
+	    return fileName;
+	}
 
 }

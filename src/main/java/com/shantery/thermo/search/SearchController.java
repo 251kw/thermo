@@ -25,8 +25,8 @@ import com.shantery.thermo.entity.UserInfoEntity;
 @Controller
 class SearchController {
 
-	@Autowired
-	private SearchService schService; //サービスクラス呼び出す
+//	@Autowired
+//	private SearchService schService; //サービスクラス呼び出す
 	
 	@Autowired
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
@@ -37,21 +37,20 @@ class SearchController {
 	@Autowired
 	HttpSession session; 
 	
-//	@RequestMapping(value ="/search", method = RequestMethod.GET) //初めて検索画面に来た時
-//	public  String search(Model  m){
-//		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
-//		String group_id = loginuser.getGroup_id();
-//		
-//		List<ThermoInfoEntity> list = schRepository.searchCurDate("1");	//今日の日付で検索	//group_idで絞る
-//		
-//		m.addAttribute("searchInfo", new SearchInfoForm());
-//		m.addAttribute("list", list);
-//		
-//		
-//		session.setAttribute("schlist", list);		//印刷用
-//		
-//		return "search";
-//	}
+	@RequestMapping(value ="/return_search", method = RequestMethod.GET) //検索画面に来た時(戻る)
+	public  String search(Model  m){
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+		String groupId = loginuser.getGroup_id();
+		
+		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);	//今日の日付で検索	//group_idで絞る
+		
+		m.addAttribute("searchInfo", new SearchInfoForm());
+		m.addAttribute("list", list);
+		
+		session.setAttribute("schlist", list);		//印刷用
+		
+		return "search";
+	}
 	
 	/**
 	 * 検索ボタンが押されたときに起動する
@@ -67,10 +66,24 @@ class SearchController {
 		m.addAttribute("searchInfo", form);
 		m.addAttribute("list", list);
 		
-		session.setAttribute("schlist", list);
+		session.setAttribute("schlist", list);	//印刷用
 	
 		return "search";
 	}
 	
+//	@RequestMapping(value ="/logout", method = RequestMethod.GET) //検索画面に来た時(戻る)
+//	public  String logout(Model  m){
+//		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+//		String groupId = loginuser.getGroup_id();
+//		
+//		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);	//今日の日付で検索	//group_idで絞る
+//		
+//		m.addAttribute("searchInfo", new SearchInfoForm());
+//		m.addAttribute("list", list);
+//		
+//		session.setAttribute("schlist", list);		//印刷用
+//		
+//		return "search";
+//	}
 	
 }

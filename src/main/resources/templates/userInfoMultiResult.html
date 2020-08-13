@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title th:text="#{view.searchInput.pagetitle}"></title>
+		<title th:text="#{view.userInfoMulRes.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
@@ -42,13 +42,13 @@
 								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${line}"></td>
 							</th:block>
 							<th:block th:if="${lineStat.index == 5}" >
-								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGender(line)}"></td>
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',line)}"></td>
 							</th:block>
 							<th:block th:if="${lineStat.index == 7}" >
-								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(line)}"></td>
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',line)}"></td>
 							</th:block>
 							<th:block th:if="${lineStat.index == 8}" >
-								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceAdmin(line)}"></td>
+								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('admin',line)}"></td>
 							</th:block>
 						</th:block>
 					</tr>

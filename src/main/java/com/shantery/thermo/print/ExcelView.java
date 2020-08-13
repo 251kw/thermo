@@ -26,6 +26,7 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.util.ThermoReplaceValue;
+import static com.shantery.thermo.util.ThermoConstants.*;
 /**
  * @author d.ito
  *検索結果をExcelに 
@@ -35,6 +36,9 @@ import com.shantery.thermo.util.ThermoReplaceValue;
 public class ExcelView extends AbstractXlsxView {
 	@Autowired
 	protected MessageSource msgPro;
+	/**
+	 *
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
@@ -48,10 +52,10 @@ public class ExcelView extends AbstractXlsxView {
 		String[] rowTmp = {"計測日", "名前", "性別", "学年", "年齢", "体温", "味覚障害", "嗅覚障害", "咳", "その他" };
 		//列の幅を設定する
 		sheet.setColumnWidth(0, 2800); //計測日の幅
- 		sheet.setColumnWidth(2, 1150); //性別の幅
+ 		sheet.setColumnWidth(2, 1200); //性別の幅
  		sheet.setColumnWidth(3, 2500); //学年の幅
- 		sheet.setColumnWidth(4, 1150); //年齢の幅
- 		sheet.setColumnWidth(5, 1600); //体温の幅
+ 		sheet.setColumnWidth(4, 1200); //年齢の幅
+ 		sheet.setColumnWidth(5, 1650); //体温の幅
  		sheet.setColumnWidth(6, 1150); //味覚障害の幅
  		sheet.setColumnWidth(7, 1150); //嗅覚障害の幅
  		sheet.setColumnWidth(8, 1150); //咳の幅
@@ -111,10 +115,10 @@ public class ExcelView extends AbstractXlsxView {
 				cell.setCellValue(list.get(i - 1).getUserInfoEntity().getUser_name());
 				//3列目に性別を挿入
 				cell = row.getCell(2);
-				cell.setCellValue(ThermoReplaceValue.replaceGender(list.get(i - 1).getUserInfoEntity().getGender()));
+				cell.setCellValue(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, (list.get(i - 1).getUserInfoEntity().getGender())));
 				//4列目に学年を挿入
 				cell = row.getCell(3);
-				cell.setCellValue(ThermoReplaceValue.replaceGrade(list.get(i - 1).getUserInfoEntity().getGrade()));
+				cell.setCellValue(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, (list.get(i - 1).getUserInfoEntity().getGrade())));
 				//5列目に年齢を挿入
 				cell = row.getCell(4);
 				cell.setCellValue(ThermoReplaceValue.calcAge(list.get(i - 1).getUserInfoEntity().getBirthday()) + "歳");
@@ -123,19 +127,21 @@ public class ExcelView extends AbstractXlsxView {
 				cell.setCellValue(list.get(i - 1).getThermo() + "度");
 				//7列目に味覚障害を挿入
 				cell = row.getCell(6);
-				cell.setCellValue(ThermoReplaceValue.replaceAdmin(list.get(i - 1).getTaste_disorder()));
+				cell.setCellValue(ThermoReplaceValue.valueToName(KBN_TYPE_EXISTENCE, (list.get(i - 1).getTaste_disorder())));
 				//8列目に嗅覚障害を挿入
 				cell = row.getCell(7);
-				cell.setCellValue(ThermoReplaceValue.replaceAdmin(list.get(i - 1).getTaste_disorder()));
+				cell.setCellValue(ThermoReplaceValue.valueToName(KBN_TYPE_EXISTENCE, (list.get(i - 1).getTaste_disorder())));
 				//9列目に咳を挿入
 				cell = row.getCell(8);
-				cell.setCellValue(ThermoReplaceValue.replaceAdmin(list.get(i - 1).getCough()));
+				cell.setCellValue(ThermoReplaceValue.valueToName(KBN_TYPE_EXISTENCE, (list.get(i - 1).getCough())));
 				//10列目にその他を挿入
 				cell = row.getCell(9);
 				cell.setCellValue(list.get(i - 1).getOther());
 			}
 		}	
 		cellstyle.setWrapText(true); //改行を有効化
+		indexCellstyle.setWrapText(true); //見出しの改行を有効化
 		cellstyle.setVerticalAlignment(VerticalAlignment.TOP); //cellサイズを調節した際文字を上揃え
+		indexCellstyle.setVerticalAlignment(VerticalAlignment.TOP); //見出しのcellサイズを調節した際文字を上揃え
 	}
 }
