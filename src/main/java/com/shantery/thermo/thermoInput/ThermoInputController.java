@@ -21,6 +21,7 @@ import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.thermoInput.ThermoInputService;
 import com.shantery.thermo.userInfo.UserInfoForm;
 import com.shantery.thermo.userInfo.UserInfoRepository;
+import com.shantery.thermo.util.ThermoReplaceValue;
 
 import antlr.collections.List;
 
@@ -35,6 +36,7 @@ class ThermoInputController {
 	ThermoInputRepository t_repository;
 	@Autowired
 	ThermoInputUserRepository u_repository;
+	
 	
 	/**
 	 * テスト
@@ -63,9 +65,18 @@ class ThermoInputController {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs(loginuser.getGroup_id());
 		
-		//for(int i=0; i< ulist)
+		ArrayList<String> birth = new ArrayList<String>();
+		for(UserInfoEntity ul : ulist) {
+			ul.setGender(ThermoReplaceValue.replaceGender(ul.getGender()));
+			ul.setGrade(ThermoReplaceValue.replaceGrade(ul.getGrade()));
+			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday()));
+			
+		}
+		
 		model.addAttribute("ulist", ulist);
+		model.addAttribute("birth", birth);
 		session.setAttribute("ulist", ulist);
+		session.setAttribute("birth", birth);
 		model.addAttribute("thForm", new ThermoInputForm());
 		return "thermoInput"/*TO_INPUT*/;
 	}
@@ -108,6 +119,7 @@ class ThermoInputController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
+		model.addAttribute("birth", (ArrayList<String>)session.getAttribute("birth"));
 		//TODO 値の保持考える
 		return "thermoInput" /*TO_INPUT*/;
 	}

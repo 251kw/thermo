@@ -37,7 +37,7 @@
 		    		<td th:text="${ul.user_name}"></td>
 		    		<td th:text="${ul.gender}"></td>
 		    		<td th:text="${ul.grade}"></td>
-		    		<td></td>
+		    		<td th:text="${birth[status.index]}"></td>
 					<td data-label="#{view.tablelabel.thermo}">
 						<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
 						size="30"  pattern="^\d{2}(\.\d{1})?$" title="2桁,1桁で入力 例：36.0"/>
@@ -52,6 +52,7 @@
 						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
 						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
 						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
+						<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
 					</td>
 				</tr>
 			</table>
