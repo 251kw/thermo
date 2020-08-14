@@ -40,6 +40,16 @@ public class ThermoConstants {
 	public static final String GROUP_INFO_CONF_SUC = "/group_info_conf_suc";
 	/** グループ新規登録の確認画面で修正ボタンを押されたとき **/
 	public static final String GROUP_INFO_CONF_BACK = "/group_info_conf_back";
+	/** 体温情報登録の入力画面で確認ボタンを押されたとき **/
+	public static final String THERMO_INFO_INP_SUC = "/thermo_info_inp_suc";
+	/** 体温情報登録の確認画面で登録ボタンを押されたとき **/
+	public static final String THERMO_INFO_CONF_SUC = "/thermo_info_conf_suc";
+	/** 体温情報登録の確認画面で修正ボタンを押されたとき **/
+	public static final String THERMO_INFO_CONF_BACK = "/thermo_info_conf_back";
+	/** 体温情報登録から検索に戻るとき **/
+	public static final String SEARCH_RETURN = "/search_return";
+	
+	
 	
 	// 遷移先を示す変数
 	/** TOPページの遷移先 **/
@@ -62,6 +72,16 @@ public class ThermoConstants {
 	public static final String TO_GROUP_INFO_CONF = "groupInfoConfirm";
 	/** グループ新規登録のRESULTへの遷移 **/
 	public static final String TO_GROUP_INFO_RES = "groupInfoResult";
+	/** 体温情報登録のINPUTへの遷移 **/
+	public static final String TO_THERMO_INFO_INP = "thermoInput";
+	/** 体温情報登録のCONFIRMへの遷移 **/
+	public static final String TO_THERMO_INFO_CONF = "thermoConfirm";
+	/** 体温情報登録のRESULTへの遷移 **/
+	public static final String TO_THERMO_INFO_RES = "thermoResult";
+	/** 検索画面への遷移 **/
+	public static final String TO_SEARCH = "search";
+	
+	
 	
 	// キーを示す変数
 	/** ユーザー情報のCSVファイルをinputするときのキー **/
