@@ -39,12 +39,14 @@ public class ThermoInputService {
 		//updateuserとしてsessionからログインユーザーをとってくる
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
+		//一人ひとり登録
 		for(int i=0; i<list.size(); i++) {
 			ThermoInfoEntity thEn = new ThermoInfoEntity();
 			thEn.setUser_id(list.get(i).getUserId());
-			//削除入れる
+			//登録されていた場合削除する
 			ThermoInfoEntity user = repository.findByUserIdAndRegistDate(list.get(i).getUserId(), day.format(calendar.getTime()));
 			if(user != null) {
+				//ThermoIdを消すものと入れ替える
 				thEn.setThermo_id(user.getThermo_id());
 				repository.delete(user);
 			}else {

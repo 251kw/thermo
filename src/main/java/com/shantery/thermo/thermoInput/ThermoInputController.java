@@ -61,12 +61,14 @@ class ThermoInputController {
 			for(UserInfoEntity ul : ulist) {
 				ThermoInfoEntity user = t_repository.findByUserIdAndRegistDate(ul.getUser_id(), day.format(calendar.getTime()));
 				list.add(new ThermoInputForm.Detail());
-				list.get(i).setTemperature(user.getThermo());
-				list.get(i).setTaste(service.convertCheckReturn(user.getTaste_disorder()));
-				list.get(i).setSmell(service.convertCheckReturn(user.getOlfactory_disorder()));
-				list.get(i).setCough(service.convertCheckReturn(user.getCough()));
-				list.get(i).setWriting(user.getOther());
-				i++;
+				if(user != null) {
+					list.get(i).setTemperature(user.getThermo());
+					list.get(i).setTaste(service.convertCheckReturn(user.getTaste_disorder()));
+					list.get(i).setSmell(service.convertCheckReturn(user.getOlfactory_disorder()));
+					list.get(i).setCough(service.convertCheckReturn(user.getCough()));
+					list.get(i).setWriting(user.getOther());
+					i++;
+				}
 			}
 			model.addAttribute("list",list);
 			
