@@ -5,14 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
@@ -25,14 +22,11 @@ import com.shantery.thermo.entity.UserInfoEntity;
 @Controller
 class SearchController {
 
-//	@Autowired
-//	private SearchService schService; //サービスクラス呼び出す
+	@Autowired
+	private SearchService schService; //サービスクラス呼び出す
 	
 	@Autowired
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
-	
-	@Autowired
-	private SearchRepositoryCustom schRepCus; //リポジトリカスタムを呼び出す
 	
 	@Autowired
 	HttpSession session; 
@@ -40,9 +34,7 @@ class SearchController {
 	@RequestMapping(value ="/return_search", method = RequestMethod.GET) //検索画面に来た時(戻る)
 	public  String search(Model  m){
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
-		String groupId = loginuser.getGroup_id();
-		
-		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);	//今日の日付で検索	//group_idで絞る
+		List<ThermoInfoEntity> list = schRepository.searchCurDate(loginuser.getGroup_id());	//今日の日付で検索	//group_idで絞る
 		
 		m.addAttribute("searchInfo", new SearchInfoForm());
 		m.addAttribute("list", list);
@@ -59,10 +51,9 @@ class SearchController {
 	 */
 	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
 	public String search_info(@ModelAttribute SearchInfoForm form, Model m) {
-		
-		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
-		List<ThermoInfoEntity> list = schRepCus.searchQuery(loginuser.getGroup_id(), form);
+		List<ThermoInfoEntity> list = schService.separate(loginuser.getGroup_id(), form);
+		
 		m.addAttribute("searchInfo", form);
 		m.addAttribute("list", list);
 		
@@ -71,19 +62,10 @@ class SearchController {
 		return "search";
 	}
 	
-//	@RequestMapping(value ="/logout", method = RequestMethod.GET) //検索画面に来た時(戻る)
+//	@RequestMapping(value ="/logout", method = RequestMethod.GET) //ログアウト
 //	public  String logout(Model  m){
-//		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
-//		String groupId = loginuser.getGroup_id();
 //		
-//		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);	//今日の日付で検索	//group_idで絞る
-//		
-//		m.addAttribute("searchInfo", new SearchInfoForm());
-//		m.addAttribute("list", list);
-//		
-//		session.setAttribute("schlist", list);		//印刷用
-//		
-//		return "search";
+//		return "index";
 //	}
 	
 }

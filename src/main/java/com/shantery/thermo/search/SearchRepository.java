@@ -2,11 +2,6 @@ package com.shantery.thermo.search;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
-import org.hibernate.query.QueryParameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,7 +24,17 @@ public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String
 			+" WHERE u.user_id = t.user_id"
 			+" AND u.group_id = :group_id"
 			+" AND t.regist_date = curdate()", nativeQuery = true)
-	List<ThermoInfoEntity> searchCurDate(@Param("group_id") String group_id);	
+	List<ThermoInfoEntity> searchCurDate(@Param("group_id") String group_id);
+	
+	//過去2週間分の体温が高い人のデータを取得（37度以上）
+	@Query(value="SELECT *"
+			+" FROM user_info u, thermo_info t"
+			+" WHERE u.user_id = t.user_id"
+			+" AND u.group_id = :group_id"
+			+" AND t.regist_date >= DATE_ADD(now(), INTERVAL -14 DAY)"
+			+" AND t.thermo >= 37"
+			+" ORDER BY t.thermo DESC, t.regist_date DESC", nativeQuery = true)
+	List<ThermoInfoEntity> searchHighThermo(@Param("group_id") String group_id);
 	
 	
 }

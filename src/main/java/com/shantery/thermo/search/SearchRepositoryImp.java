@@ -1,5 +1,7 @@
 package com.shantery.thermo.search;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -64,8 +66,9 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     		}
     	}
     	
-    	if(!dateFlg&&nameFlg) { //TODO 名前検索のときのデータ総数制御
-    		sql.append("AND t.registDate BETWEEN CURRENT_DATE AND '2020-08-03' ");
+    	if(!dateFlg&&nameFlg) { //日付指定がなかったら、二週間分を設定
+    		sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
+    		sql.append("order by t.registDate desc ");
     	}
     	
     	Query query = entityManager.createQuery(sql.toString());
@@ -74,7 +77,21 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     	
     	//以下、フラグがtrueの時に値をセット
 		if (dateFlg) query.setParameter("date", form.getSch_date());
-		if (nameFlg) query.setParameter("name", "%"+form.getSch_name()+"%");
+		if (nameFlg) {
+			query.setParameter("name", "%"+form.getSch_name()+"%");
+			if(!dateFlg) {	//日付指定がなかったら、二週間分を設定
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				String curDate = sdf.format(cal.getTime());		//今日の日付
+				
+				cal.add(Calendar.DAY_OF_MONTH, -14);			//日付計算
+				String endDate = sdf.format(cal.getTime());		//二週間前の日付
+				
+				query.setParameter("curDate", curDate);
+				query.setParameter("endDate", endDate);
+			}
+		}
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
 		
 		return query.getResultList();
