@@ -101,6 +101,14 @@ class ThermoController {
 			model.addAttribute("searchInfo", new SearchInfoForm());
 			model.addAttribute("list", schlist);
 			
+			boolean display = true;
+			if(schlist.size()==0) {
+				model.addAttribute("nolist_msg", "今日の検温情報が登録されていません。");
+				display = false;
+			}
+			model.addAttribute("display", display);
+
+			
 			session.setAttribute("schlist", schlist);
 			
 		}else {	 // 不正なユーザーの場合
