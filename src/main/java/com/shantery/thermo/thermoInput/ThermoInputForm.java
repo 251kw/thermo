@@ -3,8 +3,7 @@ package com.shantery.thermo.thermoInput;
 
 import java.util.ArrayList;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 
 
 /**

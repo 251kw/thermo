@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 @Service
 public class ThermoInputService {
@@ -34,14 +35,22 @@ public class ThermoInputService {
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		//thermoIDを自動採番で決める
 		int thermoId = (1+(int)repository.count());
+		
 		//updateuserとしてsessionからログインユーザーをとってくる
-		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
 		for(int i=0; i<list.size(); i++) {
 			ThermoInfoEntity thEn = new ThermoInfoEntity();
 			thEn.setUser_id(list.get(i).getUserId());
-			thEn.setThermo_id("t_"+Integer.toString(thermoId));
-			thermoId++;
+			//削除入れる
+			ThermoInfoEntity user = repository.findByUserIdAndRegistDate(list.get(i).getUserId(), day.format(calendar.getTime()));
+			if(user != null) {
+				thEn.setThermo_id(user.getThermo_id());
+				repository.delete(user);
+			}else {
+				thEn.setThermo_id("t_"+Integer.toString(thermoId));
+				thermoId++;
+			}
 			thEn.setThermo(convertNull(list.get(i).getTemperature()));
 			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
 			thEn.setOlfactory_disorder(convertCheck(list.get(i).getSmell()));
@@ -51,7 +60,7 @@ public class ThermoInputService {
 			thEn.setUpdate_user(loginuser.getUser_id());			
 			thEn.setUpdate_time(time.format(calendar.getTime()));
 			
-			repository.save(thEn);
+			repository.saveAndFlush(thEn);
 			
 		}
 					
@@ -65,9 +74,9 @@ public class ThermoInputService {
 	 */
 	public String convertCheck(String check) {
 		if(check != null) {
-			check = "1";
+			check = KBN_VALUE_WITH;
 		}else {
-			check = "0";
+			check = KBN_VALUE_WITHOUT;
 		}
 		
 		return check;
@@ -79,11 +88,19 @@ public class ThermoInputService {
 	 * @return そのままの値かnull
 	 */
 	public String convertNull(String thermo) {
-		if(thermo == "") {
+		if(thermo == EMPTY) {
 			thermo = null;
 		}
 		
 		return thermo;
+	}
+	
+	public String convertCheckReturn(String check) {
+		if(check.equals(KBN_VALUE_WITHOUT)) {
+			check = null;
+		}
+		
+		return check;
 	}
 }
 

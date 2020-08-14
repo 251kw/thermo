@@ -3,7 +3,10 @@ package com.shantery.thermo.thermoInput;
 
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,18 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
-import com.shantery.thermo.thermoInput.ThermoInputService;
-import com.shantery.thermo.userInfo.UserInfoForm;
-import com.shantery.thermo.userInfo.UserInfoRepository;
+
 import com.shantery.thermo.util.ThermoReplaceValue;
 import static com.shantery.thermo.util.ThermoConstants.*;
 
-import antlr.collections.List;
 
 @Controller
 class ThermoInputController {
@@ -37,20 +35,6 @@ class ThermoInputController {
 	ThermoInputRepository t_repository;
 	@Autowired
 	ThermoInputUserRepository u_repository;
-	
-	
-	/**
-	 * テスト
-	 * @param mav
-	 * @return
-	 */
-	@RequestMapping("/test")
-	public ModelAndView index(ModelAndView mav) {
-		Iterable<ThermoInfoEntity> list = t_repository.findAll();
-		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs("lol");
-		mav.addObject("date",list);
-		return mav;
-	}
 
 	/**
 	 * 検索のボタンから入力画面へ
@@ -63,10 +47,32 @@ class ThermoInputController {
 		//TODO スマホ版に変更したときの見出しの付け方を佐藤に聞く
 		
 		//ログインユーザーと同じグループIDのユーザー情報受け取る
-		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs(loginuser.getGroup_id());
 		
-		//データベースからとってきた情報を表示用に変換する 外部化する
+		//現在日時の取得と日付の書式設定
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+		
+		//すでに登録していないか確認
+		if(t_repository.findByUserIdAndRegistDate(loginuser.getUser_id(), day.format(calendar.getTime())) != null) {
+			ArrayList<ThermoInputForm.Detail> list = new ArrayList<ThermoInputForm.Detail>();
+			int i = 0;
+			for(UserInfoEntity ul : ulist) {
+				ThermoInfoEntity user = t_repository.findByUserIdAndRegistDate(ul.getUser_id(), day.format(calendar.getTime()));
+				list.add(new ThermoInputForm.Detail());
+				list.get(i).setTemperature(user.getThermo());
+				list.get(i).setTaste(service.convertCheckReturn(user.getTaste_disorder()));
+				list.get(i).setSmell(service.convertCheckReturn(user.getOlfactory_disorder()));
+				list.get(i).setCough(service.convertCheckReturn(user.getCough()));
+				list.get(i).setWriting(user.getOther());
+				i++;
+			}
+			model.addAttribute("list",list);
+			
+		}
+		
+		//データベースからとってきたユーザー情報を表示用に変換する 
 		ArrayList<String> birth = new ArrayList<String>();
 		for(UserInfoEntity ul : ulist) {
 			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
