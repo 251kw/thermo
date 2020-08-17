@@ -19,7 +19,7 @@
 		</div>
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
-			<form action="#" th:action="@{/userInfoConfirm}" th:object="${userInfoForm}" method="post">
+			<form action="#" th:action="@{/userInfoConfirm}" th:object="${userInfoForm}" method="post" class="ui form">
 				<div class="ui center aligned container">
 					<h3 class="askinput" th:text="#{view.text.UGInfoTop}"></h3>
 				</div>
@@ -37,14 +37,14 @@
 								<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}"/></span>
 									<br><span th:if="${#fields.hasErrors('groupPass')}" th:errors="*{groupPass}"></span>
-									<br><span th:if="${grError}" th:text=${grError}></span>
+									<br><span th:text="${grError}"></span>
 								</td>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uId}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 								<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}"/></span>
 									<br><span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
-									<br><span th:if="${uIdError}" th:text=${uIdError}></span>
+									<br><span th:text="${uIdError}"></span>
 								</td>	
 								
 							</tr>
@@ -71,7 +71,6 @@
 									</span>
 								</td>
 							</tr>
-	
 							<tr>
 								<td><p th:text="#{view.tablelabel.birthday}"></td>
 								<td><span class="ui input"><input type="date" class="form-control" th:field="*{birthday}"/></span>
@@ -81,7 +80,7 @@
 							<tr>
 								<td><p th:text="#{view.tablelabel.grade}"></td>
 								<td>
-									 <span class="ui input select">
+									 <div class="field">
 										<select th:field="*{grade}">
 											<option th:value="#{view.number.zero}" th:text="#{view.select.grade0}"></option>
 											<option th:value="#{view.number.one}" th:text="#{view.select.grade1}"></option>
@@ -94,7 +93,7 @@
 											<option th:value="#{view.number.B}" th:text="#{view.select.gradeB}"></option>
 											<option th:value="#{view.number.C}" th:text="#{view.select.gradeC}"></option>
 										</select>
-									</span>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -115,11 +114,13 @@
 					<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
 				</div>
 			</form>
-			<form action="#" th:action="@{./}" method="get">
-				<div class="ui center aligned container">
-					<input type="submit" class="ui inverted primary button" th:value="#{view.btn.return}">
-				</div>
-			</form>	
+			<div class="ui center aligned container">
+				<a href="./">
+					<button type="button" class="ui inverted primary button center">
+						<th:block th:text="#{view.btn.return}"></th:block>
+					</button>
+				</a>
+			</div>
 		</div>
 	</body>
 </html>

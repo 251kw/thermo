@@ -1,47 +1,53 @@
 package com.shantery.thermo.userInfo;
 
-import java.io.Serializable;
+import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.Optional;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 
 /**
  * Fromクラス
  */
 
-public class UserInfoForm implements Serializable {
+public class UserInfoForm{
 
 	
 	/** グループID **/
-	@NotBlank(message = "※入力必須項目※　半角英数字で入力してください")
-	@Size(min = 4, max = 32,message="4文字以上、32文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 4, max = 32)
+	@Pattern(regexp=THERMO_REGEX_PATTERN)
 	private String groupId;
+	
 	/** グループパスワード **/
-	@NotBlank(message = "※入力必須項目※　半角英数字で入力してください")
-	@Size(min = 4, max = 16,message="4文字以上、16文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 4, max = 16)
+	@Pattern(regexp=THERMO_REGEX_PATTERN)
 	private String groupPass;
+	
 	/** ユーザID **/
-	@NotBlank(message = "※入力必須項目※　半角英数字で入力してください")
-	@Size(min = 4, max = 32,message="4文字以上、32文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 4, max = 32)
+	@Pattern(regexp=THERMO_REGEX_PATTERN)
 	private String userId;
+	
 	/** ユーザーパスワード **/
-	@NotBlank(message = "※入力必須項目※　半角英数字で入力してください")
-	@Size(min = 4, max = 16,message="4文字以上、16文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 4, max = 16)
+	@Pattern(regexp=THERMO_REGEX_PATTERN)
 	private String userPass;
+	
 	/** 氏名 **/
-	@NotBlank(message = "※入力必須項目※　記号以外で入力してください")
-	@Size(max = 64,message="64文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="記号、スペースは入力できません")//TODO
+	@NotBlank
+	@Size(min = 4, max = 64)
+	@Pattern(regexp = "[ a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$")
 	private String userName;
+	
 	/** 性別 **/
 	@NotBlank
 	private String gender;
@@ -49,7 +55,7 @@ public class UserInfoForm implements Serializable {
 	@NotBlank
 	private String birthday;
 	/** 学年区分 **/
-	@NotBlank(message = "※入力必須項目※")
+	@NotBlank
 	private String grade;
 	/** 管理者フラグ **/
 	@NotBlank
@@ -57,6 +63,28 @@ public class UserInfoForm implements Serializable {
 	/** 更新時間 **/
 	private String updateTime;
 	
+	/** グループ正誤チェック **/
+	//@Value("first")
+	private Optional<GroupMstEntity> errGPass;
+	//@Value("#{null}")
+	/** ユーザID重複チェック **/
+	private Optional<UserInfoEntity> dupUId;
+	
+	public Optional<UserInfoEntity> getDupUId() {
+		return dupUId;
+	}
+
+	public void setDupUId(Optional<UserInfoEntity> dupUId) {
+		this.dupUId = dupUId;
+	}
+
+	public Optional<GroupMstEntity> getErrGPass() {
+		return errGPass;
+	}
+
+	public void setErrGPass(Optional<GroupMstEntity> errGPass) {
+		this.errGPass = errGPass;
+	}
 
 	public String getGroupId() {
 		return groupId;
@@ -155,7 +183,5 @@ public class UserInfoForm implements Serializable {
 		uInEn.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	    return uInEn ;
 	 }
-	 
-
 	
 }

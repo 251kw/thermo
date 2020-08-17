@@ -5,33 +5,23 @@ package com.shantery.thermo.groupInfo;
 
  */
 
-import java.text.ParseException;
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.shantery.thermo.entity.GroupMstEntity;
-import com.shantery.thermo.userInfo.UserInfoForm;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+/**
+ * @author h.komatsu
+ *グループ新規登録機能をまとめたクラス
+ */
 @Controller
 class GroupInfoController {
 	@Autowired
@@ -49,6 +39,14 @@ class GroupInfoController {
 	}
 	
 			
+	/**
+	 * 新規グループ登録内容確認画面
+	 * @param groupInfoForm　入力されたグループ情報を保持
+	 * @param result
+	 * @param model
+	 * @param bindRes	入力エラー項目情報
+	 * @return　エラーがあればgroupInfoInputへ、なければgroupInfoConfirmへ遷移
+	 */
 	@RequestMapping(value = "/groupInfoConfirm", method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm groupInfoForm, 
 			BindingResult result, Model model,BindingResult bindRes) {
@@ -59,13 +57,7 @@ class GroupInfoController {
 		if(grList.orElse(null) == null && bindRes.getAllErrors().isEmpty()) {
 			//グループIDがないとき抜ける
 			
-			
 		}else {
-			//入力エラーをすべて取り出す
-			//for(ObjectError error : bindRes.getAllErrors()) {
-			//	System.out.println(error.getDefaultMessage());
-			//}
-			
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(grList.orElse(null) != null) {
 				model.addAttribute("uGrError", "既に登録されているグループIDです");
@@ -75,7 +67,13 @@ class GroupInfoController {
 		return "groupInfoConfirm";
 	}
 	
-	//入力確認画面から戻るボタンで戻った時
+	/**
+	 * 入力確認画面から戻るボタンで戻った時
+	 * @param groupInfoForm 入力されたユーザ情報を保持
+	 * @param result
+	 * @param model
+	 * @return 入力画面
+	 */
 	@RequestMapping(value = "/groupInfoInput", method = RequestMethod.POST)
 	public String returnGroupInfoInput(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm groupInfoForm, 
 			BindingResult result, Model model) {
@@ -83,7 +81,13 @@ class GroupInfoController {
 		return "groupInfoInput";
 	}
 	
-	//登録完了画面
+	/**
+	 * 新規グループ登録完了画面
+	 * @param gInfoData 入力されたグループ情報を保持
+	 * @param model
+	 * @param gInEn　 FormからEntityに変換したユーザ情報
+	 * @return　登録完了画面
+	 */
 	@RequestMapping(value = "/groupInfoResult", method = RequestMethod.POST)
 	public String groupInfoResult(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm gInfoData, 
 			Model model,GroupMstEntity gInEn) {

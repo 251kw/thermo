@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -33,11 +34,10 @@ public class GroupInfoForm implements Serializable {
 	/** グループ名 **/
 	@NotBlank(message = "※入力必須項目※　記号以外で入力してください")
 	@Size(min = 1, max = 64,message="1文字以上、64文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="記号、スペースは入力できません")
+	@Pattern(regexp = "[ a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="記号、スペースは入力できません")
 	private String groupName;
 	/** 更新時間 **/
 	private String updateTime;
-	
 
 	public String getGroupId() {
 		return groupId;
