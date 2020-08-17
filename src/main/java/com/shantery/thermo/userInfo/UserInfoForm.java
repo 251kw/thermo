@@ -44,7 +44,7 @@ public class UserInfoForm{
 	
 	/** 氏名 **/
 	@NotBlank
-	@Size(min = 4, max = 64)
+	@Size(min = 1, max = 64)
 	@Pattern(regexp = "[ a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$")
 	private String userName;
 	

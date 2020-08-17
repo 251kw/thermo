@@ -110,17 +110,16 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 				<div class="ui center aligned container">
 					<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
+					<a href="./">
+						<button type="button" class="ui inverted primary button center">
+							<th:block th:text="#{view.btn.return}"></th:block>
+						</button>
+					</a>
 				</div>
 			</form>
-			<div class="ui center aligned container">
-				<a href="./">
-					<button type="button" class="ui inverted primary button center">
-						<th:block th:text="#{view.btn.return}"></th:block>
-					</button>
-				</a>
-			</div>
 		</div>
 	</body>
 </html>

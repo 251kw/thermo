@@ -16,7 +16,7 @@
 		<div class="komidasi">
 			<h3 th:text="#{view.label.conf}"></h3>
 		</div>
-		<div class="ui container">
+		<div class="ui container  form_conf">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui text container">
 				<form action="/" th:action="@{/userInfoResult}" th:object="${userInfoForm}" method="post">
@@ -27,7 +27,7 @@
 						<tbody>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gId}"></td>
-								<td th:text="*{groupId}"/>
+								<td th:text="${ulist.group_id}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gPass}"></td>
@@ -35,40 +35,36 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uId}"></td>
-								<td th:text="*{userId}"/>
+								<td th:text="${ulist.user_id}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uPass}"></td>
-								<td th:text="*{userPass}"/>
+								<td th:text="${ulist.user_pass}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.name}"></td>
-								<td th:text="*{userName}"/>
+								<td th:text="${ulist.user_name}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gender}"></td>
-								<td>
-									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(userInfoForm.gender)}"></div>
-								</td>
+								<td th:text="${ulist.gender}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.birthday}"></td>
-								<td th:text="*{birthday}"/>
+								<td th:text="${ulist.birthday}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.grade}"></td>
-								<td>
-									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(userInfoForm.grade)}"></div>
-								</td>
+								<td th:text="${ulist.grade}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-								<td>
-									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceAdmin(userInfoForm.adminFlg)}"></div>
-								</td>
+								<td th:text="${ulist.admin_flg}"/>
 							</tr>
 						</tbody>
-					</table>		
+					</table>
+					<!--
+							
 					<input type="hidden" th:field="*{groupId}"/>
 					<input type="hidden" th:field="*{groupPass}"/>
 					<input type="hidden" th:field="*{userId}"/>
@@ -78,11 +74,37 @@
 					<input type="hidden" th:field="*{birthday}"/>
 					<input type="hidden" th:field="*{grade}"/>
 					<input type="hidden" th:field="*{adminFlg}"/>
+					
+					-->
+										
+					<input type="hidden" th:field="${ulist}"/>
+					<input type="hidden" th:field="*{groupPass}"/>
 					<div class="ui center aligned container">
 						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.reg}"></button>	
-					</div>
-				</form>
-				<form action="#" th:action="@{/userInfoInput}" th:object="${userInfoForm}" method="post">
+					 </div>
+					 </form>
+					 <!--
+					 	 	<a href="/userInfoInput">
+					 	 	<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.fix}" />
+							</button>
+							</a>
+					 	 	<form th:action="@{/userInfoInput}" th:object="${userInfoForm}" method="post">
+							<input type="hidden" th:field="*{groupId}"/>
+							<input type="hidden" th:field="*{groupPass}"/>
+							<input type="hidden" th:field="*{userId}"/>
+							<input type="hidden" th:field="*{userPass}"/>
+							<input type="hidden" th:field="*{userName}"/>
+							<input type="hidden" th:field="*{gender}"/>
+							<input type="hidden" th:field="*{birthday}"/>
+							<input type="hidden" th:field="*{grade}"/>
+							<input type="hidden" th:field="*{adminFlg}"/>
+							</form>
+						
+						
+					-->
+				
+	  			<form action="#" th:action="@{/userInfoInput}" th:object="${userInfoForm}" method="post">
 					<input type="hidden" th:field="*{groupId}"/>
 					<input type="hidden" th:field="*{groupPass}"/>
 					<input type="hidden" th:field="*{userId}"/>
@@ -93,7 +115,7 @@
 					<input type="hidden" th:field="*{grade}"/>
 					<input type="hidden" th:field="*{adminFlg}"/>
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.fix}"></button>
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.fix}"></button>
 					</div>
 				</form>
 			</div>

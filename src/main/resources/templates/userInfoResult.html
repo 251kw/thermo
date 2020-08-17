@@ -27,7 +27,7 @@
 						<tbody>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gId}"></td>
-								<td th:text="*{groupId}"/>
+								<td th:text="${ulist.group_id}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gPass}"></td>
@@ -35,43 +35,39 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uId}"></td>
-								<td th:text="*{userId}"/>
+								<td th:text="${ulist.user_id}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uPass}"></td>
-								<td th:text="*{userPass}"/>
+								<td th:text="${ulist.user_pass}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.name}"></td>
-								<td th:text="*{userName}"/>
+								<td th:text="${ulist.user_name}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gender}"></td>
-								<td>
-									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(userInfoForm.gender)}"></div>
-								</td>
+								<td th:text="${ulist.gender}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.birthday}"></td>
-								<td th:text="*{birthday}"/>
+								<td th:text="${ulist.birthday}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.grade}"></td>
-								<td>
-									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceGrade(userInfoForm.grade)}"></div>
-								</td>
+								<td th:text="${ulist.grade}"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-								<td>
-									<div th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).replaceAdmin(userInfoForm.adminFlg)}"></div>
-								</td>
+								<td th:text="${ulist.admin_flg}"/>
 							</tr>
 						</tbody>
 					</table>
-					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.return}"></button>
-					</div>
+					<a href="./">
+						<button type="button" class="ui inverted primary button center">
+							<th:block th:text="#{view.btn.return}"></th:block>
+						</button>
+					</a>
 				</form>
 			</div>
 		</div>
