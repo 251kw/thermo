@@ -1,6 +1,8 @@
 package com.shantery.thermo.util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +33,17 @@ public class IsbnValidator implements ConstraintValidator<IsbnValid, String>{
 		if (mch.find()) { //マッチしていたら
 			try {
 				LocalDate.of(Integer.valueOf(mch.group(1)), Integer.valueOf(mch.group(2)),
-						Integer.valueOf(mch.group(3))); //生年月日の入力値が正しければエラーは起きない
+					Integer.valueOf(mch.group(3))); //生年月日の入力値が正しければエラーは起きない
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		        Calendar nowCalendar = Calendar.getInstance();
+				 // 入力が正しい日付かをチェックする
+                format.parse(value);
+                // 現在の日付を文字列化
+                String today = format.format(nowCalendar.getTime());
+                if (value.compareTo(today) > 0){
+                	return false;
+               }
+				
 			} catch (Exception e) { //不正な値を入力していたら(15月44日など)
 				return false;
 			}
