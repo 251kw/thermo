@@ -24,20 +24,8 @@ public class SearchService {
 	@Autowired
 	private SearchRepositoryCustom schRepCus; //リポジトリカスタムを呼び出す
 	
-	@Autowired
-	private HttpSession session;
-	
-	@SuppressWarnings("unchecked")
+
 	public List<ThermoInfoEntity> separate(String groupId, SearchInfoForm form){
-		
-		if(!"".equals(form.getSch_date()) ||
-				!"".equals(form.getSch_name()) ||
-					!"".equals(form.getSch_grade())) {
-			if(form.getSch_high()!=null) {
-				//error
-				return (List<ThermoInfoEntity>) session.getAttribute("schlist");
-			}
-		}
 		
 		if("".equals(form.getSch_date()) &&
 				"".equals(form.getSch_name()) && 
@@ -53,6 +41,17 @@ public class SearchService {
 		
 		
 		return schRepCus.searchQuery(groupId, form);	//条件検索;
+	}
+	
+	public boolean isZeroCurDate(String groupId) {		//今日の検温情報があるか
+		boolean result = false;
+		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);
+		
+		if (list.size()==0) {	//なければtrueを返す
+			result = true;
+		}
+	
+		return result;
 	}
 
 }

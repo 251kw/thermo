@@ -4,8 +4,6 @@ import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
 import static com.shantery.thermo.util.ThermoConstants.THERMO_FORM;
 import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -61,19 +59,30 @@ class SearchController {
 	 * メソッド
 	 * @return 検索画面
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
 	public String search_info(@ModelAttribute SearchInfoForm form, Model m) {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
-		List<ThermoInfoEntity> list = schService.separate(loginuser.getGroup_id(), form);
-		boolean display = true;
+		List<ThermoInfoEntity> list = null;
+		boolean display = true;		//テーブルを表示させるか
 		
+		//チェックボックスと他の入力欄の併用を許可しない
+		if((!"".equals(form.getSch_date()) ||
+				!"".equals(form.getSch_name()) ||
+					!"".equals(form.getSch_grade()))&&
+						(form.getSch_high()!=null)){
+			
+			list = (List<ThermoInfoEntity>) session.getAttribute("schlist");
+			m.addAttribute("combi_msg", "チェックボックスは単体で使用してください。");
+			
+		} else {
 		
-		if(list.size()==0) {
-			Calendar cal = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String curDate = sdf.format(cal.getTime());		//今日の日付
-			if((form.getSch_date()).equals(curDate)) {
-				m.addAttribute("nolist_msg", "今日の検温情報が登録されていません。");
+			list = schService.separate(loginuser.getGroup_id(), form);
+		}
+		
+		if(list.size()==0) {	//listがないとき
+			if(schService.isZeroCurDate(loginuser.getGroup_id())) {	//今日の情報がない時
+				m.addAttribute("nolist_msg", "今日の検温情報は登録されていません。");
 			} else {
 				m.addAttribute("nolist_msg", "検索結果がありませんでした。");
 			}
