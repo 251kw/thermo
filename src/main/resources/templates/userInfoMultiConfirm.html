@@ -55,16 +55,21 @@
 					</tr>
 				</tbody>
 			</table>
-			
-			<form action="#" th:action="@{./users_multi_conf_suc}" method="post">
-				<input type="submit" class="ui inverted primary button right aligned" th:value="#{view.btn.reg}">
-			</form>		
-			
-			<br>
-			
-			<form action="#" th:action="@{./users_multi_set}" method="get">
-				<input type="submit" class="ui inverted primary button" th:value=#{view.btn.cancel}>
-			</form>	
+			<table class="inner">
+				<tr>
+					<td class="rightorigin">
+						<form action="#" th:action="@{./users_multi_conf_suc}" method="post">
+							<input type="submit" class="ui inverted primary button right aligned" th:value="#{view.btn.reg}">
+						</form>
+					</td>
+					
+					<td class="rightorigin">
+									<form action="#" th:action="@{./users_multi_set}" method="get">
+						<input type="submit" class="ui inverted primary button" th:value=#{view.btn.cancel}>
+					</form>
+					</td>
+				</tr>
+			</table>
 			
 		</div>
 	</body>
