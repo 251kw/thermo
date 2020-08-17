@@ -2,6 +2,8 @@ package com.shantery.thermo.search;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +24,18 @@ public class SearchService {
 	@Autowired
 	private SearchRepositoryCustom schRepCus; //リポジトリカスタムを呼び出す
 	
+	@Autowired
+	private HttpSession session;
+	
+	@SuppressWarnings("unchecked")
 	public List<ThermoInfoEntity> separate(String groupId, SearchInfoForm form){
-		List<ThermoInfoEntity> list=null;
 		
 		if(!"".equals(form.getSch_date()) ||
 				!"".equals(form.getSch_name()) ||
 					!"".equals(form.getSch_grade())) {
 			if(form.getSch_high()!=null) {
-				//TODO error
-				return list;
+				//error
+				return (List<ThermoInfoEntity>) session.getAttribute("schlist");
 			}
 		}
 		

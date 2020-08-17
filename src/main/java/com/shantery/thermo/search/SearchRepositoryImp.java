@@ -32,7 +32,8 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     	boolean nameFlg = false;
     	boolean gradeFlg = false;
     	
-    	sql.append("SELECT t FROM ThermoInfoEntity t ");
+    	sql.append("SELECT t ");
+    	sql.append("FROM ThermoInfoEntity t ");
     	sql.append("WHERE t.userInfoEntity.groupId = :groupId ");
     	
     	

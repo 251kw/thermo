@@ -28,7 +28,7 @@
 							<p th:text="#{view.btn.thermoinfo}"></p>
 					</button>
 			</form>
-			<form method="post" action="/from">
+			<form method="get" action="/logout">
 					<button type="submit" class="ui inverted primary button">
 							<p th:text="ログアウト"></p>
 					</button>
@@ -101,58 +101,62 @@
 			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
 		</div>
 		
-		<div class="ui right aligned  container"><!-- 右寄せ -->
-		<form method="post" action="/excel">
-			<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.copy}"></button>
-		</form>
+		<div th:if="${display}">
+			<div class="ui right aligned  container"><!-- 右寄せ -->
+				<form method="post" action="/excel">
+					<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.copy}"></button>
+				</form>
+			</div>
 		</div>
 		
 		<div class="ui container">
-		<p th:text="${msg}"></p>
-​		<!--span th:if="${display == true}"-->
-			<table class="ui celled table">
-				<thead class="delete">
-					<tr>
-						<th th:text="#{view.tablelabel.regist_date}"></th>
-						<th th:text="#{view.tablelabel.name}"></th>
-						<th th:text="#{view.tablelabel.gender}"></th>
-						<th th:text="#{view.tablelabel.grade}"></th>
-						<th th:text="#{view.tablelabel.age}"></th>
-						<th th:text="#{view.tablelabel.thermo}"></th>
-						<th th:text="#{view.tablelabel.taste}"></th>
-						<th th:text="#{view.tablelabel.smell}"></th>
-						<th th:text="#{view.tablelabel.cough}"></th>
-						<th th:text="#{view.tablelabel.other}"></th>
-					</tr>
-				</thead>
-				<th:block th:each="list : ${list}">
-				<tbody>
-						<th:block th:if="${list.thermo == 38.0}">
-					<tr class="error"></th:block>
-						<th:block th:unless="${list.thermo == 38.0}">
-					<tr>
-						<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
-						<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
-						<td th:data-label="#{view.tablelabel.gender}"  th:text="${list.userInfoEntity.gender}">
-							<th:block th:if="${list.userInfoEntity.gender == M}">男性</th:block>
-							<th:block th:unless="${list.userInfoEntity.gender == M}">女性</th:block></td>
-						<td th:data-label="#{view.tablelabel.grade}" th:text="${list.userInfoEntity.grade}"></td>
-						<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${list.userInfoEntity.birthday})}"></td>
-						<td th:data-label="#{view.tablelabel.thermo}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
-						<td th:data-label="#{view.tablelabel.taste}">
-							<p th:if="${list.taste_disorder}" th:text="あり"></p>
-							<p th:unless="${list.taste_disorder}" th:text="なし"></p></td>
-						<td th:data-label="#{view.tablelabel.smell}">
-							<p th:if="${list.olfactory_disorder}" th:text="あり"></p>
-							<p th:unless="${list.olfactory_disorder}" th:text="なし"></p></td>
-						<td th:data-label="#{view.tablelabel.cough}">
-							<p th:if="${list.cough}" th:text="あり"></p >
-							<p th:unless="${list.cough}" th:text="なし"></p></td>
-						<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
-					</tr>
-				</tbody>
-			</table>
-	
+	​		<div th:if="${display}">
+				<table class="ui celled table">
+					<thead class="delete">
+						<tr>
+							<th th:text="#{view.tablelabel.regist_date}"></th>
+							<th th:text="#{view.tablelabel.name}"></th>
+							<th th:text="#{view.tablelabel.gender}"></th>
+							<th th:text="#{view.tablelabel.grade}"></th>
+							<th th:text="#{view.tablelabel.age}"></th>
+							<th th:text="#{view.tablelabel.thermo}"></th>
+							<th th:text="#{view.tablelabel.taste}"></th>
+							<th th:text="#{view.tablelabel.smell}"></th>
+							<th th:text="#{view.tablelabel.cough}"></th>
+							<th th:text="#{view.tablelabel.other}"></th>
+						</tr>
+					</thead>
+					<th:block th:each="list : ${list}">
+					<tbody>
+							<th:block th:if="${list.thermo == 38.0}">
+						<tr class="error"></th:block>
+							<th:block th:unless="${list.thermo == 38.0}">
+						<tr>
+							<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
+							<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
+							<td th:data-label="#{view.tablelabel.gender}"  th:text="${list.userInfoEntity.gender}">
+								<th:block th:if="${list.userInfoEntity.gender == M}">男性</th:block>
+								<th:block th:unless="${list.userInfoEntity.gender == M}">女性</th:block></td>
+							<td th:data-label="#{view.tablelabel.grade}" th:text="${list.userInfoEntity.grade}"></td>
+							<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${list.userInfoEntity.birthday})}"></td>
+							<td th:data-label="#{view.tablelabel.thermo}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
+							<td th:data-label="#{view.tablelabel.taste}">
+								<p th:if="${list.taste_disorder}" th:text="あり"></p>
+								<p th:unless="${list.taste_disorder}" th:text="なし"></p></td>
+							<td th:data-label="#{view.tablelabel.smell}">
+								<p th:if="${list.olfactory_disorder}" th:text="あり"></p>
+								<p th:unless="${list.olfactory_disorder}" th:text="なし"></p></td>
+							<td th:data-label="#{view.tablelabel.cough}">
+								<p th:if="${list.cough}" th:text="あり"></p >
+								<p th:unless="${list.cough}" th:text="なし"></p></td>
+							<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div th:unless="${display}">
+				<h3 th:text="${nolist_msg}"></h3>
+			</div>
 		</div>
 	</body>
 </html>
