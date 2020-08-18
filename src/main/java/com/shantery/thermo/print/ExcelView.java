@@ -1,5 +1,9 @@
 package com.shantery.thermo.print;
 
+
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,10 +43,18 @@ public class ExcelView extends AbstractXlsxView {
 	/**
 	 *
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		//日付を取得
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//excelファイル名の日付以下を設定
+		String fileName = "_検温情報.xlsx";
+		//日付とfileNameを結合
+		String excelFileName = sdf.format(new Date()) + URLEncoder.encode(fileName, "UTF-8");
+		//ファイル名をセット
+		response.setHeader("Content-Disposition", "attachment; filename=" + excelFileName);
 		// セッションに接続
 		HttpSession session = request.getSession();
 		// 検索結果をリストで取得
@@ -142,6 +154,6 @@ public class ExcelView extends AbstractXlsxView {
 		cellstyle.setWrapText(true); //改行を有効化
 		indexCellstyle.setWrapText(true); //見出しの改行を有効化
 		cellstyle.setVerticalAlignment(VerticalAlignment.TOP); //cellサイズを調節した際文字を上揃え
-		indexCellstyle.setVerticalAlignment(VerticalAlignment.TOP); //見出しのcellサイズを調節した際文字を上揃え
+		indexCellstyle.setVerticalAlignment(VerticalAlignment.TOP); //見出しのcellサイズを調節した際文字を上揃え}
 	}
 }
