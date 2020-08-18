@@ -44,7 +44,6 @@ class ThermoInputController {
 	@RequestMapping(value = "/from"/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.POST)
 	public String Input(Model model) {
 		
-		//TODO スマホ版に変更したときの見出しの付け方を佐藤に聞く
 		
 		//ログインユーザーと同じグループIDのユーザー情報受け取る
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
