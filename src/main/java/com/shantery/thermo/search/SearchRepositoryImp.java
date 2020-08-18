@@ -7,7 +7,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
@@ -19,6 +21,9 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 @Component
 public class SearchRepositoryImp implements SearchRepositoryCustom {
 
+	@Autowired
+	HttpSession session; 
+	
     @PersistenceContext
     EntityManager entityManager;
     
@@ -95,7 +100,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 		}
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
 		
-		return query.getResultList();
+		return query.setMaxResults(50).getResultList();		//取得データ数の制限.結果をlistで取得
     }
 
 }

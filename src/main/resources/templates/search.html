@@ -20,17 +20,19 @@
 		<div class="komidasi">
 			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
 		</div>
-		
+		<p></p>
+		<div class="ui right aligned  container">
+			<form method="get" action="/logout">
+						<button type="submit" class="ui inverted primary button">
+								<p th:text="ログアウト"></p>
+						</button>
+			</form>
+		</div>
 		<div class="ui left aligned  container">
 			<p></p>
 			<form method="post" action="/from">
 					<button type="submit" class="ui inverted primary button">
 							<p th:text="#{view.btn.thermoinfo}"></p>
-					</button>
-			</form>
-			<form method="get" action="/logout">
-					<button type="submit" class="ui inverted primary button">
-							<p th:text="ログアウト"></p>
 					</button>
 			</form>
 		</div>
@@ -58,7 +60,8 @@
 							<input type="date" th:field="*{sch_date}"></div></td>
 						<td th:data-label="#{view.tablelabel.name}">
 							<div class="ui input">
-							<input type="text" th:field="*{sch_name}"></div></td>
+							<input type="text" th:field="*{sch_name}"></div>
+							<span th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}"></span></td>
 						
 						<td th:data-label="#{view.tablelabel.grade}">
 	  						<div class="field">
@@ -112,6 +115,7 @@
 		
 		<div class="ui container">
 	​		<div th:if="${display}">
+			<h3 th:text="${overlist_msg}"></h3>
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
@@ -129,27 +133,16 @@
 					</thead>
 					<th:block th:each="list : ${list}">
 					<tbody>
-							<th:block th:if="${list.thermo == 38.0}">
-						<tr class="error"></th:block>
-							<th:block th:unless="${list.thermo == 38.0}">
 						<tr>
 							<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
 							<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
-							<td th:data-label="#{view.tablelabel.gender}"  th:text="${list.userInfoEntity.gender}">
-								<th:block th:if="${list.userInfoEntity.gender == M}">男性</th:block>
-								<th:block th:unless="${list.userInfoEntity.gender == M}">女性</th:block></td>
-							<td th:data-label="#{view.tablelabel.grade}" th:text="${list.userInfoEntity.grade}"></td>
-							<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${list.userInfoEntity.birthday})}"></td>
+							<td th:data-label="#{view.tablelabel.gender}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
+							<td th:data-label="#{view.tablelabel.grade}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
+							<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
 							<td th:data-label="#{view.tablelabel.thermo}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></td>
-							<td th:data-label="#{view.tablelabel.taste}">
-								<p th:if="${list.taste_disorder}" th:text="あり"></p>
-								<p th:unless="${list.taste_disorder}" th:text="なし"></p></td>
-							<td th:data-label="#{view.tablelabel.smell}">
-								<p th:if="${list.olfactory_disorder}" th:text="あり"></p>
-								<p th:unless="${list.olfactory_disorder}" th:text="なし"></p></td>
-							<td th:data-label="#{view.tablelabel.cough}">
-								<p th:if="${list.cough}" th:text="あり"></p >
-								<p th:unless="${list.cough}" th:text="なし"></p></td>
+							<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
+							<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
+							<td th:data-label="#{view.tablelabel.cough}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
 							<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
 						</tr>
 					</tbody>

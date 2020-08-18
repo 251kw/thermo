@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,7 +63,9 @@ class SearchController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
-	public String search_info(@ModelAttribute SearchInfoForm form, Model m) {
+	public String search_info(/*@Validated*/ @ModelAttribute SearchInfoForm form, Model m,
+			BindingResult result) {
+		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
@@ -87,6 +91,8 @@ class SearchController {
 				m.addAttribute("nolist_msg", "検索結果がありませんでした。");
 			}
 			display = false;
+		} else if(list.size()==50){
+			m.addAttribute("overlist_msg", "上位50件の検索結果を表示しています。");
 		}
 		
 		m.addAttribute("searchInfo", form);

@@ -1,5 +1,7 @@
 package com.shantery.thermo.search;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
+import javax.validation.constraints.Pattern;
 
 /**
  * @author y.sato
@@ -9,7 +11,10 @@ package com.shantery.thermo.search;
 public class SearchInfoForm {
 
 	private String sch_date;
+	
+//	@Pattern(regexp = "[ a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$")
 	private String sch_name;
+	
 	private String sch_grade;
 	private String sch_high;
 	
