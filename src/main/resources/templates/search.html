@@ -96,7 +96,7 @@
 		<p></p>
 		<div class="ui center aligned container"><!-- 中央寄せ -->
 			<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.search}"></button>
-			<button type="reset" class="ui inverted primary button"><p th:text="#{view.btn.clear}"></button>
+			<button type="button" class="ui inverted primary button" onClick="clearFormAll(); "><p th:text="#{view.btn.clear}"></button>
 		</div>
 		
 		</form>
@@ -153,5 +153,45 @@
 				<h3 th:text="${nolist_msg}"></h3>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+			function clearFormAll() {
+			    for (var i=0; i<document.forms.length; ++i) {
+			        clearForm(document.forms[i]);
+			    }
+			}
+			function clearForm(form) {
+			    for(var i=0; i<form.elements.length; ++i) {
+			        clearElement(form.elements[i]);
+			    }
+			}
+			function clearElement(element) {
+			    switch(element.type) {
+			        case "hidden":
+			        case "submit":
+			        case "reset":
+			        case "button":
+			        case "image":
+			            return;
+			        case "file":
+			            return;
+			        case "text":
+			        case "password":
+			        case "date":
+			        case "textarea":
+			            element.value = "";
+			            return;
+			        case "checkbox":
+			        case "radio":
+			            element.checked = false;
+			            return;
+			        case "select-one":
+			        case "select-multiple":
+			            element.selectedIndex = 0;
+			            return;
+			        default:
+			    }
+			}  
+		</script>
 	</body>
 </html>

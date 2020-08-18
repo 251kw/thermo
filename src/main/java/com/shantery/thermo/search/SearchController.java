@@ -92,7 +92,7 @@ class SearchController {
 			}
 			display = false;
 		} else if(list.size()==50){
-			m.addAttribute("overlist_msg", "上位50件の検索結果を表示しています。");
+			m.addAttribute("overlist_msg", "50件の検索結果を表示しています。");
 		}
 		
 		m.addAttribute("searchInfo", form);
