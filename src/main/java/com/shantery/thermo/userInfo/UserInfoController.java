@@ -2,15 +2,13 @@ package com.shantery.thermo.userInfo;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
 
+
+
+import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_ADMIN;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,10 +32,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 class UserInfoController {
 	@Autowired
 	private UserInfoService uInfoService; //呼び出すクラス
-	
 	@Autowired
 	MessageSource messagesource; //messages.propertiesの利用
-	
 	@Autowired
 	HttpSession session;
 	
@@ -48,8 +44,17 @@ class UserInfoController {
 	 */
 	@RequestMapping(value = "/userInfoInput", method = RequestMethod.GET)
 	public String input(Model model){
-		model.addAttribute("userInfoForm", new UserInfoForm());
-		return "userInfoInput";
+		
+		try {
+			if(session.getAttribute("uForm").equals(null)) {
+					model.addAttribute("userInfoForm", new UserInfoForm());
+			}else {
+					model.addAttribute("userInfoForm", session.getAttribute("uForm"));
+			}
+		}catch(Exception e){
+			model.addAttribute("userInfoForm", new UserInfoForm());
+		}
+		return "userInfoInput"; 
 	}
 			
 	/**
@@ -70,6 +75,7 @@ class UserInfoController {
 		//グループ正誤調査
 		Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
 		userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
+		
 	
 		if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.hasErrors() == false) {
 			//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力がnullや空白じゃない
@@ -81,6 +87,7 @@ class UserInfoController {
 			ulist.setAdmin_flg(ThermoReplaceValue.valueToName(KBN_TYPE_ADMIN, ulist.getAdmin_flg()));
 			model.addAttribute("ulist", ulist);
 			session.setAttribute("ulist", ulist);
+			session.setAttribute("uForm", userInfoForm);
 			
 			return "userInfoConfirm";//確認画面に遷移
 			
@@ -89,7 +96,7 @@ class UserInfoController {
 			if(test2List.orElse(null) != null) {
 				//String message = messagesource.getMessage("errLoginUse", null, Locale.JAPAN);//TODO あとで外部化やる
 				model.addAttribute("uIdError", "既に存在しているユーザIDです");
-			}else if(grList.orElse(null) == null) {
+			}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
 				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
 				model.addAttribute("grError", "グループIDが存在しないか、グループパスワードが間違っています");
 			}	

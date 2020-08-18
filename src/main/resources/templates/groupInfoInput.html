@@ -22,7 +22,7 @@
 			<div class="ui text container">	
 				<form action="#" th:action="@{/groupInfoConfirm}" th:object="${groupInfoForm}" method="post">
 					<div class="ui center aligned container">
-						<h3 class="askinput" th:text="#{view.text.UGInfoTop}"></h3>
+						<h3 class="index_ask_input" th:text="#{view.text.UGInfoTop}"></h3>
 					</div>
 					<table class="ui celled table">
 						<tbody>
@@ -47,16 +47,18 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
 						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
-					</div>
-				</form>
-				<form action="#" th:action="@{./}" method="get">
-					<div class="ui center aligned container">
-						<input type="submit" class="ui inverted primary button" th:value="#{view.btn.return}">
+						<a href="./">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.return}"></th:block>
+							</button>
+						</a>
 					</div>
 				</form>	
 			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>
 	</body>
 </html>

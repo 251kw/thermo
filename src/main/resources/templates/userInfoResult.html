@@ -21,7 +21,7 @@
 			<div class="ui text container">
 				<form action="#" th:action="@{./}" th:object="${userInfoForm}" method="get">
 					<div class="ui center aligned container">
-						<h3 class="askinput" th:text="#{view.text.userInfoRes}"></h3>
+						<h3 class="index_ask_input" th:text="#{view.text.userInfoRes}"></h3>
 					</div>
 					<table class="ui celled table">
 						<tbody>
@@ -63,13 +63,16 @@
 							</tr>
 						</tbody>
 					</table>
-					<a href="./">
-						<button type="button" class="ui inverted primary button center">
-							<th:block th:text="#{view.btn.return}"></th:block>
-						</button>
-					</a>
+					<div class="ui center aligned container">
+						<a href="./">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.return}"></th:block>
+							</button>
+						</a>
+					</div>
 				</form>
 			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>
 	</body>
 </html>

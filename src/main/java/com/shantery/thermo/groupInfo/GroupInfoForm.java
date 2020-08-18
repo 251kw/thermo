@@ -22,19 +22,19 @@ public class GroupInfoForm implements Serializable {
 
 	
 	/** グループID **/
-	@NotBlank(message = "※入力必須項目※　半角英数字で入力してください")
-	@Size(min = 4, max = 32,message="4文字以上、32文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 4, max = 32)
+	@Pattern(regexp = "[a-zA-Z0-9\\-]+")
 	private String groupId;
 	/** グループパスワード **/
-	@NotBlank(message = "※入力必須項目※　半角英数字で入力してください")
-	@Size(min = 4, max = 16,message="4文字以上、16文字以下で入力してください")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 4, max = 16)
+	@Pattern(regexp = "[a-zA-Z0-9\\-]+")
 	private String groupPass;
 	/** グループ名 **/
-	@NotBlank(message = "※入力必須項目※　記号以外で入力してください")
-	@Size(min = 1, max = 64,message="1文字以上、64文字以下で入力してください")
-	@Pattern(regexp = "[ a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$",message="記号、スペースは入力できません")
+	@NotBlank
+	@Size(min = 1, max = 64)
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")
 	private String groupName;
 	/** 更新時間 **/
 	private String updateTime;

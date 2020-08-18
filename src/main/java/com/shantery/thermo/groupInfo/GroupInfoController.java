@@ -1,5 +1,6 @@
 package com.shantery.thermo.groupInfo;
 
+
 /*
  * import static com.shantery.result2.util.Result2Constants.*;
 
@@ -7,7 +8,11 @@ package com.shantery.thermo.groupInfo;
 
 import java.util.Optional;
 
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +20,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.shantery.thermo.entity.GroupMstEntity;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
@@ -26,6 +30,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 class GroupInfoController {
 	@Autowired
 	private GroupInfoService gInfoService; //呼び出すクラス
+	@Autowired
+	MessageSource messagesource; //messages.propertiesの利用
+	@Autowired
+	HttpSession session;
 	
 	/**
 	 * グループ新規登録入力画面
@@ -34,7 +42,17 @@ class GroupInfoController {
 	 */
 	@RequestMapping(value = "/groupInfoInput", method = RequestMethod.GET)
 	public String input(Model model){
-		model.addAttribute("groupInfoForm", new GroupInfoForm());
+		
+		try {
+			if(session.getAttribute("gForm").equals(null)) {
+				model.addAttribute("groupInfoForm", new GroupInfoForm());
+			}else {
+					model.addAttribute("groupInfoForm", session.getAttribute("gForm"));
+			}
+		}catch(Exception e){
+			model.addAttribute("groupInfoForm", new GroupInfoForm());
+		}
+		
 		return "groupInfoInput";
 	}
 	
@@ -55,7 +73,9 @@ class GroupInfoController {
 		Optional<GroupMstEntity> grList = gInfoService.getGrDate(groupInfoForm.getGroupId());
 		
 		if(grList.orElse(null) == null && bindRes.getAllErrors().isEmpty()) {
-			//グループIDがないとき抜ける
+			//確認画面に遷移
+			session.setAttribute("gForm", groupInfoForm);
+			return "groupInfoConfirm";
 			
 		}else {
 			//既に登録されているユーザIDの場合、エラー文をset
@@ -64,7 +84,6 @@ class GroupInfoController {
 			}	
 			return "groupInfoInput";
 		}
-		return "groupInfoConfirm";
 	}
 	
 	/**

@@ -22,7 +22,7 @@
 			<div class="ui text container">
 				<form action="/" th:action="@{/groupInfoResult}" th:object="${groupInfoForm}" method="post">
 					<div class="ui center aligned container">
-						<h3 class="askinput" th:text="#{view.text.UGInfoCon}"></h3>
+						<h3 class="index_ask_input" th:text="#{view.text.UGInfoCon}"></h3>
 					</div>
 					<table class="ui celled table">
 						<tbody>
@@ -43,19 +43,18 @@
 					<input type="hidden" th:field="*{groupId}"/>
 					<input type="hidden" th:field="*{groupName}"/>
 					<input type="hidden" th:field="*{groupPass}"/>
+					<input type="hidden" th:field="${groupInfoForm}"/>
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.reg}"></button>	
-					</div>
-				</form>
-				<form action="#" th:action="@{/groupInfoInput}" th:object="${groupInfoForm}" method="post">
-					<input type="hidden" th:field="*{groupId}"/>
-					<input type="hidden" th:field="*{groupName}"/>
-					<input type="hidden" th:field="*{groupPass}"/>
-					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.fix}"></button>
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.reg}"></button>	
+						<a href="/groupInfoInput">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.fix}"></th:block>
+							</button>
+						</a>
 					</div>
 				</form>
 			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>
 	</body>
 </html>
