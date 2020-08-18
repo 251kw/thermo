@@ -25,7 +25,7 @@
 		
 		<div class="ui text container">
 			<form method="get" class="ui form" name="registform" onsubmit="return check()">
-				<table class="registtable">
+				<table class="index_regist_table">
 					<tr>
 						<td>
 							<span class="ui input select">			
@@ -39,35 +39,35 @@
 			</form>
 			<br>
 			<div class="ui center aligned container">
-				<h3 class="askinput" th:text="#{view.text.inputinfo}"></h3>
+				<p class="index_ask_input" th:text="#{view.text.inputinfo}"></p>
 			</div>
 			<div class="ui center aligned container">
-				<h3 class="error" th:text="${login_error}"></h3>
+				<p class="index_error" th:text="${login_error}"></p>
 			</div>
 			<br>
 			<form action="/login" method="post" class="ui large form" th:object="${ThermoForm}">
 				<table class="ui table">
 					<tr>
 						<td>
-							<div class="field">
+							<div>
 	    						<label th:text="#{view.tablelabel.uId}"></label>
 	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}">
-	    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="error"></div>
+	    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="index_input_error"></div>
 	  						</div>
   						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="field">
+							<div>
 	    						<label th:text="#{view.tablelabel.pass}"></label>
 	    						<input type="password" name="userpass" th:placeholder="#{view.inputph.userpass}" th:value="*{userpass}">
-	    						<div th:if="${#fields.hasErrors('userpass')}" th:errors="*{userpass}" th:errorclass="error"></div>
+	    						<div th:if="${#fields.hasErrors('userpass')}" th:errors="*{userpass}" th:errorclass="index_input_error"></div>
 	  						</div>
   						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="loginbtn">
+							<div class="index_login_btn">
 								<input class="ui inverted blue button" type="submit" th:value="#{view.btn.login}" />
 							</div>
 						</td>

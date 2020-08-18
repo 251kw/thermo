@@ -1,32 +1,39 @@
 @charset "UTF-8";
 
+/* index.html */
+.index_error {
+	color: red;
+	font-size:110%;
+	font-weight: bold;
+}
 
-.error {
+.index_input_error {
 	color: red;
 }
 
-.askinput {
+.index_ask_input {
 	color:#a2ca0e;/*文字色*/
+	font-size:110%;
+	font-weight: bold;
 }
-.registtable {
+
+.index_regist_table {
 	margin: 0 0 0 auto;
 }
 
-.loginbtn {
+.index_login_btn {
 	text-align: center;
-vertical-align: top;
+	vertical-align: top;
 }
 
-.fieldError {
-  background-color: red;
-}
-
+/**/
 .cp_ipselect {
 	overflow: hidden;
 	width: 90%;
 	margin: 2em auto;
 	text-align: center;
 }
+
 .cp_ipselect select {
 	width: 100% !important;
 	padding-right: 1em !important;
@@ -41,9 +48,11 @@ vertical-align: top;
 	-webkit-appearance: none !important;
 	appearance: none !important;
 }
+
 .cp_ipselect select::-ms-expand {
     display: none !important;
 }
+
 .cp_ipselect.cp_sl04 {
 	position: relative;
 	border-radius: 2px;
@@ -51,6 +60,7 @@ vertical-align: top;
   border-radius: 50px;
 	background: #ffffff;
 }
+
 .cp_ipselect.cp_sl04::before {
 	position: absolute;
 	top: 0.8em;
@@ -64,32 +74,10 @@ vertical-align: top;
 	border-top: 6px solid #da3c41;
 	pointer-events: none;
 }
+
 .cp_ipselect.cp_sl04 select {
 	padding: 8px 38px 8px 8px !important;
 	color: #000000!important;
-}
-
-@media screen and (max-width: 959px) {
-	/* 959px以下に適用されるCSS（タブレット用） */
-	.registtable {
-		    margin-left: auto;
-    		margin-right: auto;
-	}
-	
-	.delete {
-		display:none !important;
-	}
-}
-@media screen and (max-width: 480px) {
-	/* 480px以下に適用されるCSS（スマホ用） */
-	.registtable {
-	    margin-left: auto;
-    	margin-right: auto;
-	}
-	
-		.delete {
-		display:none !important;
-	}
 }
 
 .uploadButton {
@@ -144,4 +132,32 @@ div.example  {
 
 .rightorigin {
 	text-align: right;
+}
+
+/* ------------------------------------スマホ用css--------------------------------------*/
+
+@media screen and (max-width: 640px) {
+
+	/* index.html */
+	.index_error {
+	color: red;
+	font-size:85%;
+	font-weight: bold;
+	}
+
+	.index_ask_input {
+		color:#a2ca0e;/*文字色*/
+		font-size:85%;
+		font-weight: bold;
+	}
+	
+	.index_regist_table {
+	    margin-left: auto;
+    	margin-right: auto;
+	}
+	
+	/**/
+	.delete {
+		display:none !important;
+	}
 }
