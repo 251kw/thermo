@@ -1,13 +1,8 @@
 package com.shantery.thermo.groupInfo;
 
-import java.io.Serializable;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -15,10 +10,11 @@ import com.shantery.thermo.entity.GroupMstEntity;
 
 
 /**
+ * @author h.komatsu
  * GroupInfoのFromクラス
  */
 
-public class GroupInfoForm implements Serializable {
+public class GroupInfoForm{
 
 	
 	/** グループID **/
@@ -34,7 +30,8 @@ public class GroupInfoForm implements Serializable {
 	/** グループ名 **/
 	@NotBlank
 	@Size(min = 1, max = 64)
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")
+	//↓のpattern、ValidationMessagesが優勢なのでmessage指定しておく。
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message = "※記号、前後のスペースは入力できません")//TODO　外部化
 	private String groupName;
 	/** 更新時間 **/
 	private String updateTime;

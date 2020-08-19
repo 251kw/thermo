@@ -2,8 +2,6 @@ package com.shantery.thermo.userInfo;
 
 import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
 
-
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -14,7 +12,8 @@ import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 
 /**
- * Fromクラス
+ * @author h.komatsu
+ * UserInfoのFromクラス
  */
 public class UserInfoForm{
 	
@@ -45,7 +44,8 @@ public class UserInfoForm{
 	/** 氏名 **/
 	@NotBlank
 	@Size(min = 1, max = 64)
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")
+	//↓のpattern、ValidationMessagesが優勢なのでmessage指定しておく。
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message = "※記号、前後のスペースは入力できません")//TODO　外部化
 	private String userName;
 	
 	/** 性別 **/

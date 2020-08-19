@@ -2,13 +2,13 @@ package com.shantery.thermo.userInfo;
 
 import java.util.Optional;
 
-
-
-
 import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_ADMIN;
+import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_INP;
+import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_CONF;
+import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_RES;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -44,17 +44,20 @@ class UserInfoController {
 	 */
 	@RequestMapping(value = "/userInfoInput", method = RequestMethod.GET)
 	public String input(Model model){
-		
+		//もしユーザ情報確認画面から戻ってきた際の処理
 		try {
 			if(session.getAttribute("uForm").equals(null)) {
-					model.addAttribute("userInfoForm", new UserInfoForm());
+				//セッション内データがなければFormをnewする
+				model.addAttribute("userInfoForm", new UserInfoForm());
 			}else {
-					model.addAttribute("userInfoForm", session.getAttribute("uForm"));
+				//セッションデータがあれば引き継ぐ
+				model.addAttribute("userInfoForm", session.getAttribute("uForm"));
 			}
 		}catch(Exception e){
+			//セッション内データがない場合必ずnullpoになるため、Formをnewする
 			model.addAttribute("userInfoForm", new UserInfoForm());
 		}
-		return "userInfoInput"; 
+		return TO_USER_INFO_INP;//ユーザ情報入力画面へ遷移"userInfoInput"
 	}
 			
 	/**
@@ -76,48 +79,51 @@ class UserInfoController {
 		Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
 		userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
 		
-	
 		if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.hasErrors() == false) {
-			//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力がnullや空白じゃない
+			//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力チェックがエラーじゃない
 			
 			//Formに入っているユーザー情報を表示用に変換(セレクトボックスのみ)
 			UserInfoEntity ulist = userInfoForm._toConvertUserInfoEntity();
 			ulist.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ulist.getGender()));
 			ulist.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ulist.getGrade()));
 			ulist.setAdmin_flg(ThermoReplaceValue.valueToName(KBN_TYPE_ADMIN, ulist.getAdmin_flg()));
+			//モデルとセッションにForm情報、取得した表示変換後情報をセット
 			model.addAttribute("ulist", ulist);
 			session.setAttribute("ulist", ulist);
 			session.setAttribute("uForm", userInfoForm);
 			
-			return "userInfoConfirm";//確認画面に遷移
+			return TO_USER_INFO_CONF;//確認画面に遷移"userInfoConfirm"
 			
 		}else {
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(test2List.orElse(null) != null) {
-				//String message = messagesource.getMessage("errLoginUse", null, Locale.JAPAN);//TODO あとで外部化やる
-				model.addAttribute("uIdError", "既に存在しているユーザIDです");
+				//String message = messagesource.getMessage("errLoginUse", null, Locale.JAPAN);//TODO　外部化やる
+				model.addAttribute("uIdError", "既に存在しているユーザIDです");//TODO 外部化やる
 			}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
 				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
-				model.addAttribute("grError", "グループIDが存在しないか、グループパスワードが間違っています");
+				model.addAttribute("grError", "グループIDが存在しないか、グループパスワードが間違っています");//TODO 外部化やる
 			}	
-			//入力画面に遷移
-			return "userInfoInput";
+			//ユーザ情報入力画面に遷移"userInfoInput"
+			return TO_USER_INFO_INP;
 		}
 	}
 	
+	//TODO 削除予定
+	/*
 	/**
 	 * 新規ユーザー入力確認画面から戻るボタンで戻った時
 	 * @param userInfoForm　入力されたユーザ情報を保持
 	 * @param result
 	 * @param model
 	 * @return 入力画面
-	 */
+	 *
 	@RequestMapping(value = "/userInfoInput", method = RequestMethod.POST)
 	public String returnUserInfoInput(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
 			BindingResult result, Model model) {
 		
-		return "userInfoInput";	
+		return "userInfoInput";	//ユーザ情報入力画面に遷移
 	}
+	*/
 	
 	/**
 	 * 新規ユーザー登録完了画面
@@ -130,6 +136,7 @@ class UserInfoController {
 	public String userInfoResult(@Validated @ModelAttribute("userInfoForm") UserInfoForm uInfoData, 
 			Model model,UserInfoEntity uInEn) {
 		
+		//セッション内のulist(表示用に変換したリスト)を取得、モデルにセット
 		model.addAttribute("ulist", session.getAttribute("ulist"));
 		
 		//Formに入っているユーザ情報をEntityに変換
@@ -137,7 +144,7 @@ class UserInfoController {
 		//Entityの情報を登録する
 		uInfoService.create(uInEn);
 		
-		return "userInfoResult";
+		return TO_USER_INFO_RES;//ユーザ情報登録完了画面に遷移"userInfoResult"
 		
 	}
 	

@@ -1,16 +1,12 @@
 package com.shantery.thermo.groupInfo;
 
-
-/*
- * import static com.shantery.result2.util.Result2Constants.*;
-
- */
-
 import java.util.Optional;
 
+import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_INP;
+import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_CONF;
+import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_RES;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -42,18 +38,20 @@ class GroupInfoController {
 	 */
 	@RequestMapping(value = "/groupInfoInput", method = RequestMethod.GET)
 	public String input(Model model){
-		
+		//もしグループ情報確認画面から戻ってきた際の処理
 		try {
 			if(session.getAttribute("gForm").equals(null)) {
+				//セッション内データがなければFormをnewする
 				model.addAttribute("groupInfoForm", new GroupInfoForm());
 			}else {
-					model.addAttribute("groupInfoForm", session.getAttribute("gForm"));
+				//セッションデータがあれば引き継ぐ
+				model.addAttribute("groupInfoForm", session.getAttribute("gForm"));
 			}
 		}catch(Exception e){
+			//セッション内データがない場合必ずnullpoになるため、Formをnewする
 			model.addAttribute("groupInfoForm", new GroupInfoForm());
 		}
-		
-		return "groupInfoInput";
+		return TO_GROUP_INFO_INP;//グループ情報入力画面へ遷移"groupInfoInput"
 	}
 	
 			
@@ -73,32 +71,35 @@ class GroupInfoController {
 		Optional<GroupMstEntity> grList = gInfoService.getGrDate(groupInfoForm.getGroupId());
 		
 		if(grList.orElse(null) == null && bindRes.getAllErrors().isEmpty()) {
-			//確認画面に遷移
+			//エラーがない場合、結果をセッションにセット
 			session.setAttribute("gForm", groupInfoForm);
-			return "groupInfoConfirm";
+			return TO_GROUP_INFO_CONF;//確認画面に遷移"groupInfoConfirm"
 			
 		}else {
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(grList.orElse(null) != null) {
-				model.addAttribute("uGrError", "既に登録されているグループIDです");
+				model.addAttribute("uGrError", "既に登録されているグループIDです");//TODO　外部化
 			}	
-			return "groupInfoInput";
+			return TO_GROUP_INFO_INP;//グループ情報入力画面へ遷移"groupInfoInput"
 		}
 	}
 	
+	//TODO　削除予定
+	/*
 	/**
 	 * 入力確認画面から戻るボタンで戻った時
 	 * @param groupInfoForm 入力されたユーザ情報を保持
 	 * @param result
 	 * @param model
 	 * @return 入力画面
-	 */
+	 
 	@RequestMapping(value = "/groupInfoInput", method = RequestMethod.POST)
 	public String returnGroupInfoInput(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm groupInfoForm, 
 			BindingResult result, Model model) {
 		
-		return "groupInfoInput";
+		return "groupInfoInput";//グループ情報入力画面へ遷移
 	}
+	*/
 	
 	/**
 	 * 新規グループ登録完了画面
@@ -111,14 +112,13 @@ class GroupInfoController {
 	public String groupInfoResult(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm gInfoData, 
 			Model model,GroupMstEntity gInEn) {
 		
-		gInEn = gInfoData._toConvertGroupInfoEntity();//Formに入っているユーザ情報をEntityに変換
+		//Formに入っているユーザ情報をEntityに変換
+		gInEn = gInfoData._toConvertGroupInfoEntity();
 		gInfoService.create(gInEn);//Entityの情報を登録する
 		
-		return "groupInfoResult";
-		
+		return TO_GROUP_INFO_RES;//グループ情報登録完了画面へ遷移"groupInfoResult"
 	}
 
-	
 }
 
 
