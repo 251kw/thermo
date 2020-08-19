@@ -2,6 +2,8 @@ package com.shantery.thermo.search;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
 import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Size;
+import javax.validation.constraints.Size;
 
 /**
  * @author y.sato
@@ -12,7 +14,8 @@ public class SearchInfoForm {
 
 	private String sch_date;
 	
-//	@Pattern(regexp = "[ a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$")
+	@Size(max = 64, message = "※64文字以内で入力してください")
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message = "※記号は入力できません")
 	private String sch_name;
 	
 	private String sch_grade;

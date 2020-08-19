@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,15 +73,20 @@ class SearchController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
-	public String search_info(/*@Validated*/ @ModelAttribute SearchInfoForm form, Model m,
-			BindingResult result) {
+	public String search_info(@ModelAttribute("searchInfo") @Validated SearchInfoForm form,
+								BindingResult result,
+									Model m) {
 		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
 		
+		//入力チェックでエラーがあったら
+		if(result.hasErrors()) {
+			list = (List<ThermoInfoEntity>)session.getAttribute("schlist");
+		}
 		//チェックボックスと他の入力欄の併用を許可しない
-		if((!"".equals(form.getSch_date()) ||
+		else if((!"".equals(form.getSch_date()) ||
 				!"".equals(form.getSch_name()) ||
 					!"".equals(form.getSch_grade()))&&
 						(form.getSch_high()!=null)){

@@ -60,8 +60,8 @@
 							<input type="date" th:field="*{sch_date}"></div></td>
 						<td th:data-label="#{view.tablelabel.name}">
 							<div class="ui input">
-							<input type="text" th:field="*{sch_name}"></div>
-							<span th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}"></span></td>
+							<input type="text" th:field="*{sch_name}" maxlength='64'></div>
+							<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}"></div></td>
 						
 						<td th:data-label="#{view.tablelabel.grade}">
 	  						<div class="field">
@@ -194,7 +194,7 @@
 			}
 			
 			function onlyClearButton(){
-				this.searchForm.searchBox.value="";
+				this.value="";
 			}
 		</script>
 	</body>
