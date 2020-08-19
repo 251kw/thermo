@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -47,6 +48,8 @@ public class ExcelView extends AbstractXlsxView {
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		//体温初期化
+		double thermo = 0;
 		//日付を取得
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//excelファイル名の日付以下を設定
@@ -73,11 +76,14 @@ public class ExcelView extends AbstractXlsxView {
  		sheet.setColumnWidth(8, 1150); //咳の幅
  		sheet.setColumnWidth(9, 5000); //その他の幅
 		// セルスタイルを指定
-		CellStyle cellstyle = workbook.createCellStyle();
-		CellStyle indexCellstyle = workbook.createCellStyle();
+		CellStyle cellstyle = workbook.createCellStyle(); //入力項目のスタイル
+		CellStyle indexCellstyle = workbook.createCellStyle(); //見出しのスタイル
+		CellStyle highThermo = workbook.createCellStyle(); //37.5度以上の行のスタイル
 		
 		int rowNum = 0; //何行目かを指定する変数
 		Row row = sheet.createRow(rowNum++); //先頭行を作成
+		sheet.createFreezePane(0, 1, 0, 1); //ウィンドウ枠の固定有効化
+		sheet.setRepeatingRows(new CellRangeAddress(0, 0, -1, -1)); //一行目の見出しを改ページに対応
 		Cell cell = null;	//cellを指定する変数
 		
 		Header header = sheet.getHeader(); //ヘッダーの作成
@@ -119,6 +125,25 @@ public class ExcelView extends AbstractXlsxView {
 			} else {
 				//改行を行う
 				row = sheet.getRow(rowNum++);
+				//体温のnullチェック
+				if(list.get(i - 1).getThermo() != null) {
+					thermo = Double.parseDouble(list.get(i - 1).getThermo());
+				}else {
+					thermo = 0;
+				}
+				//37.5度以上は赤色で塗りつぶす
+				if(thermo >= 37.5) {
+					for (int j = 0; j < rowTmp.length; j++) {
+						cell = row.getCell(j);
+						highThermo.setFillPattern(FillPatternType.DIAMONDS); //塗りつぶし
+						highThermo.setFillForegroundColor(IndexedColors.RED .getIndex()); //背景色グレー
+						highThermo.setBorderLeft(BorderStyle.MEDIUM);
+						highThermo.setBorderRight(BorderStyle.MEDIUM);
+						highThermo.setBorderTop(BorderStyle.MEDIUM);
+						highThermo.setBorderBottom(BorderStyle.MEDIUM);
+						cell.setCellStyle(highThermo);
+					}
+				}
 				//1列目に日付を挿入
 				cell = row.getCell(0);
 				cell.setCellValue(list.get(i - 1).getRegist_date());
@@ -136,7 +161,12 @@ public class ExcelView extends AbstractXlsxView {
 				cell.setCellValue(ThermoReplaceValue.calcAge(list.get(i - 1).getUserInfoEntity().getBirthday()) + "歳");
 				//6列目に体温を挿入
 				cell = row.getCell(5);
-				cell.setCellValue(list.get(i - 1).getThermo() + "度");
+				//体温のnullチェック
+				if(list.get(i - 1).getThermo() == null) {
+					cell.setCellValue("");
+				}else {
+					cell.setCellValue(list.get(i - 1).getThermo() + "度");
+				}
 				//7列目に味覚障害を挿入
 				cell = row.getCell(6);
 				cell.setCellValue(ThermoReplaceValue.valueToName(KBN_TYPE_EXISTENCE, (list.get(i - 1).getTaste_disorder())));
@@ -153,7 +183,9 @@ public class ExcelView extends AbstractXlsxView {
 		}	
 		cellstyle.setWrapText(true); //改行を有効化
 		indexCellstyle.setWrapText(true); //見出しの改行を有効化
+		highThermo.setWrapText(true); //色付きcellの改行を有効化
 		cellstyle.setVerticalAlignment(VerticalAlignment.TOP); //cellサイズを調節した際文字を上揃え
-		indexCellstyle.setVerticalAlignment(VerticalAlignment.TOP); //見出しのcellサイズを調節した際文字を上揃え}
+		indexCellstyle.setVerticalAlignment(VerticalAlignment.TOP); //見出しのcellサイズを調節した際文字を上揃え
+		highThermo.setVerticalAlignment(VerticalAlignment.TOP); //色付きcellサイズを調節した際文字を上揃え
 	}
 }
