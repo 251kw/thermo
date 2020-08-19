@@ -19,7 +19,6 @@
 		<div class="komidasi">
 			<h3>この内容で登録してもよろしいですか？</h3>
 		</div>
-	
 		<form action="/from_confirm" method="post" >
 			<table class="ui celled table">
 				<thead class="delete">
@@ -42,24 +41,24 @@
 					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
 					<td th:data-label="#{view.tablelabel.thermo}" th:text="${list.temperature}"></td>
 					<td th:data-label="#{view.tablelabel.taste}">
-						<p th:if="${list.taste}" th:text="あり"></p>
-						<p th:unless="${list.taste}" th:text="なし"></p>
+						<p th:if="${list.taste}" th:text="#{view.select.admin}"></p>
+						<p th:unless="${list.taste}" th:text="#{view.select.normal}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.smell}">
-						<p th:if="${list.smell}" th:text="あり"></p>
-						<p th:unless="${list.smell}" th:text="なし"></p>
+						<p th:if="${list.smell}" th:text="#{view.select.admin}"></p>
+						<p th:unless="${list.smell}" th:text="#{view.select.normal}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.cough}">
-						<p th:if="${list.cough}" th:text="あり"></p>
-						<p th:unless="${list.cough}" th:text="なし"></p>
+						<p th:if="${list.cough}" th:text="#{view.select.admin}"></p>
+						<p th:unless="${list.cough}" th:text="#{view.select.normal}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
 				</tr>
 			</table>
 			<div align="center">
-				<button type="submit" name="input" class="ui inverted blue button " >ok</button>
+				<button type="submit" name="input" class="ui inverted blue button " ><p th:text="#{view.btn.reg}"></button>
 				<a href="/return_input">
-					<button type="button" class="ui inverted blue button " >修正する</button>
+					<button type="button" class="ui inverted blue button " ><p th:text="#{view.btn.fix}"></button>
 				</a>
 			</div>
 		</form>

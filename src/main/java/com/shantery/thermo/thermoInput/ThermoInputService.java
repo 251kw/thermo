@@ -22,7 +22,8 @@ public class ThermoInputService {
 	HttpSession session;
 	
 	
-	/**エンティティにセットして登録する
+	/**
+	 * エンティティにセットして登録する
 	 * @param list Formに入った登録したい情報
 	 */
 	public void registAll(ArrayList<ThermoInputForm.Detail> list) {
@@ -65,8 +66,6 @@ public class ThermoInputService {
 			repository.saveAndFlush(thEn);
 			
 		}
-					
-			
 	}
 	
 	/**
@@ -102,7 +101,7 @@ public class ThermoInputService {
 				if ('０' <= c && c <= '９') {
 					sb.setCharAt(i, (char) (c - '０' + '0'));
 				}
-				if (c == ',') {
+				if (c == ',' || c == '．') {
 					sb.setCharAt(i, (char)'.');
 				}
 			}
@@ -118,8 +117,9 @@ public class ThermoInputService {
 	}
 	
 	/**
-	 * @param check
-	 * @return
+	 * 空文字をnullに変換する
+	 * @param check チェックしたい値
+	 * @return チェック後の値
 	 */
 	public String convertCheckReturn(String check) {
 		if(check.equals(KBN_VALUE_WITHOUT)) {
@@ -130,13 +130,14 @@ public class ThermoInputService {
 	}
 	
 	/**
-	 * @param list
-	 * @return
+	 * 体温の入力チェックをする
+	 * @param list チェックしたい体温情報の入った入力情報
+	 * @return エラーメッセージ
 	 */
 	public ArrayList<String> checkInput(ArrayList<ThermoInputForm.Detail> list){
 		ArrayList<String> message = new ArrayList<String>();
 		for(ThermoInputForm.Detail lt : list) {
-			if(lt.getTemperature().matches("^[0-9０-９]{2}(.[0-9０-９]{1})?$") || lt.getTemperature().equals("")) {
+			if(lt.getTemperature().matches("^[0-9０-９]{2}(.[0-9０-９]{1})?$") || lt.getTemperature().equals(EMPTY)) {
 				message.add(null);
 			}
 			else {
@@ -146,5 +147,33 @@ public class ThermoInputService {
 		
 		return message;
 	}
+	
+	/**
+	 * ユーザー情報を元に、そのユーザーの体温情報を取得する
+	 * @param ulist ユーザー情報
+	 * @return 表示用に変換した体温情報
+	 */
+	public ArrayList<ThermoInputForm.Detail> checkRegistDate(Iterable<UserInfoEntity> ulist){
+		//現在日時の取得と日付の書式設定
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+		//すでに登録している情報取得 
+		ArrayList<ThermoInputForm.Detail> list = new ArrayList<ThermoInputForm.Detail>();
+		int i = 0;
+		for(UserInfoEntity ul : ulist) {
+			ThermoInfoEntity user = repository.findByUserIdAndRegistDate(ul.getUser_id(), day.format(calendar.getTime()));
+			list.add(new ThermoInputForm.Detail());
+			//表示用に値を変換
+			if(user != null) {
+				list.get(i).setTemperature(user.getThermo());
+				list.get(i).setTaste(convertCheckReturn(user.getTaste_disorder()));
+				list.get(i).setSmell(convertCheckReturn(user.getOlfactory_disorder()));
+				list.get(i).setCough(convertCheckReturn(user.getCough()));
+				list.get(i).setWriting(user.getOther());
+				i++;
+			}
+		}
+		
+		return list;
+	}
 }
-

@@ -13,13 +13,11 @@
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
-​
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
 			<h3>登録しました</h3>
 		</div>
-	
 		<form action="/return_search" method="get" >
 			<table class="ui celled table">
 				<thead class="delete">
@@ -42,22 +40,22 @@
 					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
 					<td th:data-label="#{view.tablelabel.thermo}" th:text="${list.temperature}"></td>
 					<td th:data-label="#{view.tablelabel.taste}">
-						<p th:if="${list.taste}" th:text="あり"></p>
-						<p th:unless="${list.taste}" th:text="なし"></p>
+						<p th:if="${list.taste}" th:text="#{view.select.admin}"></p>
+						<p th:unless="${list.taste}" th:text="#{view.select.normal}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.smell}">
-						<p th:if="${list.smell}" th:text="あり"></p>
-						<p th:unless="${list.smell}" th:text="なし"></p>
+						<p th:if="${list.smell}" th:text="#{view.select.admin}"></p>
+						<p th:unless="${list.smell}" th:text="#{view.select.normal}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.cough}">
-						<p th:if="${list.cough}" th:text="あり"></p>
-						<p th:unless="${list.cough}" th:text="なし"></p>
+						<p th:if="${list.cough}" th:text="#{view.select.admin}"></p>
+						<p th:unless="${list.cough}" th:text="#{view.select.normal}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
 				</tr>
 			</table>
 			<div align="center">
-				<button type="submit" class="ui inverted primary button" name="input" >ok</button>
+				<button type="submit" class="ui inverted primary button" name="input" ><p th:text="#{view.btn.return}"></button>
 			</div>
 		</form>
 	</body>

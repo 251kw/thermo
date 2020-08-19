@@ -265,4 +265,12 @@ public class ThermoConstants {
 		/** ログイン画面から受け取るパラメータを格納する **/
 		public static final String THERMO_FORM = "ThermoForm";
 		public static final String THERMO_REGEX_PATTERN = "[a-zA-Z0-9]*";
+		
+	// ThermoInputパッケージでしか使わない定数
+		public static final String THERMO_INP_ER = "※半角数字で小数第一位まで入力してください";
+		public static final String THERMO_ID = "t_";
+		public static final String THERMO_LIST = "list";
+		public static final String THERMO_USER_LIST = "ulist";
+		public static final String THERMO_BIRTH = "birth";
+		public static final String THERMO_INP_FORM = "thForm";
 }

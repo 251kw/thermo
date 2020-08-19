@@ -17,10 +17,8 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>検温情報入力フォーム</h3>
+			<h3>体温情報を入力してください</h3>
 		</div>
-	
-		
 		<form action="/from_input" method="post" th:object="${thForm}">
 			<table class="ui celled table">
 				<thead class="delete">
@@ -36,13 +34,11 @@
 						<th th:text="#{view.tablelabel.other}"></th>
 					</tr>
 				</thead>
-				
 				<tr th:each= "ul,status : ${ulist}">
 		    		<td th:data-label="#{view.tablelabel.name}" th:text="${ul.user_name}"></td>
 		    		<td th:data-label="#{view.tablelabel.gender}" th:text="${ul.gender}"></td>
 		    		<td th:data-label="#{view.tablelabel.grade}" th:text="${ul.grade}"></td>
 		    		<td th:data-label="#{view.tablelabel.age}" th:text="${birth[status.index]}"></td>
-					
 					<th:block th:if="${list}">
 						<td th:data-label="#{view.tablelabel.thermo}">
 							<span class="ui input"><input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
@@ -86,15 +82,12 @@
 						</td>
 					</th:block>
 				</tr>
-				</tbody>
 			</table>
 			<div align="center">
-				<button type="submit" name="input" class="ui inverted blue button " >ok</button>
+				<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.confirm}"></button>
 				<a href="/return_search">
-					<button type="button" class="ui inverted blue button" >戻る</button>
+					<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
 				</a>
 			</div>
 		</form>
-		
-	
 </html>
