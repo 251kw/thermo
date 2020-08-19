@@ -53,7 +53,7 @@ public class ThermoInputService {
 				thEn.setThermo_id("t_"+Integer.toString(thermoId));
 				thermoId++;
 			}
-			thEn.setThermo(convertNull(list.get(i).getTemperature()));
+			thEn.setThermo(convertThermo(list.get(i).getTemperature()));
 			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
 			thEn.setOlfactory_disorder(convertCheck(list.get(i).getSmell()));
 			thEn.setCough(convertCheck(list.get(i).getCough()));
@@ -85,24 +85,66 @@ public class ThermoInputService {
 	}
 	
 	/**
-	 * 体温未入力時にnullを返す
+	 * 体温を変換
 	 * @param thermo 体温
 	 * @return そのままの値かnull
 	 */
-	public String convertNull(String thermo) {
+	public String convertThermo(String thermo) {
+		//空文字をnullにする
 		if(thermo == EMPTY) {
 			thermo = null;
 		}
-		
+		//全角を半角にする
+		if(thermo != null) {
+			StringBuffer sb = new StringBuffer(thermo);
+			for (int i = 0; i < thermo.length(); i++) {
+				char c = thermo.charAt(i);
+				if ('０' <= c && c <= '９') {
+					sb.setCharAt(i, (char) (c - '０' + '0'));
+				}
+				if (c == ',') {
+					sb.setCharAt(i, (char)'.');
+				}
+			}
+			thermo = sb.toString();
+		}
+		//小数第一位に０を付ける
+		if(thermo != null) {
+			if(thermo.matches("^[0-9]{2}$")) {
+				thermo = thermo+".0";
+			}
+		}
 		return thermo;
 	}
 	
+	/**
+	 * @param check
+	 * @return
+	 */
 	public String convertCheckReturn(String check) {
 		if(check.equals(KBN_VALUE_WITHOUT)) {
 			check = null;
 		}
 		
 		return check;
+	}
+	
+	/**
+	 * @param list
+	 * @return
+	 */
+	public ArrayList<String> checkInput(ArrayList<ThermoInputForm.Detail> list){
+		ArrayList<String> message = new ArrayList<String>();
+		for(ThermoInputForm.Detail lt : list) {
+			if(lt.getTemperature().matches("^[0-9０-９]{2}(.[0-9０-９]{1})?$") || lt.getTemperature().equals("")) {
+				message.add(null);
+			}
+			else {
+				message.add("※半角数字で小数第一位まで入力してください");
+			}
+		}
+		
+		return message;
 	}
 }
 

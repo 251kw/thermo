@@ -6,6 +6,8 @@
 		<title>検温情報確認</title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	</head>
 	<body>
@@ -20,36 +22,38 @@
 	
 		<form action="/from_confirm" method="post" >
 			<table class="ui celled table">
-				<tr>
-					<th th:text="#{view.tablelabel.name}"></th>
-					<th th:text="#{view.tablelabel.gender}"></th>
-					<th th:text="#{view.tablelabel.grade}"></th>
-					<th th:text="#{view.tablelabel.age}"></th>
-					<th th:text="#{view.tablelabel.thermo}"></th>
-					<th th:text="#{view.tablelabel.taste}"></th>
-					<th th:text="#{view.tablelabel.smell}"></th>
-					<th th:text="#{view.tablelabel.cough}"></th>
-					<th th:text="#{view.tablelabel.other}"></th>
-				</tr>
+				<thead class="delete">
+					<tr>
+						<th th:text="#{view.tablelabel.name}"></th>
+						<th th:text="#{view.tablelabel.gender}"></th>
+						<th th:text="#{view.tablelabel.grade}"></th>
+						<th th:text="#{view.tablelabel.age}"></th>
+						<th th:text="#{view.tablelabel.thermo}"></th>
+						<th th:text="#{view.tablelabel.taste}"></th>
+						<th th:text="#{view.tablelabel.smell}"></th>
+						<th th:text="#{view.tablelabel.cough}"></th>
+						<th th:text="#{view.tablelabel.other}"></th>
+					</tr>
+				</thead>
 				<tr th:each= "list:${list}">
-					<td th:text="${list.userName}"></td>
-					<td th:text="${list.gender}"></td>
-					<td th:text="${list.grade}"></td>
-					<td th:text="${list.age}"></td>
-					<td th:text="${list.temperature}"></td>
-					<td>
+					<td th:data-label="#{view.tablelabel.name}" th:text="${list.userName}"></td>
+					<td th:data-label="#{view.tablelabel.gender}" th:text="${list.gender}"></td>
+					<td th:data-label="#{view.tablelabel.grade}" th:text="${list.grade}"></td>
+					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
+					<td th:data-label="#{view.tablelabel.thermo}" th:text="${list.temperature}"></td>
+					<td th:data-label="#{view.tablelabel.taste}">
 						<p th:if="${list.taste}" th:text="あり"></p>
 						<p th:unless="${list.taste}" th:text="なし"></p>
 					</td>
-					<td>
+					<td th:data-label="#{view.tablelabel.smell}">
 						<p th:if="${list.smell}" th:text="あり"></p>
 						<p th:unless="${list.smell}" th:text="なし"></p>
 					</td>
-					<td>
+					<td th:data-label="#{view.tablelabel.cough}">
 						<p th:if="${list.cough}" th:text="あり"></p>
 						<p th:unless="${list.cough}" th:text="なし"></p>
 					</td>
-					<td th:text="${list.writing}"></td>
+					<td th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
 				</tr>
 			</table>
 			<div align="center">

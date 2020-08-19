@@ -53,25 +53,24 @@ class ThermoInputController {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		
-		//すでに登録していないか確認
-		if(t_repository.findByUserIdAndRegistDate(loginuser.getUser_id(), day.format(calendar.getTime())) != null) {
-			ArrayList<ThermoInputForm.Detail> list = new ArrayList<ThermoInputForm.Detail>();
-			int i = 0;
-			for(UserInfoEntity ul : ulist) {
-				ThermoInfoEntity user = t_repository.findByUserIdAndRegistDate(ul.getUser_id(), day.format(calendar.getTime()));
-				list.add(new ThermoInputForm.Detail());
-				if(user != null) {
-					list.get(i).setTemperature(user.getThermo());
-					list.get(i).setTaste(service.convertCheckReturn(user.getTaste_disorder()));
-					list.get(i).setSmell(service.convertCheckReturn(user.getOlfactory_disorder()));
-					list.get(i).setCough(service.convertCheckReturn(user.getCough()));
-					list.get(i).setWriting(user.getOther());
-					i++;
-				}
+		//すでに登録している情報取得 外部化する
+		ArrayList<ThermoInputForm.Detail> list = new ArrayList<ThermoInputForm.Detail>();
+		int i = 0;
+		for(UserInfoEntity ul : ulist) {
+			ThermoInfoEntity user = t_repository.findByUserIdAndRegistDate(ul.getUser_id(), day.format(calendar.getTime()));
+			list.add(new ThermoInputForm.Detail());
+			if(user != null) {
+				list.get(i).setTemperature(user.getThermo());
+				list.get(i).setTaste(service.convertCheckReturn(user.getTaste_disorder()));
+				list.get(i).setSmell(service.convertCheckReturn(user.getOlfactory_disorder()));
+				list.get(i).setCough(service.convertCheckReturn(user.getCough()));
+				list.get(i).setWriting(user.getOther());
+				i++;
 			}
-			model.addAttribute("list",list);
-			
 		}
+		model.addAttribute("list",list);
+			
+		
 		
 		//データベースからとってきたユーザー情報を表示用に変換する 
 		ArrayList<String> birth = new ArrayList<String>();
@@ -99,8 +98,16 @@ class ThermoInputController {
 	@RequestMapping(value = "/from_input"/*FROM_INPUT_BUTTON*/ , method = RequestMethod.POST)
 	public String InputConfirm(@ModelAttribute("thForm") ThermoInputForm form, Model model) {
 		
-		model.addAttribute("list", form.gettList());
-		session.setAttribute("list", form.gettList());
+		ArrayList<ThermoInputForm.Detail> list = form.gettList();
+		model.addAttribute("list", list);
+		session.setAttribute("list", list);
+		ArrayList<String> message = service.checkInput(list);
+		if(message.contains("※半角数字で小数第一位まで入力してください")) {
+			model.addAttribute("message", message);
+			model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
+			model.addAttribute("birth", (ArrayList<String>)session.getAttribute("birth"));
+			return "thermoInput";
+		}
 		
 		return "thermoConfirm"/*TO_INPUT_CONFIRM*/;
 	}
