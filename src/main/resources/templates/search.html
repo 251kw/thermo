@@ -23,7 +23,7 @@
 		<p></p>
 		<div class="ui right aligned  container">
 			<form method="get" action="/logout">
-						<button type="submit" class="ui inverted primary button">
+						<button type="submit" class="ui inverted primary button" style="float:right;">
 								<p th:text="ログアウト"></p>
 						</button>
 			</form>
@@ -191,7 +191,11 @@
 			            return;
 			        default:
 			    }
-			}  
+			}
+			
+			function onlyClearButton(){
+				this.searchForm.searchBox.value="";
+			}
 		</script>
 	</body>
 </html>

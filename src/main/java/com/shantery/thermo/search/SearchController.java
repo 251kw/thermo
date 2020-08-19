@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,9 +46,19 @@ class SearchController {
 	public  String search(Model  m){
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		List<ThermoInfoEntity> list = schRepository.searchCurDate(loginuser.getGroup_id());	//今日の日付で検索	//group_idで絞る
+		boolean display = true;		//テーブルを表示させるか
 		
 		m.addAttribute("searchInfo", new SearchInfoForm());
 		m.addAttribute("list", list);
+		
+		if(list.size()==0) {	//listがないとき
+			m.addAttribute("nolist_msg", "今日の検温情報は登録されていません。");
+			display = false;
+			
+		} else if(list.size()==50){
+			m.addAttribute("overlist_msg", "50件の検索結果を表示しています。");
+		}
+		m.addAttribute("display", display);
 		
 		session.setAttribute("schlist", list);		//印刷用
 		
