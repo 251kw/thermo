@@ -73,19 +73,19 @@ class SearchController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
-	public String search_info(@ModelAttribute("searchInfo") @Validated SearchInfoForm form,
-								BindingResult result,
-									Model m) {
+	public String search_info(@ModelAttribute("searchInfo") SearchInfoForm form, Model m) {
 		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
+		String error_msg = null;
 		
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
 		//入力チェックでエラーがあったら
-		if(result.hasErrors()) {
+		if(!schService.strCheck(form.getSch_name())&&(!form.getSch_name().equals(""))) {
 			list = (List<ThermoInfoEntity>)session.getAttribute("schlist");
+			error_msg = "※記号は入力できません。";
 		}
 		//チェックボックスと他の入力欄の併用を許可しない
 		else if((!"".equals(form.getSch_date()) ||
@@ -115,6 +115,7 @@ class SearchController {
 		m.addAttribute("searchInfo", form);
 		m.addAttribute("list", list);
 		m.addAttribute("display", display);
+		m.addAttribute("error_msg", error_msg);
 		m.addAttribute("adminbtn", adminbtn);
 		
 		session.setAttribute("schlist", list);	//印刷用

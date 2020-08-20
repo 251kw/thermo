@@ -16,7 +16,7 @@ public class SearchInfoForm {
 
 	private String sch_date;
 	
-//	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+",message = "※記号は入力できません")
+//	@Pattern(regexp = "[^!\"#$%&'()\\*\\+\\-\\.,\\/:;<=>?@\\[\\\\\\]^_`{|}~]+",message = "※記号は入力できません")
 	private String sch_name;
 	
 	private String sch_grade;

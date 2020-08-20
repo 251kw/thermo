@@ -25,7 +25,13 @@ public class SearchService {
 	@Autowired
 	private SearchRepositoryCustom schRepCus; //リポジトリカスタムを呼び出す
 	
-
+	/**
+	 * 入力の状態を見分けて
+	 * 検索するメソッド
+	 * @param grouoId グループId
+	 * @param form 検索入力情報
+	 * @return list 検索結果
+	 */
 	public List<ThermoInfoEntity> separate(String groupId, SearchInfoForm form){
 		
 		if("".equals(form.getSch_date()) &&
@@ -44,7 +50,12 @@ public class SearchService {
 		return schRepCus.searchQuery(groupId, form);	//条件検索;
 	}
 	
-	public boolean isZeroCurDate(String groupId) {		//今日の検温情報があるか
+	/**
+	 * 今日の検温情報があるか検索するメソッド
+	 * @param groupId グループId
+	 * @return result	真偽値
+	 */
+	public boolean isZeroCurDate(String groupId) {
 		boolean result = false;
 		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);
 		
@@ -55,7 +66,12 @@ public class SearchService {
 		return result;
 	}
 	
-	public boolean isAdminFlg(UserInfoEntity loginuser) {
+	/**
+	 * ログインユーザーは管理者か判断するメソッド
+	 * @param loginuser ログインユーザ情報
+	 * @return	result 真偽値
+	 */
+	public boolean isAdminFlg(UserInfoEntity loginuser) { 
 		boolean result = false;
 		
 		if(loginuser.getAdmin_flg().equals("1")) {	//管理者フラグであればtrue
@@ -65,4 +81,10 @@ public class SearchService {
 		return result;
 	}
 
+	public boolean strCheck(String sch_name){
+		if (!sch_name.matches("[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")) {
+			return false;
+		}
+		return true;
+	}
 }
