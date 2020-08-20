@@ -37,7 +37,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="list,status : ${users_info}">
-						<td data-label="#{view.usercount}" th:text="${status.count}"></td>
+						<td th:data-label="#{view.usercount}" th:text="${status.count}"></td>
 						<th:block th:each="line:${list}">
 							<th:block th:if="${lineStat.index != 5 && lineStat.index != 7 && lineStat.index != 8}" >
 								<td th:data-label="${users_head_info[lineStat.index]}" th:text="${line}"></td>

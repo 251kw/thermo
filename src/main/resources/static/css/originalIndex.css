@@ -136,7 +136,7 @@ div.example  {
 
 /* ------------------------------------スマホ用css--------------------------------------*/
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 767px) {
 
 	/* index.html */
 	.index_error {
