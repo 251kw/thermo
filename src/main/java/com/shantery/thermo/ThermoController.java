@@ -59,6 +59,18 @@ class ThermoController {
 		if (session.getAttribute(LOGIN_USER) != null) {
 			session.removeAttribute(LOGIN_USER);
 		}
+		//userInfoのsessionオブジェクトを削除する
+		if(session.getAttribute("ulist") != null) {
+			session.removeAttribute("ulist");
+		}
+		//userInfoのsessionオブジェクトを削除する
+		if(session.getAttribute("uForm") != null) {
+			session.removeAttribute("uForm");
+		}
+		//groupInfoのsessionオブジェクトを削除する
+		if(session.getAttribute("gForm") != null) {
+			session.removeAttribute("gForm");
+		}
 			
 		// トップページへ移動
 		return TO_TOP;
