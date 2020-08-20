@@ -17,6 +17,7 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 import com.shantery.thermo.search.SearchRepository;
+import com.shantery.thermo.search.SearchService;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,9 @@ class ThermoController {
 	
 	@Autowired
 	private SearchRepository schRepository;
+	
+	@Autowired
+	private SearchService schService;
 	
 	@Autowired
 	HttpSession session; 
@@ -107,7 +111,9 @@ class ThermoController {
 				display = false;
 			}
 			model.addAttribute("display", display);
-
+			
+			boolean adminbtn = schService.isAdminFlg(userinfo);
+			model.addAttribute("adminbtn", adminbtn);
 			
 			session.setAttribute("schlist", schlist);
 			
