@@ -225,6 +225,36 @@ public class ThermoReplaceValue {
 		    map.put(SELECT_GRADE_KEY_C, keys[9]);
 		    
 		    break;
+		    
+		// 学年と空欄  
+		case KBN_TYPE_GRADE_AND_BLANK:
+			
+			keys = new String[11];
+			keys[0] = EMPTY;
+			keys[1] = SELECT_GRADE_VALUE_ZERO;
+			keys[2] = SELECT_GRADE_VALUE_ONE;
+			keys[3] = SELECT_GRADE_VALUE_TWO;
+			keys[4] = SELECT_GRADE_VALUE_THREE;
+			keys[5] = SELECT_GRADE_VALUE_FOUR;
+			keys[6] = SELECT_GRADE_VALUE_FIVE;
+			keys[7] = SELECT_GRADE_VALUE_SIX;
+			keys[8] = SELECT_GRADE_VALUE_A;
+			keys[9] = SELECT_GRADE_VALUE_B;
+			keys[10] = SELECT_GRADE_VALUE_C;
+				
+			map.put(EMPTY, EMPTY);
+		    map.put(SELECT_GRADE_KEY_ZERO, keys[1]);
+		    map.put(SELECT_GRADE_KEY_ONE, keys[2]);
+		    map.put(SELECT_GRADE_KEY_TWO, keys[3]);
+		    map.put(SELECT_GRADE_KEY_THREE, keys[4]);
+		    map.put(SELECT_GRADE_KEY_FOUR, keys[5]);
+		    map.put(SELECT_GRADE_KEY_FIVE, keys[6]);
+		    map.put(SELECT_GRADE_KEY_SIX, keys[7]);
+		    map.put(SELECT_GRADE_KEY_A, keys[8]);
+		    map.put(SELECT_GRADE_KEY_B, keys[9]);
+		    map.put(SELECT_GRADE_KEY_C, keys[10]);
+		    
+		    break;
 		}
 			
 		for(Map.Entry<String, String> value : map.entrySet()) {

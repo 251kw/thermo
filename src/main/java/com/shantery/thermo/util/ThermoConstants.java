@@ -152,6 +152,7 @@ public class ThermoConstants {
 		
 		// valueToName
 		/** 区分の種類 **/
+		public static final String KBN_TYPE_GRADE_AND_BLANK = "gradeAndBlank";
 		public static final String KBN_TYPE_GRADE = "grade";
 		public static final String KBN_TYPE_ADMIN = "admin";
 		public static final String KBN_TYPE_GENDER = "gender";
