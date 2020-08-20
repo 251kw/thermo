@@ -1,9 +1,7 @@
 package com.shantery.thermo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import static com.shantery.thermo.util.ThermoConstants.*;
+import com.shantery.thermo.util.LoginIdValid;
+import com.shantery.thermo.util.LoginPassValid;
 
 /**
  * @author k.takahashi
@@ -12,15 +10,11 @@ import static com.shantery.thermo.util.ThermoConstants.*;
 public class ThermoForm {
 
 	/** ユーザID **/
-    @NotBlank
-    @Size(min = 4, max = 32)
-    @Pattern(regexp=THERMO_REGEX_PATTERN)
+	@LoginIdValid
 	private String userId;
     
 	/** ユーザパスワード **/
-    @NotBlank
-    @Size(min = 4, max = 16)
-    @Pattern(regexp=THERMO_REGEX_PATTERN)
+	@LoginPassValid
 	private String userpass;
 
     // getter・setter
