@@ -51,7 +51,7 @@ class SearchController {
 			m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 			display = false;
 			
-		} else if(list.size()==50){
+		} else if(list.size()==MAX_SCH_LIST){
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		m.addAttribute("display", display);

@@ -43,31 +43,31 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     	sql.append("WHERE t.userInfoEntity.groupId = :groupId ");
     	
     	
-    	if(!"".equals(form.getSch_date())) {			//日付が入力されたら
+    	if(!EMPTY.equals(form.getSch_date())) {			//日付が入力されたら
     		sql.append("AND t.registDate = :date ");
     		dateFlg = true;
     		
-    		if(!"".equals(form.getSch_name())) {		//名前が入力されたら
+    		if(!EMPTY.equals(form.getSch_name())) {		//名前が入力されたら
     			sql.append("AND t.userInfoEntity.userName LIKE :name ");
     			nameFlg = true;
     		}
-    		if(!"".equals(form.getSch_grade())) {		//学年が入力されたら
+    		if(!EMPTY.equals(form.getSch_grade())) {		//学年が入力されたら
     			sql.append("AND t.userInfoEntity.grade = :grade ");
     			gradeFlg = true;
     		}
     	} else {
     		
-    		if(!"".equals(form.getSch_name())) {
+    		if(!EMPTY.equals(form.getSch_name())) {
     			sql.append("AND t.userInfoEntity.userName LIKE :name ");
     			nameFlg = true;
     			
-    			if(!"".equals(form.getSch_grade())) {
+    			if(!EMPTY.equals(form.getSch_grade())) {
         			sql.append("AND t.userInfoEntity.grade = :grade ");
         			gradeFlg = true;
         		}
     		}
     		
-    		if(!"".equals(form.getSch_grade())) {
+    		if(!EMPTY.equals(form.getSch_grade())) {
     			sql.append("AND t.userInfoEntity.grade = :grade ");
     			gradeFlg = true;
     		}
@@ -85,7 +85,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     	//以下、フラグがtrueの時に値をセット
 		if (dateFlg) query.setParameter("date", form.getSch_date());
 		if (nameFlg) {
-			query.setParameter("name", "%"+form.getSch_name()+"%");
+			query.setParameter("name", Q_PERCENT+form.getSch_name()+Q_PERCENT);
 			if(!dateFlg) {	//日付指定がなかったら、二週間分を設定
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
@@ -101,7 +101,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 		}
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
 		
-		return query.setMaxResults(50).getResultList();		//取得データ数の制限.結果をlistで取得
+		return query.setMaxResults(MAX_SCH_LIST).getResultList();		//取得データ数の制限.結果をlistで取得
     }
 
 }
