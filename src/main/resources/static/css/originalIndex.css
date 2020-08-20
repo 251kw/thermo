@@ -160,4 +160,25 @@ div.example  {
 	.delete {
 		display:none !important;
 	}
+	
+	.table {
+	 width: 80%;
+	}
+	#id .table thead {
+	  display: none;
+	}
+	.table tr {
+	  width: 100%;
+	}
+	.table td {
+	  display: block;
+	  text-align: center;
+	  width: 100%;
+	}
+	.table td:before {
+	  content: attr(data-label);
+	  float: left;
+	  font-weight: bold;
+	  margin-right: 10px;
+	}
 }
