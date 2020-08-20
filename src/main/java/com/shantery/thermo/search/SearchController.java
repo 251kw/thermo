@@ -81,6 +81,8 @@ class SearchController {
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
 		
+		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
+		
 		//入力チェックでエラーがあったら
 		if(result.hasErrors()) {
 			list = (List<ThermoInfoEntity>)session.getAttribute("schlist");
@@ -113,6 +115,7 @@ class SearchController {
 		m.addAttribute("searchInfo", form);
 		m.addAttribute("list", list);
 		m.addAttribute("display", display);
+		m.addAttribute("adminbtn", adminbtn);
 		
 		session.setAttribute("schlist", list);	//印刷用
 	
