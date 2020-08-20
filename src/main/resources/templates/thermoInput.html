@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>検温情報入力</title>
+		<title th:text="#{view.thermoInfoIn.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
@@ -13,11 +13,10 @@
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
-​
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>体温情報を入力してください</h3>
+			<h3 th:text="#{view.text.thermoInfoIn}"></h3>
 		</div>
 		<form action="/from_input" method="post" th:object="${thForm}">
 			<table class="ui celled table">
@@ -42,7 +41,7 @@
 					<th:block th:if="${list}">
 						<td th:data-label="#{view.tablelabel.thermo}">
 							<span class="ui input"><input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-							th:value="${list[status.index].temperature}" size="30" maxlength="4" th:placeholder="半角数字で入力" /></span>
+							th:value="${list[status.index].temperature}" size="30" maxlength="4" th:placeholder="#{view.checkPh.thermo}" /></span>
 							<div th:if="${message}">
 								<br><font color="red"><span th:text="${message[status.index]}"></span></font>
 							</div>
@@ -73,7 +72,7 @@
 						</td>
 						<td th:data-label="#{view.tablelabel.other}">
 							<span class="ui input"><input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-							th:value="${list[status.index].writing}" size="30" maxlength="128" th:placeholder="128文字以内" /></span>
+							th:value="${list[status.index].writing}" size="30" maxlength="128" th:placeholder="#{view.checkPh.other}" /></span>
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >

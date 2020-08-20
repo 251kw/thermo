@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>検温情報結果</title>
+		<title th:text="#{view.thermoInfoRes.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
@@ -16,7 +16,7 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>登録しました</h3>
+			<h3 th:text="#{view.text.thermoInfoRes}"></h3>
 		</div>
 		<form action="/return_search" method="get" >
 			<table class="ui celled table">

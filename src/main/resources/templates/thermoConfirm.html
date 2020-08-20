@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-		<title>検温情報確認</title>
+		<title th:text="#{view.thermoInfoCon.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
@@ -13,11 +13,10 @@
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
-​
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
-			<h3>この内容で登録してもよろしいですか？</h3>
+			<h3 th:text="#{view.text.thermoInfoCon}"></h3>
 		</div>
 		<form action="/from_confirm" method="post" >
 			<table class="ui celled table">

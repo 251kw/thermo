@@ -1,5 +1,6 @@
 package com.shantery.thermo.thermoInput;
 
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,7 +52,7 @@ public class ThermoInputService {
 				thEn.setThermo_id(user.getThermo_id());
 				repository.delete(user);
 			}else {
-				thEn.setThermo_id("t_"+Integer.toString(thermoId));
+				thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
 				thermoId++;
 			}
 			thEn.setThermo(convertThermo(list.get(i).getTemperature()));
@@ -89,23 +90,12 @@ public class ThermoInputService {
 	 * @return そのままの値かnull
 	 */
 	public String convertThermo(String thermo) {
+		//空欄つぶす
+		thermo = thermo.trim();
+		thermo = Normalizer.normalize(thermo,Normalizer.Form.NFKC);
 		//空文字をnullにする
 		if(thermo == EMPTY) {
 			thermo = null;
-		}
-		//全角を半角にする
-		if(thermo != null) {
-			StringBuffer sb = new StringBuffer(thermo);
-			for (int i = 0; i < thermo.length(); i++) {
-				char c = thermo.charAt(i);
-				if ('０' <= c && c <= '９') {
-					sb.setCharAt(i, (char) (c - '０' + '0'));
-				}
-				if (c == ',' || c == '．') {
-					sb.setCharAt(i, (char)'.');
-				}
-			}
-			thermo = sb.toString();
 		}
 		//小数第一位に０を付ける
 		if(thermo != null) {
@@ -137,11 +127,15 @@ public class ThermoInputService {
 	public ArrayList<String> checkInput(ArrayList<ThermoInputForm.Detail> list){
 		ArrayList<String> message = new ArrayList<String>();
 		for(ThermoInputForm.Detail lt : list) {
-			if(lt.getTemperature().matches("^[0-9０-９]{2}(.[0-9０-９]{1})?$") || lt.getTemperature().equals(EMPTY)) {
-				message.add(null);
-			}
-			else {
-				message.add("※半角数字で小数第一位まで入力してください");
+			String check = Normalizer.normalize(lt.getTemperature().trim(),Normalizer.Form.NFKC);
+			if(check.matches("^\\d+\\.?\\d{0,1}$") || check.equals(EMPTY)) {
+				if(check.matches("^[3-4][0-9](.[0-9])?$") || check.equals(EMPTY)) {
+					message.add(null);
+				}else {
+					message.add(THERMO_INP_TEMP_ER);
+				}
+			}else {
+				message.add(THERMO_INP_ER);
 			}
 		}
 		

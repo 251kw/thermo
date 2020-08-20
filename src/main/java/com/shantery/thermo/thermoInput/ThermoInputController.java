@@ -56,7 +56,7 @@ class ThermoInputController {
 		for(UserInfoEntity ul : ulist) {
 			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
 			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
-			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday()));	
+			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
 		}
 		
 		model.addAttribute("list",list);
@@ -85,7 +85,7 @@ class ThermoInputController {
 		
 		//入力チェックをしてエラー文があれば入力画面へ
 		ArrayList<String> message = service.checkInput(list);
-		if(message.contains("※半角数字で小数第一位まで入力してください")) {
+		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER)) {
 			model.addAttribute("message", message);
 			model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
 			model.addAttribute("birth", (ArrayList<String>)session.getAttribute("birth"));

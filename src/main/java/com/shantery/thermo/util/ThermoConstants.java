@@ -269,6 +269,7 @@ public class ThermoConstants {
 		
 	// ThermoInputパッケージでしか使わない定数
 		public static final String THERMO_INP_ER = "※半角数字で小数第一位まで入力してください";
+		public static final String THERMO_INP_TEMP_ER = "※体温は30.0～49.9の範囲で入力してください";
 		public static final String THERMO_ID = "t_";
 		public static final String THERMO_LIST = "list";
 		public static final String THERMO_USER_LIST = "ulist";
