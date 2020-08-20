@@ -90,7 +90,7 @@
 	text-align: center;
 	padding: 10px;
 	line-height: 100px;
-	width: 400px;
+	width: 300px;
 	cursor: pointer;
 }
 
@@ -130,8 +130,8 @@ div.example  {
 	margin-right: auto;
 }
 
-.rightorigin {
-	text-align: right;
+.centerorigin {
+	text-align: center;
 }
 
 /* ------------------------------------スマホ用css--------------------------------------*/
