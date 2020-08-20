@@ -2,13 +2,12 @@ package com.shantery.thermo.search;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 /**
  * @author y.sato
@@ -34,9 +33,9 @@ public class SearchService {
 	 */
 	public List<ThermoInfoEntity> separate(String groupId, SearchInfoForm form){
 		
-		if("".equals(form.getSch_date()) &&
-				"".equals(form.getSch_name()) && 
-					"".equals(form.getSch_grade())) {
+		if(EMPTY.equals(form.getSch_date()) &&
+				EMPTY.equals(form.getSch_name()) && 
+					EMPTY.equals(form.getSch_grade())) {
 			if(form.getSch_high()==null) {
 				//未記入、未選択で今日のデータ検索にするのか
 				return schRepository.searchCurDate(groupId);
@@ -74,15 +73,20 @@ public class SearchService {
 	public boolean isAdminFlg(UserInfoEntity loginuser) { 
 		boolean result = false;
 		
-		if(loginuser.getAdmin_flg().equals("1")) {	//管理者フラグであればtrue
+		if(loginuser.getAdmin_flg().equals(KBN_VALUE_ADMIN_ON)) {	//管理者フラグであればtrue
 			result = true;
 		}
 		
 		return result;
 	}
 
+	/**
+	 * 検索情報（名前）の入力チェック
+	 * @param sch_name 名前検索情報
+	 * @return 真偽値
+	 */
 	public boolean strCheck(String sch_name){
-		if (!sch_name.matches("[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")) {
+		if (!sch_name.matches(SCH_INFO_REGEX_PATTERN)) {
 			return false;
 		}
 		return true;

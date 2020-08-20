@@ -1,12 +1,5 @@
 package com.shantery.thermo.search;
 
-import static com.shantery.thermo.util.ThermoConstants.*;
-
-import javax.persistence.Column;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-
 /**
  * @author y.sato
  * 検索条件form
@@ -15,10 +8,7 @@ import javax.validation.constraints.Size;
 public class SearchInfoForm {
 
 	private String sch_date;
-	
-//	@Pattern(regexp = "[^!\"#$%&'()\\*\\+\\-\\.,\\/:;<=>?@\\[\\\\\\]^_`{|}~]+",message = "※記号は入力できません")
 	private String sch_name;
-	
 	private String sch_grade;
 	private String sch_high;
 	

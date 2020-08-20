@@ -1,9 +1,6 @@
 package com.shantery.thermo.search;
 
-import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
-import static com.shantery.thermo.util.ThermoConstants.THERMO_FORM;
-import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
-
+import static com.shantery.thermo.util.ThermoConstants.*;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,8 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,7 +40,7 @@ class SearchController {
 	 */
 	@RequestMapping(value ="/return_search", method = RequestMethod.GET) //検索画面に来た時(戻る)
 	public  String search(Model  m){
-		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		List<ThermoInfoEntity> list = schRepository.searchCurDate(loginuser.getGroup_id());	//今日の日付で検索	//group_idで絞る
 		boolean display = true;		//テーブルを表示させるか
 		
@@ -53,17 +48,17 @@ class SearchController {
 		m.addAttribute("list", list);
 		
 		if(list.size()==0) {	//listがないとき
-			m.addAttribute("nolist_msg", "今日の検温情報は登録されていません。");
+			m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 			display = false;
 			
 		} else if(list.size()==50){
-			m.addAttribute("overlist_msg", "50件の検索結果を表示しています。");
+			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		m.addAttribute("display", display);
 		
-		session.setAttribute("schlist", list);		//印刷用
+		session.setAttribute(SCH_LIST, list);		//印刷用
 		
-		return "search";
+		return TO_SEARCH;
 	}
 	
 	/**
@@ -75,26 +70,26 @@ class SearchController {
 	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
 	public String search_info(@ModelAttribute("searchInfo") SearchInfoForm form, Model m) {
 		
-		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute("loginuser");
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
 		String error_msg = null;
 		
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
-		//入力チェックでエラーがあったら
-		if(!schService.strCheck(form.getSch_name())&&(!form.getSch_name().equals(""))) {
-			list = (List<ThermoInfoEntity>)session.getAttribute("schlist");
-			error_msg = "※記号は入力できません。";
+		//入力チェックでエラーがあったら(未記入はスルーする）
+		if(!schService.strCheck(form.getSch_name())&&(!form.getSch_name().equals(EMPTY))) {
+			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
+			error_msg = INFO_ERROR;
 		}
 		//チェックボックスと他の入力欄の併用を許可しない
-		else if((!"".equals(form.getSch_date()) ||
-				!"".equals(form.getSch_name()) ||
-					!"".equals(form.getSch_grade()))&&
+		else if((!EMPTY.equals(form.getSch_date()) ||
+				!EMPTY.equals(form.getSch_name()) ||
+					!EMPTY.equals(form.getSch_grade()))&&
 						(form.getSch_high()!=null)){
 			
-			list = (List<ThermoInfoEntity>) session.getAttribute("schlist");
-			m.addAttribute("combi_msg", "チェックボックスは単体で使用してください。");
+			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
+			m.addAttribute("combi_msg", COMBI_MSG);
 			
 		} else {
 		
@@ -103,13 +98,13 @@ class SearchController {
 		
 		if(list.size()==0) {	//listがないとき
 			if(schService.isZeroCurDate(loginuser.getGroup_id())) {	//今日の情報がない時
-				m.addAttribute("nolist_msg", "今日の検温情報は登録されていません。");
+				m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 			} else {
-				m.addAttribute("nolist_msg", "検索結果がありませんでした。");
+				m.addAttribute("nolist_msg", NOLIST_MSG);
 			}
 			display = false;
 		} else if(list.size()==50){
-			m.addAttribute("overlist_msg", "50件の検索結果を表示しています。");
+			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		
 		m.addAttribute("searchInfo", form);
@@ -118,9 +113,9 @@ class SearchController {
 		m.addAttribute("error_msg", error_msg);
 		m.addAttribute("adminbtn", adminbtn);
 		
-		session.setAttribute("schlist", list);	//印刷用
+		session.setAttribute(SCH_LIST, list);	//印刷用
 	
-		return "search";
+		return TO_SEARCH;
 	}
 	
 	/**
@@ -143,5 +138,4 @@ class SearchController {
 	}
 	
 	
-	//TODO クリアボタンの動きおかしい
 }

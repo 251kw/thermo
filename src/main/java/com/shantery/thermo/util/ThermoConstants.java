@@ -1,5 +1,6 @@
 package com.shantery.thermo.util;
 
+
 /**
  * @author y.okino
  * 共通 定数を保持するクラス
@@ -100,6 +101,8 @@ public class ThermoConstants {
 	public static final String LOGIN_USER = "loginuser";
 	/** ログイン画面に出すエラーメッセージをモデルに入れるときのキー **/
 	public static final String LOGIN_ERROR = "login_error";
+	/** 検索結果Listをセッションに入れるときのキー**/
+	public static final String SCH_LIST = "schlist";
 	
 	//ユーザー情報一括登録の配列を使うときの数値
 	public static final int M_GID = 0;
@@ -275,4 +278,16 @@ public class ThermoConstants {
 		public static final String THERMO_USER_LIST = "ulist";
 		public static final String THERMO_BIRTH = "birth";
 		public static final String THERMO_INP_FORM = "thForm";
+		
+	// Searchパッケージで使用する定数
+		public static final String COMBI_MSG = "チェックボックスは単体で使用してください。";
+		public static final String NOLIST_MSG = "検索結果がありませんでした。";
+		public static final String TODAY_NOLIST_MSG = "今日の検温情報は登録されていません。";
+		public static final String OVER_LIST_MSG = "50件の検索結果を表示しています。";
+		public static final String INFO_ERROR = "※記号は入力できません。";
+		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$";
+		
+		//検索時のクエリ文
+		public static final String Q_SELECT = "SELECT ";
+		public static final String Q_ALL = "* ";
 }

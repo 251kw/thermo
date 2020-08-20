@@ -7,7 +7,10 @@
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
-    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	
+		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{js/jquery-ui.js}"></script>
+		
     	<script type="text/javascript"  th:src="@{/js/jquery-3.4.1.min.js}"></script>
     	
 	<body>
@@ -203,5 +206,14 @@
 				return;
 			}
 		</script>
+		
+		<script type="text/javascript">
+		  $( function() {
+		    $( "#datepicker" ).datepicker();
+		  } );
+  		</script>
+  
+		
+		
 	</body>
 </html>

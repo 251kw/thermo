@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
+import static com.shantery.thermo.util.ThermoConstants.*;
 /**
  * @author y.sato
  * 検索動的クエリ実装クラス
@@ -87,7 +88,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 			query.setParameter("name", "%"+form.getSch_name()+"%");
 			if(!dateFlg) {	//日付指定がなかったら、二週間分を設定
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
 				
 				String curDate = sdf.format(cal.getTime());		//今日の日付
 				
