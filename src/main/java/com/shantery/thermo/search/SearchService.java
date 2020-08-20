@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
+import com.shantery.thermo.entity.UserInfoEntity;
 
 /**
  * @author y.sato
@@ -51,6 +52,16 @@ public class SearchService {
 			result = true;
 		}
 	
+		return result;
+	}
+	
+	public boolean isAdminFlg(UserInfoEntity loginuser) {
+		boolean result = false;
+		
+		if(loginuser.getAdmin_flg().equals("1")) {	//管理者フラグであればtrue
+			result = true;
+		}
+		
 		return result;
 	}
 

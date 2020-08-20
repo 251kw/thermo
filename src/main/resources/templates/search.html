@@ -31,9 +31,14 @@
 		<div class="ui left aligned  container">
 			<p></p>
 			<form method="post" action="/from">
-					<button type="submit" class="ui inverted primary button">
+					<div th:if="${adminbtn}">
+						<button type="submit" class="ui inverted primary button">
 							<p th:text="#{view.btn.thermoinfo}"></p>
-					</button>
+						</button></div>
+					<div th:unless="${adminbtn}">
+						<button class="ui disabled inverted primary button">
+							<p th:text="#{view.btn.thermoinfo}"></p>
+						</button></div>
 			</form>
 		</div>
 		<p></p>
@@ -195,6 +200,7 @@
 			
 			function onlyClearButton(){
 				this.value="";
+				return;
 			}
 		</script>
 	</body>
