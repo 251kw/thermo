@@ -157,7 +157,6 @@ public class ThermoConstants {
 		
 		// valueToName
 		/** 区分の種類 **/
-		public static final String KBN_TYPE_GRADE_AND_BLANK = "gradeAndBlank";
 		public static final String KBN_TYPE_GRADE = "grade";
 		public static final String KBN_TYPE_ADMIN = "admin";
 		public static final String KBN_TYPE_GENDER = "gender";
@@ -220,6 +219,7 @@ public class ThermoConstants {
 		// makeSelect
 		/** セレクトボックスの種類を決めるdivisionの値 **/
 		public static final String SELECT_TYPE_GRADE = "grade";
+		public static final String SELECT_TYPE_GRADE_AND_BLANK = "gradeAndBlank";
 		public static final String SELECT_TYPE_GENDER = "gender";
 		public static final String SELECT_TYPE_REGIST = "regist";
 		
@@ -257,7 +257,8 @@ public class ThermoConstants {
 		public static final String SELECT_GRADE_KEY_B = "B";
 		public static final String SELECT_GRADE_KEY_C = "C";
 		
-		public static final String SELECT_HTML_PARTS_A = "<select name='";
+		public static final String SELECT_HTML_PARTS_A1 = "<select name='";
+		public static final String SELECT_HTML_PARTS_A2 = "<select th:field='*{sch_grade}' name='";
 		public static final String SELECT_HTML_PARTS_B = "'";
 		public static final String SELECT_HTML_PARTS_C = ">";
 		public static final String SELECT_HTML_PARTS_D = " ";

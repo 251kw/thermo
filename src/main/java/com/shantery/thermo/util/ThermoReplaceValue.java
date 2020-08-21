@@ -163,8 +163,9 @@ public class ThermoReplaceValue {
 		Map<String, String> map = new LinkedHashMap<>();
 		
 		// htmlを構成するパーツ
-		String start = SELECT_HTML_PARTS_A + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
-		String startWithId = SELECT_HTML_PARTS_A + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_D + SELECT_HTML_PARTS_E + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
+		String start = SELECT_HTML_PARTS_A1 + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
+		String startWithField = SELECT_HTML_PARTS_A2 + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
+		String startWithId = SELECT_HTML_PARTS_A1 + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_D + SELECT_HTML_PARTS_E + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
 		String end = SELECT_HTML_PARTS_F;
 		String option = EMPTY;
 		String comp = null;
@@ -227,7 +228,7 @@ public class ThermoReplaceValue {
 		    break;
 		    
 		// 学年と空欄  
-		case KBN_TYPE_GRADE_AND_BLANK:
+		case SELECT_TYPE_GRADE_AND_BLANK:
 			
 			keys = new String[11];
 			keys[0] = EMPTY;
@@ -264,6 +265,8 @@ public class ThermoReplaceValue {
 			
 		if(division.equals(SELECT_TYPE_REGIST)) {
 			comp = startWithId + option + end;
+		}else if(division.equals(SELECT_TYPE_GRADE_AND_BLANK)) {
+			comp = startWithField + option + end;
 		}else {
 			comp = start + option + end;
 		}
