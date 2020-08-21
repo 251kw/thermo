@@ -75,7 +75,19 @@
 						
 						<td th:data-label="#{view.tablelabel.grade}">
 	  						<div class="field">
-		  						<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('gradeAndBlank')}"></span>
+							<select th:field="*{sch_grade}">
+								<option value=""></option>
+								<option value="0" th:text="#{view.select.grade0}"></option>
+								<option value="1" th:text="#{view.select.grade1}"></option>
+								<option value="2" th:text="#{view.select.grade2}"></option>
+								<option value="3" th:text="#{view.select.grade3}"></option>
+								<option value="4" th:text="#{view.select.grade4}"></option>
+								<option value="5" th:text="#{view.select.grade5}"></option>
+								<option value="6" th:text="#{view.select.grade6}"></option>
+								<option value="A" th:text="#{view.select.gradeA}"></option>
+								<option value="B" th:text="#{view.select.gradeB}"></option>
+								<option value="C" th:text="#{view.select.gradeC}"></option>
+							</select>
 							</div>
 						</td>
 						<td>
