@@ -44,6 +44,8 @@ class SearchController {
 		List<ThermoInfoEntity> list = schRepository.searchCurDate(loginuser.getGroup_id());	//今日の日付で検索	//group_idで絞る
 		boolean display = true;		//テーブルを表示させるか
 		
+		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
+		
 		m.addAttribute("searchInfo", new SearchInfoForm());
 		m.addAttribute("list", list);
 		
@@ -55,6 +57,7 @@ class SearchController {
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		m.addAttribute("display", display);
+		m.addAttribute("adminbtn", adminbtn);
 		
 		session.setAttribute(SCH_LIST, list);		//印刷用
 		
@@ -137,5 +140,5 @@ class SearchController {
 		return TO_TOP;
 	}
 	
-	
+	//TODO カレンダー単独消し
 }
