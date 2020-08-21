@@ -294,4 +294,10 @@ public class ThermoConstants {
 		public static final int MAX_SCH_LIST = 50;
 		
 		public static final String Q_PERCENT = "%";
+		
+
+	// UserInfoInput,GroupInfoInputでしか使わない定義
+		public static final String USER_INP_GR_ER = "グループIDか、グループパスワードが間違っています";
+		public static final String USER_IN_ID_ER = "既に存在しているユーザIDです";
+		public static final String USER_INP_ID_ER= "既に登録されているグループIDです";
 }

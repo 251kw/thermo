@@ -49,8 +49,8 @@
 												<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}">
 											</span>
 											<span class="btns" id="gp">
-												<input class="btn-input js-password-toggle-a" id="eye" type="checkbox">
-												<label class="btn-label js-password-label-a" for="eye">
+												<input class="btn-input js-password-toggle-a" id="gpeye" type="checkbox">
+												<label class="btn-label js-password-label-a" for="gpeye">
 													<i class="fa fa-eye"></i>
 												</label>
 											</span>
@@ -80,8 +80,8 @@
 												<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}">
 											</span>
 											<span class="btns" id="up">
-												<input class="btn-input js-password-toggle-b" id="eye" type="checkbox">
-												<label class="btn-label js-password-label-b" for="eye">
+												<input class="btn-input js-password-toggle-b" id="upeye" type="checkbox">
+												<label class="btn-label js-password-label-b" for="upeye">
 													<i class="fa fa-eye"></i>
 												</label>
 											</span>
@@ -101,6 +101,8 @@
 										</span>
 									</td>
 								</tr>
+								
+<!--  								
 								<tr>
 									<td><p th:text="#{view.tablelabel.gender}"></td>
 									<td>
@@ -112,6 +114,20 @@
 										</span>
 									</td>
 								</tr>
+-->
+								
+								<tr>
+									<td><p th:text="#{view.tablelabel.gender}"></td>
+									<td><span th:if = "${userInfoForm.gender != null}">
+											<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect()}"></span>
+										</span>
+										<span th:if = "${userInfoForm.gender == null}">
+											<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('gender')}"></span>
+										</span>
+									</td>
+								</tr>
+								
+								
 								<tr>
 									<td><p th:text="#{view.tablelabel.birthday}"></td>
 									<td><span class="ui input"><input type="text" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
