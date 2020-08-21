@@ -119,7 +119,6 @@ class SearchController {
 		}
 		
 		m.addAttribute("searchInfo", form);
-		m.addAttribute("sch_grade", form.getSch_grade());
 		m.addAttribute("list", list);
 		m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);
