@@ -76,6 +76,7 @@ class SearchController {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
+		boolean errorFlg = false;
 		
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
@@ -83,6 +84,7 @@ class SearchController {
 		if(!schService.nameCheck(form.getSch_name())&&(!form.getSch_name().equals(EMPTY))) {
 			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
 			m.addAttribute("name_error", NAME_ERROR);
+			errorFlg = true;
 		}
 		
 		//日付入力チェックでエラーがあったら(未記入はスルーする）
@@ -90,19 +92,22 @@ class SearchController {
 			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
 			m.addAttribute("date_error", DATE_ERROR);
 			m.addAttribute("example", EXAMPLE);
+			errorFlg = true;
 		}
 		
 		//チェックボックスと他の入力欄の併用を許可しない
-		else if((!EMPTY.equals(form.getSch_date()) ||
+		if((!EMPTY.equals(form.getSch_date()) ||
 				!EMPTY.equals(form.getSch_name()) ||
 					!EMPTY.equals(form.getSch_grade()))&&
 						(form.getSch_high()!=null)){
 			
 			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
 			m.addAttribute("combi_msg", COMBI_MSG);
-			
-		} else {
+			errorFlg = true;
+		}
 		
+		//errorがなければ検索
+		if(!errorFlg) {
 			list = schService.separate(loginuser.getGroup_id(), form);
 		}
 		
@@ -114,6 +119,7 @@ class SearchController {
 		}
 		
 		m.addAttribute("searchInfo", form);
+		m.addAttribute("sch_grade", form.getSch_grade());
 		m.addAttribute("list", list);
 		m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);

@@ -72,10 +72,15 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     		}
     	}
     	
-    	if(!dateFlg&&nameFlg) { //日付指定がなかったら、二週間分を設定
-    		sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
-    		sql.append("order by t.registDate desc ");
-    	}
+    	if(!dateFlg) { //日付指定がなかったら、二週間分を設定
+    		if(nameFlg) {
+	    		sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
+	    		sql.append("order by t.registDate desc ");
+    		} else if(gradeFlg) {
+    			sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
+	    		sql.append("order by t.userInfoEntity.userName, t.registDate desc ");
+    		}
+	    }
     	
     	Query query = entityManager.createQuery(sql.toString());
     	
@@ -98,7 +103,21 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 				query.setParameter("endDate", endDate);
 			}
 		}
-		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
+		if (gradeFlg) {
+			query.setParameter("grade", form.getSch_grade());
+			if(!dateFlg) {	//日付指定がなかったら、二週間分を設定
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+				
+				String curDate = sdf.format(cal.getTime());		//今日の日付
+				
+				cal.add(Calendar.DAY_OF_MONTH, -14);			//日付計算
+				String endDate = sdf.format(cal.getTime());		//二週間前の日付
+				
+				query.setParameter("curDate", curDate);
+				query.setParameter("endDate", endDate);
+			}
+		}
 		
 		return query.setMaxResults(MAX_SCH_LIST).getResultList();		//取得データ数の制限.結果をlistで取得
     }
