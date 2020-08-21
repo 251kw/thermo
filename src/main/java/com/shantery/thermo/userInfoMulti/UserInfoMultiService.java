@@ -262,4 +262,25 @@ public class UserInfoMultiService {
 		
 	}
 	
+	/**
+	 * 表示する見出しを返却する
+	 * @return 表示する見出し
+	 */
+	public List<String> getColumnName(){
+		List<String> head = new ArrayList<>();
+		
+		head.add(msgPro.getMessage("view.tablelabel.gId", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.gPass", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.uId", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.uPass", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.name", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.gender", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.birthday", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.grade", new String[] {}, Locale.JAPAN));
+		head.add(msgPro.getMessage("view.tablelabel.adminFlg", new String[] {}, Locale.JAPAN));
+		
+		return head;
+		
+	}
+	
 }
