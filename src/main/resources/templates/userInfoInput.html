@@ -150,7 +150,10 @@
 								<tr>
 									<td><p th:text="#{view.tablelabel.birthday}"></td>
 									<td><span class="ui input"><input type="text" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
-										<br><span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
+										<span th:if="${#fields.hasErrors('birthday')}">
+											<br><span th:text="カレンダーから選択してください"></span>
+											<br><span th:text="手打ち入力は禁止です"></span>
+										</span>
 									</td>
 								</tr>
 								<tr>
@@ -221,8 +224,9 @@
 					</div>
 				</form>
 
-				<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<!-- 削除予定 --> 
+			<!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
 				
 				<!-- パスワードの表示/非表示切替 -->
 				<script type="text/javascript">

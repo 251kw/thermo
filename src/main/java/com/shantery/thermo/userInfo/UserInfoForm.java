@@ -53,6 +53,7 @@ public class UserInfoForm{
 	private String gender;
 	/** 生年月日 **/
 	@NotBlank
+	@Size(min = 10, max = 10)
 	private String birthday;
 	/** 学年区分 **/
 	@NotBlank
