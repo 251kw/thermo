@@ -1,13 +1,14 @@
 package com.shantery.thermo.groupInfo;
 
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.shantery.thermo.entity.GroupMstEntity;
-
+import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
 
 /**
  * @author h.komatsu
@@ -20,18 +21,17 @@ public class GroupInfoForm{
 	/** グループID **/
 	@NotBlank
 	@Size(min = 4, max = 32)
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+")
+	@Pattern(regexp = THERMO_REGEX_PATTERN)
 	private String groupId;
 	/** グループパスワード **/
 	@NotBlank
 	@Size(min = 4, max = 16)
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+")
+	@Pattern(regexp = THERMO_REGEX_PATTERN)
 	private String groupPass;
 	/** グループ名 **/
 	@NotBlank
 	@Size(min = 1, max = 64)
-	//↓のpattern、ValidationMessagesが優勢なのでmessage指定しておく。
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message = "※記号、前後のスペースは入力できません")//TODO　外部化
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")//TODO　外部化
 	private String groupName;
 	/** 更新時間 **/
 	private String updateTime;

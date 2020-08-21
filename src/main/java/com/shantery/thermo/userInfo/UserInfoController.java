@@ -101,7 +101,7 @@ class UserInfoController {
 				model.addAttribute("uIdError", "既に存在しているユーザIDです");//TODO 外部化やる
 			}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
 				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
-				model.addAttribute("grError", "グループIDが存在しないか、グループパスワードが間違っています");//TODO 外部化やる
+				model.addAttribute("grError", "グループIDか、グループパスワードが間違っています");//TODO 外部化やる
 			}	
 			//ユーザ情報入力画面に遷移"userInfoInput"
 			return TO_USER_INFO_INP;
@@ -137,12 +137,16 @@ class UserInfoController {
 			Model model,UserInfoEntity uInEn) {
 		
 		//セッション内のulist(表示用に変換したリスト)を取得、モデルにセット
-		model.addAttribute("ulist", session.getAttribute("ulist"));
+		model.addAttribute("ul", session.getAttribute("ulist"));
 		
 		//Formに入っているユーザ情報をEntityに変換
 		uInEn = uInfoData._toConvertUserInfoEntity();
 		//Entityの情報を登録する
 		uInfoService.create(uInEn);
+		
+		//sessionオブジェクトを削除する
+		session.removeAttribute("ulist");
+		session.removeAttribute("uForm");
 		
 		return TO_USER_INFO_RES;//ユーザ情報登録完了画面に遷移"userInfoResult"
 		

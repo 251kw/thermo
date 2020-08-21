@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta charset="UTF-8" />
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 		<title th:text="#{view.userInfoIn.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		
+		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
 	</head>
 	<body>
 	<!-- 外部ヘッダーファイル読み込み -->
@@ -31,34 +36,104 @@
 								<tr>
 									<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
 									<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}"/></span>
-										<br><span th:if="${#fields.hasErrors('groupId')}" th:errors="*{groupId}"></span>
+										<span th:if="${#fields.hasErrors('groupId')}">
+											<br><span th:text="4～32文字以内の"></span>
+											<br><span th:text="半角英数字で入力してください"></span>
+										</span>
 									</td>
 								</tr>
+					<!--  
 								<tr>
 									<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 									<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}"/></span>
-										<br><span th:if="${#fields.hasErrors('groupPass')}" th:errors="*{groupPass}"></span>
+										<span th:if="${#fields.hasErrors('groupPass')}">
+											<br><span th:text="4～16文字以内の"></span>
+											<br><span th:text="半角英数字で入力してください"></span>
+										</span>
 										<br><span th:text="${grError}"></span>
 									</td>
 								</tr>
+					-->	
+								<tr>
+									<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
+									<td>		
+										<div class="toggle">
+											<span class="ui input">
+												<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}">
+											</span>
+											<span class="btns" id="gp">
+												<input class="btn-input js-password-toggle-a" id="eye" type="checkbox">
+												<label class="btn-label js-password-label-a" for="eye">
+													<i class="fa fa-eye"></i>
+										<!-- 		<i class="fa-eye-slash"></i> -->
+												</label>
+											</span>
+											<span th:if="${#fields.hasErrors('groupPass')}">
+												<br><span th:text="4～16文字以内の"></span>
+												<br><span th:text="半角英数字で入力してください"></span>
+											</span>
+											<br><span th:text="${grError}"></span>
+										</div>	
+									</td>
+								</tr>
+							
+								
+								
+								
 								<tr>
 									<td><p th:text="#{view.tablelabel.uId}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}"/></span>
-										<br><span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
+										<span th:if="${#fields.hasErrors('userId')}">
+											<br><span th:text="4～32文字以内の"></span>
+											<br><span th:text="半角英数字で入力してください"></span>
+										</span>
 										<br><span th:text="${uIdError}"></span>
 									</td>	
-									
 								</tr>
+								
+								
+		<!--  						
 								<tr>
 									<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userPass}" th:placeholder="#{view.checkPh.userPass}"/></span>
-										<br><span th:if="${#fields.hasErrors('userPass')}" th:errors="*{userPass}"></span>
+										<span th:if="${#fields.hasErrors('userPass')}">
+											<br><span th:text="4～16文字以内の"></span>
+											<br><span th:text="半角英数字で入力してください"></span>
+										</span>
 									</td>
 								</tr>
+								
+			-->				
+								<tr>
+									<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
+									<td>		
+										<div class="toggle">
+											<span class="ui input">
+												<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}">
+											</span>
+											<span class="btns" id="up">
+												<input class="btn-input js-password-toggle-b" id="eye" type="checkbox">
+												<label class="btn-label js-password-label-b" for="eye">
+													<i class="fa fa-eye"></i>
+											<!-- 		<i class="fa-eye-slash"></i> -->
+												</label>
+											</span>
+											<span th:if="${#fields.hasErrors('userPass')}">
+												<br><span th:text="4～16文字以内の"></span>
+												<br><span th:text="半角英数字で入力してください"></span>
+											</span>
+										</div>	
+									</td>
+								</tr>
+								
+								
 								<tr>
 									<td><p th:text="#{view.tablelabel.name}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
 									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}"/></span>
-										<br><span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></span>
+										<span th:if="${#fields.hasErrors('userName')}">
+											<br><span th:text="1～64文字以内の記号、前後の"></span>
+											<br><span th:text="スペース以外で入力してください"></span>
+										</span>
 									</td>
 								</tr>
 								<tr>
@@ -74,7 +149,7 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.birthday}"></td>
-									<td><span class="ui input"><input type="date" class="form-control" th:field="*{birthday}"/></span>
+									<td><span class="ui input"><input type="text" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
 										<br><span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
 									</td>
 								</tr>
@@ -107,7 +182,31 @@
 											</select>
 										</span>
 									</td>
+									
+		<!--  							
+									<tr>
+									<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
+									<td>		
+										<div class="toggle">
+											<span class="ui input">
+												<input class="field js-password-a form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}">
+											</span>
+											<span class="btn" id="01">
+												<input class="btn-input js-password-toggle-a" id="eye" type="checkbox">
+												<label class="btn-label js-password-label-a" for="eye">
+													<i class="fa fa-eye"></i>
+													<i class="fa-eye-slash"></i>
+												</label>
+											</span>
+											<span th:if="${#fields.hasErrors('userPass')}">
+												<br><span th:text="4～16文字以内の"></span>
+												<br><span th:text="半角英数字で入力してください"></span>
+											</span>
+										</div>	
+									</td>
 								</tr>
+		-->							
+								
 							</tbody>
 						</table>
 					</div>
@@ -121,6 +220,51 @@
 						</a>
 					</div>
 				</form>
+
+				<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+				
+				<!-- パスワードの表示/非表示切替 -->
+				<script type="text/javascript">
+				//groupPassの表示切り替え 
+				$("span#gp").on("click", function () {
+					$(this).next('.btns').slideToggle();
+					const passwordToggle = document.querySelector('.js-password-toggle-a');
+				    const password = document.querySelector('.js-password-a'),
+				          passwordLabel = document.querySelector('.js-password-label-a');
+				    if (password.type === 'password') {
+				      password.type = 'text';
+				      passwordLabel.innerHTML = '<i class="fa fa-eye-slash"></i>';
+				    } else {
+				      password.type = 'password';
+				      passwordLabel.innerHTML = '<i class="fa fa-eye"></i>';
+				    }
+				    password.focus();
+				  });
+				 
+				//userPassの表示切り替え 
+				$("span#up").on("click", function () {
+					$(this).next('.btns').slideToggle();
+					const passwordToggle = document.querySelector('.js-password-toggle-b');
+				    const password = document.querySelector('.js-password-b'),
+				          passwordLabel = document.querySelector('.js-password-label-b');
+				    if (password.type === 'password') {
+				      password.type = 'text';
+				      passwordLabel.innerHTML = '<i class="fa fa-eye-slash"></i>';
+				    } else {
+				      password.type = 'password';
+				      passwordLabel.innerHTML = '<i class="fa fa-eye"></i>';
+				    }
+				    password.focus();
+				  });
+				
+				</script>
+			
+			<script type="text/javascript">
+			$('#datepicker').datepicker();
+  		</script>
+			
+				
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>

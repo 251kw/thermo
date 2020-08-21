@@ -46,6 +46,7 @@ class GroupInfoController {
 			}else {
 				//セッションデータがあれば引き継ぐ
 				model.addAttribute("groupInfoForm", session.getAttribute("gForm"));
+				
 			}
 		}catch(Exception e){
 			//セッション内データがない場合必ずnullpoになるため、Formをnewする
@@ -115,6 +116,9 @@ class GroupInfoController {
 		//Formに入っているユーザ情報をEntityに変換
 		gInEn = gInfoData._toConvertGroupInfoEntity();
 		gInfoService.create(gInEn);//Entityの情報を登録する
+		
+		//sessionオブジェクトの"gForm"を削除する
+		session.removeAttribute("gForm");
 		
 		return TO_GROUP_INFO_RES;//グループ情報登録完了画面へ遷移"groupInfoResult"
 	}
