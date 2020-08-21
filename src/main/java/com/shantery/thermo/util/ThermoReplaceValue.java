@@ -164,7 +164,7 @@ public class ThermoReplaceValue {
 		
 		// htmlを構成するパーツ
 		String start = SELECT_HTML_PARTS_A1 + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
-		String startWithField = SELECT_HTML_PARTS_A2 + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
+		String startWithField = SELECT_HTML_PARTS_A2 + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
 		String startWithId = SELECT_HTML_PARTS_A1 + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_D + SELECT_HTML_PARTS_E + division + SELECT_HTML_PARTS_B + SELECT_HTML_PARTS_C;
 		String end = SELECT_HTML_PARTS_F;
 		String option = EMPTY;

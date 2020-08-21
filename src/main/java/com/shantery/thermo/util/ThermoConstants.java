@@ -258,7 +258,7 @@ public class ThermoConstants {
 		public static final String SELECT_GRADE_KEY_C = "C";
 		
 		public static final String SELECT_HTML_PARTS_A1 = "<select name='";
-		public static final String SELECT_HTML_PARTS_A2 = "<select th:field='*{sch_grade}' name='";
+		public static final String SELECT_HTML_PARTS_A2 = "<select th:field='*{sch_grade}'id='sch_grade' name='sch_grade";
 		public static final String SELECT_HTML_PARTS_B = "'";
 		public static final String SELECT_HTML_PARTS_C = ">";
 		public static final String SELECT_HTML_PARTS_D = " ";
