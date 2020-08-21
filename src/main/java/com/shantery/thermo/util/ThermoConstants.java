@@ -17,6 +17,8 @@ public class ThermoConstants {
 	public static final String TOP = "/";
 	/** ログインボタンを押された時 **/
 	public static final String LOGIN = "/login";
+	/** ログインボタンを押された時 **/
+	public static final String LOGOUT = "/logout";
 	/** ユーザー一括登録ボタンを押された時 **/
 	public static final String USERS_MULTI_SET = "/users_multi_set";
 	/** ユーザー一括登録でファイルをアップロードした時 **/
@@ -284,12 +286,11 @@ public class ThermoConstants {
 		public static final String NOLIST_MSG = "検索結果がありませんでした。";
 		public static final String TODAY_NOLIST_MSG = "今日の検温情報は登録されていません。";
 		public static final String OVER_LIST_MSG = "50件の検索結果を表示しています。";
-		public static final String INFO_ERROR = "※記号は入力できません。";
+		public static final String NAME_ERROR = "※記号は入力できません。";
+		public static final String DATE_ERROR = "※有効な日付を入力してください。";
+		public static final String EXAMPLE = "（例：2020/08/21)";
 		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$";
 		public static final int MAX_SCH_LIST = 50;
 		
-		//検索時のクエリ文
-		public static final String Q_SELECT = "SELECT ";
-		public static final String Q_ALL = "* ";
 		public static final String Q_PERCENT = "%";
 }

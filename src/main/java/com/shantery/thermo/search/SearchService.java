@@ -1,5 +1,8 @@
 package com.shantery.thermo.search;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+
 import static com.shantery.thermo.util.ThermoConstants.*;
 
 /**
@@ -85,10 +89,31 @@ public class SearchService {
 	 * @param sch_name 名前検索情報
 	 * @return 真偽値
 	 */
-	public boolean strCheck(String sch_name){
+	public boolean nameCheck(String sch_name){
 		if (!sch_name.matches(SCH_INFO_REGEX_PATTERN)) {
 			return false;
 		}
+		return true;
+	}
+	
+	/**
+	 * 検索情報（日付）の入力チェック
+	 * @param sch_date
+	 * @return 真偽値
+	 */
+	public boolean dateCheck(String sch_date) {
+		DateFormat df = new SimpleDateFormat(DATE_PATTERN);
+		 
+		df.setLenient(false);	//日付を厳密にチェック
+		 
+		try {
+			// 日付妥当性
+			df.parse(sch_date);
+		 
+		} catch (ParseException e) {
+			return false;
+		}
+		
 		return true;
 	}
 }

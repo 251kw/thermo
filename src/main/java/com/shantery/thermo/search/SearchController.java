@@ -76,15 +76,22 @@ class SearchController {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		List<ThermoInfoEntity> list = null;
 		boolean display = true;		//テーブルを表示させるか
-		String error_msg = null;
 		
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
-		//入力チェックでエラーがあったら(未記入はスルーする）
-		if(!schService.strCheck(form.getSch_name())&&(!form.getSch_name().equals(EMPTY))) {
+		//名前入力チェックでエラーがあったら(未記入はスルーする）
+		if(!schService.nameCheck(form.getSch_name())&&(!form.getSch_name().equals(EMPTY))) {
 			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
-			error_msg = INFO_ERROR;
+			m.addAttribute("name_error", NAME_ERROR);
 		}
+		
+		//日付入力チェックでエラーがあったら(未記入はスルーする）
+		if(!schService.dateCheck(form.getSch_date())&&(!form.getSch_date().equals(EMPTY))) {
+			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
+			m.addAttribute("date_error", DATE_ERROR);
+			m.addAttribute("example", EXAMPLE);
+		}
+		
 		//チェックボックスと他の入力欄の併用を許可しない
 		else if((!EMPTY.equals(form.getSch_date()) ||
 				!EMPTY.equals(form.getSch_name()) ||
@@ -100,20 +107,15 @@ class SearchController {
 		}
 		
 		if(list.size()==0) {	//listがないとき
-			if(schService.isZeroCurDate(loginuser.getGroup_id())) {	//今日の情報がない時
-				m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
-			} else {
-				m.addAttribute("nolist_msg", NOLIST_MSG);
-			}
+			m.addAttribute("nolist_msg", NOLIST_MSG);
 			display = false;
-		} else if(list.size()==50){
+		} else if(list.size()==MAX_SCH_LIST){
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		
 		m.addAttribute("searchInfo", form);
 		m.addAttribute("list", list);
 		m.addAttribute("display", display);
-		m.addAttribute("error_msg", error_msg);
 		m.addAttribute("adminbtn", adminbtn);
 		
 		session.setAttribute(SCH_LIST, list);	//印刷用
@@ -126,19 +128,14 @@ class SearchController {
 	 * メソッド
 	 * @return ログイン画面
 	 */
-	@RequestMapping(value ="/logout", method = RequestMethod.GET) //ログアウト
-	public String logout(	//TODO 仮ログアウト
-			@ModelAttribute(THERMO_FORM) 
-			ThermoForm FormValue){	// この時点では空
+	@RequestMapping(value =LOGOUT, method = RequestMethod.GET)
+	public String logout(@ModelAttribute(THERMO_FORM) ThermoForm FormValue){	
 		
-		// もしsessionスコープ内にデータがあるなら削除する
-		if (session.getAttribute(LOGIN_USER) != null) {
-			session.removeAttribute(LOGIN_USER);
-		}
+		session.removeAttribute(LOGIN_USER);
+		session.removeAttribute(SCH_LIST);
 			
 		// トップページへ移動
 		return TO_TOP;
 	}
 	
-	//TODO カレンダー単独消し
 }

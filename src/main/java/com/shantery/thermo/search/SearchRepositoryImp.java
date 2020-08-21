@@ -21,7 +21,6 @@ import static com.shantery.thermo.util.ThermoConstants.*;
  */
 @Component
 public class SearchRepositoryImp implements SearchRepositoryCustom {
-	//TODO jpql、外部化
 	@Autowired
 	HttpSession session; 
 	

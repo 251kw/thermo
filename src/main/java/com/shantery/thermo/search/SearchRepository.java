@@ -16,7 +16,6 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
  */
 @Repository
 public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String>{
-	//TODO sql文、外部化
 	
 	//今日のデータ取得
 	@Query(value="SELECT *"
