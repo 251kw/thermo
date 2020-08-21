@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shantery.thermo.util.ThermoUtil;
-
 @Controller
 public class UserInfoMultiController {
 
@@ -121,8 +119,7 @@ public class UserInfoMultiController {
 
 		if (CollectionUtils.isEmpty(errmsg)) { //エラーメッセージがない場合確認画面に
 			session.setAttribute(USERS_INFO_SES, users);  //ユーザー情報をセッションにいれる
-			model.addAttribute(USERS_HEAD,
-					ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN)));  //ヘッドをmodelにいれる
+			model.addAttribute(USERS_HEAD,uMService.getColumnName());  //ヘッドをmodelにいれる
 			model.addAttribute(USERS_INFO, users);  //ユーザー情報をmodelにいれる
 			rtn = TO_USERS_MULTI_CONF;  //遷移先を確認画面に指定
 		} else {  //エラーメッセージがある場合
@@ -141,8 +138,7 @@ public class UserInfoMultiController {
 	@RequestMapping(value = USERS_MULTI_CONF_SUC, method = RequestMethod.POST)
 	//@Transactional
 	public String userInfoConfirm(Model model) throws ParseException {
-		model.addAttribute(USERS_HEAD,
-				ThermoUtil.getColumnName(msgPro.getMessage("view.usercolumns", new String[] {}, Locale.JAPAN))); //ヘッドをmodelにいれる
+		model.addAttribute(USERS_HEAD,uMService.getColumnName());  //ヘッドをmodelにいれる
 		@SuppressWarnings("unchecked")  //未検査のキャストをするため
 		List<String[]> users = (List<String[]>) session.getAttribute(USERS_INFO_SES);  //セッションから登録するユーザー情報を取得
 		model.addAttribute(USERS_INFO, users);  //modelに登録するユーザー情報をいれる

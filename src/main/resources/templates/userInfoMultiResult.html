@@ -6,7 +6,7 @@
 		<title th:text="#{view.userInfoMulRes.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
-    	<link th:href="@{/css/search.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	</head>
 	<body>
@@ -30,8 +30,24 @@
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
-						<th th:text="#{view.usercount}"></th>
-						<th th:each="val:${users_head_info}" width="100" th:text="${val}"></th>
+						<th th:text="#{view.usercount}" width="35"></th>
+						<th:block th:each="val:${users_head_info}">
+							<th:block th:if="${valStat.index >= 0 && valStat.index <= 4}" >
+								<th width="140" th:text="${val}"></th>
+							</th:block>
+							<th:block th:if="${valStat.index == 5}" >
+								<th width="60" th:text="${val}"></th>
+							</th:block>
+							<th:block th:if="${valStat.index == 6}" >
+								<th width="90" th:text="${val}"></th>
+							</th:block>
+							<th:block th:if="${valStat.index == 7}" >
+								<th width="80" th:text="${val}"></th>
+							</th:block>
+							<th:block th:if="${valStat.index == 8}" >
+								<th width="70" th:text="${val}"></th>
+							</th:block>
+						</th:block>
 					</tr>
 				</thead>
 				<tbody>
