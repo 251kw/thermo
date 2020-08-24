@@ -17,7 +17,7 @@
 		<div class="komidasi">
 			<h3 th:text="#{view.text.thermoInfoCon}"></h3>
 		</div>
-		<form action="/from_confirm" method="post" >
+		<form action="/thermo_info_conf_suc" method="post" >
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
@@ -55,7 +55,7 @@
 			</table>
 			<div align="center">
 				<button type="submit" name="input" class="ui inverted blue button " ><p th:text="#{view.btn.reg}"></button>
-				<a href="/return_input">
+				<a href="/thermo_info_conf_back">
 					<button type="button" class="ui inverted blue button " ><p th:text="#{view.btn.fix}"></button>
 				</a>
 			</div>

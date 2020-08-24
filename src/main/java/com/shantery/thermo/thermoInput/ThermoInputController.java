@@ -59,12 +59,12 @@ class ThermoInputController {
 			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
 		}
 		
-		model.addAttribute("list",list);
-		model.addAttribute("ulist", ulist);
-		model.addAttribute("birth", birth);
-		model.addAttribute("thForm", new ThermoInputForm());
-		session.setAttribute("ulist", ulist);
-		session.setAttribute("birth", birth);
+		model.addAttribute(THERMO_LIST ,list);
+		model.addAttribute(THERMO_USER_LIST, ulist);
+		model.addAttribute(THERMO_BIRTH, birth);
+		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
+		session.setAttribute(THERMO_USER_LIST, ulist);
+		session.setAttribute(THERMO_BIRTH, birth);
 		
 		return TO_THERMO_INFO_INP;
 	}
@@ -75,21 +75,21 @@ class ThermoInputController {
 	 * @param model 
 	 * @return 確認画面
 	 */
-	@RequestMapping(value = "/from_input"/*FROM_INPUT_BUTTON*/ , method = RequestMethod.POST)
-	public String InputConfirm(@ModelAttribute("thForm") ThermoInputForm form, Model model) {
+	@RequestMapping(value = THERMO_INFO_INP_SUC, method = RequestMethod.POST)
+	public String InputConfirm(@ModelAttribute(THERMO_INP_FORM) ThermoInputForm form, Model model) {
 		
 		//入力情報を取得
 		ArrayList<ThermoInputForm.Detail> list = form.gettList();
-		model.addAttribute("list", list);
-		session.setAttribute("list", list);
+		model.addAttribute(THERMO_LIST , list);
+		session.setAttribute(THERMO_LIST , list);
 		
 		//入力チェックをしてエラー文があれば入力画面へ
 		ArrayList<String> message = service.checkInput(list);
 		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER)) {
 			model.addAttribute("message", message);
-			model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
-			model.addAttribute("birth", (ArrayList<String>)session.getAttribute("birth"));
-			return "thermoInput";
+			model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
+			model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
+			return TO_THERMO_INFO_INP;
 		}
 		
 		return TO_THERMO_INFO_CONF;
@@ -99,15 +99,15 @@ class ThermoInputController {
 	 * 検温情報確認画面から結果画面へ
 	 * @return 結果画面
 	 */
-	@RequestMapping(value =  "/from_confirm"/*FROM_INPUT_CONFIRM_BUTTON*/ , method = RequestMethod.POST)
+	@RequestMapping(value = THERMO_INFO_CONF_SUC, method = RequestMethod.POST)
 	public String InputResult(Model model) {
 		
 		//入力情報を取得
-		ArrayList<ThermoInputForm.Detail> list = (ArrayList<ThermoInputForm.Detail>)session.getAttribute("list");
+		ArrayList<ThermoInputForm.Detail> list = (ArrayList<ThermoInputForm.Detail>)session.getAttribute(THERMO_LIST);
 		
 		//登録実行
 		service.registAll(list);
-		model.addAttribute("list", list);
+		model.addAttribute(THERMO_LIST , list);
 		
 		return TO_THERMO_INFO_RES;
 	}
@@ -116,13 +116,13 @@ class ThermoInputController {
 	 * 登録情報入力画面へ戻る
 	 * @return 入力画面
 	 */
-	@RequestMapping(value = "/return_input"/*FROM_RETURN_INPUT_BUTTON*/ , method = RequestMethod.GET)
+	@RequestMapping(value = THERMO_INFO_CONF_BACK, method = RequestMethod.GET)
 	public String InputReturn(Model model) {
 		
 		//初期処理をして再度入力画面へ
-		model.addAttribute("list", (ArrayList<ThermoInputForm.Detail>)session.getAttribute("list"));
-		model.addAttribute("ulist", (Iterable<UserInfoEntity>)session.getAttribute("ulist"));
-		model.addAttribute("birth", (ArrayList<String>)session.getAttribute("birth"));
+		model.addAttribute(THERMO_LIST , (ArrayList<ThermoInputForm.Detail>)session.getAttribute(THERMO_LIST));
+		model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
+		model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
 		
 		return TO_THERMO_INFO_INP;
 	}
