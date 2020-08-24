@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shantery.thermo.util.ThermoUtil;
+
 @Controller
 public class UserInfoMultiController {
 
@@ -63,7 +65,7 @@ public class UserInfoMultiController {
 		List<String[]> users = uMService.toStringList(usersInfo); //CSVファイルの解析,トリミング
 		List<String> errmsg = new ArrayList<>();
 
-		if (usersInfo.isEmpty()) { //ファイルが選択されていない場合
+		if (usersInfo.isEmpty() && ThermoUtil.getSuffix(usersInfo.getOriginalFilename()).equals(NO_SEND)) { //ファイルが選択されていない場合
 			errmsg.add((msgPro.getMessage("view.errUserFileExisting", new String[] {}, Locale.JAPAN)));
 		}else if(users == null) {  //CSVファイルの解析でエラーを検出した場合
 			errmsg.add((msgPro.getMessage("view.errUserFileOrder", new String[] {}, Locale.JAPAN)));

@@ -42,9 +42,8 @@ public class UserInfoMultiService {
 	 */
 	public List<String[]> toStringList(MultipartFile usersInfo) throws ParseException {
 		
-		String name = usersInfo.getOriginalFilename();
-		
-		if(!ThermoUtil.getSuffix(name).equals("csv")) {
+		//ファイルの拡張子がcsvか調べる
+		if(!ThermoUtil.getSuffix(usersInfo.getOriginalFilename()).equals(CSV_SEND)) {
 			return null;
 		}
 		
@@ -63,6 +62,10 @@ public class UserInfoMultiService {
             	line[M_UNAME] = ThermoReplaceValue.trimBlank(line[M_UNAME]);  //ユーザー名のトリミング
             	//戻り値に分割した情報をadd
             	lines.add(line);
+            }
+            
+            if(division == null) {
+            	lines = null;
             }
 
         } catch (IOException e) { //解析中にエラーを検出した場合nullを返す

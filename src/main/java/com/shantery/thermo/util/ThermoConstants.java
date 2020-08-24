@@ -119,6 +119,12 @@ public class ThermoConstants {
 	public static final int M_GRADE = 7;
 	public static final int M_FLG = 8;
 	
+	//イコールメソッドで比べる定数
+	/** 何も選択しない場合を判別 **/
+	public static final String NO_SEND = "";
+	/** 拡張子がcsvファイルであることを判別 **/
+	public static final String CSV_SEND = "csv";
+	
 	// @RequestParamのname属性
 	
 	// その他よく使う文字の変数 TODO 不要なものを削除する
