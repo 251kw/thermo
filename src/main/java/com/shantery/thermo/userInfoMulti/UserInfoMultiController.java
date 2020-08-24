@@ -67,9 +67,7 @@ public class UserInfoMultiController {
 
 		if (usersInfo.isEmpty() && ThermoUtil.getSuffix(usersInfo.getOriginalFilename()).equals(NO_SEND)) { //ファイルが選択されていない場合
 			errmsg.add((msgPro.getMessage("view.errUserFileExisting", new String[] {}, Locale.JAPAN)));
-		}else if(users == null) {  //CSVファイルの解析でエラーを検出した場合
-			errmsg.add((msgPro.getMessage("view.errUserFileOrder", new String[] {}, Locale.JAPAN)));
-		}else if (uMService.checkUserinfo(users)) { //ファイルの形式が正しくない場合
+		}else if(users == null || usersInfo.isEmpty() || uMService.checkUserinfo(users)) {  //CSVファイルの解析でエラーを検出した場合,ファイルの形式が正しくない場合,空のファイルを送信された場合
 			errmsg.add((msgPro.getMessage("view.errUserFileOrder", new String[] {}, Locale.JAPAN)));
 		} else if (uMService.checkUserId(users)) { //一括登録するユーザーIDに重複がある場合
 			errmsg.add((msgPro.getMessage("view.errUserFileDuplication", new String[] {}, Locale.JAPAN)));

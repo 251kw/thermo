@@ -63,10 +63,6 @@ public class UserInfoMultiService {
             	//戻り値に分割した情報をadd
             	lines.add(line);
             }
-            
-            if(division == null) {
-            	lines = null;
-            }
 
         } catch (IOException e) { //解析中にエラーを検出した場合nullを返す
             lines = null;
