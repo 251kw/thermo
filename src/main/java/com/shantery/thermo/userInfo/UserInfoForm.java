@@ -45,7 +45,7 @@ public class UserInfoForm{
 	/** 氏名 **/
 	@NotBlank
 	@Size(min = 1, max = 64)
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")//TODO　外部化
+	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")
 	private String userName;
 	
 	/** 性別 **/
@@ -53,7 +53,7 @@ public class UserInfoForm{
 	private String gender;
 	/** 生年月日 **/
 	@NotBlank
-	@Size(min = 10, max = 10)
+	@Pattern(regexp = "^(\\d{4})/(\\d{1,2})/(\\d{1,2})$")
 	private String birthday;
 	/** 学年区分 **/
 	@NotBlank
