@@ -31,6 +31,7 @@ datepicker.regional.ja = {
 	yearRange: "1920:2020",
 	firstDay: 0,
 	isRTL: false,
+	maxDate: new Date(),
 	showMonthAfterYear: true,
 	yearSuffix: "年" };
 datepicker.setDefaults( datepicker.regional.ja );
