@@ -86,8 +86,11 @@ public class ExcelView extends AbstractXlsxView {
 		
 		//フォントサイズ設定
  		Font font = workbook.createFont();
- 		font.setFontHeightInPoints((short)9);
- 		cellstyle.setFont(font);
+ 		font.setFontHeightInPoints((short)9); //フォントサイズを9に指定
+ 		font.setFontName("游ゴシック"); //フォントを游ゴシックに指定
+ 		cellstyle.setFont(font); //通常項目にセット
+ 		highThermo.setFont(font); //37.0以上項目にセット
+ 		highThermoRed.setFont(font); //37.5以上項目にセット
 		
 		int rowNum = 0; //何行目かを指定する変数
 		Row row = sheet.createRow(rowNum++); //先頭行を作成
