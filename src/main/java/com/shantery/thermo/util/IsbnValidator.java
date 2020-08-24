@@ -43,6 +43,10 @@ public class IsbnValidator implements ConstraintValidator<IsbnValid, String>{
                 if (value.compareTo(today) > 0){
                 	return false;
                }
+                
+                if(!ThermoUtil.ageLimit(value)) {
+                	return false;
+                }
 				
 			} catch (Exception e) { //不正な値を入力していたら(15月44日など)
 				return false;
@@ -53,5 +57,7 @@ public class IsbnValidator implements ConstraintValidator<IsbnValid, String>{
 
 		return true;
 	}
+	
+	
 
 }

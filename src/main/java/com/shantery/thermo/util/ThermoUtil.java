@@ -28,4 +28,13 @@ public class ThermoUtil {
 	    return fileName;
 	}
 
+	public static boolean ageLimit(String birthday) {
+		int Age = Integer.parseInt(ThermoReplaceValue.calcAge(birthday));
+		if(0 < Age && Age <= 120) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }
