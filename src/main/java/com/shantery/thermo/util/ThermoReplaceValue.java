@@ -199,6 +199,18 @@ public class ThermoReplaceValue {
 		    
 		    break;
 		    
+		 // 管理者フラグ
+		 case SELECT_TYPE_ADMINFLG:
+		 			
+ 			keys = new String[2];
+ 			keys[0] = SELECT_ADMINFLG_VALUE_NORMAL;
+ 			keys[1] = SELECT_ADMINFLG_VALUE_ADMIN;
+ 				
+ 		    map.put(SELECT_ADMINFLG_KEY_NORMAL, keys[0]);
+ 		    map.put(SELECT_ADMINFLG_KEY_ADMIN, keys[1]);
+ 		    
+ 		    break;
+		    
 		// 学年
 		case SELECT_TYPE_GRADE:
 			

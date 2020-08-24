@@ -30,9 +30,9 @@
 							<tr>
 								<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
 								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}"/></span>
-									<span th:if="${#fields.hasErrors('groupId')}">
-										<br><span th:text="1～32文字以内の"></span>
-										<br><span th:text="半角英数字で入力してください"></span>
+									<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
+										<br><span th:text="#{view.errM432}"></span>
+										<br><span th:text="#{view.errEng}"></span>
 									</span>
 									<br><span th:if="${uGrError}" th:text=${uGrError}></span>
 								</td>
@@ -40,9 +40,9 @@
 							<tr>
 								<td><p th:text="#{view.tablelabel.gName}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
 								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupName}" th:placeholder="#{view.checkPh.name}"/></span>
-									<span th:if="${#fields.hasErrors('groupName')}">
-										<br><span th:text="1～16文字以内の"></span>
-										<br><span th:text="半角英数字で入力してください"></span>
+									<span th:if="${#fields.hasErrors('groupName')}" class="index_input_error">
+										<br><span th:text="#{view.errNameM}"></span>
+										<br><span th:text="#{view.errNameS}"></span>
 									</span>
 								</td>
 							</tr>
@@ -59,9 +59,9 @@
 												<i class="fa fa-eye"></i>
 											</label>
 										</span>
-										<span th:if="${#fields.hasErrors('groupPass')}">
-											<br><span th:text="4～16文字以内の"></span>
-											<br><span th:text="半角英数字で入力してください"></span>
+										<span th:if="${#fields.hasErrors('groupPass')}" class="index_input_error">
+											<br><span th:text="#{view.errM416}"></span>
+											<br><span th:text="#{view.errEng}"></span>
 										</span>	
 									</div>	
 								</td>

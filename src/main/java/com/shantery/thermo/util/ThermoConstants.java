@@ -224,6 +224,7 @@ public class ThermoConstants {
 		public static final String SELECT_TYPE_GRADE_AND_BLANK = "gradeAndBlank";
 		public static final String SELECT_TYPE_GENDER = "gender";
 		public static final String SELECT_TYPE_REGIST = "regist";
+		public static final String SELECT_TYPE_ADMINFLG = "adminFlg";
 		
 		/** mapのvalue **/
 		public static final String SELECT_REGIST_VALUE_GROUP = "グループ";
@@ -232,15 +233,17 @@ public class ThermoConstants {
 		public static final String SELECT_GENDER_VALUE_MALE = "男性";
 		public static final String SELECT_GENDER_VALUE_FEMALE = "女性";
 		public static final String SELECT_GRADE_VALUE_ZERO = "なし";
-		public static final String SELECT_GRADE_VALUE_ONE = "小学１年";
-		public static final String SELECT_GRADE_VALUE_TWO = "小学２年";
-		public static final String SELECT_GRADE_VALUE_THREE = "小学３年";
-		public static final String SELECT_GRADE_VALUE_FOUR = "小学４年";
-		public static final String SELECT_GRADE_VALUE_FIVE = "小学５年";
-		public static final String SELECT_GRADE_VALUE_SIX = "小学６年";
-		public static final String SELECT_GRADE_VALUE_A = "中学１年";
-		public static final String SELECT_GRADE_VALUE_B = "中学２年";
-		public static final String SELECT_GRADE_VALUE_C = "中学３年";
+		public static final String SELECT_GRADE_VALUE_ONE = "小学1年生";
+		public static final String SELECT_GRADE_VALUE_TWO = "小学2年生";
+		public static final String SELECT_GRADE_VALUE_THREE = "小学3年生";
+		public static final String SELECT_GRADE_VALUE_FOUR = "小学4年生";
+		public static final String SELECT_GRADE_VALUE_FIVE = "小学5年生";
+		public static final String SELECT_GRADE_VALUE_SIX = "小学6年生";
+		public static final String SELECT_GRADE_VALUE_A = "中学1年生";
+		public static final String SELECT_GRADE_VALUE_B = "中学2年生";
+		public static final String SELECT_GRADE_VALUE_C = "中学3年生";
+		public static final String SELECT_ADMINFLG_VALUE_NORMAL = "一般";
+		public static final String SELECT_ADMINFLG_VALUE_ADMIN = "管理者";
 		
 		/** mapのkey **/
 		public static final String SELECT_REGIST_KEY_GROUP = "group";
@@ -258,6 +261,8 @@ public class ThermoConstants {
 		public static final String SELECT_GRADE_KEY_A = "A";
 		public static final String SELECT_GRADE_KEY_B = "B";
 		public static final String SELECT_GRADE_KEY_C = "C";
+		public static final String SELECT_ADMINFLG_KEY_NORMAL = "0";
+		public static final String SELECT_ADMINFLG_KEY_ADMIN = "1";
 		
 		public static final String SELECT_HTML_PARTS_A1 = "<select name='";
 		public static final String SELECT_HTML_PARTS_A2 = "<select id='sch_grade' name='sch_grade";

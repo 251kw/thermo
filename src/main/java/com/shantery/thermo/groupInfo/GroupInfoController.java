@@ -2,9 +2,11 @@ package com.shantery.thermo.groupInfo;
 
 import java.util.Optional;
 
+
 import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_INP;
 import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_CONF;
 import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_RES;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,28 +81,11 @@ class GroupInfoController {
 		}else {
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(grList.orElse(null) != null) {
-				model.addAttribute("uGrError", "既に登録されているグループIDです");//TODO　外部化
+				model.addAttribute("uGrError", USER_INP_ID_ER);
 			}	
 			return TO_GROUP_INFO_INP;//グループ情報入力画面へ遷移"groupInfoInput"
 		}
 	}
-	
-	//TODO　削除予定
-	/*
-	/**
-	 * 入力確認画面から戻るボタンで戻った時
-	 * @param groupInfoForm 入力されたユーザ情報を保持
-	 * @param result
-	 * @param model
-	 * @return 入力画面
-	 
-	@RequestMapping(value = "/groupInfoInput", method = RequestMethod.POST)
-	public String returnGroupInfoInput(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm groupInfoForm, 
-			BindingResult result, Model model) {
-		
-		return "groupInfoInput";//グループ情報入力画面へ遷移
-	}
-	*/
 	
 	/**
 	 * 新規グループ登録完了画面
