@@ -39,39 +39,61 @@
 		    		<td th:data-label="#{view.tablelabel.age}" th:text="${birth[status.index]}"></td>
 					<th:block th:if="${list}">
 						<td th:data-label="#{view.tablelabel.thermo}">
-							<span class="ui input"><input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-							th:value="${list[status.index].temperature}" size="30" maxlength="4" th:placeholder="#{view.checkPh.thermo}" /></span>
+							<span class="ui input">
+								<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
+								th:value="${list[status.index].temperature}" size="30" maxlength="4" th:placeholder="#{view.checkPh.thermo}" />
+							</span>
 							<div th:if="${message}">
 								<br><font color="red"><span th:text="${message[status.index]}"></span></font>
 							</div>
 						</td>
 						<td th:data-label="#{view.tablelabel.taste}">
 							<div th:unless="${list[status.index].taste}">
-								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
+								<span class="ui checkbox">
+									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
+									<label></label>
+								</span>
 							</div>
 							<div th:if="${list[status.index].taste}">
-								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
+								<span class="ui checkbox">
+									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
+									<label></label>
+								</span>
 							</div>
 						</td>
 						<td th:data-label="#{view.tablelabel.smell}">
 							<div th:unless="${list[status.index].smell}">
-								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
+								<span class="ui checkbox">
+									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
+									<label></label>
+								</span>
 							</div>
 							<div th:if="${list[status.index].smell}">
-								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
+								<span class="ui checkbox">
+									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
+									<label></label>
+								</span>
 							</div>
 						</td>
 						<td th:data-label="#{view.tablelabel.cough}">
 							<div th:unless="${list[status.index].cough}">
-								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
+								<span class="ui checkbox">
+									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
+									<label></label>
+								</span>
 							</div>
 							<div th:if="${list[status.index].cough}">
-								<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
+								<span class="ui checkbox">
+									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
+									<label></label>
+								</span>
 							</div>
 						</td>
 						<td th:data-label="#{view.tablelabel.other}">
-							<span class="ui input"><input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-							th:value="${list[status.index].writing}" size="30" maxlength="128" th:placeholder="#{view.checkPh.other}" /></span>
+							<span class="ui input">
+								<input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
+								th:value="${list[status.index].writing}" size="30" maxlength="128" th:placeholder="#{view.checkPh.other}" />
+							</span>
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
@@ -88,4 +110,5 @@
 				</a>
 			</div>
 		</form>
+	</body>
 </html>
