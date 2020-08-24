@@ -53,7 +53,7 @@ class SearchController {
 			m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 			display = false;
 			
-		} else if(list.size()==MAX_SCH_LIST){
+		} else if(list.size()==MAX_SCH_LISTINT){
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		m.addAttribute("display", display);
@@ -93,6 +93,8 @@ class SearchController {
 			m.addAttribute("date_error", DATE_ERROR);
 			m.addAttribute("example", EXAMPLE);
 			errorFlg = true;
+		} else {
+			
 		}
 		
 		//チェックボックスと他の入力欄の併用を許可しない
@@ -114,7 +116,7 @@ class SearchController {
 		if(list.size()==0) {	//listがないとき
 			m.addAttribute("nolist_msg", NOLIST_MSG);
 			display = false;
-		} else if(list.size()==MAX_SCH_LIST){
+		} else if(list.size()==MAX_SCH_LISTINT){
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		

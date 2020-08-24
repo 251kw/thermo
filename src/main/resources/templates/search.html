@@ -65,7 +65,7 @@
 					<tr>
 						<td th:data-label="#{view.tablelabel.regist_date}">
 							<div class="ui input">
-							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日"></div>
+							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日" readonly="readonly"></div>
 							<div><font color="red"><span th:if="${date_error}" th:text="${date_error}"></span></font></div>
 							<div><font color="red"><span th:if="${example}" th:text="${example}"></span></font></div></td>
 						<td th:data-label="#{view.tablelabel.name}">
@@ -259,7 +259,9 @@
 				return;
 			}
 			
-			$('#datepicker').datepicker();
+			$('#datepicker').datepicker({
+				minDate:"-13d"
+			});
   		</script>
   		
   		

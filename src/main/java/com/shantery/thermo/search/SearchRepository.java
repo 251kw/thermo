@@ -2,6 +2,7 @@ package com.shantery.thermo.search;
 
 import java.util.List;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,7 +24,8 @@ public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String
 			+" WHERE u.user_id = t.user_id"
 			+" AND u.group_id = :group_id"
 			+" AND t.regist_date = curdate()"
-			+" LIMIT 50", nativeQuery = true)
+			+" LIMIT "
+			+MAX_SCH_LISTSTR, nativeQuery = true)
 	List<ThermoInfoEntity> searchCurDate(@Param("group_id") String group_id);
 	
 	//過去2週間分の体温が高い人のデータを取得（☑単独、37度以上）
@@ -34,7 +36,8 @@ public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String
 			+" AND t.regist_date >= DATE_ADD(now(), INTERVAL -14 DAY)"
 			+" AND t.thermo >= 37"
 			+" ORDER BY t.thermo DESC, t.regist_date DESC"
-			+" LIMIT 50", nativeQuery = true)
+			+" LIMIT "
+			+MAX_SCH_LISTSTR, nativeQuery = true)
 	List<ThermoInfoEntity> searchHighThermo(@Param("group_id") String group_id);
 	
 	

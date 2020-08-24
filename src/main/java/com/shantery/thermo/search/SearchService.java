@@ -116,4 +116,9 @@ public class SearchService {
 		
 		return true;
 	}
+	
+//	public boolean minDateCheck(String sch_date) {
+//		
+//		
+//	}
 }

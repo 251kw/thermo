@@ -99,7 +99,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 		if (nameFlg) query.setParameter("name", Q_PERCENT+form.getSch_name()+Q_PERCENT);
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
 		
-		return query.setMaxResults(MAX_SCH_LIST).getResultList();		//取得データ数の制限.結果をlistで取得
+		return query.setMaxResults(MAX_SCH_LISTINT).getResultList();		//取得データ数の制限.結果をlistで取得
     }
 
 }

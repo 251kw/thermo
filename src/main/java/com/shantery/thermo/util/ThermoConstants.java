@@ -298,7 +298,8 @@ public class ThermoConstants {
 		public static final String DATE_ERROR = "※有効な日付を入力してください。";
 		public static final String EXAMPLE = "（例：2020/08/21)";
 		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠]+$";
-		public static final int MAX_SCH_LIST = 50;
+		public static final String MAX_SCH_LISTSTR = "100";
+		public static final int MAX_SCH_LISTINT = 100;
 		
 		public static final String Q_PERCENT = "%";
 		
