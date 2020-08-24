@@ -38,7 +38,7 @@ class SearchController {
 	 * メソッド
 	 * @return 検索画面
 	 */
-	@RequestMapping(value ="/return_search", method = RequestMethod.GET) //検索画面に来た時(戻る)
+	@RequestMapping(value =SEARCH_RETURN, method = RequestMethod.GET) //検索画面に来た時(戻る)
 	public  String search(Model  m){
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		List<ThermoInfoEntity> list = schRepository.searchCurDate(loginuser.getGroup_id());	//今日の日付で検索	//group_idで絞る
@@ -70,7 +70,7 @@ class SearchController {
 	 * @return 検索画面
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value ="/search_info" , method = RequestMethod.POST) // 検索ボタンが押されたとき
+	@RequestMapping(value =SEARCH_INFO , method = RequestMethod.POST) // 検索ボタンが押されたとき
 	public String search_info(@ModelAttribute("searchInfo") SearchInfoForm form, Model m) {
 		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);

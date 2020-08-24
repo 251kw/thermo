@@ -51,6 +51,8 @@ public class ThermoConstants {
 	public static final String THERMO_INFO_CONF_BACK = "/thermo_info_conf_back";
 	/** 体温情報登録から検索に戻るとき **/
 	public static final String SEARCH_RETURN = "/search_return";
+	/** 体温検索画面で検索ボタンが押されたとき **/
+	public static final String SEARCH_INFO = "/search_info";
 	
 	
 	

@@ -26,7 +26,7 @@ public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String
 			+" LIMIT 50", nativeQuery = true)
 	List<ThermoInfoEntity> searchCurDate(@Param("group_id") String group_id);
 	
-	//過去2週間分の体温が高い人のデータを取得（37度以上）
+	//過去2週間分の体温が高い人のデータを取得（☑単独、37度以上）
 	@Query(value="SELECT *"
 			+" FROM user_info u, thermo_info t"
 			+" WHERE u.user_id = t.user_id"
