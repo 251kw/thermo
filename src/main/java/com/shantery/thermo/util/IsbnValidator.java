@@ -27,7 +27,7 @@ public class IsbnValidator implements ConstraintValidator<IsbnValid, String>{
 			return true;
 		}
 		//正規表現を固定
-		Pattern ptn = Pattern.compile("^(\\d{4})[-/](\\d{2})[-/](\\d{2})$");
+		Pattern ptn = Pattern.compile("^(\\d{4})[-/](\\d{1,2})[-/](\\d{1,2})$");
 		//正規表現のチェック
 		Matcher mch = ptn.matcher(value);
 		if (mch.find()) { //マッチしていたら
