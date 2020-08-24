@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Footer;
 import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -55,7 +56,7 @@ public class ExcelView extends AbstractXlsxView {
 		//excelファイル名の日付以下を設定
 		String fileName = "_検温情報.xlsx";
 		//日付とfileNameを結合
-		String excelFileName = sdf.format(new Date()) + URLEncoder.encode(fileName, "UTF-8");
+		String excelFileName =  sdf.format(new Date()) + URLEncoder.encode(fileName, "UTF-8");
 		//ファイル名をセット
 		response.setHeader("Content-Disposition", "attachment; filename=" + excelFileName);
 		// セッションに接続
@@ -67,6 +68,7 @@ public class ExcelView extends AbstractXlsxView {
 		String[] rowTmp = {"計測日", "名前", "性別", "学年", "年齢", "体温", "味覚障害", "嗅覚障害", "咳", "その他" };
 		//列の幅を設定する
 		sheet.setColumnWidth(0, 2800); //計測日の幅
+		sheet.setColumnWidth(1, 2500); //名前の幅
  		sheet.setColumnWidth(2, 1200); //性別の幅
  		sheet.setColumnWidth(3, 2500); //学年の幅
  		sheet.setColumnWidth(4, 1200); //年齢の幅
@@ -74,11 +76,18 @@ public class ExcelView extends AbstractXlsxView {
  		sheet.setColumnWidth(6, 1150); //味覚障害の幅
  		sheet.setColumnWidth(7, 1150); //嗅覚障害の幅
  		sheet.setColumnWidth(8, 1150); //咳の幅
- 		sheet.setColumnWidth(9, 5000); //その他の幅
+ 		sheet.setColumnWidth(9, 4500); //その他の幅
+ 
 		// セルスタイルを指定
 		CellStyle cellstyle = workbook.createCellStyle(); //入力項目のスタイル
 		CellStyle indexCellstyle = workbook.createCellStyle(); //見出しのスタイル
-		CellStyle highThermo = workbook.createCellStyle(); //37.5度以上の行のスタイル
+		CellStyle highThermo = workbook.createCellStyle(); //37.0度以上の行のスタイル
+		CellStyle highThermoRed = workbook.createCellStyle(); //37.5度以上の行のスタイル
+		
+		//フォントサイズ設定
+ 		Font font = workbook.createFont();
+ 		font.setFontHeightInPoints((short)9);
+ 		cellstyle.setFont(font);
 		
 		int rowNum = 0; //何行目かを指定する変数
 		Row row = sheet.createRow(rowNum++); //先頭行を作成
@@ -131,17 +140,30 @@ public class ExcelView extends AbstractXlsxView {
 				}else {
 					thermo = 0;
 				}
-				//37.5度以上は赤色で塗りつぶす
-				if(thermo >= 37.5) {
+				//37.0度以上はオレンジ色で塗りつぶす
+				if(thermo >= 37.0 && thermo <= 37.5) {
 					for (int j = 0; j < rowTmp.length; j++) {
 						cell = row.getCell(j);
 						highThermo.setFillPattern(FillPatternType.DIAMONDS); //塗りつぶし
-						highThermo.setFillForegroundColor(IndexedColors.RED .getIndex()); //背景色グレー
+						highThermo.setFillForegroundColor(IndexedColors.LIGHT_ORANGE .getIndex()); //背景色オレンジ
 						highThermo.setBorderLeft(BorderStyle.MEDIUM);
 						highThermo.setBorderRight(BorderStyle.MEDIUM);
 						highThermo.setBorderTop(BorderStyle.MEDIUM);
 						highThermo.setBorderBottom(BorderStyle.MEDIUM);
 						cell.setCellStyle(highThermo);
+					}
+				}
+				//37.0度以上は赤色で塗りつぶす
+				if(thermo >= 37.5) {
+					for (int j = 0; j < rowTmp.length; j++) {
+						cell = row.getCell(j);
+						highThermoRed.setFillPattern(FillPatternType.DIAMONDS); //塗りつぶし
+						highThermoRed.setFillForegroundColor(IndexedColors.RED1 .getIndex()); //背景色赤
+						highThermoRed.setBorderLeft(BorderStyle.MEDIUM);
+						highThermoRed.setBorderRight(BorderStyle.MEDIUM);
+						highThermoRed.setBorderTop(BorderStyle.MEDIUM);
+						highThermoRed.setBorderBottom(BorderStyle.MEDIUM);
+						cell.setCellStyle(highThermoRed);
 					}
 				}
 				//1列目に日付を挿入
@@ -184,8 +206,10 @@ public class ExcelView extends AbstractXlsxView {
 		cellstyle.setWrapText(true); //改行を有効化
 		indexCellstyle.setWrapText(true); //見出しの改行を有効化
 		highThermo.setWrapText(true); //色付きcellの改行を有効化
+		highThermoRed.setWrapText(true); //色付きcellの改行を有効化
 		cellstyle.setVerticalAlignment(VerticalAlignment.TOP); //cellサイズを調節した際文字を上揃え
 		indexCellstyle.setVerticalAlignment(VerticalAlignment.TOP); //見出しのcellサイズを調節した際文字を上揃え
 		highThermo.setVerticalAlignment(VerticalAlignment.TOP); //色付きcellサイズを調節した際文字を上揃え
+		highThermoRed.setVerticalAlignment(VerticalAlignment.TOP); //色付きcellサイズを調節した際文字を上揃え
 	}
 }
