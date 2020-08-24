@@ -178,15 +178,15 @@ public class ThermoConstants {
 		
 		/** 学年区分の区分名 **/
 		public static final String KBN_NAME_GRADE_ZERO = "なし";
-		public static final String KBN_NAME_GRADE_ONE = "小学１年";
-		public static final String KBN_NAME_GRADE_TWO = "小学２年";
-		public static final String KBN_NAME_GRADE_THREE = "小学３年";
-		public static final String KBN_NAME_GRADE_FOUR = "小学４年";
-		public static final String KBN_NAME_GRADE_FIVE = "小学５年";
-		public static final String KBN_NAME_GRADE_SIX = "小学６年";
-		public static final String KBN_NAME_GRADE_A = "中学１年";
-		public static final String KBN_NAME_GRADE_B = "中学２年";
-		public static final String KBN_NAME_GRADE_C = "中学３年";
+		public static final String KBN_NAME_GRADE_ONE = "小学1年生";
+		public static final String KBN_NAME_GRADE_TWO = "小学2年生";
+		public static final String KBN_NAME_GRADE_THREE = "小学3年生";
+		public static final String KBN_NAME_GRADE_FOUR = "小学4年生";
+		public static final String KBN_NAME_GRADE_FIVE = "小学5年生";
+		public static final String KBN_NAME_GRADE_SIX = "小学6年生";
+		public static final String KBN_NAME_GRADE_A = "中学1年生";
+		public static final String KBN_NAME_GRADE_B = "中学2年生";
+		public static final String KBN_NAME_GRADE_C = "中学3年生";
 		
 		/** 管理者権限の区分値 **/
 		public static final String KBN_VALUE_ADMIN_ON = "1";

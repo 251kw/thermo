@@ -122,13 +122,7 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-									<td>
-										<span class="ui input select">
-											<select th:field="*{adminFlg}">
-												<option th:value="#{view.number.zero}" th:text="#{view.select.normal}"></option>
-												<option th:value="#{view.number.one}" th:text="#{view.select.admin}"></option>
-											</select>
-										</span>
+									<td><span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('adminFlg')}"></span>
 									</td>
 								</tr>
 							</tbody>
