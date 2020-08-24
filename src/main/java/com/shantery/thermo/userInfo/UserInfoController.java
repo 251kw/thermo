@@ -2,6 +2,7 @@ package com.shantery.thermo.userInfo;
 
 import java.util.Optional;
 
+
 import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
@@ -9,6 +10,8 @@ import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_ADMIN;
 import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_INP;
 import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_CONF;
 import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_RES;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -97,34 +100,16 @@ class UserInfoController {
 		}else {
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(test2List.orElse(null) != null) {
-				//String message = messagesource.getMessage("errLoginUse", null, Locale.JAPAN);//TODO　外部化やる
-				model.addAttribute("uIdError", "既に存在しているユーザIDです");//TODO 外部化やる
+				model.addAttribute("uIdError", USER_INP_ID_ER);
 			}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
 				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
-				model.addAttribute("grError", "グループIDか、グループパスワードが間違っています");//TODO 外部化やる
+				model.addAttribute("grError", USER_INP_GR_ER);//
 			}	
 			//ユーザ情報入力画面に遷移"userInfoInput"
 			return TO_USER_INFO_INP;
 		}
 	}
-	
-	//TODO 削除予定
-	/*
-	/**
-	 * 新規ユーザー入力確認画面から戻るボタンで戻った時
-	 * @param userInfoForm　入力されたユーザ情報を保持
-	 * @param result
-	 * @param model
-	 * @return 入力画面
-	 *
-	@RequestMapping(value = "/userInfoInput", method = RequestMethod.POST)
-	public String returnUserInfoInput(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
-			BindingResult result, Model model) {
 		
-		return "userInfoInput";	//ユーザ情報入力画面に遷移
-	}
-	*/
-	
 	/**
 	 * 新規ユーザー登録完了画面
 	 * @param uInfoData 入力されたユーザ情報を保持
