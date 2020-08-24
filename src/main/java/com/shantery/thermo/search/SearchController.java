@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,7 +73,7 @@ class SearchController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value =SEARCH_INFO , method = RequestMethod.POST) // 検索ボタンが押されたとき
-	public String search_info(@ModelAttribute("searchInfo") SearchInfoForm form, Model m) {
+	public String search_info(@ModelAttribute("searchInfo") @Validated SearchInfoForm form, BindingResult result, Model m) {
 		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		List<ThermoInfoEntity> list = null;
@@ -81,20 +83,8 @@ class SearchController {
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
 		//名前入力チェックでエラーがあったら(未記入はスルーする）
-		if(!schService.nameCheck(form.getSch_name())&&(!form.getSch_name().equals(EMPTY))) {
-			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
-			m.addAttribute("name_error", NAME_ERROR);
+		if(result.hasErrors()) {
 			errorFlg = true;
-		}
-		
-		//日付入力チェックでエラーがあったら(未記入はスルーする）
-		if(!schService.dateCheck(form.getSch_date())&&(!form.getSch_date().equals(EMPTY))) {
-			list = (List<ThermoInfoEntity>)session.getAttribute(SCH_LIST);
-			m.addAttribute("date_error", DATE_ERROR);
-			m.addAttribute("example", EXAMPLE);
-			errorFlg = true;
-		} else {
-			
 		}
 		
 		//チェックボックスと他の入力欄の併用を許可しない
@@ -103,7 +93,6 @@ class SearchController {
 					!EMPTY.equals(form.getSch_grade()))&&
 						(form.getSch_high()!=null)){
 			
-			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
 			m.addAttribute("combi_msg", COMBI_MSG);
 			errorFlg = true;
 		}
@@ -111,6 +100,8 @@ class SearchController {
 		//errorがなければ検索
 		if(!errorFlg) {
 			list = schService.separate(loginuser.getGroup_id(), form);
+		} else {
+			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
 		}
 		
 		if(list.size()==0) {	//listがないとき

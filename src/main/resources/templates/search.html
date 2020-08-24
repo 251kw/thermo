@@ -66,28 +66,14 @@
 						<td th:data-label="#{view.tablelabel.regist_date}">
 							<div class="ui input">
 							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日" readonly="readonly"></div>
-							<div><font color="red"><span th:if="${date_error}" th:text="${date_error}"></span></font></div>
-							<div><font color="red"><span th:if="${example}" th:text="${example}"></span></font></div></td>
 						<td th:data-label="#{view.tablelabel.name}">
 							<div class="ui input">
 							<input type="text" th:field="*{sch_name}" maxlength='64'></div>
-							<div><font color="red"><span th:if="${name_error}" th:text="${name_error}"></span></font></div></td>
+							<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 						
 						<td th:data-label="#{view.tablelabel.grade}">
 	  						<div class="field">
-							<select th:field="*{sch_grade}">
-								<option value=""></option>
-								<option value="0" th:text="#{view.select.grade0}"></option>
-								<option value="1" th:text="#{view.select.grade1}"></option>
-								<option value="2" th:text="#{view.select.grade2}"></option>
-								<option value="3" th:text="#{view.select.grade3}"></option>
-								<option value="4" th:text="#{view.select.grade4}"></option>
-								<option value="5" th:text="#{view.select.grade5}"></option>
-								<option value="6" th:text="#{view.select.grade6}"></option>
-								<option value="A" th:text="#{view.select.gradeA}"></option>
-								<option value="B" th:text="#{view.select.gradeB}"></option>
-								<option value="C" th:text="#{view.select.gradeC}"></option>
-							</select>
+								<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('gradeAndBlank')}"></span>
 							</div>
 						</td>
 						<td>
@@ -259,6 +245,24 @@
 				return;
 			}
 			
+			var showAdditionalButton = function (input) {
+	            setTimeout(function () {
+	                var buttonPanel = $(input)
+	                    .datepicker("widget")
+	                    .find(".ui-datepicker-buttonpane"),
+
+	                btn = $('<button class="ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all" type="button">クリア</button>');
+
+	                btn
+	                    .unbind("click")
+	                    .bind("click", function () {
+	                        $.datepicker._clearDate(input);
+	                    });
+
+	                btn.appendTo(buttonPanel);
+	            }, 1);
+	        };
+
 			$('#datepicker').datepicker({
 				minDate:"-13d"
 			});
