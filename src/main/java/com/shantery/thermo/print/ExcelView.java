@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Footer;
 import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -67,6 +68,7 @@ public class ExcelView extends AbstractXlsxView {
 		String[] rowTmp = {"計測日", "名前", "性別", "学年", "年齢", "体温", "味覚障害", "嗅覚障害", "咳", "その他" };
 		//列の幅を設定する
 		sheet.setColumnWidth(0, 2800); //計測日の幅
+		sheet.setColumnWidth(1, 2500); //名前の幅
  		sheet.setColumnWidth(2, 1200); //性別の幅
  		sheet.setColumnWidth(3, 2500); //学年の幅
  		sheet.setColumnWidth(4, 1200); //年齢の幅
@@ -74,12 +76,18 @@ public class ExcelView extends AbstractXlsxView {
  		sheet.setColumnWidth(6, 1150); //味覚障害の幅
  		sheet.setColumnWidth(7, 1150); //嗅覚障害の幅
  		sheet.setColumnWidth(8, 1150); //咳の幅
- 		sheet.setColumnWidth(9, 5000); //その他の幅
+ 		sheet.setColumnWidth(9, 4500); //その他の幅
+ 
 		// セルスタイルを指定
 		CellStyle cellstyle = workbook.createCellStyle(); //入力項目のスタイル
 		CellStyle indexCellstyle = workbook.createCellStyle(); //見出しのスタイル
 		CellStyle highThermo = workbook.createCellStyle(); //37.0度以上の行のスタイル
 		CellStyle highThermoRed = workbook.createCellStyle(); //37.5度以上の行のスタイル
+		
+		//フォントサイズ設定
+ 		Font font = workbook.createFont();
+ 		font.setFontHeightInPoints((short)9);
+ 		cellstyle.setFont(font);
 		
 		int rowNum = 0; //何行目かを指定する変数
 		Row row = sheet.createRow(rowNum++); //先頭行を作成
@@ -132,7 +140,7 @@ public class ExcelView extends AbstractXlsxView {
 				}else {
 					thermo = 0;
 				}
-				//37.0度以上は赤色で塗りつぶす
+				//37.0度以上はオレンジ色で塗りつぶす
 				if(thermo >= 37.0 && thermo <= 37.5) {
 					for (int j = 0; j < rowTmp.length; j++) {
 						cell = row.getCell(j);
@@ -145,6 +153,7 @@ public class ExcelView extends AbstractXlsxView {
 						cell.setCellStyle(highThermo);
 					}
 				}
+				//37.0度以上は赤色で塗りつぶす
 				if(thermo >= 37.5) {
 					for (int j = 0; j < rowTmp.length; j++) {
 						cell = row.getCell(j);
