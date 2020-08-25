@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,7 +78,7 @@ class ThermoInputController {
 	 * @return 確認画面
 	 */
 	@RequestMapping(value = THERMO_INFO_INP_SUC, method = RequestMethod.POST)
-	public String InputConfirm(@ModelAttribute(THERMO_INP_FORM) ThermoInputForm form, Model model) {
+	public String InputConfirm(@Validated @ModelAttribute(THERMO_INP_FORM) ThermoInputForm form, BindingResult result, Model model) {
 		
 		//入力情報を取得
 		ArrayList<ThermoInputForm.Detail> list = form.gettList();
@@ -85,7 +87,8 @@ class ThermoInputController {
 		
 		//入力チェックをしてエラー文があれば入力画面へ
 		ArrayList<String> message = service.checkInput(list);
-		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER)) {
+		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER) || result.hasErrors()) {
+			
 			model.addAttribute("message", message);
 			model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
 			model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
@@ -123,6 +126,7 @@ class ThermoInputController {
 		model.addAttribute(THERMO_LIST , (ArrayList<ThermoInputForm.Detail>)session.getAttribute(THERMO_LIST));
 		model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
 		model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
+		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
 		
 		return TO_THERMO_INFO_INP;
 	}

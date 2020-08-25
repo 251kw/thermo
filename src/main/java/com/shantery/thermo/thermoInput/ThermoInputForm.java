@@ -3,6 +3,9 @@ package com.shantery.thermo.thermoInput;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
 
 
 
@@ -13,6 +16,7 @@ import java.util.ArrayList;
  */
 public class ThermoInputForm {
 	
+	@Valid
 	private ArrayList<Detail> tList;
 	
 	public ArrayList<Detail> gettList() {
@@ -45,6 +49,7 @@ public class ThermoInputForm {
 		/* 咳 */
 		private String cough;
 		/* その他 */
+		@Size(max = 128)
 		private String writing;
 		/* 登録日 */
 		private String date;
