@@ -98,7 +98,10 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 			query.setParameter("curDate", curDate);
 			query.setParameter("endDate", endDate);
 		}
-		if (nameFlg) query.setParameter("name", Q_PERCENT+form.getSch_name()+Q_PERCENT);
+		if (nameFlg) {
+			String rename = form.getSch_name().trim();
+			query.setParameter("name", Q_PERCENT+rename+Q_PERCENT);
+		}
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
 		
 		return query.setMaxResults(MAX_SCH_LISTINT).getResultList();		//取得データ数の制限.結果をlistで取得

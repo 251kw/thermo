@@ -73,7 +73,7 @@
 						
 						<td th:data-label="#{view.tablelabel.grade}">
 	  						<div class="field">
-								<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('gradeAndBlank')}"></span>
+								<div th:insert="selectbox :: gradeAndBlank"></div>
 							</div>
 						</td>
 						<td>
@@ -123,7 +123,7 @@
 							<th width="65" th:text="#{view.tablelabel.taste}"></th>
 							<th width="65" th:text="#{view.tablelabel.smell}"></th>
 							<th width="60" th:text="#{view.tablelabel.cough}"></th>
-							<th width="150" th:text="#{view.tablelabel.other}"></th>
+							<th width="80" th:text="#{view.tablelabel.other}"></th>
 						</tr>
 					</thead>
 					<th:block th:each="list : ${list}">
@@ -139,7 +139,7 @@
 									<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
 									<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
 									<td th:data-label="#{view.tablelabel.cough}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
-									<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
 								</tr>
 							</tbody>
 						</th:block>
@@ -156,7 +156,7 @@
 									<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
 									<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
 									<td th:data-label="#{view.tablelabel.cough}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
-									<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
 								</tr>
 							</tbody>
 						</th:block>
@@ -172,7 +172,7 @@
 									<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
 									<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
 									<td th:data-label="#{view.tablelabel.cough}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
-									<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
 								</tr>
 							</tbody>
 						</th:block>
@@ -188,7 +188,7 @@
 									<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
 									<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
 									<td th:data-label="#{view.tablelabel.cough}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
-									<td th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}" th:text="${list.other}"></td>
 								</tr>
 							</tbody>
 						</th:block>
@@ -275,6 +275,6 @@
 			});
   		</script>
   		
-  		
+  		<br><br><br>
 	</body>
 </html>
