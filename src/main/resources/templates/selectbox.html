@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+	
+		<!-- 学年　-->
+		<div th:fragment="grade" th:remove="tag">
+			<div class="content">
+				<select th:field="*{sch_grade}" id="sch_grade" name="sch_grade">
+					<option th:value="0" th:text="なし"></option>
+					<option th:value="1" th:text="小学１年生"></option>
+					<option th:value="2" th:text="小学２年生"></option>
+					<option th:value="3" th:text="小学３年生"></option>
+					<option th:value="4" th:text="小学４年生"></option>
+					<option th:value="5" th:text="小学５年生"></option>
+					<option th:value="6" th:text="小学６年生"></option>
+					<option th:value="A" th:text="中学１年生"></option>
+					<option th:value="B" th:text="中学２年生"></option>
+					<option th:value="C" th:text="中学３年生"></option>
+				</select>
+			</div>
+		</div>
+		
+		<!-- 学年＋空白 -->
+		<div th:fragment="gradeAndBlank" th:remove="tag">
+			<div class="content">
+				<select th:field="*{sch_grade}" id="sch_grade" name="sch_grade">
+					<option th:value="" th:text=""></option>
+					<option th:value="0" th:text="なし"></option>
+					<option th:value="1" th:text="小学１年生"></option>
+					<option th:value="2" th:text="小学２年生"></option>
+					<option th:value="3" th:text="小学３年生"></option>
+					<option th:value="4" th:text="小学４年生"></option>
+					<option th:value="5" th:text="小学５年生"></option>
+					<option th:value="6" th:text="小学６年生"></option>
+					<option th:value="A" th:text="中学１年生"></option>
+					<option th:value="B" th:text="中学２年生"></option>
+					<option th:value="C" th:text="中学３年生"></option>
+				</select>
+			</div>
+		</div>
+	</body>
+</html>

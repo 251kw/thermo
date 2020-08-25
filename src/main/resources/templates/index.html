@@ -51,7 +51,7 @@
 						<td>
 							<div>
 	    						<label th:text="#{view.tablelabel.uId}"></label>
-	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}">
+	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}"  maxlength='32'>
 	    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="index_input_error"></div>
 	  						</div>
   						</td>
@@ -60,7 +60,7 @@
 						<td>
 							<div>
 	    						<label th:text="#{view.tablelabel.pass}"></label>
-	    						<input type="password" name="userpass" th:placeholder="#{view.inputph.userpass}" th:value="*{userpass}">
+	    						<input type="password" name="userpass" th:placeholder="#{view.inputph.userpass}" th:value="*{userpass}"  maxlength='16'>
 	    						<div th:if="${#fields.hasErrors('userpass')}" th:errors="*{userpass}" th:errorclass="index_input_error"></div>
 	  						</div>
   						</td>
