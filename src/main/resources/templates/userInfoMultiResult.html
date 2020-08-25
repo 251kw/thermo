@@ -10,16 +10,18 @@
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	</head>
 	<body>
-		<!--外部ヘッダーファイル読み込み-->
+		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 ​
-		<!--ページで書き換え -->
-		<p></p>
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
 		<div class="komidasi">
-			<h3><th:block th:text="#{view.userInfoMulRes.pagetitle}"></th:block></h3>
+			<h3 th:text="#{view.userInfoMulRes.pagetitle}"></h3>
 		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		
-		<!-------------------------------------------本体始まり ----------------------------------------------------->
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+
 		<div class="ui container center aligned">
 			
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->

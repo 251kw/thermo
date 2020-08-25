@@ -161,7 +161,7 @@ public class ThermoConstants {
 		// calcAge
 		public static final String HYPHEN = "-";
 		public static final String SLASH = "/";
-		public static final String DATE_PATTERN = "yyyy/MM/dd";
+		public static final String DATE_PATTERN = "yyyy/M/d";
 		
 		// valueToName
 		/** 区分の種類 **/
