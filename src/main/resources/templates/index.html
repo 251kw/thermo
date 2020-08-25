@@ -29,8 +29,7 @@
 					<tr>
 						<td>
 							<span class="ui input select">			
-								<span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('regist')}">
-								</span>
+								<span th:insert="selectbox :: regist"></span>
 							</span> 
 							<input class="ui inverted blue button" type="submit" th:value="#{view.btn.signup}" />
 						</td>
