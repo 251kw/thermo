@@ -68,7 +68,7 @@ public class ThermoService {
 		if(check == false) {	// 不適正ユーザーの場合
 			logintransition = TO_TOP;
 		}else if(check == true) {
-			logintransition = "search";// 適正ユーザーの場合
+			logintransition = TO_SEARCH;// 適正ユーザーの場合
 		}
 		return logintransition;
 	}

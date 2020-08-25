@@ -127,7 +127,7 @@ class ThermoController {
 			boolean adminbtn = schService.isAdminFlg(userinfo);
 			model.addAttribute("adminbtn", adminbtn);
 			
-			session.setAttribute("schlist", schlist);
+			session.setAttribute(SCH_LIST, schlist);
 			
 		}else {	 // 不正なユーザーの場合
 			// エラーメッセージを格納
