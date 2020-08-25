@@ -8,41 +8,41 @@
 		<!-- 新規登録　-->
 		<div th:fragment="regist" th:remove="tag">
 			<select name="regist" id="regist">
-				<option value="group" th:text="グループ"></option>
-				<option value="user" th:text="ユーザー（個人）"></option>
-				<option value="multiuser" th:text="ユーザー（複数）"></option>
+				<option value="group" th:text="#{view.indexselect.group}"></option>
+				<option value="user" th:text="#{view.indexselect.user}"></option>
+				<option value="multiuser" th:text="#{view.indexselect.multiuser}"></option>
 			</select>
 		</div>
 		
 		<!-- 性別 -->
 		<div th:fragment="gender" th:remove="tag">
 			<select th:field="*{gender}"name="gender">
-				<option value="M" th:text="男性"></option>
-				<option value="F" th:text="女性"></option>
+				<option value="M" th:text="#{view.select.man}"></option>
+				<option value="F" th:text="#{view.select.woman}"></option>
 			</select>
 		</div>
 		
 		<!-- 管理者権限 -->
 		<div th:fragment="admin" th:remove="tag">
 			<select th:field="*{admin}" name="admin">
-				<option value="1" th:text="管理者"></option>
-				<option value="0" th:text="一般"></option>
+				<option value="1" th:text="#{view.select.adminon}"></option>
+				<option value="0" th:text="#{view.select.adminoff}"></option>
 			</select>
 		</div>
 		
 		<!-- 学年　-->
 		<div th:fragment="grade" th:remove="tag">
 			<select th:field="*{grade}" name="grade">
-				<option value="0" th:text="なし"></option>
-				<option value="1" th:text="小学１年生"></option>
-				<option value="2" th:text="小学２年生"></option>
-				<option value="3" th:text="小学３年生"></option>
-				<option value="4" th:text="小学４年生"></option>
-				<option value="5" th:text="小学５年生"></option>
-				<option value="6" th:text="小学６年生"></option>
-				<option value="A" th:text="中学１年生"></option>
-				<option value="B" th:text="中学２年生"></option>
-				<option value="C" th:text="中学３年生"></option>
+				<option value="0" th:text="#{view.select.grade0}"></option>
+				<option value="1" th:text="#{view.select.grade1}"></option>
+				<option value="2" th:text="#{view.select.grade2}"></option>
+				<option value="3" th:text="#{view.select.grade3}"></option>
+				<option value="4" th:text="#{view.select.grade4}"></option>
+				<option value="5" th:text="#{view.select.grade5}"></option>
+				<option value="6" th:text="#{view.select.grade6}"></option>
+				<option value="A" th:text="#{view.select.gradeA}"></option>
+				<option value="B" th:text="#{view.select.gradeB}"></option>
+				<option value="C" th:text="#{view.select.gradeC}"></option>
 			</select>
 		</div>
 		
@@ -50,16 +50,16 @@
 		<div th:fragment="gradeAndBlank" th:remove="tag">
 			<select th:field="*{sch_grade}" name="sch_grade">
 				<option value=""></option>
-				<option value="0" th:text="なし"></option>
-				<option value="1" th:text="小学１年生"></option>
-				<option value="2" th:text="小学２年生"></option>
-				<option value="3" th:text="小学３年生"></option>
-				<option value="4" th:text="小学４年生"></option>
-				<option value="5" th:text="小学５年生"></option>
-				<option value="6" th:text="小学６年生"></option>
-				<option value="A" th:text="中学１年生"></option>
-				<option value="B" th:text="中学２年生"></option>
-				<option value="C" th:text="中学３年生"></option>
+				<option value="0" th:text="#{view.select.grade0}"></option>
+				<option value="1" th:text="#{view.select.grade1}"></option>
+				<option value="2" th:text="#{view.select.grade2}"></option>
+				<option value="3" th:text="#{view.select.grade3}"></option>
+				<option value="4" th:text="#{view.select.grade4}"></option>
+				<option value="5" th:text="#{view.select.grade5}"></option>
+				<option value="6" th:text="#{view.select.grade6}"></option>
+				<option value="A" th:text="#{view.select.gradeA}"></option>
+				<option value="B" th:text="#{view.select.gradeB}"></option>
+				<option value="C" th:text="#{view.select.gradeC}"></option>
 			</select>
 		</div>
 		

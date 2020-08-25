@@ -138,6 +138,7 @@ public class ThermoReplaceValue {
 	 * @param param
 	 * @return
 	 */
+	// TODO 未使用の関数
 	public static String trimBlank(String param) {
 		
 		// 文字列中に全角スペースがあれば全て半角スペースに置き換える
