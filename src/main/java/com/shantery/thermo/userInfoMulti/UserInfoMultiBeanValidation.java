@@ -1,5 +1,7 @@
 package com.shantery.thermo.userInfoMulti;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -11,32 +13,32 @@ public class UserInfoMultiBeanValidation {
 	/** グループID **/
 	@NotBlank(message = "gId")
 	@Size(min = 4, max = 32,message="gId")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="gId")
+	@Pattern(regexp = THERMO_REGEX_PATTERN,message="gId")
 	private String group_id;
 	/** グループパスワード **/
 	@NotBlank(message = "gpass")
 	@Size(min = 4, max = 16,message="gPass")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="gPass")
+	@Pattern(regexp = THERMO_REGEX_PATTERN,message="gPass")
 	private String group_pass;
 	/** ユーザID **/
 	@NotBlank(message = "uId")
 	@Size(min = 4, max = 32,message="uId")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="uId")
+	@Pattern(regexp = THERMO_REGEX_PATTERN,message="uId")
 	private String user_id;
 	/** ユーザパスワード **/
 	@NotBlank(message = "uPass")
 	@Size(min = 4, max = 16,message="uPass")
-	@Pattern(regexp = "[a-zA-Z0-9\\-]+",message="uPass")
+	@Pattern(regexp = THERMO_REGEX_PATTERN,message="uPass")
 	private String user_pass;
 	/** ユーザ名 **/
 	@NotBlank(message = "uName")
 	@Size(min = 1, max = 64,message="uName")
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$",message="uName")
+	@Pattern(regexp = NAME_PATTERN,message="uName")
 	private String user_name;
 	/** 性別 **/
 	@NotBlank(message = "gender")
 	@Size(min = 1,max = 1,message="gender")
-	@Pattern(regexp = "[MF]",message="gender")
+	@Pattern(regexp = GENDER_PATTERN,message="gender")
 	private String gender;
 	/** 生年月日 **/
 	@NotBlank(message = "birthday")
@@ -45,12 +47,12 @@ public class UserInfoMultiBeanValidation {
 	/** 学年区分 **/
 	@NotBlank(message = "grade")
 	@Size(min = 1,max = 1,message="grade")
-	@Pattern(regexp = "[A-C0-6]",message="grade")
+	@Pattern(regexp = GRADE_PATTERN,message="grade")
 	private String grade;
 	/** 管理者フラグ **/
 	@NotBlank(message = "flg")
 	@Size(min = 1,max = 1,message="flg")
-	@Pattern(regexp = "[0-1]",message="flg")
+	@Pattern(regexp = FLAG_PATTERN,message="flg")
 	private String admin_flg;
 	
 	

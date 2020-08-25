@@ -284,7 +284,15 @@ public class ThermoConstants {
 	// その他thermoパッケージでしか使わなさそうな定数
 		/** ログイン画面から受け取るパラメータを格納する **/
 		public static final String THERMO_FORM = "ThermoForm";
+		
+	//バリデーションで使用する定数
 		public static final String THERMO_REGEX_PATTERN = "[a-zA-Z0-9]*";
+		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9０-９ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]*$";
+		public static final String NAME_PATTERN ="[a-zA-Z0-9０-９ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$";
+		public static final String GENDER_PATTERN ="[MF]";
+		public static final String GRADE_PATTERN ="[A-C0-6]";
+		public static final String FLAG_PATTERN ="[0-1]";
+		
 		
 	// ThermoInputパッケージでしか使わない定数
 		public static final String THERMO_INP_ER = "※半角数字で小数第一位まで入力してください";
@@ -302,7 +310,6 @@ public class ThermoConstants {
 		public static final String OVER_LIST_MSG = "100件の検索結果を表示しています。";
 		public static final String NAME_ERROR = "※記号は入力できません。";
 		public static final String NAME_OVER_ERROR = "※64文字以内で入力してください。";
-		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]*$";
 		public static final String MAX_SCH_LISTSTR = "100";
 		public static final int MAX_SCH_LISTINT = 100;
 		
