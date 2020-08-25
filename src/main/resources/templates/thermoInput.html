@@ -17,7 +17,9 @@
 		<div class="komidasi">
 			<h3 th:text="#{view.text.thermoInfoIn}"></h3>
 		</div>
+		<p></p>
 		<form action="/thermo_info_inp_suc" method="post" th:object="${thForm}">
+			<div class="ui container center aligned">
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
@@ -41,7 +43,7 @@
 						<td th:data-label="#{view.tablelabel.thermo}">
 							<span class="ui input">
 								<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-								th:value="${list[status.index].temperature}" size="30" maxlength="4" th:placeholder="#{view.checkPh.thermo}" />
+								th:value="${list[status.index].temperature}" size="12" maxlength="4" th:placeholder="#{view.checkPh.thermo}" />
 							</span>
 							<div th:if="${message}">
 								<br><font color="red"><span th:text="${message[status.index]}"></span></font>
@@ -103,6 +105,8 @@
 					</th:block>
 				</tr>
 			</table>
+			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div align="center">
 				<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.confirm}"></button>
 				<a href="/search_return">

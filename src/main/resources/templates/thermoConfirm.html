@@ -17,7 +17,9 @@
 		<div class="komidasi">
 			<h3 th:text="#{view.text.thermoInfoCon}"></h3>
 		</div>
+		<p></p>
 		<form action="/thermo_info_conf_suc" method="post" >
+			<div class="ui container center aligned">
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
@@ -53,6 +55,8 @@
 					<td th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
 				</tr>
 			</table>
+			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div align="center">
 				<button type="submit" name="input" class="ui inverted blue button " ><p th:text="#{view.btn.reg}"></button>
 				<a href="/thermo_info_conf_back">
