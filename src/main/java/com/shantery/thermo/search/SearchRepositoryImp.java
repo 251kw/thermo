@@ -74,7 +74,9 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     	
     	if(!dateFlg) { //日付指定がなかったら、二週間分を設定
 			sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
-    		sql.append("order by t.userInfoEntity.userName, t.registDate desc ");	//名前でまとめて、日付順に
+    		sql.append("order by t.registDate desc, t.userInfoEntity.grade, t.userInfoEntity.userName ");	//日付、学年、名前順で並べる
+	    } else {
+	    	sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");	//
 	    }
     	
     	Query query = entityManager.createQuery(sql.toString());

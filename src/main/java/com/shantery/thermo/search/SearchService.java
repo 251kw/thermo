@@ -38,8 +38,8 @@ public class SearchService {
 				EMPTY.equals(form.getSch_name()) && 
 					EMPTY.equals(form.getSch_grade())) {
 			if(form.getSch_high()==null) {
-				//未記入、未選択で今日のデータ検索にするのか
-				return schRepository.searchCurDate(groupId);
+				//未記入、未選択で二週間分のデータを検索
+				return schRepository.searchUnconditional(groupId);
 			} else {
 				//高い人二週間分のデータを検索
 				return schRepository.searchHighThermo(groupId);

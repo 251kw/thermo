@@ -114,16 +114,16 @@
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
-							<th th:text="#{view.tablelabel.regist_date}"></th>
-							<th th:text="#{view.tablelabel.name}"></th>
-							<th th:text="#{view.tablelabel.gender}"></th>
-							<th th:text="#{view.tablelabel.grade}"></th>
-							<th th:text="#{view.tablelabel.age}"></th>
-							<th th:text="#{view.tablelabel.thermo}"></th>
-							<th th:text="#{view.tablelabel.taste}"></th>
-							<th th:text="#{view.tablelabel.smell}"></th>
-							<th th:text="#{view.tablelabel.cough}"></th>
-							<th th:text="#{view.tablelabel.other}"></th>
+							<th width="80" th:text="#{view.tablelabel.regist_date}"></th>
+							<th width="90" th:text="#{view.tablelabel.name}"></th>
+							<th width="50" th:text="#{view.tablelabel.gender}"></th>
+							<th width="70" th:text="#{view.tablelabel.grade}"></th>
+							<th width="50" th:text="#{view.tablelabel.age}"></th>
+							<th width="65" th:text="#{view.tablelabel.thermo}"></th>
+							<th width="65" th:text="#{view.tablelabel.taste}"></th>
+							<th width="65" th:text="#{view.tablelabel.smell}"></th>
+							<th width="60" th:text="#{view.tablelabel.cough}"></th>
+							<th width="150" th:text="#{view.tablelabel.other}"></th>
 						</tr>
 					</thead>
 					<th:block th:each="list : ${list}">
@@ -135,7 +135,7 @@
 									<td th:data-label="#{view.tablelabel.gender}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
 									<td th:data-label="#{view.tablelabel.grade}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
 									<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
-									<td th:data-label="#{view.tablelabel.thermo}">
+									<td th:data-label="#{view.tablelabel.thermo}"><p></p>
 									<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
 									<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
 									<td th:data-label="#{view.tablelabel.cough}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
