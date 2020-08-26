@@ -111,19 +111,19 @@
 		<div class="ui container">
 	​		<div th:if="${display}">
 			<h3 th:text="${overlist_msg}"></h3>
-				<table class="ui celled table">
+				<table class="ui celled table" style="table-layout:fixed">
 					<thead class="delete">
 						<tr>
 							<th width="50" th:text="#{view.tablelabel.regist_date}"></th>
 							<th width="60" th:text="#{view.tablelabel.name}"></th>
-							<th width="20" th:text="#{view.tablelabel.gender}"></th>
-							<th width="50" th:text="#{view.tablelabel.grade}"></th>
-							<th width="20" th:text="#{view.tablelabel.age}"></th>
-							<th width="30" th:text="#{view.tablelabel.thermo}"></th>
-							<th width="60" th:text="#{view.tablelabel.taste}"></th>
-							<th width="60" th:text="#{view.tablelabel.smell}"></th>
-							<th width="60" th:text="#{view.tablelabel.cough}"></th>
-							<th width="150" th:text="#{view.tablelabel.other}"></th>
+							<th width="30" th:text="#{view.tablelabel.gender}"></th>
+							<th width="45" th:text="#{view.tablelabel.grade}"></th>
+							<th width="30" th:text="#{view.tablelabel.age}"></th>
+							<th width="35" th:text="#{view.tablelabel.thermo}"></th>
+							<th width="40" th:text="#{view.tablelabel.taste}"></th>
+							<th width="40" th:text="#{view.tablelabel.smell}"></th>
+							<th width="40" th:text="#{view.tablelabel.cough}"></th>
+							<th width="180" th:text="#{view.tablelabel.other}"></th>
 						</tr>
 					</thead>
 					<th:block th:each="list : ${list}">
