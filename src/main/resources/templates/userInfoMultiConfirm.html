@@ -34,11 +34,14 @@
 					<tr>
 						<th th:text="#{view.usercount}" width="35"></th>
 						<th:block th:each="val:${users_head_info}">
-							<th:block th:if="${valStat.index >= 0 && valStat.index <= 3}" >
+							<th:block th:if="${valStat.index == 0 || valStat.index == 2}" >
+								<th width="120" th:text="${val}"></th>
+							</th:block>
+							<th:block th:if="${valStat.index == 1 || valStat.index == 3}" >
 								<th width="140" th:text="${val}"></th>
 							</th:block>
 							<th:block th:if="${valStat.index == 4}" >
-								<th width="100" th:text="${val}"></th>
+								<th width="110" th:text="${val}"></th>
 							</th:block>
 							<th:block th:if="${valStat.index == 5}" >
 								<th width="60" th:text="${val}"></th>
