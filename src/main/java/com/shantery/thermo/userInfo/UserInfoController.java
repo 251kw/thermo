@@ -81,15 +81,15 @@ public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm us
 	//グループ正誤調査
 	Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
 	userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
-	
 	//年齢チェック
-	Boolean age = true;//初期化
+	Boolean age = true;//変数ageの初期化
 	if(!(userInfoForm.getBirthday().isEmpty())) {
 		age = ThermoUtil.ageLimit(userInfoForm.getBirthday());
 		}
 	
 	if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.hasErrors() == false && age == true) {
-		//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力チェックがエラーじゃない
+		//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力チェックがエラーじゃないとき
+		
 		
 		//Formに入っているユーザー情報を表示用に変換(セレクトボックスのみ)
 		UserInfoEntity ulist = userInfoForm._toConvertUserInfoEntity();
