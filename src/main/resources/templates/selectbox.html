@@ -23,8 +23,8 @@
 		</div>
 		
 		<!-- 管理者権限 -->
-		<div th:fragment="admin" th:remove="tag">
-			<select th:field="*{admin}" name="admin">
+		<div th:fragment="adminFlg" th:remove="tag">
+			<select th:field="*{adminFlg}" name="adminFlg">
 				<option value="1" th:text="#{view.select.adminon}"></option>
 				<option value="0" th:text="#{view.select.adminoff}"></option>
 			</select>
