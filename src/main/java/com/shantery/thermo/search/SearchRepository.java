@@ -24,6 +24,7 @@ public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String
 			+" WHERE u.user_id = t.user_id"
 			+" AND u.group_id = :group_id"
 			+" AND t.regist_date = curdate()"
+			+" ORDER BY u.grade, u.user_name"
 			+" LIMIT "
 			+MAX_SCH_LISTSTR, nativeQuery = true)
 	List<ThermoInfoEntity> searchCurDate(@Param("group_id") String group_id);
