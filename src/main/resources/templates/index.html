@@ -50,7 +50,7 @@
 						<td>
 							<div>
 	    						<label th:text="#{view.tablelabel.uId}"></label>
-	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}"  maxlength='32'>
+	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}"  maxlength='32' autofocus>
 	    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="index_input_error"></div>
 	  						</div>
   						</td>
