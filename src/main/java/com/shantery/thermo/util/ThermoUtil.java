@@ -28,9 +28,14 @@ public class ThermoUtil {
 	    return fileName;
 	}
 
+	/**
+	 * 生年月日入力時、年齢制限を行うメソッド
+	 * @param birthday 生年月日
+	 * @return true/false 年齢が0歳～120歳までの間か否か
+	 */
 	public static boolean ageLimit(String birthday) {
-		int Age = Integer.parseInt(ThermoReplaceValue.calcAge(birthday));
-		if(0 < Age && Age <= 120) {
+		int Age = Integer.parseInt(ThermoReplaceValue.calcAge(birthday));//生年月日から年齢を算出
+		if(0 <= Age && Age <= 120) {
 			return true;
 		}else {
 			return false;
