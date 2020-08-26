@@ -114,16 +114,16 @@
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
-							<th width="80" th:text="#{view.tablelabel.regist_date}"></th>
-							<th width="90" th:text="#{view.tablelabel.name}"></th>
-							<th width="50" th:text="#{view.tablelabel.gender}"></th>
-							<th width="70" th:text="#{view.tablelabel.grade}"></th>
-							<th width="50" th:text="#{view.tablelabel.age}"></th>
-							<th width="65" th:text="#{view.tablelabel.thermo}"></th>
-							<th width="65" th:text="#{view.tablelabel.taste}"></th>
-							<th width="65" th:text="#{view.tablelabel.smell}"></th>
+							<th width="50" th:text="#{view.tablelabel.regist_date}"></th>
+							<th width="60" th:text="#{view.tablelabel.name}"></th>
+							<th width="20" th:text="#{view.tablelabel.gender}"></th>
+							<th width="50" th:text="#{view.tablelabel.grade}"></th>
+							<th width="20" th:text="#{view.tablelabel.age}"></th>
+							<th width="30" th:text="#{view.tablelabel.thermo}"></th>
+							<th width="60" th:text="#{view.tablelabel.taste}"></th>
+							<th width="60" th:text="#{view.tablelabel.smell}"></th>
 							<th width="60" th:text="#{view.tablelabel.cough}"></th>
-							<th width="80" th:text="#{view.tablelabel.other}"></th>
+							<th width="150" th:text="#{view.tablelabel.other}"></th>
 						</tr>
 					</thead>
 					<th:block th:each="list : ${list}">
@@ -131,7 +131,7 @@
 							<tbody>
 								<tr>
 									<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
-									<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
 									<td th:data-label="#{view.tablelabel.gender}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
 									<td th:data-label="#{view.tablelabel.grade}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
 									<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
@@ -148,7 +148,7 @@
 							<tbody>
 								<tr class="error">
 									<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
-									<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
 									<td th:data-label="#{view.tablelabel.gender}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
 									<td th:data-label="#{view.tablelabel.grade}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
 									<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
@@ -164,7 +164,7 @@
 							<tbody>
 								<tr class="warning">
 									<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
-									<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
 									<td th:data-label="#{view.tablelabel.gender}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
 									<td th:data-label="#{view.tablelabel.grade}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
 									<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
@@ -180,7 +180,7 @@
 							<tbody>
 								<tr>
 									<td th:data-label="#{view.tablelabel.regist_date}" th:text="${list.regist_date}"></td>
-									<td th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
+									<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userInfoEntity.user_name}"></td>
 									<td th:data-label="#{view.tablelabel.gender}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
 									<td th:data-label="#{view.tablelabel.grade}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
 									<td th:data-label="#{view.tablelabel.age}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>

@@ -29,6 +29,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     
     @SuppressWarnings("unchecked")
     @Override
+    //TODO 検索氏名スペース変換
     public List<ThermoInfoEntity> searchQuery(String groupId, SearchInfoForm form) {
     	
     	StringBuilder sql = new StringBuilder();
@@ -47,7 +48,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     		dateFlg = true;
     		
     		if(!EMPTY.equals(form.getSch_name())) {		//名前が入力されたら
-    			sql.append("AND t.userInfoEntity.userName LIKE :name ");
+    			sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
     			nameFlg = true;
     		}
     		if(!EMPTY.equals(form.getSch_grade())) {		//学年が入力されたら
@@ -57,7 +58,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     	} else {
     		
     		if(!EMPTY.equals(form.getSch_name())) {
-    			sql.append("AND t.userInfoEntity.userName LIKE :name ");
+    			sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
     			nameFlg = true;
     			
     			if(!EMPTY.equals(form.getSch_grade())) {
@@ -76,7 +77,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 			sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
     		sql.append("order by t.registDate desc, t.userInfoEntity.grade, t.userInfoEntity.userName ");	//日付、学年、名前順で並べる
 	    } else {
-	    	sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");	//
+	    	sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");
 	    }
     	
     	Query query = entityManager.createQuery(sql.toString());
@@ -99,7 +100,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 			query.setParameter("endDate", endDate);
 		}
 		if (nameFlg) {
-			String rename = form.getSch_name().trim();
+			String rename = form.getSch_name().replaceAll("　", " ").replaceAll(" ", "");
 			query.setParameter("name", Q_PERCENT+rename+Q_PERCENT);
 		}
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
