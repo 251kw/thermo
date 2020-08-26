@@ -1,6 +1,7 @@
 package com.shantery.thermo.userInfo;
 
 import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
+import static com.shantery.thermo.util.ThermoConstants.NAME_PATTERN;
 
 
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class UserInfoForm{
 	/** 氏名 **/
 	@NotBlank
 	@Size(min = 1, max = 64)
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")
+	@Pattern(regexp = NAME_PATTERN)
 	private String userName;
 	
 	/** 性別 **/
@@ -53,7 +54,7 @@ public class UserInfoForm{
 	private String gender;
 	/** 生年月日 **/
 	@NotBlank
-	@Pattern(regexp = "^(\\d{4})/(\\d{1,2})/(\\d{1,2})$")
+
 	private String birthday;
 	/** 学年区分 **/
 	@NotBlank

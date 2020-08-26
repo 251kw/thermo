@@ -1,8 +1,6 @@
 package com.shantery.thermo.userInfo;
 
 import java.util.Optional;
-
-
 import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.util.ThermoReplaceValue;
+import com.shantery.thermo.util.ThermoUtil;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -63,52 +62,62 @@ class UserInfoController {
 		return TO_USER_INFO_INP;//ユーザ情報入力画面へ遷移"userInfoInput"
 	}
 			
-	/**
-	 * 新規ユーザー登録内容確認画面
-	 * @param userInfoForm 入力されたユーザ情報を保持
-	 * @param result
-	 * @param model
-	 * @param bindRes　入力エラー項目情報
-	 * @return　エラーがあればuserInfoInputへ、なければuserInfoConfirmへ遷移
-	 */
-	@RequestMapping(value = "/userInfoConfirm", method = RequestMethod.POST)
-	public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
-			BindingResult result,Model model,BindingResult bindRes) {
-		
-		//ユーザID重複調査
-		Optional<UserInfoEntity> test2List = uInfoService.getGrDate(userInfoForm.getUserId());
-		userInfoForm.setDupUId(test2List);//ユーザID重複調査結果をFormにセット
-		//グループ正誤調査
-		Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
-		userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
-		
-		if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.hasErrors() == false) {
-			//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力チェックがエラーじゃない
-			
-			//Formに入っているユーザー情報を表示用に変換(セレクトボックスのみ)
-			UserInfoEntity ulist = userInfoForm._toConvertUserInfoEntity();
-			ulist.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ulist.getGender()));
-			ulist.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ulist.getGrade()));
-			ulist.setAdmin_flg(ThermoReplaceValue.valueToName(KBN_TYPE_ADMIN, ulist.getAdmin_flg()));
-			//モデルとセッションにForm情報、取得した表示変換後情報をセット
-			model.addAttribute("ulist", ulist);
-			session.setAttribute("ulist", ulist);
-			session.setAttribute("uForm", userInfoForm);
-			
-			return TO_USER_INFO_CONF;//確認画面に遷移"userInfoConfirm"
-			
-		}else {
-			//既に登録されているユーザIDの場合、エラー文をset
-			if(test2List.orElse(null) != null) {
-				model.addAttribute("uIdError", USER_INP_ID_ER);
-			}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
-				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
-				model.addAttribute("grError", USER_INP_GR_ER);//
-			}	
-			//ユーザ情報入力画面に遷移"userInfoInput"
-			return TO_USER_INFO_INP;
+	
+/**
+ * 新規ユーザー登録内容確認画面
+ * @param userInfoForm 入力されたユーザ情報を保持
+ * @param result
+ * @param model
+ * @param bindRes　入力エラー項目情報
+ * @return　エラーがあればuserInfoInputへ、なければuserInfoConfirmへ遷移
+ */
+@RequestMapping(value = "/userInfoConfirm", method = RequestMethod.POST)
+public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
+		BindingResult result,Model model,BindingResult bindRes) {
+	
+	//ユーザID重複調査
+	Optional<UserInfoEntity> test2List = uInfoService.getGrDate(userInfoForm.getUserId());
+	userInfoForm.setDupUId(test2List);//ユーザID重複調査結果をFormにセット
+	//グループ正誤調査
+	Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
+	userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
+	
+	//年齢チェック
+	Boolean age = true;//初期化
+	if(!(userInfoForm.getBirthday().isEmpty())) {
+		age = ThermoUtil.ageLimit(userInfoForm.getBirthday());
 		}
+	
+	if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.hasErrors() == false && age == true) {
+		//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力チェックがエラーじゃない
+		
+		//Formに入っているユーザー情報を表示用に変換(セレクトボックスのみ)
+		UserInfoEntity ulist = userInfoForm._toConvertUserInfoEntity();
+		ulist.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ulist.getGender()));
+		ulist.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ulist.getGrade()));
+		ulist.setAdmin_flg(ThermoReplaceValue.valueToName(KBN_TYPE_ADMIN, ulist.getAdmin_flg()));
+		//モデルとセッションにForm情報、取得した表示変換後情報をセット
+		model.addAttribute("ulist", ulist);
+		session.setAttribute("ulist", ulist);
+		session.setAttribute("uForm", userInfoForm);
+		
+		return TO_USER_INFO_CONF;//確認画面に遷移"userInfoConfirm"
+		
+	}else {
+		//既に登録されているユーザIDの場合、エラー文をset
+		if(test2List.orElse(null) != null) {
+			model.addAttribute("uIdError", USER_INP_ID_ER);
+		}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
+			//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
+			model.addAttribute("grError", USER_INP_GR_ER);//
+		}else if(age == false) {
+			//年齢が120歳以上の場合、エラー文をset
+			model.addAttribute("ageError", "年齢が120歳を超えています");
+		}
+		//ユーザ情報入力画面に遷移"userInfoInput"
+		return TO_USER_INFO_INP;
 	}
+}
 		
 	/**
 	 * 新規ユーザー登録完了画面
