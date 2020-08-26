@@ -133,8 +133,7 @@ public class UserInfoMultiService {
 		String errmsg = null;  //エラーメッセージの初期化（エラーが無ければnullを返す）
 		if(gimr.findByGroupIdAndGroupPass((usersInfo[M_GID]),(usersInfo[M_GPASS])).orElse(null) == null) { //ログインできないユーザー情報が見つかった場合
 			errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAndPassCK", new String[] {}, Locale.JAPAN)));  //メッセージプロパティからエラーメッセージの取得
-		}
-		
+		}		
 		return errmsg;
 	}
 	
@@ -151,9 +150,6 @@ public class UserInfoMultiService {
 		if(uimr.findById(usersInfo[M_UID]).orElse(null) != null ){  //DBに同じユーザーＩＤがある場合はエラーメッセージを代入
 			errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
 		}
-		
-		
-		
 		return errmsg;
 	}
 	
