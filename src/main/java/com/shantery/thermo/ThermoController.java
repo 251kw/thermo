@@ -119,7 +119,7 @@ class ThermoController {
 			
 			boolean display = true;
 			if(schlist.size()==0) {
-				model.addAttribute("nolist_msg", "今日の検温情報が登録されていません。");
+				model.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 				display = false;
 			}
 			model.addAttribute("display", display);

@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
-.header {
-	text-align: center;
+.headerback {
 	background-color:#ffe600;
-	color:#0db8d9;
+	height: 90px;
+}
+
+.header {
+ 	color:#0db8d9;
 	text-shadow:
        2px  2px 1px #ffffff,
       -2px  2px 1px #ffffff,
@@ -14,7 +17,19 @@
       -2px  0px 1px #ffffff,
        0px -2px 1px #ffffff;
 	font-size: 45px;
-	padding: 14px 0px;
+}
+
+.header p {
+	text-align: center;
+	position: relative;
+	top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 2%;
+  	width: 1%;
+  	height: 90px;
+  	display:table-cell;
+  	vertical-align: middle;
 }
 
 .header i{
@@ -31,9 +46,18 @@
 
 }
 
-@media screen and (max-width: 640px) {
-	 .header {
-  	font-size: 30px;
-	text-align: left;
+  
+@media screen and (max-width: 450px) {
+	 .header p {
+		text-align: center;
+		position: relative;
+		top: 0%;
+	    right: 0%;
+	    bottom: 0%;
+	    left: 6%;
+	  	width: 1%;
+	  	height: 90px;
+	  	display:table-cell;
+	  	vertical-align: middle;
   }
 }
