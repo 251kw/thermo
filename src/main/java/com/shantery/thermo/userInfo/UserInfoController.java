@@ -112,7 +112,7 @@ public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm us
 			model.addAttribute("grError", USER_INP_GR_ER);//
 		}else if(age == false) {
 			//年齢が120歳以上の場合、エラー文をset
-			model.addAttribute("ageError", "年齢が120歳を超えています");
+			model.addAttribute("ageError", "年齢が120歳を超えています");//TODO 外部化
 		}
 		//ユーザ情報入力画面に遷移"userInfoInput"
 		return TO_USER_INFO_INP;

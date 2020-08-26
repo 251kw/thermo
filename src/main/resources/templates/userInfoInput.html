@@ -34,7 +34,7 @@
 							<tbody>
 								<tr>
 									<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-									<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}"/></span>
+									<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}" maxlength="32"/></span>
 										<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
 											<br><span th:text="#{view.errM432}"></span>
 											<br><span th:text="#{view.errEng}"></span>
@@ -46,7 +46,7 @@
 									<td>		
 										<div class="toggle">
 											<span class="ui input">
-												<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}">
+												<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
 											</span>
 											<span class="btns" id="gp">
 												<input class="btn-input js-password-toggle-a" id="gpeye" type="checkbox">
@@ -64,7 +64,7 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.uId}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}"/></span>
+									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
 										<span th:if="${#fields.hasErrors('userId')}" class="index_input_error">
 											<br><span th:text="#{view.errM432}"></span>
 											<br><span th:text="#{view.errEng}"></span>
@@ -77,7 +77,7 @@
 									<td>		
 										<div class="toggle">
 											<span class="ui input">
-												<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}">
+												<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
 											</span>
 											<span class="btns" id="up">
 												<input class="btn-input js-password-toggle-b" id="upeye" type="checkbox">
@@ -94,7 +94,7 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.name}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
-									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}"/></span>
+									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
 										<span th:if="${#fields.hasErrors('userName')}" class="index_input_error">
 											<br><span th:text="#{view.errNameM}"></span>
 											<br><span th:text="#{view.errNameS}"></span>
@@ -103,26 +103,26 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.gender}"></td>
-									<td><span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('gender')}"></span>
+									<td><span th:insert="selectbox :: gender"></span>
 									</td>
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.birthday}"></td>
-									<td><span class="ui input"><input type="text" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
+									<td><span class="ui input"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
 										<span th:if="${#fields.hasErrors('birthday')}" class="index_input_error">
 											<br><span th:text="#{view.errCa}"></span>
-											<br><span th:text="#{view.errMun}"></span>
 										</span>
+										<br><span th:text="${ageError}" class="index_input_error"></span>
 									</td>
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.grade}"></td>
-									<td><span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('grade')}"></span>
+									<td><span th:insert="selectbox :: grade"></span>
 									</td>
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-									<td><span th:utext="${T(com.shantery.thermo.util.ThermoReplaceValue).makeSelect('adminFlg')}"></span>
+									<td><span th:insert="selectbox :: admin"></span>
 									</td>
 								</tr>
 							</tbody>

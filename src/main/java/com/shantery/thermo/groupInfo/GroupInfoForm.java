@@ -8,6 +8,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.shantery.thermo.entity.GroupMstEntity;
+
+import static com.shantery.thermo.util.ThermoConstants.NAME_PATTERN;
 import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
 
 /**
@@ -31,7 +33,7 @@ public class GroupInfoForm{
 	/** グループ名 **/
 	@NotBlank
 	@Size(min = 1, max = 64)
-	@Pattern(regexp = "[a-zA-Z0-9ａ-ｚA-Zぁ-んァ-ヶー一-龠 　]+$")//TODO　外部化
+	@Pattern(regexp = NAME_PATTERN)
 	private String groupName;
 	/** 更新時間 **/
 	private String updateTime;

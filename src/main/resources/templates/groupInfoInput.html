@@ -9,6 +9,9 @@
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
     	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
 	</head>
 	<body>
 	<!-- 外部ヘッダーファイル読み込み -->
@@ -29,17 +32,17 @@
 						<tbody>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}"/></span>
+								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
 									<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
 										<br><span th:text="#{view.errM432}"></span>
 										<br><span th:text="#{view.errEng}"></span>
 									</span>
-									<br><span th:if="${uGrError}" th:text=${uGrError}></span>
+									<br><span th:text=${uGrError} class="index_input_error"></span>
 								</td>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gName}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
-								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupName}" th:placeholder="#{view.checkPh.name}"/></span>
+								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
 									<span th:if="${#fields.hasErrors('groupName')}" class="index_input_error">
 										<br><span th:text="#{view.errNameM}"></span>
 										<br><span th:text="#{view.errNameS}"></span>
@@ -51,7 +54,7 @@
 								<td>		
 									<div class="toggle">
 										<span class="ui input">
-											<input class="field js-password form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}">
+											<input class="field js-password form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
 										</span>
 										<span class="btns">
 											<input class="btn-input js-password-toggle" id="eye" type="checkbox">

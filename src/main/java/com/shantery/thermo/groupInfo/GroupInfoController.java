@@ -3,11 +3,10 @@ package com.shantery.thermo.groupInfo;
 import java.util.Optional;
 
 
+import static com.shantery.thermo.util.ThermoConstants.GRO_INP_ID_ER;
 import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_INP;
 import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_CONF;
 import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_RES;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -81,7 +80,7 @@ class GroupInfoController {
 		}else {
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(grList.orElse(null) != null) {
-				model.addAttribute("uGrError", USER_INP_ID_ER);
+				model.addAttribute("uGrError", GRO_INP_ID_ER);
 			}	
 			return TO_GROUP_INFO_INP;//グループ情報入力画面へ遷移"groupInfoInput"
 		}
