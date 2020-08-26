@@ -23,33 +23,33 @@
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
-						<th th:text="#{view.tablelabel.name}"></th>
-						<th th:text="#{view.tablelabel.gender}"></th>
-						<th th:text="#{view.tablelabel.grade}"></th>
-						<th th:text="#{view.tablelabel.age}"></th>
-						<th th:text="#{view.tablelabel.thermo}"></th>
-						<th th:text="#{view.tablelabel.taste}"></th>
-						<th th:text="#{view.tablelabel.smell}"></th>
-						<th th:text="#{view.tablelabel.cough}"></th>
-						<th th:text="#{view.tablelabel.other}"></th>
-					</tr>
+						<th width="90" th:text="#{view.tablelabel.name}"></th>
+						<th width="50" th:text="#{view.tablelabel.gender}"></th>
+						<th width="70" th:text="#{view.tablelabel.grade}"></th>
+						<th width="50" th:text="#{view.tablelabel.age}"></th>
+						<th width="65" th:text="#{view.tablelabel.thermo}"></th>
+						<th width="55" th:text="#{view.tablelabel.taste}"></th>
+						<th width="55" th:text="#{view.tablelabel.smell}"></th>
+						<th width="55" th:text="#{view.tablelabel.cough}"></th>
+						<th width="90" th:text="#{view.tablelabel.other}"></th>
+					</tr> 
 				</thead>
 				<tr th:each= "ul,status : ${ulist}">
-		    		<td th:data-label="#{view.tablelabel.name}" th:text="${ul.user_name}" width="12%"></td>
-		    		<td th:data-label="#{view.tablelabel.gender}" th:text="${ul.gender}" width="8%"></td>
-		    		<td th:data-label="#{view.tablelabel.grade}" th:text="${ul.grade}" width="11%"></td>
-		    		<td th:data-label="#{view.tablelabel.age}" th:text="${birth[status.index]}" width="8%"></td>
+		    		<td th:data-label="#{view.tablelabel.name}" th:text="${ul.user_name}"></td>
+		    		<td th:data-label="#{view.tablelabel.gender}" th:text="${ul.gender}"></td>
+		    		<td th:data-label="#{view.tablelabel.grade}" th:text="${ul.grade}"></td>
+		    		<td th:data-label="#{view.tablelabel.age}" th:text="${birth[status.index]}"></td>
 					<th:block th:if="${list}">
-						<td th:data-label="#{view.tablelabel.thermo}" width="16%">
+						<td th:data-label="#{view.tablelabel.thermo}">
 							<span class="ui input">
 								<input type="text" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-								th:value="${list[status.index].temperature}" size="12" maxlength="4" th:placeholder="#{view.checkPh.thermo}" />
+								th:value="${list[status.index].temperature}" size="13" maxlength="4" th:placeholder="#{view.checkPh.thermo}" />
 							</span>
 							<div th:if="${message}">
 								<br><font color="red"><span th:text="${message[status.index]}"></span></font>
 							</div>
 						</td>
-						<td th:data-label="#{view.tablelabel.taste}" width="11%">
+						<td th:data-label="#{view.tablelabel.taste}">
 							<div th:unless="${list[status.index].taste}">
 								<span class="ui checkbox">
 									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
@@ -63,7 +63,7 @@
 								</span>
 							</div>
 						</td>
-						<td th:data-label="#{view.tablelabel.smell}" width="11%">
+						<td th:data-label="#{view.tablelabel.smell}">
 							<div th:unless="${list[status.index].smell}">
 								<span class="ui checkbox">
 									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
@@ -77,7 +77,7 @@
 								</span>
 							</div>
 						</td>
-						<td th:data-label="#{view.tablelabel.cough}" width="8%">
+						<td th:data-label="#{view.tablelabel.cough}">
 							<div th:unless="${list[status.index].cough}">
 								<span class="ui checkbox">
 									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
@@ -91,13 +91,13 @@
 								</span>
 							</div>
 						</td>
-						<td th:data-label="#{view.tablelabel.other}" width="15%">
+						<td th:data-label="#{view.tablelabel.other}">
 							<span class="ui input">
 								<input type="text" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-								th:value="${list[status.index].writing}" size="50"  th:placeholder="#{view.checkPh.other}" />
+								th:value="${list[status.index].writing}" size="55" maxlength="128" th:placeholder="#{view.checkPh.other}" />
 							</span>
 							<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
-								<br><span th:text="#{view.errM432}"></span>
+								<br><span th:text="#{view.errM128}"></span>
 							</span>
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
 							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
@@ -117,5 +117,6 @@
 				</a>
 			</div>
 		</form>
+		<br><br><br>
 	</body>
 </html>

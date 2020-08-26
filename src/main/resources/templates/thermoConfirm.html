@@ -23,15 +23,15 @@
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
-						<th th:text="#{view.tablelabel.name}"></th>
-						<th th:text="#{view.tablelabel.gender}"></th>
-						<th th:text="#{view.tablelabel.grade}"></th>
-						<th th:text="#{view.tablelabel.age}"></th>
-						<th th:text="#{view.tablelabel.thermo}"></th>
-						<th th:text="#{view.tablelabel.taste}"></th>
-						<th th:text="#{view.tablelabel.smell}"></th>
-						<th th:text="#{view.tablelabel.cough}"></th>
-						<th th:text="#{view.tablelabel.other}"></th>
+						<th width="15%" th:text="#{view.tablelabel.name}"></th>
+						<th width="5%" th:text="#{view.tablelabel.gender}"></th>
+						<th width="10%" th:text="#{view.tablelabel.grade}"></th>
+						<th width="5%" th:text="#{view.tablelabel.age}"></th>
+						<th width="10%" th:text="#{view.tablelabel.thermo}"></th>
+						<th width="5%" th:text="#{view.tablelabel.taste}"></th>
+						<th width="5%" th:text="#{view.tablelabel.smell}"></th>
+						<th width="5%" th:text="#{view.tablelabel.cough}"></th>
+						<th width="40%" th:text="#{view.tablelabel.other}"></th>
 					</tr>
 				</thead>
 				<tr th:each= "list:${list}">
@@ -39,7 +39,7 @@
 					<td th:data-label="#{view.tablelabel.gender}" th:text="${list.gender}"></td>
 					<td th:data-label="#{view.tablelabel.grade}" th:text="${list.grade}"></td>
 					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
-					<td th:data-label="#{view.tablelabel.thermo}" th:text="${list.temperature}"></td>
+					<td th:data-label="#{view.tablelabel.thermo}"><p th:text="${list.temperature}"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
 					<td th:data-label="#{view.tablelabel.taste}">
 						<p th:if="${list.taste}" th:text="#{view.select.admin}"></p>
 						<p th:unless="${list.taste}" th:text="#{view.select.normal}"></p>
@@ -52,7 +52,7 @@
 						<p th:if="${list.cough}" th:text="#{view.select.admin}"></p>
 						<p th:unless="${list.cough}" th:text="#{view.select.normal}"></p>
 					</td>
-					<td th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
+					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
 				</tr>
 			</table>
 			</div>
@@ -64,5 +64,6 @@
 				</a>
 			</div>
 		</form>
+		<br><br><br>
 	</body>
 </html>
