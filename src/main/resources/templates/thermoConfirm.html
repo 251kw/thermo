@@ -35,11 +35,11 @@
 					</tr>
 				</thead>
 				<tr th:each= "list:${list}">
-					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userName}"></td>
+					<td height="52.4" style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userName}"></td>
 					<td th:data-label="#{view.tablelabel.gender}" th:text="${list.gender}"></td>
 					<td th:data-label="#{view.tablelabel.grade}" th:text="${list.grade}"></td>
 					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
-					<td th:data-label="#{view.tablelabel.thermo}"><p th:text="${list.temperature}"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
+					<td th:data-label="#{view.tablelabel.thermo}"><p th:unless="${list.temperature} eq ''" th:text="${list.temperature}+度"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
 					<td th:data-label="#{view.tablelabel.taste}">
 						<p th:if="${list.taste}" th:text="#{view.select.admin}"></p>
 						<p th:unless="${list.taste}" th:text="#{view.select.normal}"></p>
@@ -52,7 +52,7 @@
 						<p th:if="${list.cough}" th:text="#{view.select.admin}"></p>
 						<p th:unless="${list.cough}" th:text="#{view.select.normal}"></p>
 					</td>
-					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}" th:text="${list.writing}"></td>
+					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}"><p th:unless="${list.writing} eq ''" th:text="${list.writing}"></p><p th:if="${list.writing} eq ''">&nbsp;</p></td>
 				</tr>
 			</table>
 			</div>
