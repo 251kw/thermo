@@ -321,4 +321,5 @@ public class ThermoConstants {
 		public static final String USER_IN_ID_ER = "既に存在しているユーザーIDです";
 		public static final String USER_INP_ID_ER= "既に登録されているユーザーIDです";
 		public static final String GRO_INP_ID_ER= "既に登録されているグループIDです";
+		public static final String USER_INP_AGE_ER= "年齢が120歳を超えています";
 }
