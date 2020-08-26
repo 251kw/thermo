@@ -17,7 +17,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.util.ThermoReplaceValue;
 import com.shantery.thermo.util.ThermoUtil;
@@ -130,23 +129,11 @@ public class UserInfoMultiService {
 	 * @return エラーメッセージ
 	 */
 	public String loginGroup(String[] usersInfo,int i) {
-		boolean bool = true;
-		String errmsg = null;
-		Iterable<GroupMstEntity> glist = gimr.findAll(); //DB内の
 		
-			bool = true;
-			for (GroupMstEntity list : glist) {  //データベースにあるグループの長さ繰り返す
-				if(list.getGroup_id().equals(usersInfo[0])) {  //入力したグループidと同じものが見つかった場合入る
-					if(list.getGroup_pass().equals(usersInfo[1])) {  //入力したグループpassと
-						bool = false;
-					}
-				}
-				
-			}
-			
-			if(bool == true) { //ログインできないユーザー情報が見つかった場合
-				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAndPassCK", new String[] {}, Locale.JAPAN)));  //メッセージプロパティからエラーメッセージの取得
-			}
+		String errmsg = null;  //エラーメッセージの初期化（エラーが無ければnullを返す）
+		if(gimr.findByGroupIdAndGroupPass((usersInfo[M_GID]),(usersInfo[M_GPASS])).orElse(null) == null) { //ログインできないユーザー情報が見つかった場合
+			errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAndPassCK", new String[] {}, Locale.JAPAN)));  //メッセージプロパティからエラーメッセージの取得
+		}
 		
 		return errmsg;
 	}
@@ -155,17 +142,17 @@ public class UserInfoMultiService {
 	 * データベース上に重複したユーザーIdがないか調べる
 	 * @param usersInfo 登録ユーザー情報
 	 * @param i 行番号
-	 * @return エラーメッセージ
+	 * @return エラーメッセージ 
+	 * TODO 処理の軽量化
 	 */
 	public String checUserIdDB(String[] usersInfo, int i) {
-		
-		String errmsg = null;
-		Iterable<UserInfoEntity> ulist = uimr.findAll();
-		for (UserInfoEntity list : ulist) {
-			if(list.getUser_id().equals(usersInfo[M_UID])) { 
-				errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
-			}
+	
+		String errmsg = null;  //エラーメッセージの初期化（エラーが無ければnullを返す）
+		if(uimr.findById(usersInfo[M_UID]).orElse(null) != null ){  //DBに同じユーザーＩＤがある場合はエラーメッセージを代入
+			errmsg = ((i+1) + (msgPro.getMessage("view.errUserFileIdAlreadyUsed", new String[] {}, Locale.JAPAN)));
 		}
+		
+		
 		
 		return errmsg;
 	}
