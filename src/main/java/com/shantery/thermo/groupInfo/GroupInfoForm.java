@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.shantery.thermo.entity.GroupMstEntity;
+import com.shantery.thermo.util.ThermoReplaceValue;
 
 import static com.shantery.thermo.util.ThermoConstants.NAME_PATTERN;
 import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
@@ -77,7 +78,7 @@ public class GroupInfoForm{
 		
 		gInEn.setGroup_id(getGroupId());
 		gInEn.setGroup_pass(getGroupPass());
-		gInEn.setGroup_name(getGroupName());
+		gInEn.setGroup_name(ThermoReplaceValue.trimBlank(getGroupName()));//前後の空白を除去
 		gInEn.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	    return gInEn ;
 	 }
