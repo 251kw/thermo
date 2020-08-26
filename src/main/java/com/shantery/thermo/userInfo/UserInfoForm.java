@@ -12,7 +12,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
-import com.shantery.thermo.util.ThermoReplaceValue;
 
 /**
  * @author h.komatsu
@@ -178,12 +177,12 @@ public class UserInfoForm{
 		uInEn.setGroup_id(getGroupId());
 		uInEn.setUser_id(getUserId());
 		uInEn.setUser_pass(getUserPass());
-		uInEn.setUser_name(ThermoReplaceValue.trimBlank(getUserName()));//前後の空白を除去
+		uInEn.setUser_name(getUserName());
 		uInEn.setGender(getGender());
 		uInEn.setBirthday(getBirthday());
 		uInEn.setGrade(getGrade());
 		uInEn.setAdmin_flg(getAdminFlg());
-		uInEn.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));//前後の空白を除去
+		uInEn.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 	    return uInEn ;
 	 }
 	

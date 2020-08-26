@@ -90,7 +90,8 @@ public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm us
 	if(test2List.orElse(null) == null && grList.orElse(null) != null && bindRes.hasErrors() == false && age == true) {
 		//ユーザIDが被ってない＆グループIDとグループパスワードが正しい＆入力チェックがエラーじゃないとき
 		
-		
+		//グループ名の前後の空白を除去し、Formに詰め替える
+		userInfoForm.setUserName(ThermoReplaceValue.trimBlank(userInfoForm.getUserName()));
 		//Formに入っているユーザー情報を表示用に変換(セレクトボックスのみ)
 		UserInfoEntity ulist = userInfoForm._toConvertUserInfoEntity();
 		ulist.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ulist.getGender()));

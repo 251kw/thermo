@@ -17,6 +17,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.shantery.thermo.entity.GroupMstEntity;
+import com.shantery.thermo.util.ThermoReplaceValue;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
@@ -73,8 +75,12 @@ class GroupInfoController {
 		Optional<GroupMstEntity> grList = gInfoService.getGrDate(groupInfoForm.getGroupId());
 		
 		if(grList.orElse(null) == null && bindRes.getAllErrors().isEmpty()) {
-			//エラーがない場合、結果をセッションにセット
+			//エラーがない場合
+			//グループ名の前後の空白を除去し、Formに詰め替える
+			groupInfoForm.setGroupName(ThermoReplaceValue.trimBlank(groupInfoForm.getGroupName()));
+			//結果をセッションにセット
 			session.setAttribute("gForm", groupInfoForm);
+			
 			return TO_GROUP_INFO_CONF;//確認画面に遷移"groupInfoConfirm"
 			
 		}else {
