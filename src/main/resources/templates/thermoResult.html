@@ -41,16 +41,16 @@
 					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
 					<td th:data-label="#{view.tablelabel.thermo}"><p th:unless="${list.temperature} eq ''" th:text="${list.temperature}+度"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
 					<td th:data-label="#{view.tablelabel.taste}">
-						<p th:if="${list.taste}" th:text="#{view.select.admin}"></p>
-						<p th:unless="${list.taste}" th:text="#{view.select.normal}"></p>
+						<p th:if="${list.taste}" th:text="#{view.text.yes}"></p>
+						<p th:unless="${list.taste}" th:text="#{view.text.no}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.smell}">
-						<p th:if="${list.smell}" th:text="#{view.select.admin}"></p>
-						<p th:unless="${list.smell}" th:text="#{view.select.normal}"></p>
+						<p th:if="${list.smell}" th:text="#{view.text.yes}"></p>
+						<p th:unless="${list.smell}" th:text="#{view.text.no}"></p>
 					</td>
 					<td th:data-label="#{view.tablelabel.cough}">
-						<p th:if="${list.cough}" th:text="#{view.select.admin}"></p>
-						<p th:unless="${list.cough}" th:text="#{view.select.normal}"></p>
+						<p th:if="${list.cough}" th:text="#{view.text.yes}"></p>
+						<p th:unless="${list.cough}" th:text="#{view.text.no}"></p>
 					</td>
 					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}"><p th:unless="${list.writing} eq ''" th:text="${list.writing}"></p><p th:if="${list.writing} eq ''">&nbsp;</p></td>
 				</tr>
