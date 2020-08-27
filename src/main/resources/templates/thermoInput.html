@@ -35,7 +35,7 @@
 					</tr> 
 				</thead>
 				<tr th:each= "ul,status : ${ulist}">
-		    		<td th:data-label="#{view.tablelabel.name}" th:text="${ul.user_name}"></td>
+		    		<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${ul.user_name}"></td>
 		    		<td th:data-label="#{view.tablelabel.gender}" th:text="${ul.gender}"></td>
 		    		<td th:data-label="#{view.tablelabel.grade}" th:text="${ul.grade}"></td>
 		    		<td th:data-label="#{view.tablelabel.age}" th:text="${birth[status.index]}"></td>
