@@ -1,6 +1,7 @@
 package com.shantery.thermo.userInfo;
 
 import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
@@ -10,6 +11,7 @@ import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_CONF;
 import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_RES;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_AGE_ER;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -113,7 +115,7 @@ public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm us
 			model.addAttribute("grError", USER_INP_GR_ER);//
 		}else if(age == false) {
 			//年齢が120歳以上の場合、エラー文をset
-			model.addAttribute("ageError", "年齢が120歳を超えています");//TODO 外部化
+			model.addAttribute("ageError", USER_INP_AGE_ER);
 		}
 		//ユーザ情報入力画面に遷移"userInfoInput"
 		return TO_USER_INFO_INP;

@@ -30,11 +30,15 @@
 					</div>
 					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui text container">
-						<table class="ui celled table">
+						<table class="ui celled table" style="table-layout:fixed">
 							<tbody>
 								<tr>
 									<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-									<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}" maxlength="32"/></span>
+									<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}" maxlength="32" id="focus"/></span>
+										<script type="text/javascript">
+										    // 上記の入力欄にフォーカスを与える
+										    document.getElementById('focus').focus();
+										</script>
 										<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
 											<br><span th:text="#{view.errM432}"></span>
 											<br><span th:text="#{view.errEng}"></span>
@@ -45,7 +49,7 @@
 									<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 									<td>		
 										<div class="toggle">
-											<span class="ui input">
+											<span class="ui input" Style="width:85%">
 												<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
 											</span>
 											<span class="btns" id="gp">
@@ -64,7 +68,7 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.uId}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
+									<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
 										<span th:if="${#fields.hasErrors('userId')}" class="index_input_error">
 											<br><span th:text="#{view.errM432}"></span>
 											<br><span th:text="#{view.errEng}"></span>
@@ -76,7 +80,7 @@
 									<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
 									<td>		
 										<div class="toggle">
-											<span class="ui input">
+											<span class="ui input" Style="width:85%">
 												<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
 											</span>
 											<span class="btns" id="up">
@@ -94,7 +98,7 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.name}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
-									<td><span class="ui input"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
+									<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
 										<span th:if="${#fields.hasErrors('userName')}" class="index_input_error">
 											<br><span th:text="#{view.errNameM}"></span>
 											<br><span th:text="#{view.errNameS}"></span>
@@ -103,12 +107,15 @@
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.gender}"></td>
-									<td><span th:insert="selectbox :: gender"></span>
+									<td>
+										<span class="select">
+										<span th:insert="selectbox :: gender"></span>
+										</span>
 									</td>
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.birthday}"></td>
-									<td><span class="ui input"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
+									<td><span class="ui input" Style="width:85%"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
 										<span th:if="${#fields.hasErrors('birthday')}" class="index_input_error">
 											<br><span th:text="#{view.errCa}"></span>
 										</span>
@@ -176,6 +183,7 @@
 	  			</script>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		</div>
+			</div>
+		<br><br><br>
 	</body>
 </html>

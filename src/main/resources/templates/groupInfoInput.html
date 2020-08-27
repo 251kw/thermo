@@ -28,11 +28,15 @@
 					<div class="ui center aligned container">
 						<h3 class="index_ask_input" th:text="#{view.text.UGInfoTop}"></h3>
 					</div>
-					<table class="ui celled table">
+					<table class="ui celled table" style="table-layout:fixed">
 						<tbody>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}" maxlength="32" id="focus"/></span>
+									<script type="text/javascript">
+										    // 上記の入力欄にフォーカスを与える
+										    document.getElementById('focus').focus();
+									</script>
 									<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
 										<br><span th:text="#{view.errM432}"></span>
 										<br><span th:text="#{view.errEng}"></span>
@@ -42,7 +46,7 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gName}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
-								<td><span class="ui input"><input type="text" class="form-control" th:field="*{groupName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
 									<span th:if="${#fields.hasErrors('groupName')}" class="index_input_error">
 										<br><span th:text="#{view.errNameM}"></span>
 										<br><span th:text="#{view.errNameS}"></span>
@@ -53,7 +57,7 @@
 								<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
 								<td>		
 									<div class="toggle">
-										<span class="ui input">
+										<span class="ui input" Style="width:85%">
 											<input class="field js-password form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
 										</span>
 										<span class="btns">
