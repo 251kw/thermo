@@ -14,13 +14,17 @@
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
 	</head>
 	<body>
-	<!-- 外部ヘッダーファイル読み込み -->
+		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
+		
 		<!-- 小見出しを各々のページで書き換え -->
 		<p></p>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.userInfoInput}"></h3>
 		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		
 		<div class="ui container">
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui text container">
@@ -183,7 +187,7 @@
 	  			</script>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			</div>
+		</div>
 		<br><br><br>
 	</body>
 </html>
