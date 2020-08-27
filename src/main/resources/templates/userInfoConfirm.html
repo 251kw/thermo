@@ -13,82 +13,79 @@
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 		<!-- 小見出しを各々のページで書き換え -->
-		<p></p>
+		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.conf}"></h3>
 		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui container">
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui text container">
 				<form action="/" th:action="@{/userInfoResult}" th:object="${userInfoForm}" method="post">
 					<div class="ui center aligned container">
 						<h3 class="index_ask_input" th:text="#{view.text.UGInfoCon}"></h3>
 					</div>
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-					<div class="ui text container">
-						<table class="ui celled table" style="table-layout:fixed">
-							<tbody>
-								<tr>
-									<td><p th:text="#{view.tablelabel.gId}"></td>
-									<td th:text="${ulist.group_id}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.gPass}"></td>
-									<td th:text="#{view.Scr}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.uId}"></td>
-									<td th:text="${ulist.user_id}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.uPass}"></td>
-									<td th:text="#{view.Scr}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.name}"></td>
-									<td th:text="${ulist.user_name}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.gender}"></td>
-									<td th:text="${ulist.gender}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.birthday}"></td>
-									<td th:text="${ulist.birthday}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.grade}"></td>
-									<td th:text="${ulist.grade}"/>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-									<td th:text="${ulist.admin_flg}"/>
-								</tr>
-							</tbody>
-						</table>	
-						<input type="hidden" th:field="*{groupId}"/>
-						<input type="hidden" th:field="*{groupPass}"/>
-						<input type="hidden" th:field="*{userId}"/>
-						<input type="hidden" th:field="*{userPass}"/>
-						<input type="hidden" th:field="*{userName}"/>
-						<input type="hidden" th:field="*{gender}"/>
-						<input type="hidden" th:field="*{birthday}"/>
-						<input type="hidden" th:field="*{grade}"/>
-						<input type="hidden" th:field="*{adminFlg}"/>			
-						<input type="hidden" th:field="${ulist}"/>
-						<input type="hidden" th:field="${userInfoForm}"/>
-						<div class="ui center aligned container">
-							<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.reg}"></button>	
-							<a href="/userInfoInput">
-								<button type="button" class="ui inverted primary button center">
-									<th:block th:text="#{view.btn.fix}"></th:block>
-								</button>
-							</a>
-						</div>
+					<table class="ui celled table" style="table-layout:fixed">
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></td>
+								<td th:text="${ulist.group_id}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></td>
+								<td th:text="#{view.Scr}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uId}"></td>
+								<td th:text="${ulist.user_id}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uPass}"></td>
+								<td th:text="#{view.Scr}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.name}"></td>
+								<td th:text="${ulist.user_name}" style="word-break:break-all;"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gender}"></td>
+								<td th:text="${ulist.gender}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.birthday}"></td>
+								<td th:text="${ulist.birthday}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.grade}"></td>
+								<td th:text="${ulist.grade}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.adminFlg}"></td>
+								<td th:text="${ulist.admin_flg}"/>
+							</tr>
+						</tbody>
+					</table>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+					<input type="hidden" th:field="*{groupId}"/>
+					<input type="hidden" th:field="*{groupPass}"/>
+					<input type="hidden" th:field="*{userId}"/>
+					<input type="hidden" th:field="*{userPass}"/>
+					<input type="hidden" th:field="*{userName}"/>
+					<input type="hidden" th:field="*{gender}"/>
+					<input type="hidden" th:field="*{birthday}"/>
+					<input type="hidden" th:field="*{grade}"/>
+					<input type="hidden" th:field="*{adminFlg}"/>			
+					<input type="hidden" th:field="${ulist}"/>
+					<input type="hidden" th:field="${userInfoForm}"/>
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.reg}"></button>	
+						<a href="/userInfoInput">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.fix}"></th:block>
+							</button>
+						</a>
 					</div>
 				</form>
 			</div>
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>
 		<br><br><br>
 	</body>

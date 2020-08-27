@@ -13,12 +13,12 @@
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 		<!-- 小見出しを各々のページで書き換え -->
-		<p></p>
+		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.grInfoConf}"></h3>
 		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui container">
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui text container">
 				<form action="#" th:action="@{./}" th:object="${groupInfoForm}" method="get">
 					<div class="ui center aligned container">
@@ -32,7 +32,7 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gName}"></td>
-								<td th:text="*{groupName}"/>
+								<td th:text="*{groupName}" style="word-break:break-all;"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gPass}"></td>
@@ -40,17 +40,17 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
-					<a href="./">
-						<button type="button" class="ui inverted primary button center">
-							<th:block th:text="#{view.btn.return}"></th:block>
-						</button>
-					</a>
+						<a href="./">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.return}"></th:block>
+							</button>
+						</a>
 					</div>
 				</form>
 			</div>
 		</div>
-		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<br><br><br>
 	</body>
 </html>

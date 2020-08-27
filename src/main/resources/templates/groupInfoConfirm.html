@@ -13,12 +13,12 @@
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 		<!-- 小見出しを各々のページで書き換え -->
-		<p></p>
+		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.conf}"></h3>
 		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui container">
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui text container">
 				<form action="/" th:action="@{/groupInfoResult}" th:object="${groupInfoForm}" method="post">
 					<div class="ui center aligned container">
@@ -32,14 +32,15 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gName}"></td>
-								<td th:text="*{groupName}"/>
+								<td th:text="*{groupName}" style="word-break:break-all;"/>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gPass}"></td>
 								<td th:text="#{view.Scr}"/>
 							</tr>
 						</tbody>
-					</table>	
+					</table>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
 					<input type="hidden" th:field="*{groupId}"/>
 					<input type="hidden" th:field="*{groupName}"/>
 					<input type="hidden" th:field="*{groupPass}"/>
@@ -54,8 +55,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			</div>
+		</div>
 		<br><br><br>
 	</body>
 </html>

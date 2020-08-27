@@ -4,11 +4,11 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 		<title th:text="#{view.grInfoIn.pagetitle}"></title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
@@ -16,14 +16,12 @@
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
-​
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.grInfoInput}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-	
 		<div class="ui container">
 			<div class="ui text container">	
 				<form action="#" th:action="@{/groupInfoConfirm}" th:object="${groupInfoForm}" method="post">
@@ -105,7 +103,6 @@
 				  });				
 				</script>
 			</div>
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>
 		<br><br><br>
 	</body>

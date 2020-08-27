@@ -4,141 +4,145 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 		<title th:text="#{view.userInfoIn.pagetitle}"></title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+
+    	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
 	</head>
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
-		
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.userInfoInput}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		
-		
 		<div class="ui container">
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui text container">
 				<form action="#" th:action="@{/userInfoConfirm}" th:object="${userInfoForm}" method="post">
 					<div class="ui center aligned container">
 						<h3 class="index_ask_input" th:text="#{view.text.UGInfoTop}"></h3>
 					</div>
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-					<div class="ui text container">
-						<table class="ui celled table" style="table-layout:fixed">
-							<tbody>
-								<tr>
-									<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-									<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}" maxlength="32" id="focus"/></span>
-										<script type="text/javascript">
-										    // 上記の入力欄にフォーカスを与える
-										    document.getElementById('focus').focus();
-										</script>
-										<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
-											<br><span th:text="#{view.errM432}"></span>
+					<table class="ui celled table" style="table-layout:fixed">
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.groupId}" maxlength="32" id="focus"/></span>
+									<script type="text/javascript">
+									    // 上記の入力欄にフォーカスを与える
+									    document.getElementById('focus').focus();
+									</script>
+									<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
+										<br><span th:text="#{view.errM432}"></span>
+										<br><span th:text="#{view.errEng}"></span>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
+								<td>		
+									<div class="toggle">
+										<span class="ui input" Style="width:85%">
+											<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
+										</span>
+										<span class="btns" id="gp">
+											<input class="btn-input js-password-toggle-a" id="gpeye" type="checkbox">
+											<label class="btn-label js-password-label-a" for="gpeye">
+												<i class="fa fa-eye"></i>
+											</label>
+										</span>
+										<span th:if="${#fields.hasErrors('groupPass')}" class="index_input_error">
+											<br><span th:text="#{view.errM416}"></span>
 											<br><span th:text="#{view.errEng}"></span>
 										</span>
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-									<td>		
-										<div class="toggle">
-											<span class="ui input" Style="width:85%">
-												<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
-											</span>
-											<span class="btns" id="gp">
-												<input class="btn-input js-password-toggle-a" id="gpeye" type="checkbox">
-												<label class="btn-label js-password-label-a" for="gpeye">
-													<i class="fa fa-eye"></i>
-												</label>
-											</span>
-											<span th:if="${#fields.hasErrors('groupPass')}" class="index_input_error">
-												<br><span th:text="#{view.errM416}"></span>
-												<br><span th:text="#{view.errEng}"></span>
-											</span>
-											<br><span th:text="${grError}" class="index_input_error"></span>
-										</div>	
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.uId}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-									<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
-										<span th:if="${#fields.hasErrors('userId')}" class="index_input_error">
-											<br><span th:text="#{view.errM432}"></span>
+										<br><span th:text="${grError}" class="index_input_error"></span>
+									</div>	
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uId}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{userId}" th:placeholder="#{view.checkPh.userId}" maxlength="32"/></span>
+									<span th:if="${#fields.hasErrors('userId')}" class="index_input_error">
+										<br><span th:text="#{view.errM432}"></span>
+										<br><span th:text="#{view.errEng}"></span>
+									</span>
+									<br><span th:text="${uIdError}" class="index_input_error"></span>
+								</td>	
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
+								<td>		
+									<div class="toggle">
+										<span class="ui input" Style="width:85%">
+											<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
+										</span>
+										<span class="btns" id="up">
+											<input class="btn-input js-password-toggle-b" id="upeye" type="checkbox">
+											<label class="btn-label js-password-label-b" for="upeye">
+												<i class="fa fa-eye"></i>
+											</label>
+										</span>
+										<span th:if="${#fields.hasErrors('userPass')}" class="index_input_error">
+											<br><span th:text="#{view.errM416}"></span>
 											<br><span th:text="#{view.errEng}"></span>
 										</span>
-										<br><span th:text="${uIdError}" class="index_input_error"></span>
-									</td>	
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-									<td>		
-										<div class="toggle">
-											<span class="ui input" Style="width:85%">
-												<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
-											</span>
-											<span class="btns" id="up">
-												<input class="btn-input js-password-toggle-b" id="upeye" type="checkbox">
-												<label class="btn-label js-password-label-b" for="upeye">
-													<i class="fa fa-eye"></i>
-												</label>
-											</span>
-											<span th:if="${#fields.hasErrors('userPass')}" class="index_input_error">
-												<br><span th:text="#{view.errM416}"></span>
-												<br><span th:text="#{view.errEng}"></span>
-											</span>
-										</div>	
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.name}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
-									<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
-										<span th:if="${#fields.hasErrors('userName')}" class="index_input_error">
-											<br><span th:text="#{view.errNameM}"></span>
-											<br><span th:text="#{view.errNameS}"></span>
+									</div>	
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.name}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{userName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
+									<span th:if="${#fields.hasErrors('userName')}" class="index_input_error">
+										<br><span th:text="#{view.errNameM}"></span>
+										<br><span th:text="#{view.errNameS}"></span>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gender}"></td>
+								<td><div class="ui form">
+										<span class="ui input select">
+											<span th:insert="selectbox :: gender"></span>
 										</span>
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.gender}"></td>
-									<td>
-										<span class="select">
-										<span th:insert="selectbox :: gender"></span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.birthday}"></td>
+								<td><span class="ui input" Style="width:85%"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
+									<span th:if="${#fields.hasErrors('birthday')}" class="index_input_error">
+										<br><span th:text="#{view.errCa}"></span>
+									</span>
+									<br><span th:text="${ageError}" class="index_input_error"></span>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.grade}"></td>
+								<td><div class="ui form">
+										<span class="ui input select">
+											<span th:insert="selectbox :: grade"></span>
 										</span>
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.birthday}"></td>
-									<td><span class="ui input" Style="width:85%"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
-										<span th:if="${#fields.hasErrors('birthday')}" class="index_input_error">
-											<br><span th:text="#{view.errCa}"></span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.adminFlg}"></td>
+								<td>
+									<div class="ui form">
+										<span class="ui input select">
+											<span th:insert="selectbox :: adminFlg"></span>
 										</span>
-										<br><span th:text="${ageError}" class="index_input_error"></span>
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.grade}"></td>
-									<td><span th:insert="selectbox :: grade"></span>
-									</td>
-								</tr>
-								<tr>
-									<td><p th:text="#{view.tablelabel.adminFlg}"></td>
-									<td><span th:insert="selectbox :: adminFlg"></span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
 						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.confirm}"></button>
@@ -186,7 +190,6 @@
 					$('#datepicker').datepicker();
 	  			</script>
 			</div>
-			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		</div>
 		<br><br><br>
 	</body>
