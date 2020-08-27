@@ -51,11 +51,11 @@ class SearchController {
 		m.addAttribute("searchInfo", new SearchInfoForm());
 		m.addAttribute("list", list);
 		
-		if(list.size()==0) {	//listがないとき
+		if(list.size()==0) {	//今日の検温情報がないとき
 			m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 			display = false;
 			
-		} else if(list.size()==MAX_SCH_LISTINT){
+		} else if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		m.addAttribute("display", display);
@@ -104,10 +104,10 @@ class SearchController {
 			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
 		}
 		
-		if(list.size()==0) {	//listがないとき
+		if(list.size()==0) {	//検索結果がないとき
 			m.addAttribute("nolist_msg", NOLIST_MSG);
 			display = false;
-		} else if(list.size()==MAX_SCH_LISTINT){
+		} else if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		

@@ -29,7 +29,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     
     @SuppressWarnings("unchecked")
     @Override
-    //TODO 検索氏名スペース変換
+    
     public List<ThermoInfoEntity> searchQuery(String groupId, SearchInfoForm form) {
     	
     	StringBuilder sql = new StringBuilder();
@@ -47,7 +47,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     		sql.append("AND t.registDate = :date ");
     		dateFlg = true;
     		
-    		if(!EMPTY.equals(form.getSch_name())) {		//名前が入力されたら
+    		if(!EMPTY.equals(form.getSch_name())) {		//名前が入力されたら、文字列の空白は削除
     			sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
     			nameFlg = true;
     		}
@@ -93,13 +93,13 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 			
 			String curDate = sdf.format(cal.getTime());		//今日の日付
 			
-			cal.add(Calendar.DAY_OF_MONTH, -14);			//日付計算
+			cal.add(Calendar.DAY_OF_MONTH, -13);			//日付計算
 			String endDate = sdf.format(cal.getTime());		//二週間前の日付
 			
 			query.setParameter("curDate", curDate);
 			query.setParameter("endDate", endDate);
 		}
-		if (nameFlg) {
+		if (nameFlg) {	//入力された文字列の空白も削除
 			String rename = form.getSch_name().replaceAll("　", " ").replaceAll(" ", "");
 			query.setParameter("name", Q_PERCENT+rename+Q_PERCENT);
 		}

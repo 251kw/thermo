@@ -24,11 +24,11 @@
 		</div>
 		<p></p>
 		<div class="ui right aligned  container">
-			<form method="get" action="/logout">
+			<a href="/logout">
 						<button type="submit" class="ui inverted primary button" style="float:right;">
 								<p th:text="#{view.btn.logout}"></p>
 						</button>
-			</form>
+			</a>
 		</div>
 		<div class="ui left aligned  container">
 			<p></p>
@@ -71,7 +71,7 @@
 							<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 						
 						<td th:data-label="#{view.tablelabel.grade}">
-	  						<div class="field">
+	  						<div class="ui input">
 								<div th:insert="selectbox :: gradeAndBlank"></div>
 							</div>
 						</td>

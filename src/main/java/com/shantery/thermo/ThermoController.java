@@ -121,7 +121,10 @@ class ThermoController {
 			if(schlist.size()==0) {
 				model.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 				display = false;
+			} else if(schlist.size()==MAX_SCH_LISTINT){
+				model.addAttribute("overlist_msg", OVER_LIST_MSG);
 			}
+			
 			model.addAttribute("display", display);
 			
 			boolean adminbtn = schService.isAdminFlg(userinfo);
