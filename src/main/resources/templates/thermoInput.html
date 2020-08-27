@@ -13,11 +13,14 @@
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 		<!-- 小見出しを各々のページで書き換え -->
-		<p></p>
+		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.text.thermoInfoIn}"></h3>
 		</div>
-		<p></p>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+		
 		<form action="/thermo_info_inp_suc" method="post" th:object="${thForm}">
 			<div class="ui container center aligned">
 			<table class="ui celled table" style="table-layout:fixed">
