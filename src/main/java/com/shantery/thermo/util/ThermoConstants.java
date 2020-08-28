@@ -304,7 +304,7 @@ public class ThermoConstants {
 		public static final String THERMO_INP_FORM = "thForm";
 		
 	// Searchパッケージで使用する定数
-		public static final String COMBI_MSG = "チェックボックスは単体で使用してください。";
+		public static final String COMBI_MSG = "※チェックボックスは単体で使用してください。";
 		public static final String NOLIST_MSG = "検索結果がありませんでした。";
 		public static final String TODAY_NOLIST_MSG = "今日の検温情報が登録されていません。";
 		public static final String OVER_LIST_MSG = "100件の検索結果を表示しています。";

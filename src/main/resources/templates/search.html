@@ -22,7 +22,7 @@
 		<div class="komidasi">
 			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
 		</div>
-		<div class="ui hidden divider"></div>
+		<p></p>
 		<div class="ui right aligned container">
 			<a href="/logout">
 						<button type="submit" class="ui inverted primary button" style="float:right;">
@@ -67,7 +67,7 @@
 							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日" readonly="readonly"></div>
 						<td th:data-label="#{view.tablelabel.name}">
 							<div class="ui input">
-							<input type="text" th:field="*{sch_name}" maxlength='64'></div>
+							<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内"></div>
 							<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 						
 						<td th:data-label="#{view.tablelabel.grade}">
