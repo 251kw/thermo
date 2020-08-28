@@ -83,7 +83,7 @@
 								</span>
 							</div>
 						</td>
-						<td th:data-label="#{view.tablelabel.cough}">
+						<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
 							<div th:unless="${list[status.index].cough}">
 								<span class="ui checkbox">
 									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
