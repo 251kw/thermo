@@ -29,7 +29,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
     
     @SuppressWarnings("unchecked")
     @Override
-    
+    //TODO 現状、全角英数字と半角英数字を区別してしまう。
     public List<ThermoInfoEntity> searchQuery(String groupId, SearchInfoForm form) {
     	
     	StringBuilder sql = new StringBuilder();
