@@ -127,35 +127,8 @@ public class ThermoConstants {
 	
 	// @RequestParamのname属性
 	
-	// その他よく使う文字の変数 TODO 不要なものを削除する
-		/** LIKE検索用の最初の%、外部化済みなので削除推奨 **/
-		public static final String TOP_PERCENT = "'%";
-		/** LIKE検索用の最後の%、外部化済みなので削除推奨 **/
-		public static final String END_PERCENT = "%'";
-		/** 空文字 **/
+	//空文字
 		public static final String EMPTY = "";
-		/** ページングに使う 0 **/
-		public static final int ZERO = 0;
-		/** ページングに使う 1 **/
-		public static final int ONE = 1;
-		/** ページングに使う 2 **/
-		public static final int TWO = 2;
-		/** ページングに使う 9 **/
-		public static final int NINE = 9;
-		/**URLの後ろの&page**/
-		public static final String PREPAGE = "&page=";
-		/**クエリ文字**/
-		public static final String Query = "?";
-		/**＆**/
-		public static final String AND = "&";
-		/**カンマ**/
-		public static final String COMMA = ",";
-		/** 空白で始まる正規表現 **/
-		public static final String STARTEMPTY = "^[\\h]+";
-		/** 空白で終わる正規表現 **/
-		public static final String FINISHEMPTY = "[\\h]+$";
-		/** ページ番号の初期値 **/
-		public static final String DEFAULT_PEGE = "1";
 		
 	// ThermoReplaceValueで使う定数
 		// calcAge
