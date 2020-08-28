@@ -65,12 +65,12 @@
 						<td th:data-label="#{view.tablelabel.regist_date}">
 							<div class="ui input">
 							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日" readonly="readonly"></div>
-						<td th:data-label="#{view.tablelabel.name}">
+						<td th:data-label="#{view.tablelabel.name}+#{view.blank.1}">
 							<div class="ui input">
 							<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" autofocus="autofocus"></div>
 							<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 						
-						<td th:data-label="#{view.tablelabel.grade}">
+						<td th:data-label="#{view.tablelabel.grade}+#{view.blank.1}">
 	  						<div class="ui input">
 								<div th:insert="selectbox :: gradeAndBlank"></div>
 							</div>
