@@ -38,11 +38,11 @@
 					</tr>
 				</thead>
 				<tr th:each= "list:${list}">
-					<td height="60.27" style="word-break:break-all;" th:data-label="#{view.tablelabel.name}" th:text="${list.userName}"></td>
-					<td th:data-label="#{view.tablelabel.gender}" th:text="${list.gender}"></td>
-					<td th:data-label="#{view.tablelabel.grade}" th:text="${list.grade}"></td>
-					<td th:data-label="#{view.tablelabel.age}" th:text="${list.age}"></td>
-					<td th:data-label="#{view.tablelabel.thermo}"><p th:unless="${list.temperature} eq ''" th:text="${list.temperature}+度"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
+					<td height="60.27" style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userName}"></td>
+					<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${list.gender}"></td>
+					<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${list.grade}"></td>
+					<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${list.age}"></td>
+					<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}"><p th:unless="${list.temperature} eq ''" th:text="${list.temperature}+度"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
 					<td th:data-label="#{view.tablelabel.taste}">
 						<p th:if="${list.taste}" th:text="#{view.text.yes}"></p>
 						<p th:unless="${list.taste}" th:text="#{view.text.no}"></p>
@@ -51,11 +51,11 @@
 						<p th:if="${list.smell}" th:text="#{view.text.yes}"></p>
 						<p th:unless="${list.smell}" th:text="#{view.text.no}"></p>
 					</td>
-					<td th:data-label="#{view.tablelabel.cough}">
+					<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
 						<p th:if="${list.cough}" th:text="#{view.text.yes}"></p>
 						<p th:unless="${list.cough}" th:text="#{view.text.no}"></p>
 					</td>
-					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}"><p th:unless="${list.writing} eq ''" th:text="${list.writing}"></p><p th:if="${list.writing} eq ''">&nbsp;</p></td>
+					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}+#{view.blank.1}"><p th:unless="${list.writing} eq ''" th:text="${list.writing}"></p><p th:if="${list.writing} eq ''">&nbsp;</p></td>
 				</tr>
 			</table>
 			</div>
