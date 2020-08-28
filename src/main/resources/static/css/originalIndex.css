@@ -144,6 +144,11 @@ div.example  {
 	font-size:85%;
 	font-weight: bold;
 	}
+	
+	.index_input_error {
+	color: red;
+	font-size:12px;
+}
 
 	.index_ask_input {
 		color:#a2ca0e;/*文字色*/
