@@ -64,10 +64,10 @@
 					<tr>
 						<td th:data-label="#{view.tablelabel.regist_date}">
 							<div class="ui input">
-							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日" readonly="readonly" autofocus="autofocus"></div>
+							<input type="text" id="datepicker" th:field="*{sch_date}" placeholder="年/月/日" readonly="readonly"></div>
 						<td th:data-label="#{view.tablelabel.name}">
 							<div class="ui input">
-							<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内"></div>
+							<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" autofocus="autofocus"></div>
 							<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 						
 						<td th:data-label="#{view.tablelabel.grade}">
