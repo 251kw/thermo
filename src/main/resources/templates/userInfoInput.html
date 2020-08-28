@@ -115,7 +115,7 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.birthday}"></td>
-								<td><span class="ui input" Style="width:85%"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}"/></span>
+								<td><span class="ui input" Style="width:85%"><input type="text" readonly="readonly" id="datepicker" class="form-control" th:field="*{birthday}" th:placeholder="#{view.checkPh.select}"/></span>
 									<span th:if="${#fields.hasErrors('birthday')}" class="index_input_error">
 										<br><span th:text="#{view.errCa}"></span>
 									</span>
