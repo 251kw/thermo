@@ -46,8 +46,11 @@
 						<td th:data-label="#{view.tablelabel.thermo}" style="position:relative">
 							<span class="ui mini icon input">
 								<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-								th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" />
+								th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
 							</span>
+							<script type="text/javascript">
+								document.getElementById('thermo0').focus();
+							</script>
 							<div th:if="${message}">
 								<br><font color="red"><span th:text="${message[status.index]}"></span></font>
 							</div>
