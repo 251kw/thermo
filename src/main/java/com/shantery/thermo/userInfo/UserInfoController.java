@@ -2,6 +2,7 @@ package com.shantery.thermo.userInfo;
 
 import java.util.Optional;
 
+
 import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
@@ -12,6 +13,7 @@ import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_RES;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_AGE_ER;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -112,7 +114,8 @@ public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm us
 			model.addAttribute("uIdError", USER_INP_ID_ER);
 		}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
 			//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
-			model.addAttribute("grError", USER_INP_GR_ER);//
+			model.addAttribute("grError", USER_INP_GR_ER);
+			model.addAttribute("grError2", USER_INP_GR_ER2);
 		}else if(age == false) {
 			//年齢が120歳以上の場合、エラー文をset
 			model.addAttribute("ageError", USER_INP_AGE_ER);
