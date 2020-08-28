@@ -45,7 +45,7 @@ class ThermoInputController {
 			
 		//ログインユーザーと同じグループIDのユーザー情報受け取る
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
-		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdIs(loginuser.getGroup_id());
+		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		
 		//ログインユーザーが今日すでに登録しているか確認
 		ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);

@@ -13,6 +13,6 @@ import com.shantery.thermo.entity.UserInfoEntity;
 public interface ThermoInputUserRepository extends JpaRepository<UserInfoEntity, String> {
 	
 	//同じグループIDのユーザー情報をとってくる
-	List<UserInfoEntity> findByGroupIdIs(String group_id);
+	List<UserInfoEntity> findByGroupIdOrderByUpdateTime(String group_id);
 	
 }
