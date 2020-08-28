@@ -87,22 +87,4 @@ public class ThermoService {
 		return message;
 	}
 	
-	/**
-	 * 新規登録の種類によって遷移先を振り分けるメソッド
-	 * @param regist ログイン画面で選択された登録の種類
-	 * @param registtransition 遷移先を格納する変数 
-	 * @return registtransition
-	 */
-	// TODO 未使用のメソッド
-	public String setRegistTransition(String regist,String registtransition) {
-		if(regist.equals(SELECT_REGIST_VALUE_GROUP)) {	// グループが選択されていた場合
-			registtransition = "groupInfoInput";
-		}else if(regist.equals(SELECT_REGIST_VALUE_USER)){	// ユーザー（個人）が選択されていた場合
-			registtransition = TO_USER_INFO_INP;
-		}else if(regist.equals(SELECT_REGIST_VALUE_MULTIUSER)) {	// ユーザー（複数）が選択されていた場合
-			registtransition = TO_USERS_MULTI_INP;
-		}
-		return registtransition;
-	}
-	
 }
