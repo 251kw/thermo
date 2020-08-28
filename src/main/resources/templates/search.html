@@ -18,12 +18,12 @@
 		<!--外部ヘッダーファイル読み込み-->
 		<div th:insert="header :: header"></div>
 		<!--ページで書き換え -->
-		<p></p>
+		<br>
 		<div class="komidasi">
 			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
 		</div>
-		<p></p>
-		<div class="ui right aligned  container">
+		<div class="ui hidden divider"></div>
+		<div class="ui right aligned container">
 			<a href="/logout">
 						<button type="submit" class="ui inverted primary button" style="float:right;">
 								<p th:text="#{view.btn.logout}"></p>
