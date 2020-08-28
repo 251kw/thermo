@@ -142,7 +142,6 @@ public class UserInfoMultiService {
 	 * @param usersInfo 登録ユーザー情報
 	 * @param i 行番号
 	 * @return エラーメッセージ 
-	 * TODO 処理の軽量化
 	 */
 	public String checUserIdDB(String[] usersInfo, int i) {
 	
