@@ -287,8 +287,8 @@ public class ThermoConstants {
 		
 	//バリデーションで使用する定数
 		public static final String THERMO_REGEX_PATTERN = "[a-zA-Z0-9]*";
-		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9０-９ａ-ｚA-Zぁ-んァ-ヶー一-龠々〆〇〻㐂-頻 　]*$";
-		public static final String NAME_PATTERN ="[a-zA-Z0-9０-９ａ-ｚA-Zぁ-んァ-ヶー一-龠々〆〇〻㐂-頻 　]+$";
+		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9０-９ａ-ｚＡ-Ｚぁ-んァ-ヶー一-龠々〆〇〻㐂-頻 　]*$";
+		public static final String NAME_PATTERN ="[a-zA-Z0-9０-９ａ-ｚＡ-Ｚぁ-んァ-ヶー一-龠々〆〇〻㐂-頻 　]+$";
 		public static final String GENDER_PATTERN ="[MF]";
 		public static final String GRADE_PATTERN ="[A-C0-6]";
 		public static final String FLAG_PATTERN ="[0-1]";
