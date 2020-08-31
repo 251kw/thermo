@@ -1,6 +1,8 @@
 package com.shantery.thermo.search;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.shantery.thermo.ThermoForm;
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+import com.shantery.thermo.thermoInput.ThermoInputForm;
+import com.shantery.thermo.thermoInput.ThermoInputService;
+import com.shantery.thermo.thermoInput.ThermoInputUserRepository;
+import com.shantery.thermo.util.ThermoReplaceValue;
 
 /**
  * @author y.sato
@@ -33,6 +39,12 @@ class SearchController {
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
 	
 	@Autowired
+	ThermoInputUserRepository u_repository; //
+	
+	@Autowired
+	ThermoInputService service; //
+	
+	@Autowired
 	HttpSession session; 
 	
 	/**
@@ -43,22 +55,45 @@ class SearchController {
 	@RequestMapping(value =SEARCH_RETURN, method = RequestMethod.GET) //検索画面に来た時(戻る)
 	public  String search(Model  m){
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
-		List<ThermoInfoEntity> list = schRepository.searchCurDate(loginuser.getGroup_id());	//今日の日付で検索	//group_idで絞る
-		boolean display = true;		//テーブルを表示させるか
+		
+		//TODO グループIDからとってくるに変更
+		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
+		
+		
+		//ログインユーザーたちが今日すでに登録しているか確認
+		ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);
+		
+		
+		//データベースからとってきたユーザー情報を表示用に変換する 
+		ArrayList<String> birth = new ArrayList<String>();
+		for(UserInfoEntity ul : ulist) {
+			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
+			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
+			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
+		}
+				
+		//boolean display = true;
 		
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
 		m.addAttribute("searchInfo", new SearchInfoForm());
-		m.addAttribute("list", list);
+		m.addAttribute(THERMO_LIST ,list);
+		m.addAttribute(THERMO_USER_LIST, ulist);
+		m.addAttribute(THERMO_BIRTH, birth);
+		m.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
+		session.setAttribute(THERMO_USER_LIST, ulist);
+		session.setAttribute(THERMO_BIRTH, birth);
 		
-		if(list.size()==0) {	//今日の検温情報がないとき
+		/*if(list.size()==0) {	//今日の検温情報がないとき
 			m.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 			display = false;
 			
-		} else if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
+		}*/
+		
+		if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
-		m.addAttribute("display", display);
+		//m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);
 		
 		session.setAttribute(SCH_LIST, list);		//印刷用
