@@ -56,7 +56,7 @@ class SearchController {
 	public  String search(Model  m){
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
-		//TODO グループIDからとってくるに変更
+		//グループIDからとってくるに変更
 		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		
 		
@@ -72,7 +72,7 @@ class SearchController {
 			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
 		}
 				
-		//boolean display = true;
+		boolean display = true;
 		
 		boolean adminbtn = schService.isAdminFlg(loginuser);	//管理者フラグがあれば検温ボタンを押せる
 		
@@ -93,7 +93,7 @@ class SearchController {
 		if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
-		//m.addAttribute("display", display);
+		m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);
 		
 		session.setAttribute(SCH_LIST, list);		//印刷用
@@ -155,6 +155,10 @@ class SearchController {
 	
 		return TO_SEARCH;
 	}
+	
+	
+	
+	
 	
 	/**
 	 * ログアウトボタンが押されたときに起動する
