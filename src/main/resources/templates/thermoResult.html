@@ -7,7 +7,14 @@
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalInput.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	
+    	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+		<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
 	</head>
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
@@ -23,7 +30,7 @@
 		
 		<form action="/search_return" method="get" >
 			<div class="ui container center aligned">
-			<table class="ui celled table" style="table-layout:fixed">
+			<table class="ui celled table thtable" style="table-layout:fixed">
 				<thead class="delete">
 					<tr>
 						<th width="60" th:text="#{view.tablelabel.name}"></th>
@@ -38,7 +45,7 @@
 					</tr>
 				</thead>
 				<tr th:each= "list:${list}">
-					<td height="60.27" style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userName}"></td>
+					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userName}"></td>
 					<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${list.gender}"></td>
 					<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${list.grade}"></td>
 					<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${list.age}"></td>
@@ -64,6 +71,9 @@
 				<button type="submit" class="ui inverted primary button" name="input" ><p th:text="#{view.btn.return}"></button>
 			</div>
 		</form>
+		<p id="btm"></p>
+		<p id="pageTop"><a href="/thermoResult"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
 		<br><br><br>
 	</body>
 </html>
