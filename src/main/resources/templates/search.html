@@ -7,11 +7,13 @@
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 		
 		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+		<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
 		
 	<body>
 	
@@ -200,6 +202,8 @@
 			</div>
 		</div>
 		
+		<p id="btm"></p>
+		
 		<script type="text/javascript">
 			//form内の値（入力情報）をすべてクリアにする
 			function clearFormAll() {
@@ -273,7 +277,8 @@
 	            onChangeMonthYear: showAdditionalButton
 			});
   		</script>
-  		
+  		<p id="pageTop"><a href="/search"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
   		<br><br><br>
 	</body>
 </html>

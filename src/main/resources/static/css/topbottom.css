@@ -1,0 +1,61 @@
+#pageTop {
+  position: fixed;
+  bottom: 46px;
+  right: 20px;
+}
+ 
+#pageTop i {
+  padding-top: 3px;
+  margin: 0 0 0 0;
+}
+ 
+#pageTop a {
+  display: block;
+  z-index: 999;
+  padding: 4px 4px 4px 4px;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  background-color: #ff8080;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+ 
+#pageTop a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+
+
+#pageBottom {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
+ 
+#pageBottom i {
+  padding-top: 3px;
+  margin: 0 0 0 0;
+}
+ 
+#pageBottom a {
+  display: block;
+  z-index: 999;
+  padding: 4px 4px 4px 4px;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  background-color: #9FD6D2;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+ 
+#pageBottom a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
