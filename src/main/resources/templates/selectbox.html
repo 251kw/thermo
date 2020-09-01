@@ -63,5 +63,14 @@
 			</select>
 		</div>
 		
+		<!-- 登録情報編集 -->
+		<div th:fragment="edit" th:remove="tag">
+			<select name="edit" id="edit">
+				<option value="editgroup" th:text="#{view.indexselect.group}"></option>
+				<option value="edituser" th:text="#{view.indexselect.user}"></option>
+				<option value="editmultiuser" th:text="#{view.indexselect.multiuser}"></option>
+			</select>
+		</div>
+		
 	</body>
 </html>
