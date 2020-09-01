@@ -53,6 +53,9 @@ public class ThermoInputForm {
 		private String writing;
 		/* 登録日 */
 		private String date;
+		/* 赤文字フラグ */
+		private String thermoColor;
+		
 		
 		
 		public String getUserName() {
@@ -120,6 +123,12 @@ public class ThermoInputForm {
 		}
 		public void setDate(String date) {
 			this.date = date;
+		}
+		public String getThermoColor() {
+			return thermoColor;
+		}
+		public void setThermoColor(String thermoColor) {
+			this.thermoColor = thermoColor;
 		}
 	
 	}
