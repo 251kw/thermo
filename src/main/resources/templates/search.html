@@ -48,6 +48,20 @@
 		<p></p>
 		
 		<!------------------------------------------- 本体始まり ----------------------------------------------------->
+		
+		<form method="get" class="ui form" name="registform" onsubmit="return check()">
+				<table class="index_regist_table">
+					<tr>
+						<td>
+							<span class="ui input select">			
+								<span th:insert="selectbox :: edit"></span>
+							</span> 
+							<input class="ui inverted blue button" type="submit" th:value="#{view.btn.signup}" />
+						</td>
+					</tr>
+				</table>
+			</form>
+			
 		<form class="ui form" th:action="@{/search_info}" th:object="${searchInfo}" method="post">
 			<div class="ui container">
 	​
@@ -294,6 +308,36 @@
 	            onChangeMonthYear: showAdditionalButton
 			});
   		</script>
+  		
+  		
+  		
+  		  <script type="text/javascript"> 
+
+			// 送り先がgetかpostかどっちで受け取っているか確認しましょう
+			function check(){
+			 //actionメソッドに遷移先のURLを代入する
+			 
+			 	var select = document.getElementById("edit").value;// registはselect(html)のid属性
+			 	var transition;
+			 	
+				switch (select){	// selectは86行目で定義している変数
+				  case "editgroup":		// caseにselect（html）のvalueを指定
+				    transition = "./";
+				    break;
+				  case "edituser":
+					transition = "./";
+				    break;
+				  case "editmultiuser":
+				    transition = "./";
+				    break;
+				}
+				
+			 	document.registform.action = transition;	// registformはformのname属性
+			}
+	</script>
+	
+	
+	
   		<p id="pageTop"><a href="/search"><i class="arrow up icon"></i></a></p>
   		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
   		<br><br><br>
