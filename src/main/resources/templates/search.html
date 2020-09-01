@@ -217,6 +217,7 @@
 										<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
 										<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
 										<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
+										<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].date'" th:value="${list[status.index].date}" >
 									</td>
 								</th:block>
 							</tr>

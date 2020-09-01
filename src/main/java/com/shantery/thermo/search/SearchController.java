@@ -157,7 +157,39 @@ class SearchController {
 	}
 	
 	
-	
+	/**
+	 * @param form
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = THERMO_INFO_INP_SUC, method = RequestMethod.POST)
+	public String InputConfirm(@Validated @ModelAttribute(THERMO_INP_FORM) ThermoInputForm form, BindingResult result, Model model) {
+		
+		//入力情報を取得
+		ArrayList<ThermoInputForm.Detail> list = form.gettList();
+		model.addAttribute(THERMO_LIST , list);
+		session.setAttribute(THERMO_LIST , list);
+		model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
+		model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
+		boolean display = true;
+		model.addAttribute("display", display);
+		model.addAttribute("searchInfo", new SearchInfoForm());
+		
+		
+		//入力チェックをしてエラー文があれば入力画面へ
+		ArrayList<String> message = service.checkInput(list);
+		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER) || result.hasErrors()) {
+			model.addAttribute("message", message);
+			return TO_THERMO_INFO_INP;
+		}
+		
+		//登録実行
+		service.registAll(list);
+		
+		return TO_SEARCH;
+	}
 	
 	
 	/**
