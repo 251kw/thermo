@@ -20,4 +20,6 @@ public interface GroupInfoRepository extends JpaRepository<GroupMstEntity, Strin
 	//新規登録時のグループIDとグループパスワードを受け取り、一致するか
 	public Optional<GroupMstEntity> findByGroupIdAndGroupPass(String group_id, String group_pass);
 	
+	//ユーザー情報更新時、グループIDを受け取りDBで探す
+	public GroupMstEntity findByGroupId(String group_id);
 }
