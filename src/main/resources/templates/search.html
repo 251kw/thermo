@@ -130,6 +130,7 @@
 						</thead>
 						<tbody>
 							<tr th:each= "ul,status : ${ulist}">
+								<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.2}" th:text="${list[status.index].date}"></td>
 								<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
 					    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
 					    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
