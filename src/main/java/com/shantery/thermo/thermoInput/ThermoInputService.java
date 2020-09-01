@@ -164,6 +164,7 @@ public class ThermoInputService {
 				list.get(i).setSmell(convertCheckReturn(user.getOlfactory_disorder()));
 				list.get(i).setCough(convertCheckReturn(user.getCough()));
 				list.get(i).setWriting(user.getOther());
+				list.get(i).setDate(user.getRegist_date());
 				i++;
 			}
 		}
