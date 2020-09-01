@@ -3,6 +3,7 @@ package com.shantery.thermo.entity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.shantery.thermo.userInfo.UserInfoForm;
 
 /**
  * user_infoデータベースのエンティティクラス
@@ -200,4 +203,25 @@ public class UserInfoEntity {
 		this.updateTime = sdf.format(calendar.getTime());
 		
 	}
+	
+	/**
+	 * Entityで受け取った情報をFormに変換する
+	 * @author h.komatsu
+	 * @return uInFm ユーザー情報
+	 */
+	public UserInfoForm _toConvertUserInfoForm(){
+		UserInfoForm uInFm = new UserInfoForm();
+		
+		uInFm.setGroupId(getGroup_id());
+		uInFm.setUserId(getUser_id());
+		uInFm.setUserPass(getUser_pass());
+		uInFm.setUserName(getUser_name());
+		uInFm.setGender(getGender());
+		uInFm.setBirthday(getBirthday());
+		uInFm.setGrade(getGrade());
+		uInFm.setAdminFlg(getAdmin_flg());
+		uInFm.setUpdateTime(getUpdate_time());
+	    return uInFm;
+	 }
+	
 }
