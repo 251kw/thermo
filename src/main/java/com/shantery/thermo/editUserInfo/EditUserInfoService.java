@@ -1,6 +1,8 @@
 package com.shantery.thermo.editUserInfo;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,7 @@ public class EditUserInfoService {
 	public GroupMstEntity getGrPass(String group_Id){		
 		return gInfoRepojitory.findByGroupId(group_Id);
 	}
+	
 	
 	/**
 	 * DB内のユーザー情報更新

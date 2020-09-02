@@ -18,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.shantery.thermo.ThermoService;
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.userInfo.UserInfoForm;
@@ -37,6 +39,8 @@ class EditUserInfoController {
 	private EditUserInfoService eUService; //呼び出すクラス
 	@Autowired
 	private UserInfoService uInfoService; //呼び出すクラス
+	@Autowired
+	private ThermoService tS; //呼び出すクラス
 	@Autowired
 	MessageSource messagesource; //messages.propertiesの利用
 	@Autowired
@@ -59,8 +63,10 @@ class EditUserInfoController {
 			
 			//ログインユーザー情報の取得
 			UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
+			//ユーザーID使用してDBからユーザー情報再取得
+			UserInfoEntity date = tS.checkdata(loginuser, uInfoService.getGrDate(loginuser.getUser_id()));
 			//EntityからFormへ詰め替え
-			uInFm = loginuser._toConvertUserInfoForm();
+			uInFm = date._toConvertUserInfoForm();
 			//グループ情報の取得
 			GroupMstEntity loginGr = eUService.getGrPass(loginuser.getGroup_id());
 			//グループパスワードをFormへ追加
