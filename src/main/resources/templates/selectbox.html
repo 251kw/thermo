@@ -74,7 +74,7 @@
 		
 		<!-- 性別 th:selected -->
 		<div th:fragment="editgender" th:remove="tag">
-			<select name="gender">
+			<select name="gender" th:name="'userList[' + __${stat.index}__ + '].gender'">
 				<option value="M" th:text="#{view.select.man}" th:selected="${user.gender=='M'}"></option>
 				<option value="F" th:text="#{view.select.woman}" th:selected="${user.gender=='F'}"></option>
 			</select>
@@ -82,7 +82,7 @@
 		
 		<!-- 管理者権限 -->
 		<div th:fragment="editadminflg" th:remove="tag">
-			<select name="adminflg">
+			<select name="admin_flg" th:name="'userList[' + __${stat.index}__ + '].admin_flg'">
 				<option value="0" th:text="#{view.select.normal}" th:selected="${user.admin_flg=='0'}"></option>
 				<option value="1" th:text="#{view.select.admin}" th:selected="${user.admin_flg=='1'}"></option>
 			</select>
@@ -90,7 +90,7 @@
 		
 		<!-- 学年　-->
 		<div th:fragment="editgrade" th:remove="tag">
-			<select name="grade">
+			<select name="grade" th:name="'userList[' + __${stat.index}__ + '].grade'">
 				<option value="0" th:text="#{view.select.grade0}" th:selected="${user.grade=='0'}"></option>
 				<option value="1" th:text="#{view.select.grade1}" th:selected="${user.grade=='1'}"></option>
 				<option value="2" th:text="#{view.select.grade2}" th:selected="${user.grade=='2'}"></option>

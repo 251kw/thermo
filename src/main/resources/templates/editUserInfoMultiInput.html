@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<title th:text="#{view.thermoInfoIn.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+    	
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="ユーザー情報編集"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+
+		<div class="ui container">
+			<form action="/editusersmulticonfirm" method="POST" class="ui form">
+				<table class="ui celled table">
+					<thead class="delete">
+						<tr>
+							<th>
+								<span class="ui checkbox">
+									<input type="checkbox" id="check_all" name="check_all"/>
+									<label></label>
+								</span>
+							</th>
+							<th th:text="名前"></th>
+							<th th:text="ユーザーID"></th>
+							<th th:text="パスワード"></th>
+							<th th:text="性別"></th>
+							<th th:text="生年月日"></th>
+							<th th:text="学年"></th>
+							<th th:text="オプション"></th>
+						</tr> 
+					</thead>
+				    <tr th:each="user, stat : ${userlist}" th:object="${user}">
+						<td>
+							<span class="ui checkbox">
+								<input type="checkbox" class="item" name="check" th:name="'check[' + ${stat.index} + ']'" value="delete"/>
+								<label></label>
+							</span>
+						</td>
+				        <td>
+	                		<input type="text" name="user_name" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="*{user_name}">
+	            		</td>
+	            		<td>
+	                		<input type="text" name="user_id" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="*{user_id}">
+	            		</td>
+	            		<td>
+	                		<input type="text" name="user_pass" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="*{user_pass}">
+	            		</td>
+	            		<td>
+	            			<div th:insert="selectbox :: editgender"></div>
+	            		</td>
+	            		<td>
+	            			<input type="text" class="datepicker" placeholder="年/月/日" readonly="readonly" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="*{birthday}">
+	            		</td>
+	            		<td>
+	                		<div th:insert="selectbox :: editgrade"></div>
+	            		</td>
+	            		<td>
+	                		<div th:insert="selectbox :: editadminflg"></div>
+	            		</td>
+	        		</tr>
+				</table>
+				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+				<div align="center">
+					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="更新"></button>
+					<a href="/search_return">
+						<button type="button" class="ui inverted blue button"><p th:text="戻る"></button>
+					</a>
+				</div>
+			</form>
+		</div>
+		<br><br><br>
+		
+		<script type="text/javascript">
+			$('.datepicker').datepicker();
+			
+			$('#check_all').on('change', function() {
+				  // 「選択肢」のチェック状態を切替える
+				  $('.item').prop('checked', $(this).is(':checked'));
+			});
+			
+			$('.item').on('change', function() {
+				  // 「全選択」のチェック状態を切替える
+				  if ($('#items :checked').length == $('#items :input').length){
+				    $('#check_all').prop('checked', true);
+				  }else{
+				    $('#check_all').prop('checked', false);
+				  }
+			});
+		</script>
+	</body>
+</html>
