@@ -171,6 +171,9 @@ public class ThermoInputService {
 					list.get(i).setThermoColor("orange");
 				}
 				i++;
+			}else if(user == null) {
+				list.get(i).setDate(day.format(calendar.getTime()));
+				i++;
 			}
 		}
 		

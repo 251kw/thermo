@@ -24,67 +24,67 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 	@Autowired
 	HttpSession session; 
 	
-    @PersistenceContext
-    EntityManager entityManager;
-    
-    @SuppressWarnings("unchecked")
-    @Override
-    //TODO 現状、全角英数字と半角英数字を区別してしまう。
-    public List<ThermoInfoEntity> searchQuery(String groupId, SearchInfoForm form) {
-    	
-    	StringBuilder sql = new StringBuilder();
-    	
-    	boolean dateFlg = false;
-    	boolean nameFlg = false;
-    	boolean gradeFlg = false;
-    	
-    	sql.append("SELECT t ");
-    	sql.append("FROM ThermoInfoEntity t ");
-    	sql.append("WHERE t.userInfoEntity.groupId = :groupId ");
-    	
-    	
-    	if(!EMPTY.equals(form.getSch_date())) {			//日付が入力されたら
-    		sql.append("AND t.registDate = :date ");
-    		dateFlg = true;
-    		
-    		if(!EMPTY.equals(form.getSch_name())) {		//名前が入力されたら、文字列の空白は削除
-    			sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
-    			nameFlg = true;
-    		}
-    		if(!EMPTY.equals(form.getSch_grade())) {		//学年が入力されたら
-    			sql.append("AND t.userInfoEntity.grade = :grade ");
-    			gradeFlg = true;
-    		}
-    	} else {
-    		
-    		if(!EMPTY.equals(form.getSch_name())) {
-    			sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
-    			nameFlg = true;
-    			
-    			if(!EMPTY.equals(form.getSch_grade())) {
-        			sql.append("AND t.userInfoEntity.grade = :grade ");
-        			gradeFlg = true;
-        		}
-    		}
-    		
-    		if(!EMPTY.equals(form.getSch_grade())) {
-    			sql.append("AND t.userInfoEntity.grade = :grade ");
-    			gradeFlg = true;
-    		}
-    	}
-    	
-    	if(!dateFlg) { //日付指定がなかったら、二週間分を設定
+	@PersistenceContext
+	EntityManager entityManager;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	//TODO 現状、全角英数字と半角英数字を区別してしまう。
+	public List<ThermoInfoEntity> searchQuery(String groupId, SearchInfoForm form) {
+		
+		StringBuilder sql = new StringBuilder();
+		
+		boolean dateFlg = false;
+		boolean nameFlg = false;
+		boolean gradeFlg = false;
+		
+		sql.append("SELECT t ");
+		sql.append("FROM ThermoInfoEntity t ");
+		sql.append("WHERE t.userInfoEntity.groupId = :groupId ");
+		
+		
+		if(!EMPTY.equals(form.getSch_date())) {			//日付が入力されたら
+			sql.append("AND t.registDate = :date ");
+			dateFlg = true;
+			
+			if(!EMPTY.equals(form.getSch_name())) {		//名前が入力されたら、文字列の空白は削除
+				sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
+				nameFlg = true;
+			}
+			if(!EMPTY.equals(form.getSch_grade())) {		//学年が入力されたら
+				sql.append("AND t.userInfoEntity.grade = :grade ");
+				gradeFlg = true;
+			}
+		} else {
+			
+			if(!EMPTY.equals(form.getSch_name())) {
+				sql.append("AND REPLACE(REPLACE(t.userInfoEntity.userName,' ', ''), '　', '') LIKE :name ");
+				nameFlg = true;
+				
+				if(!EMPTY.equals(form.getSch_grade())) {
+					sql.append("AND t.userInfoEntity.grade = :grade ");
+					gradeFlg = true;
+				}
+			}
+			
+			if(!EMPTY.equals(form.getSch_grade())) {
+				sql.append("AND t.userInfoEntity.grade = :grade ");
+				gradeFlg = true;
+			}
+		}
+		
+		if(!dateFlg) { //日付指定がなかったら、二週間分を設定
 			sql.append("AND t.registDate BETWEEN :endDate AND :curDate ");
-    		sql.append("order by t.registDate desc, t.userInfoEntity.grade, t.userInfoEntity.userName ");	//日付、学年、名前順で並べる
-	    } else {
-	    	sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");
-	    }
-    	
-    	Query query = entityManager.createQuery(sql.toString());
-    	
-    	query.setParameter("groupId", groupId);
-    	
-    	//以下、フラグがtrueの時に値をセット
+			sql.append("order by t.registDate desc, t.userInfoEntity.grade, t.userInfoEntity.userName ");	//日付、学年、名前順で並べる
+		} else {
+			sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");
+		}
+		
+		Query query = entityManager.createQuery(sql.toString());
+		
+		query.setParameter("groupId", groupId);
+		
+		//以下、フラグがtrueの時に値をセット
 		if (dateFlg) {
 			query.setParameter("date", form.getSch_date());
 		} else {
