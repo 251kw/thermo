@@ -98,6 +98,10 @@ class SearchController {
 		
 		session.setAttribute(SCH_LIST, list);		//印刷用
 		
+		session.removeAttribute("uslist");
+		session.removeAttribute("uForm");
+
+		
 		return TO_SEARCH;
 	}
 	
