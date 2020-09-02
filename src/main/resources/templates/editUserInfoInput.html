@@ -71,9 +71,10 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p th:text="#{view.tablelabel.uId}"></p><p class="index_input_error" th:text="#{view.text.uIdAdd}"></p></td>
-								<td><span class="ui input" Style="width:85%"><span class="form-control" th:text="*{userId}"></span></span>
+								<td><p th:text="#{view.tablelabel.uId}"></p></td>
+								<td><span class="ui input"><span class="form-control" th:text="*{userId}"></span></span>
 									<input type="hidden" th:field="*{userId}"/>
+									<br><span class="index_input_error" th:text="#{view.text.uIdAdd}"></span>
 									<span th:if="${#fields.hasErrors('userId')}" class="index_input_error">
 										<br><span th:text="#{view.errM432}"></span>
 										<br><span th:text="#{view.errEng}"></span>
