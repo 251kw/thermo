@@ -39,7 +39,7 @@ public class SearchService {
 					EMPTY.equals(form.getSch_grade())) {
 			if(form.getSch_high()==null) {
 				//未記入、未選択で二週間分のデータを検索
-				return schRepository.searchUnconditional(groupId);
+//				return schRepository.searchUnconditional(groupId);
 			} else {
 				//高い人二週間分のデータを検索
 				return schRepository.searchHighThermo(groupId);
@@ -55,16 +55,16 @@ public class SearchService {
 	 * @param groupId グループId
 	 * @return result	真偽値
 	 */
-	public boolean isZeroCurDate(String groupId) {
-		boolean result = false;
-		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);
-		
-		if (list.size()==0) {	//なければtrueを返す
-			result = true;
-		}
-	
-		return result;
-	}
+//	public boolean isZeroCurDate(String groupId) {
+//		boolean result = false;
+//		List<ThermoInfoEntity> list = schRepository.searchCurDate(groupId);
+//		
+//		if (list.size()==0) {	//なければtrueを返す
+//			result = true;
+//		}
+//	
+//		return result;
+//	}
 	
 	/**
 	 * ログインユーザーは管理者か判断するメソッド
