@@ -169,8 +169,6 @@ public class ThermoInputService {
 					list.get(i).setThermoColor("red");
 				}else if(user.getThermo() !=null &&Double.parseDouble(user.getThermo()) >= 37) {
 					list.get(i).setThermoColor("orange");
-				}else {
-					list.get(i).setThermoColor("non");
 				}
 				i++;
 			}
