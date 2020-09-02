@@ -3,6 +3,7 @@ package com.shantery.thermo.userInfo;
 import java.util.Optional;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import com.shantery.thermo.groupInfo.GroupInfoRepository;
  *新規ユーザー登録のサービスクラス
  */
 @Service
-class UserInfoService {
+public class UserInfoService {
 	@Autowired
 	UserInfoRepository uInfoRepository; //呼び出すクラス
 	@Autowired
