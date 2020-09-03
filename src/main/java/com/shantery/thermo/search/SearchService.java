@@ -102,4 +102,17 @@ public class SearchService {
 		return result;
 	}
 	
+	public List<UserInfoEntity> userlistCheck (List<UserInfoEntity> ulist,SearchInfoForm form){
+		if(EMPTY.equals(form.getSch_date())) {
+			int count = ulist.size();
+			for(int i=0; i+1<count; i++) {
+				for(int t=0; t<13; t++) {
+					ulist.add(i*14, ulist.get(i));
+				}
+			}
+		}
+		
+		return ulist;
+	}
+	
 }
