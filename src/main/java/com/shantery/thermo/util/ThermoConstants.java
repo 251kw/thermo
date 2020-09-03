@@ -85,6 +85,12 @@ public class ThermoConstants {
 	public static final String TO_THERMO_INFO_RES = "thermoResult";
 	/** 検索画面への遷移 **/
 	public static final String TO_SEARCH = "search";
+	/** グループ情報更新のINPUTへの遷移 **/
+	public static final String TO_EDIT_GROUP_INFO_INP = "editGroupInfoInput";
+	/** グループ情報更新のCONFIRMへの遷移 **/
+	public static final String TO_EDIT_GROUP_INFO_COMF = "editGroupInfoConfirm";
+	/** グループ情報更新のRESULTへの遷移 **/
+	public static final String TO_EDIT_GROUP_INFO_RES = "editGroupInfoResult";
 	
 	
 	
