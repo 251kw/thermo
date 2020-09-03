@@ -39,10 +39,10 @@ class SearchController {
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
 	
 	@Autowired
-	ThermoInputUserRepository u_repository; //
+	ThermoInputUserRepository thmInUserRepository; //
 	
 	@Autowired
-	ThermoInputService service; //
+	ThermoInputService thmInService; //
 	
 	@Autowired
 	HttpSession session; 
@@ -57,11 +57,11 @@ class SearchController {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
 		//グループIDからとってくるに変更
-		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
+		Iterable<UserInfoEntity> ulist = thmInUserRepository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		
 		
 		//ログインユーザーたちが今日すでに登録しているか確認
-		ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);
+		ArrayList<ThermoInputForm.Detail> list = thmInService.checkRegistDate(ulist);
 		
 		
 		//データベースからとってきたユーザー情報を表示用に変換する 
@@ -115,7 +115,7 @@ class SearchController {
 	public String search_info(@ModelAttribute("searchInfo") @Validated SearchInfoForm form, BindingResult result, Model m) {
 		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
-		List<ThermoInfoEntity> list = null;
+		List<UserInfoEntity> ulist = null;
 		boolean display = true;		//テーブルを表示させるか
 		boolean errorFlg = false;
 		
@@ -138,24 +138,29 @@ class SearchController {
 		
 		//errorがなければ検索
 		if(!errorFlg) {
-			list = schService.separate(loginuser.getGroup_id(), form);
+			ulist = schService.userSearch(loginuser.getGroup_id(), form);
 		} else {
-			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
+//			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
 		}
 		
-		if(list.size()==0) {	//検索結果がないとき
+		if(ulist.size()==0) {	//検索結果がないとき
 			m.addAttribute("nolist_msg", NOLIST_MSG);
 			display = false;
-		} else if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
+		} else if(ulist.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		
+		//ulistを元に検温情報があるかチェック
+		ArrayList<ThermoInputForm.Detail> list = thmInService.checkRegistDate(ulist);
+		
 		m.addAttribute("searchInfo", form);
-		m.addAttribute("list", list);
 		m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);
 		
-		session.setAttribute(SCH_LIST, list);	//印刷用
+		m.addAttribute(THERMO_LIST ,list);
+		m.addAttribute(THERMO_USER_LIST, ulist);
+		
+		session.setAttribute(SCH_LIST, ulist);	//印刷用
 	
 		return TO_SEARCH;
 	}
@@ -183,14 +188,14 @@ class SearchController {
 		
 		
 		//入力チェックをしてエラー文があれば入力画面へ
-		ArrayList<String> message = service.checkInput(list);
+		ArrayList<String> message = thmInService.checkInput(list);
 		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER) || result.hasErrors()) {
 			model.addAttribute("message", message);
 			return TO_THERMO_INFO_INP;
 		}
 		
 		//登録実行
-		service.registAll(list);
+		thmInService.registAll(list);
 		
 		return TO_SEARCH;
 	}
