@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.grInfoIn.pagetitle}"></title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="#{view.label.grInfoInput}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		<div class="ui container">
+			<div class="ui text container">	
+				<form action="#" th:action="@{/groupInfoConfirm}" th:object="${groupInfoForm}" method="post">
+					<div class="ui center aligned container">
+						<h3 class="index_ask_input" th:text="#{view.text.UGInfoTop}"></h3>
+					</div>
+					<table class="ui celled table" style="table-layout:fixed">
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}" maxlength="32" id="focus"/></span>
+									<script type="text/javascript">
+										    // 上記の入力欄にフォーカスを与える
+										    document.getElementById('focus').focus();
+									</script>
+									<span th:if="${#fields.hasErrors('groupId')}" class="index_input_error">
+										<br><span th:text="#{view.errM432}"></span>
+										<br><span th:text="#{view.errEng}"></span>
+									</span>
+									<br><span th:text=${uGrError} class="index_input_error"></span>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gName}"></p><div class= error><p th:text="#{view.text.fullChar}"></p></div></td>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupName}" th:placeholder="#{view.checkPh.name}" maxlength="64"/></span>
+									<span th:if="${#fields.hasErrors('groupName')}" class="index_input_error">
+										<br><span th:text="#{view.errNameM}"></span>
+										<br><span th:text="#{view.errNameS}"></span>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
+								<td>		
+									<div class="toggle">
+										<span class="ui input" Style="width:85%">
+											<input class="field js-password form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
+										</span>
+										<span class="btns">
+											<input class="btn-input js-password-toggle" tabIndex="-1" id="eye" type="checkbox">
+											<label class="btn-label js-password-label" for="eye">
+												<i class="fa fa-eye"></i>
+											</label>
+										</span>
+										<span th:if="${#fields.hasErrors('groupPass')}" class="index_input_error">
+											<br><span th:text="#{view.errM416}"></span>
+											<br><span th:text="#{view.errEng}"></span>
+										</span>	
+									</div>	
+								</td>
+							</tr>			
+						</tbody>
+					</table>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
+						<a href="./">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.return}"></th:block>
+							</button>
+						</a>
+					</div>
+				</form>
+  				<!-- パスワードの表示/非表示切替 -->
+				<script type="text/javascript">
+				//groupPassの表示切替
+				const passwordToggle = document.querySelector('.js-password-toggle');
+				  passwordToggle.addEventListener('change', function () {
+				    const password = document.querySelector('.js-password'),
+				          passwordLabel = document.querySelector('.js-password-label');
+				    if (password.type === 'password') {
+				      password.type = 'text';
+				      passwordLabel.innerHTML = '<i class="fa fa-eye-slash"></i>';
+				    } else {
+				      password.type = 'password';
+				      passwordLabel.innerHTML = '<i class="fa fa-eye"></i>';
+				    }
+				    password.focus();
+				  });				
+				</script>
+			</div>
+		</div>
+		<br><br><br>
+	</body>
+</html>

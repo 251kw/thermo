@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.headerback {
+	background-color:#ffe600;
+	height: 90px;
+}
+
+.header {
+ 	color:#0db8d9;
+	text-shadow:
+       2px  2px 1px #ffffff,
+      -2px  2px 1px #ffffff,
+       2px -2px 1px #ffffff,
+      -2px -2px 1px #ffffff,
+       2px  0px 1px #ffffff,
+       0px  2px 1px #ffffff,
+      -2px  0px 1px #ffffff,
+       0px -2px 1px #ffffff;
+	font-size: 45px;
+}
+
+.header p {
+	text-align: center;
+	position: relative;
+	top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 2%;
+  	width: 1%;
+  	height: 90px;
+  	display:table-cell;
+  	vertical-align: middle;
+}
+
+.header i{
+	color:#f08a37;
+	transform: rotate( 30deg );
+}
+
+.komidasi h3 {
+  color:#a2ca0e;/*文字色*/
+  padding: 0.5em 0;/*上下の余白*/
+  text-align: center;/*中央揃え*/
+  border-top: solid 3px #ffe600;/*上線*/
+  border-bottom: solid 3px #ffe600;/*下線*/
+
+}
+
+  
+@media screen and (max-width: 450px) {
+	 .header p {
+		text-align: center;
+		position: relative;
+		top: 0%;
+	    right: 0%;
+	    bottom: 0%;
+	    left: 6%;
+	  	width: 1%;
+	  	height: 90px;
+	  	display:table-cell;
+	  	vertical-align: middle;
+  }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.userInfoCon.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="#{view.label.addConf}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		<div class="ui container">
+			<div class="ui text container">
+				<form action="/" th:action="@{/editUserInfoResult}" th:object="${userInfoForm}" method="post">
+					<div class="ui center aligned container">
+						<h3 class="index_ask_input" th:text="#{view.text.UGInfoCon}"></h3>
+					</div>
+					<table class="ui celled table" style="table-layout:fixed">
+						<tbody>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gId}"></td>
+								<td th:text="${uslist.group_id}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gPass}"></td>
+								<td th:text="#{view.Scr}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uId}"></td>
+								<td th:text="${uslist.user_id}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.uPass}"></td>
+								<td th:text="#{view.Scr}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.name}"></td>
+								<td th:text="${uslist.user_name}" style="word-break:break-all;"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.gender}"></td>
+								<td th:text="${uslist.gender}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.birthday}"></td>
+								<td th:text="${uslist.birthday}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.grade}"></td>
+								<td th:text="${uslist.grade}"/>
+							</tr>
+							<tr>
+								<td><p th:text="#{view.tablelabel.adminFlg}"></td>
+								<td th:text="${uslist.admin_flg}"/>
+							</tr>
+						</tbody>
+					</table>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+					<input type="hidden" th:field="*{groupId}"/>
+					<input type="hidden" th:field="*{groupPass}"/>
+					<input type="hidden" th:field="*{userId}"/>
+					<input type="hidden" th:field="*{userPass}"/>
+					<input type="hidden" th:field="*{userName}"/>
+					<input type="hidden" th:field="*{gender}"/>
+					<input type="hidden" th:field="*{birthday}"/>
+					<input type="hidden" th:field="*{grade}"/>
+					<input type="hidden" th:field="*{adminFlg}"/>			
+					<input type="hidden" th:field="${uslist}"/>
+					<input type="hidden" th:field="${userInfoForm}"/>
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.edit}"></button>	
+						<a href="/editUserInfoInput">
+							<button type="button" class="ui inverted primary button center">
+								<th:block th:text="#{view.btn.fix}"></th:block>
+							</button>
+						</a>
+					</div>
+				</form>
+				<p id="btm"></p>
+			</div>
+		</div>
+		<p id="pageTop"><a href="/editUserInfoConfirm"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
+		<br><br><br>
+	</body>
+</html>

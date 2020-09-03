@@ -1,0 +1,283 @@
+@charset "UTF-8";
+
+/* index.html */
+.index_error {
+	color: red;
+	font-size:110%;
+	font-weight: bold;
+}
+
+.index_input_error {
+	color: red;
+}
+
+.index_ask_input {
+	color:#a2ca0e;/*文字色*/
+	font-size:110%;
+	font-weight: bold;
+}
+
+.index_regist_table {
+	margin: 0 0 0 auto;
+}
+
+.index_login_btn {
+	text-align: center;
+	vertical-align: top;
+}
+
+/**/
+.cp_ipselect {
+	overflow: hidden;
+	width: 90%;
+	margin: 2em auto;
+	text-align: center;
+}
+
+.cp_ipselect select {
+	width: 100% !important;
+	padding-right: 1em !important;
+	cursor: pointer !important;
+	text-indent: 0.01px !important;
+	text-overflow: ellipsis !important;
+	border: none !important;
+	outline: none !important;
+	background: transparent !important;
+	background-image: none !important;
+	box-shadow: none !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
+}
+
+.cp_ipselect select::-ms-expand {
+    display: none !important;
+}
+
+.cp_ipselect.cp_sl04 {
+	position: relative;
+	border-radius: 2px;
+	border: 2px solid #e0e1e2;
+  border-radius: 50px;
+	background: #ffffff;
+}
+
+.cp_ipselect.cp_sl04::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #da3c41;
+	pointer-events: none;
+}
+
+.cp_ipselect.cp_sl04 select {
+	padding: 8px 38px 8px 8px !important;
+	color: #000000!important;
+}
+
+.uploadButton {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	border-radius: 3px;
+	background: #5accfc;
+	color: #fff;
+	text-align: center;
+	padding: 10px;
+	line-height: 100px;
+	width: 300px;
+	cursor: pointer;
+}
+
+.uploadButton:hover {
+	background: #69c9f1;
+}
+
+.uploadButton input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	opacity: 0;
+}
+
+.uploadValue {
+	display: none;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+	padding: 3px;
+	color: #ffffff;
+}
+
+div.example  {
+	width: auto;
+	height: 300px;
+	background-color: #ffe8e6;
+	overflow: scroll !important;
+	border: solid 4px #cac9c9;
+	border-radius: 1em;
+}
+
+.inner {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.centerorigin {
+	text-align: center;
+}
+
+/* ------------------------------------スマホ用css--------------------------------------*/
+
+@media screen and (max-width: 767px) {
+
+	/* index.html */
+	.index_error {
+	color: red;
+	font-size:85%;
+	font-weight: bold;
+	}
+	
+	.index_input_error {
+	color: red;
+	font-size:12px;
+}
+
+	.index_ask_input {
+		color:#a2ca0e;/*文字色*/
+		font-size:85%;
+		font-weight: bold;
+	}
+	
+	.index_regist_table {
+	    margin-left: auto;
+    	margin-right: auto;
+	}
+	
+	/**/
+	.delete {
+		display:none !important;
+	}
+	
+	.table {
+	 width: 80%;
+	}
+	#id .table thead {
+	  display: none;
+	}
+	.table tr {
+	  width: 100%;
+	}
+	.table td {
+	  display: block;
+	  text-align: center;
+	  width: 100%;
+	}
+	.table td:before {
+	  content: attr(data-label);
+	  float: left;
+	  font-weight: bold;
+	  margin-right: 10px;
+	}
+}
+
+/*-----------------------------------------------------------*/
+input[type=checkbox] {//チェックボックスとしての機能
+      cursor: pointer;
+      opacity: 0; //機能だけでいいので透明に
+      position: absolute;
+      right: 5px;
+      width: 5px;
+      height: 5px;
+}
+
+input::-webkit-input-placeholder {
+      color: #9ca0a5
+}
+ 
+input::-moz-placeholder {
+      color: #9ca0a5
+}
+ 
+input:-ms-input-placeholder {
+      color: #9ca0a5
+}
+ 
+.btns{
+	position: relative;
+	height: 10px; /* 幅 */
+	width: 10px; /* 幅 */
+	
+}
+
+.btn-label{
+	position: relative;
+	height: 1px; /* 幅 */
+	width: 1px; /* 幅 */
+	left: 10px;
+	z-index: 10;
+}
+
+
+/*---------------------password表示切替用css------------------------------*/
+input[type=checkbox] {//チェックボックスとしての機能
+      cursor: pointer;
+      opacity: 0; //機能だけでいいので透明に
+      position: absolute;
+      right: 30px;
+      width: 30px;
+      height: 30px;
+}
+
+input::-webkit-input-placeholder {
+      color: #9ca0a5
+}
+ 
+input::-moz-placeholder {
+      color: #9ca0a5
+}
+ 
+input:-ms-input-placeholder {
+      color: #9ca0a5
+}
+ 
+.btns{
+	position: absolute;
+	height: 50px; /* 幅 */
+	width: 30px; /* 幅 */
+    align-items: center;
+}
+
+.toggle .btn {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    background: #e5e5e5;
+}
+
+.btn-input {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+}
+
+.btn-label {
+    font-size: 18px;
+    top: 8px;
+    padding: 8px 8px;
+}
+
+.toggle .btn-label {
+    width: 30px;
+    text-align: center;    
+    position: relative;
+}	

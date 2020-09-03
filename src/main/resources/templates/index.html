@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<title th:text="#{view.tab.index}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+​
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="#{view.label.index}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+		
+		<div class="ui text container">
+			<form method="get" class="ui form" name="registform" onsubmit="return check()">
+				<table class="index_regist_table">
+					<tr>
+						<td>
+							<span class="ui input select">			
+								<span th:insert="selectbox :: regist"></span>
+							</span> 
+							<input class="ui inverted blue button" type="submit" th:value="#{view.btn.signup}" />
+						</td>
+					</tr>
+				</table>
+			</form>
+			<br>
+			<div class="ui center aligned container">
+				<p class="index_ask_input" th:text="#{view.text.inputinfo}"></p>
+			</div>
+			<div class="ui center aligned container">
+				<p class="index_error" th:text="${login_error}"></p>
+			</div>
+			<br>
+			<form action="/login" method="post" class="ui large form" th:object="${ThermoForm}">
+				<table class="ui table">
+					<tr>
+						<td>
+							<div>
+	    						<label th:text="#{view.tablelabel.uId}"></label>
+	    						<input type="text" name="userId" th:placeholder="#{view.inputph.userId}" th:value="*{userId}"  maxlength='32' autofocus>
+	    						<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:errorclass="index_input_error"></div>
+	  						</div>
+  						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+	    						<label th:text="#{view.tablelabel.pass}"></label>
+	    						<input type="password" name="userpass" th:placeholder="#{view.inputph.userpass}" th:value="*{userpass}"  maxlength='16'>
+	    						<div th:if="${#fields.hasErrors('userpass')}" th:errors="*{userpass}" th:errorclass="index_input_error"></div>
+	  						</div>
+  						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="index_login_btn">
+								<input class="ui inverted blue button" type="submit" th:value="#{view.btn.login}" />
+							</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		
+<!---------------------------- 以下、javascript ----------------------------------->
+
+<script type="text/javascript"> 
+
+	// 送り先がgetかpostかどっちで受け取っているか確認しましょう
+	function check(){
+	 //actionメソッドに遷移先のURLを代入する
+	 
+	 	var select = document.getElementById("regist").value;// registはselect(html)のid属性
+	 	var transition;
+	 	
+		switch (select){	// selectは86行目で定義している変数
+		  case "group":		// caseにselect（html）のvalueを指定
+		    transition = "./groupInfoInput";
+		    break;
+		  case "user":
+			transition = "./userInfoInput";
+		    break;
+		  case "multiuser":
+		    transition = "./users_multi_set";
+		    break;
+		}
+		
+	 	document.registform.action = transition;	// registformはformのname属性
+	}
+</script>
+		
+	</body>
+</html>

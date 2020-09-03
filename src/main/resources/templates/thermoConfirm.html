@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.thermoInfoCon.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalInput.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	
+    	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+		<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="#{view.text.thermoInfoCon}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+		
+		<form action="/thermo_info_conf_suc" method="post" >
+			<div class="ui container center aligned">
+			<table class="ui celled table thtable" style="table-layout:fixed">
+				<thead class="delete">
+					<tr>
+						<th width="60" th:text="#{view.tablelabel.name}"></th>
+						<th width="30" th:text="#{view.tablelabel.gender}"></th>
+						<th width="45" th:text="#{view.tablelabel.grade}"></th>
+						<th width="30" th:text="#{view.tablelabel.age}"></th>
+						<th width="77" th:text="#{view.tablelabel.thermo}"></th>
+						<th width="40" th:text="#{view.tablelabel.taste}"></th>
+						<th width="40" th:text="#{view.tablelabel.smell}"></th>
+						<th width="40" th:text="#{view.tablelabel.cough}"></th>
+						<th width="188" th:text="#{view.tablelabel.other}"></th>
+					</tr>
+				</thead>
+				<tr th:each= "list:${list}">
+					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userName}"></td>
+					<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${list.gender}"></td>
+					<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${list.grade}"></td>
+					<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${list.age}"></td>
+					<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}"><p th:unless="${list.temperature} eq ''" th:text="${list.temperature}+度"></p><p th:if="${list.temperature} eq ''">&nbsp;</p></td>
+					<td th:data-label="#{view.tablelabel.taste}">
+						<p th:if="${list.taste}" th:text="#{view.text.yes}"></p>
+						<p th:unless="${list.taste}" th:text="#{view.text.no}"></p>
+					</td>
+					<td th:data-label="#{view.tablelabel.smell}">
+						<p th:if="${list.smell}" th:text="#{view.text.yes}"></p>
+						<p th:unless="${list.smell}" th:text="#{view.text.no}"></p>
+					</td>
+					<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
+						<p th:if="${list.cough}" th:text="#{view.text.yes}"></p>
+						<p th:unless="${list.cough}" th:text="#{view.text.no}"></p>
+					</td>
+					<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}+#{view.blank.1}"><p th:unless="${list.writing} eq ''" th:text="${list.writing}"></p><p th:if="${list.writing} eq ''">&nbsp;</p></td>
+				</tr>
+			</table>
+			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+			<div align="center">
+				<button type="submit" name="input" class="ui inverted blue button " ><p th:text="#{view.btn.reg}"></button>
+				<a href="/thermo_info_conf_back">
+					<button type="button" class="ui inverted blue button " ><p th:text="#{view.btn.fix}"></button>
+				</a>
+			</div>
+		</form>
+		<p id="btm"></p>
+		<p id="pageTop"><a href="/thermoConfirm"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
+		<br><br><br>
+	</body>
+</html>

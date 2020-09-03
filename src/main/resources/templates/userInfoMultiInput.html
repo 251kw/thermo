@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.userInfoMulIn.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+​
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="#{view.userInfoMulIn.pagetitle}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+		
+		<div class="ui text container">
+		
+			<form action="#" th:action="@{./users_multi_get}" enctype="multipart/form-data" method="post">
+				<table class="inner">
+					<tr>
+						<td>
+							<div class="position center">
+								<div class="uploadButton">
+									<th:block th:text="#{view.selectFile}"></th:block>
+									<input type="file" name="users_csv" accept=".csv" onchange="uv.style.display='inline-block'; uv.value = this.value;" />
+									<input type="text" id="uv" class="uploadValue" disabled />
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>	
+						<td class="centerorigin">
+							<input type="submit" class="ui inverted primary button center" th:value="#{view.selectSend}">
+							<a href="./">
+								<button type="button" class="ui inverted primary button center">
+									<th:block th:text="#{view.btn.return}"></th:block>
+								</button>
+							</a>
+						</td>
+					</tr>
+				</table>
+	        </form>
+	        <th:block th:if="${users_err_info}">
+				<br>
+				<div class="example">
+					<th:block th:each="msg: ${users_err_info}">
+						<p th:text="${msg}" >
+					</th:block>
+				</div>
+			</th:block>
+			
+		</div>
+		
+		<br><br><br>
+	</body>
+</html>

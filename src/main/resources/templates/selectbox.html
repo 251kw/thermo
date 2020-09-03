@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+	
+		<!-- 新規登録　-->
+		<div th:fragment="regist" th:remove="tag">
+			<select name="regist" id="regist">
+				<option value="group" th:text="#{view.indexselect.group}"></option>
+				<option value="user" th:text="#{view.indexselect.user}"></option>
+				<option value="multiuser" th:text="#{view.indexselect.multiuser}"></option>
+			</select>
+		</div>
+		
+		<!-- 性別 -->
+		<div th:fragment="gender" th:remove="tag">
+			<select th:field="*{gender}"name="gender">
+				<option value="M" th:text="#{view.select.man}"></option>
+				<option value="F" th:text="#{view.select.woman}"></option>
+			</select>
+		</div>
+		
+		<!-- 管理者権限 -->
+		<div th:fragment="adminFlg" th:remove="tag">
+			<select th:field="*{adminFlg}" name="adminFlg">
+				<option value="0" th:text="#{view.select.normal}"></option>
+				<option value="1" th:text="#{view.select.admin}"></option>
+			</select>
+		</div>
+		
+		<!-- 学年　-->
+		<div th:fragment="grade" th:remove="tag">
+			<select th:field="*{grade}" name="grade">
+				<option value="0" th:text="#{view.select.grade0}"></option>
+				<option value="1" th:text="#{view.select.grade1}"></option>
+				<option value="2" th:text="#{view.select.grade2}"></option>
+				<option value="3" th:text="#{view.select.grade3}"></option>
+				<option value="4" th:text="#{view.select.grade4}"></option>
+				<option value="5" th:text="#{view.select.grade5}"></option>
+				<option value="6" th:text="#{view.select.grade6}"></option>
+				<option value="A" th:text="#{view.select.gradeA}"></option>
+				<option value="B" th:text="#{view.select.gradeB}"></option>
+				<option value="C" th:text="#{view.select.gradeC}"></option>
+			</select>
+		</div>
+		
+		<!-- 学年＋空白 -->
+		<div th:fragment="gradeAndBlank" th:remove="tag">
+			<select th:field="*{sch_grade}" name="sch_grade">
+				<option value=""></option>
+				<option value="0" th:text="#{view.select.grade0}"></option>
+				<option value="1" th:text="#{view.select.grade1}"></option>
+				<option value="2" th:text="#{view.select.grade2}"></option>
+				<option value="3" th:text="#{view.select.grade3}"></option>
+				<option value="4" th:text="#{view.select.grade4}"></option>
+				<option value="5" th:text="#{view.select.grade5}"></option>
+				<option value="6" th:text="#{view.select.grade6}"></option>
+				<option value="A" th:text="#{view.select.gradeA}"></option>
+				<option value="B" th:text="#{view.select.gradeB}"></option>
+				<option value="C" th:text="#{view.select.gradeC}"></option>
+			</select>
+		</div>
+		
+		<!-- 登録情報編集 -->
+		<div th:fragment="edit" th:remove="tag">
+			<select name="edit" id="edit">
+				<option value="editgroup" th:text="#{view.indexselect.group}"></option>
+				<option value="edituser" th:text="#{view.indexselect.user}"></option>
+				<option value="editmultiuser" th:text="#{view.indexselect.multiuser}"></option>
+			</select>
+		</div>
+		
+		<!-- 性別 th:selected -->
+		<div th:fragment="editgender" th:remove="tag">
+			<select name="gender" th:name="'userList[' + __${stat.index}__ + '].gender'">
+				<option value="M" th:text="#{view.select.man}" th:selected="${user.gender=='M'}"></option>
+				<option value="F" th:text="#{view.select.woman}" th:selected="${user.gender=='F'}"></option>
+			</select>
+		</div>
+		
+		<!-- 管理者権限 -->
+		<div th:fragment="editadminflg" th:remove="tag">
+			<select name="admin_flg" th:name="'userList[' + __${stat.index}__ + '].admin_flg'">
+				<option value="0" th:text="#{view.select.normal}" th:selected="${user.admin_flg=='0'}"></option>
+				<option value="1" th:text="#{view.select.admin}" th:selected="${user.admin_flg=='1'}"></option>
+			</select>
+		</div>
+		
+		<!-- 学年　-->
+		<div th:fragment="editgrade" th:remove="tag">
+			<select name="grade" th:name="'userList[' + __${stat.index}__ + '].grade'">
+				<option value="0" th:text="#{view.select.grade0}" th:selected="${user.grade=='0'}"></option>
+				<option value="1" th:text="#{view.select.grade1}" th:selected="${user.grade=='1'}"></option>
+				<option value="2" th:text="#{view.select.grade2}" th:selected="${user.grade=='2'}"></option>
+				<option value="3" th:text="#{view.select.grade3}" th:selected="${user.grade=='3'}"></option>
+				<option value="4" th:text="#{view.select.grade4}" th:selected="${user.grade=='4'}"></option>
+				<option value="5" th:text="#{view.select.grade5}" th:selected="${user.grade=='5'}"></option>
+				<option value="6" th:text="#{view.select.grade6}" th:selected="${user.grade=='6'}"></option>
+				<option value="A" th:text="#{view.select.gradeA}" th:selected="${user.grade=='A'}"></option>
+				<option value="B" th:text="#{view.select.gradeB}" th:selected="${user.grade=='B'}"></option>
+				<option value="C" th:text="#{view.select.gradeC}" th:selected="${user.grade=='C'}"></option>
+			</select>
+		</div>
+		
+	</body>
+</html>

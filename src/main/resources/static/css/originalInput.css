@@ -1,0 +1,7 @@
+@media screen and (min-width: 767px) {
+	.thtable {
+		width: 100%;
+	}
+	.thtable td{
+		height: 60.27px !important;
+	}
