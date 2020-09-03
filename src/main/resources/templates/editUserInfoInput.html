@@ -35,7 +35,7 @@
 						<tbody>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gId}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" maxlength="32" id="focus"/></span>
+								<td><span class="ui input" Style="width:85%"><input type="text" class="form-control" th:field="*{groupId}" th:placeholder="#{view.checkPh.userId}" maxlength="32" id="focus"/></span>
 									<script type="text/javascript">
 									    // 上記の入力欄にフォーカスを与える
 									    document.getElementById('focus').focus();

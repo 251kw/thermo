@@ -150,9 +150,23 @@ class SearchController {
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		
+		
+		ulist= schService.userlistCheck(ulist, form);
+		
 		//ulistを元に検温情報があるかチェック
 		ArrayList<ThermoInputForm.Detail> list = thmInService.checkRegistDate(ulist);
 		
+		//データベースからとってきたユーザー情報を表示用に変換する 
+		ArrayList<String> birth = new ArrayList<String>();
+		for(UserInfoEntity ul : ulist) {
+			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
+			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
+			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
+		}
+				
+		
+		m.addAttribute(THERMO_BIRTH, birth);
+		m.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
 		m.addAttribute("searchInfo", form);
 		m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);
