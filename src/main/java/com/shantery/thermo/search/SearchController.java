@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shantery.thermo.ThermoForm;
-import com.shantery.thermo.entity.ThermoInfoEntity;
+//import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.thermoInput.ThermoInputForm;
 import com.shantery.thermo.thermoInput.ThermoInputService;
@@ -35,8 +35,8 @@ class SearchController {
 	@Autowired
 	private SearchService schService; //サービスクラス呼び出す
 	
-	@Autowired
-	private SearchRepository schRepository;	//リポジトリクラス呼び出す
+//	@Autowired
+//	private SearchRepository schRepository;	//リポジトリクラス呼び出す
 	
 	@Autowired
 	ThermoInputUserRepository thmInUserRepository; //
@@ -167,6 +167,8 @@ class SearchController {
 	
 	
 	/**
+	 * 更新ボタンが押された時に
+	 * 起動するメソッド
 	 * @param form
 	 * @param result
 	 * @param model

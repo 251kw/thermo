@@ -2,7 +2,6 @@ package com.shantery.thermo.search;
 
 import java.util.List;
 
-import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 /**
  * @author y.sato
