@@ -17,6 +17,7 @@ import static com.shantery.thermo.util.ThermoConstants.*;
 /**
  * @author y.sato
  * 検索動的クエリ実装クラス
+ * （JPQL：エンティティクラスを対象としたJPA仕様で定義されているクエリ言語）
  * 
  */
 @Component
@@ -24,6 +25,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 	@Autowired
 	HttpSession session; 
 	
+	//これを元にクエリを作成
     @PersistenceContext
     EntityManager entityManager;
     
@@ -80,7 +82,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 	    	sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");
 	    }
     	
-    	//クエリー文作成
+    	//jpqlで作成の場合↓（sqlの場合はcreateNativeQuery）
     	Query query = entityManager.createQuery(sql.toString());
     	
     	query.setParameter("groupId", groupId);
@@ -100,13 +102,13 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 			query.setParameter("curDate", curDate);
 			query.setParameter("endDate", endDate);
 		}
-		if (nameFlg) {	//入力された文字列の空白も削除
+		if (nameFlg) {	//入力された文字列の空白削除
 			String rename = form.getSch_name().replaceAll("　", " ").replaceAll(" ", "");
 			query.setParameter("name", Q_PERCENT+rename+Q_PERCENT);
 		}
 		if (gradeFlg) query.setParameter("grade", form.getSch_grade());
 		
-		return query.setMaxResults(MAX_SCH_LISTINT).getResultList();		//取得データ数の制限.結果をlistで取得
+		return query.setMaxResults(MAX_SCH_LISTINT).getResultList();		//取得データ数の制限.結果をListで取得
     }
 
 }

@@ -13,7 +13,7 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 /**
  * @author y.sato
  * 検索静的クエリ実行リポジトリ
- * 
+ * （こっちはSQL文で実行）
  */
 @Repository
 public interface SearchRepository extends JpaRepository<ThermoInfoEntity, String>{

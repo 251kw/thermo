@@ -127,7 +127,7 @@ class ThermoController {
 			
 			model.addAttribute("display", display);
 			
-			boolean adminbtn = schService.isAdminFlg(userinfo);
+			int adminbtn = schService.isAdminFlg(userinfo);
 			model.addAttribute("adminbtn", adminbtn);
 			
 			session.setAttribute(SCH_LIST, schlist);

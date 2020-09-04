@@ -67,15 +67,17 @@ public class SearchService {
 	}
 	
 	/**
-	 * ログインユーザーは管理者か判断するメソッド
+	 * ログインユーザーが一般か管理者、またはスーパーユーザか判断するメソッド
 	 * @param loginuser ログインユーザ情報
 	 * @return	result 真偽値
 	 */
-	public boolean isAdminFlg(UserInfoEntity loginuser) { 
-		boolean result = false;
+	public int isAdminFlg(UserInfoEntity loginuser) { 
+		int result = 0;
 		
 		if(loginuser.getAdmin_flg().equals(KBN_VALUE_ADMIN_ON)) {	//管理者フラグであればtrue
-			result = true;
+			result = 1;
+		} else if(loginuser.getAdmin_flg().equals("2")) {
+			result = 2;
 		}
 		
 		return result;
