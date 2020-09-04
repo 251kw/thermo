@@ -38,10 +38,6 @@ class EditUserInfoController {
 	@Autowired
 	private EditUserInfoService eUService; //呼び出すクラス
 	@Autowired
-	private UserInfoService uInfoService; //呼び出すクラス
-	@Autowired
-	private ThermoService tS; //呼び出すクラス
-	@Autowired
 	MessageSource messagesource; //messages.propertiesの利用
 	@Autowired
 	HttpSession session;
@@ -64,7 +60,7 @@ class EditUserInfoController {
 			//ログインユーザー情報の取得
 			UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 			//ユーザーID使用してDBからユーザー情報再取得
-			UserInfoEntity date = tS.checkdata(loginuser, uInfoService.getGrDate(loginuser.getUser_id()));
+			UserInfoEntity date = eUService.checkdata(loginuser, eUService.getGrDate(loginuser.getUser_id()));
 			//EntityからFormへ詰め替え
 			uInFm = date._toConvertUserInfoForm();
 			//グループ情報の取得
@@ -90,7 +86,7 @@ class EditUserInfoController {
 			BindingResult result,Model model,BindingResult bindRes) {
 
 		//グループ正誤調査
-		Optional<GroupMstEntity> grList = uInfoService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
+		Optional<GroupMstEntity> grList = eUService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
 		userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
 		//年齢チェック
 		Boolean age = true;//変数ageの初期化
