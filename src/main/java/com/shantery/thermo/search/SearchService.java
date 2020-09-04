@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+import com.shantery.thermo.thermoInput.ThermoInputUserRepository;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
 
@@ -23,7 +24,10 @@ public class SearchService {
 	private SearchRepository schRepository;	//リポジトリクラス呼び出す
 	
 	@Autowired
-	private SearchRepositoryCustom schRepCus; //リポジトリカスタムを呼び出す
+	private ThermoInputUserRepository thmInUserRepository;
+	
+	@Autowired
+	private SearchRepositoryCustom schRepCustom; //リポジトリカスタムを呼び出す
 	
 	/**
 	 * 入力の状態を見分けて
@@ -32,22 +36,39 @@ public class SearchService {
 	 * @param form 検索入力情報
 	 * @return list 検索結果
 	 */
-	public List<ThermoInfoEntity> separate(String groupId, SearchInfoForm form){
+	public List<UserInfoEntity> userSearch(String groupId, SearchInfoForm form){
+		
+		List<UserInfoEntity> ulist = null;
 		
 		if(EMPTY.equals(form.getSch_date()) &&
 				EMPTY.equals(form.getSch_name()) && 
 					EMPTY.equals(form.getSch_grade())) {
+			
 			if(form.getSch_high()==null) {
-				//未記入、未選択で二週間分のデータを検索
-//				return schRepository.searchUnconditional(groupId);
+				//未記入、未選択で全員分
+				ulist = thmInUserRepository.findByGroupIdOrderByUpdateTime(groupId);
+				
 			} else {
-				//高い人二週間分のデータを検索
-				return schRepository.searchHighThermo(groupId);
+				//☑高い人二週間分のデータを検索
+//				return schRepository.searchHighThermo(groupId);
 			}
 		}
 		
+		if(!EMPTY.equals(form.getSch_name()) || !EMPTY.equals(form.getSch_grade())) {
+			//名前か学年で検索をしていたら
+			ulist = schRepCustom.searchQuery(groupId, form);
+			
+			if(ulist.size()==0) {
+				//検索結果が無かったら
+				return ulist;
+			}
+			
+		} else {
+			//名前と学年の指定が無かったら、全員分
+			ulist = thmInUserRepository.findByGroupIdOrderByUpdateTime(groupId);
+		}
 		
-		return schRepCus.searchQuery(groupId, form);	//条件検索;
+		return ulist;
 	}
 	
 	/**
@@ -79,6 +100,19 @@ public class SearchService {
 		}
 		
 		return result;
+	}
+	
+	public List<UserInfoEntity> userlistCheck (List<UserInfoEntity> ulist,SearchInfoForm form){
+		if(EMPTY.equals(form.getSch_date())) {
+			int count = ulist.size();
+			for(int i=0; i<count; i++) {
+				for(int t=0; t<13; t++) {
+					ulist.add(i*14, ulist.get(i*14));
+				}
+			}
+		}
+		
+		return ulist;
 	}
 	
 }

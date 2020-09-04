@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shantery.thermo.ThermoForm;
-import com.shantery.thermo.entity.ThermoInfoEntity;
+//import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.thermoInput.ThermoInputForm;
 import com.shantery.thermo.thermoInput.ThermoInputService;
@@ -35,14 +35,14 @@ class SearchController {
 	@Autowired
 	private SearchService schService; //サービスクラス呼び出す
 	
-	@Autowired
-	private SearchRepository schRepository;	//リポジトリクラス呼び出す
+//	@Autowired
+//	private SearchRepository schRepository;	//リポジトリクラス呼び出す
 	
 	@Autowired
-	ThermoInputUserRepository u_repository; //
+	ThermoInputUserRepository thmInUserRepository; //
 	
 	@Autowired
-	ThermoInputService service; //
+	ThermoInputService thmInService; //
 	
 	@Autowired
 	HttpSession session; 
@@ -57,11 +57,11 @@ class SearchController {
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
 		//グループIDからとってくるに変更
-		Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
+		Iterable<UserInfoEntity> ulist = thmInUserRepository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		
 		
 		//ログインユーザーたちが今日すでに登録しているか確認
-		ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);
+		ArrayList<ThermoInputForm.Detail> list = thmInService.checkRegistDate(ulist);
 		
 		
 		//データベースからとってきたユーザー情報を表示用に変換する 
@@ -115,7 +115,7 @@ class SearchController {
 	public String search_info(@ModelAttribute("searchInfo") @Validated SearchInfoForm form, BindingResult result, Model m) {
 		
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
-		List<ThermoInfoEntity> list = null;
+		List<UserInfoEntity> ulist = null;
 		boolean display = true;		//テーブルを表示させるか
 		boolean errorFlg = false;
 		
@@ -138,30 +138,51 @@ class SearchController {
 		
 		//errorがなければ検索
 		if(!errorFlg) {
-			list = schService.separate(loginuser.getGroup_id(), form);
+			ulist = schService.userSearch(loginuser.getGroup_id(), form);
 		} else {
-			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
+//			list = (List<ThermoInfoEntity>) session.getAttribute(SCH_LIST);
 		}
 		
-		if(list.size()==0) {	//検索結果がないとき
+		if(ulist.size()==0) {	//検索結果がないとき
 			m.addAttribute("nolist_msg", NOLIST_MSG);
 			display = false;
-		} else if(list.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
+		} else if(ulist.size()==MAX_SCH_LISTINT){ //検温情報が最大件数に達したとき
 			m.addAttribute("overlist_msg", OVER_LIST_MSG);
 		}
 		
+		
+		ulist= schService.userlistCheck(ulist, form);
+		
+		//ulistを元に検温情報があるかチェック
+		ArrayList<ThermoInputForm.Detail> list = thmInService.checkRegistDate(ulist);
+		
+		//データベースからとってきたユーザー情報を表示用に変換する 
+		ArrayList<String> birth = new ArrayList<String>();
+		for(UserInfoEntity ul : ulist) {
+			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
+			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
+			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
+		}
+				
+		
+		m.addAttribute(THERMO_BIRTH, birth);
+		m.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
 		m.addAttribute("searchInfo", form);
-		m.addAttribute("list", list);
 		m.addAttribute("display", display);
 		m.addAttribute("adminbtn", adminbtn);
 		
-		session.setAttribute(SCH_LIST, list);	//印刷用
+		m.addAttribute(THERMO_LIST ,list);
+		m.addAttribute(THERMO_USER_LIST, ulist);
+		
+		session.setAttribute(SCH_LIST, ulist);	//印刷用
 	
 		return TO_SEARCH;
 	}
 	
 	
 	/**
+	 * 更新ボタンが押された時に
+	 * 起動するメソッド
 	 * @param form
 	 * @param result
 	 * @param model
@@ -183,14 +204,14 @@ class SearchController {
 		
 		
 		//入力チェックをしてエラー文があれば入力画面へ
-		ArrayList<String> message = service.checkInput(list);
+		ArrayList<String> message = thmInService.checkInput(list);
 		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER) || result.hasErrors()) {
 			model.addAttribute("message", message);
 			return TO_THERMO_INFO_INP;
 		}
 		
 		//登録実行
-		service.registAll(list);
+		thmInService.registAll(list);
 		
 		return TO_SEARCH;
 	}
