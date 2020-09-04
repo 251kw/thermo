@@ -11,10 +11,10 @@ import com.shantery.thermo.entity.UserInfoEntity;
  * sqlを実行し、データ登録を行う
  */
 @Repository
-public interface UserInfoMultiRepository extends JpaRepository<UserInfoEntity, String> {
+interface UserInfoMultiRepository extends JpaRepository<UserInfoEntity, String> {
 	
 	//新規登録のグループIDとグループパスを受け取り、DBで探す
-	public Optional<UserInfoEntity> findById(String user_id);
+	Optional<UserInfoEntity> findById(String user_id);
 	
 	
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.shantery.thermo.util.IsbnValid;
 
-public class UserInfoMultiBeanValidation {
+class UserInfoMultiBeanValidation {
 
 	/** グループID **/
 	@NotBlank(message = "gId")
@@ -115,7 +115,7 @@ public class UserInfoMultiBeanValidation {
 	 * まとめて登録する
 	 * @param info 登録ユーザー情報
 	 */
-	public void setAll(String[] info){
+	void setAll(String[] info){
 		this.group_id = info[0];
 		this.group_pass = info[1];
 		this.user_id = info[2];

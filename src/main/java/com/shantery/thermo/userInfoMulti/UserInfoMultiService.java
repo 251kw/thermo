@@ -22,7 +22,7 @@ import com.shantery.thermo.util.ThermoReplaceValue;
 import com.shantery.thermo.util.ThermoUtil;
 
 @Service
-public class UserInfoMultiService {
+class UserInfoMultiService {
 	
 	 //メッセージプロパティから情報を取得するためのクラスのインスタンス化
 	@Autowired
@@ -39,7 +39,7 @@ public class UserInfoMultiService {
 	 * @return カンマで区切られた情報の配列
 	 * @throws ParseException
 	 */
-	public List<String[]> toStringList(MultipartFile usersInfo) throws ParseException {
+	List<String[]> toStringList(MultipartFile usersInfo) throws ParseException {
 		
 		//ファイルの拡張子がcsvか調べる
 		if(!ThermoUtil.getSuffix(usersInfo.getOriginalFilename()).equals(CSV_SEND)) {
@@ -77,7 +77,7 @@ public class UserInfoMultiService {
 	 * @param usersInfo ユーザー情報
 	 * @return T/F CSVファイルの形式が正しくなければ T
 	 */
-	public boolean checkUserinfo(List<String[]> usersInfo) {
+	boolean checkUserinfo(List<String[]> usersInfo) {
 		boolean bool = false;
 		
 		if(usersInfo == null) {
@@ -102,7 +102,7 @@ public class UserInfoMultiService {
 	 * @param usersInfo 登録ユーザー情報
 	 * @return T/F 登録ユーザー情報に重複があれば T
 	 */
-	public boolean checkUserId(List<String[]> usersInfo) {
+	boolean checkUserId(List<String[]> usersInfo) {
 		boolean bool = false;
 		
 		//一括登録するユーザーの長さ繰り返す
@@ -128,7 +128,7 @@ public class UserInfoMultiService {
 	 * @param i 行数
 	 * @return エラーメッセージ
 	 */
-	public String loginGroup(String[] usersInfo,int i) {
+	String loginGroup(String[] usersInfo,int i) {
 		
 		String errmsg = null;  //エラーメッセージの初期化（エラーが無ければnullを返す）
 		if(gimr.findByGroupIdAndGroupPass((usersInfo[M_GID]),(usersInfo[M_GPASS])).orElse(null) == null) { //ログインできないユーザー情報が見つかった場合
@@ -143,7 +143,7 @@ public class UserInfoMultiService {
 	 * @param i 行番号
 	 * @return エラーメッセージ 
 	 */
-	public String checUserIdDB(String[] usersInfo, int i) {
+	String checUserIdDB(String[] usersInfo, int i) {
 	
 		String errmsg = null;  //エラーメッセージの初期化（エラーが無ければnullを返す）
 		if(uimr.findById(usersInfo[M_UID]).orElse(null) != null ){  //DBに同じユーザーＩＤがある場合はエラーメッセージを代入
@@ -157,7 +157,7 @@ public class UserInfoMultiService {
 	 * @param vios バリデーションビーンから送られてきたエラーメッセージ
 	 * @return エラーメッセージ
 	 */
-	public List<String> makeErrMsg(List<String> vios){
+	List<String> makeErrMsg(List<String> vios){
 		
 		//エラーメッセージのリストの宣言
 		List<String> errmsg = new ArrayList<String>();
@@ -233,7 +233,7 @@ public class UserInfoMultiService {
 	 * データベースに登録する
 	 * @param users 登録ユーザー情報
 	 */
-	public void saveUserInfo(List<String[]> users){
+	void saveUserInfo(List<String[]> users){
 		
 		UserInfoEntity uEntity = new UserInfoEntity();  //DBに登録するエンティティクラスのインスタンス化
 		for (String[] userInfo : users) {  //登録するユーザー情報の数だけ繰り返す
@@ -247,7 +247,7 @@ public class UserInfoMultiService {
 	 * 表示する見出しを返却する
 	 * @return 表示する見出し
 	 */
-	public List<String> getColumnName(){
+	List<String> getColumnName(){
 		List<String> head = new ArrayList<>();
 		
 		head.add(msgPro.getMessage("view.tablelabel.gId", new String[] {}, Locale.JAPAN));
