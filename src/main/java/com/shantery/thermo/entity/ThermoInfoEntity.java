@@ -55,7 +55,7 @@ public class ThermoInfoEntity {
 
 
 	/** UserInfoEntity **/
-	@ManyToOne				    //↓ユーザ情報があっての検温情報だから
+	@ManyToOne				    //↓SQLのINSERT文,UPDATE文に含むかどうか指定
 	@JoinColumn(name="user_id", insertable=false, updatable=false)
 	private UserInfoEntity userInfoEntity;
 
