@@ -80,6 +80,7 @@ public class SearchRepositoryImp implements SearchRepositoryCustom {
 	    	sql.append("order by t.userInfoEntity.grade, t.userInfoEntity.userName ");
 	    }
     	
+    	//クエリー文作成
     	Query query = entityManager.createQuery(sql.toString());
     	
     	query.setParameter("groupId", groupId);
