@@ -12,13 +12,13 @@ import com.shantery.thermo.entity.GroupMstEntity;
  * sqlを実行し、データ登録を行う
  */
 @Repository
-public interface GroupInfoMultiRepository extends JpaRepository<GroupMstEntity, String> {
+interface GroupInfoMultiRepository extends JpaRepository<GroupMstEntity, String> {
 	
 	//新規登録のグループIDとグループパスを受け取り、DBで探す
-	public Optional<GroupMstEntity> findById(String group_id);
+	Optional<GroupMstEntity> findById(String group_id);
 	
 	//新規登録時のグループIDとグループパスワードを受け取り、一致するか
-	public Optional<GroupMstEntity> findByGroupIdAndGroupPass(String group_id, String group_pass);
+	Optional<GroupMstEntity> findByGroupIdAndGroupPass(String group_id, String group_pass);
 	
 }
 

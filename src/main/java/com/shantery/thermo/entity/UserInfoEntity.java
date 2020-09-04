@@ -53,8 +53,8 @@ public class UserInfoEntity {
 	
 	
 	/** ThermoInfoEntity **/
-	@OneToMany
-	@JoinColumn(name="user_id")
+	@OneToMany					//↓SQLのINSERT文,UPDATE文に含むかどうか指定
+	@JoinColumn(name="user_id", insertable=false, updatable=false)
 	private List<ThermoInfoEntity> thermoInfoEntity;
 	
 	public List<ThermoInfoEntity> getThermoInfoEntity() {
