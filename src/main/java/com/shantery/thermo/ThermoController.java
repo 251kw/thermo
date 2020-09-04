@@ -2,7 +2,6 @@ package com.shantery.thermo;
 
 import static com.shantery.thermo.util.ThermoConstants.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +18,6 @@ import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 import com.shantery.thermo.search.SearchRepository;
 import com.shantery.thermo.search.SearchService;
-import com.shantery.thermo.thermoInput.ThermoInputForm;
-import com.shantery.thermo.thermoInput.ThermoInputService;
-import com.shantery.thermo.thermoInput.ThermoInputUserRepository;
-import com.shantery.thermo.util.ThermoReplaceValue;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,12 +42,6 @@ class ThermoController {
 	
 	@Autowired
 	private SearchService schService;
-	
-	@Autowired
-	ThermoInputUserRepository u_repository;
-	
-	@Autowired
-	ThermoInputService service;
 	
 	@Autowired
 	HttpSession session; 
@@ -123,37 +112,16 @@ class ThermoController {
 			// ログイン中のユーザーの情報を保持
 			session.setAttribute(LOGIN_USER, userinfo);
 			
-			//グループIDからとってくるに変更
-			Iterable<UserInfoEntity> ulist = u_repository.findByGroupIdOrderByUpdateTime(userinfo.getGroup_id());
-			
-			
-			//ログインユーザーたちが今日すでに登録しているか確認
-			ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);
-			
-			//データベースからとってきたユーザー情報を表示用に変換する 
-			ArrayList<String> birth = new ArrayList<String>();
-			for(UserInfoEntity ul : ulist) {
-				ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
-				ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
-				birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
-			}
-			
+			List<ThermoInfoEntity> schlist = schRepository.searchCurDate(userinfo.getGroup_id());	//今日の日付で検索	//group_idで絞る
 			
 			model.addAttribute("searchInfo", new SearchInfoForm());
-			model.addAttribute(THERMO_LIST ,list);
-			model.addAttribute(THERMO_USER_LIST, ulist);
-			model.addAttribute(THERMO_BIRTH, birth);
-			model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
-			session.setAttribute(THERMO_USER_LIST, ulist);
-			session.setAttribute(THERMO_BIRTH, birth);
-			
+			model.addAttribute("list", schlist);
 			
 			boolean display = true;
-			/*if(schlist.size()==0) {
+			if(schlist.size()==0) {
 				model.addAttribute("nolist_msg", TODAY_NOLIST_MSG);
 				display = false;
-			} */
-			if(list.size()==MAX_SCH_LISTINT){
+			} else if(schlist.size()==MAX_SCH_LISTINT){
 				model.addAttribute("overlist_msg", OVER_LIST_MSG);
 			}
 			
@@ -162,7 +130,7 @@ class ThermoController {
 			boolean adminbtn = schService.isAdminFlg(userinfo);
 			model.addAttribute("adminbtn", adminbtn);
 			
-			//session.setAttribute(SCH_LIST, schlist);
+			session.setAttribute(SCH_LIST, schlist);
 			
 		}else {	 // 不正なユーザーの場合
 			// エラーメッセージを格納
