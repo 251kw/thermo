@@ -74,7 +74,7 @@ class ThermoInputController {
 	 * @param model 
 	 * @return 確認画面
 	 */
-	/*@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = THERMO_INFO_INP_SUC, method = RequestMethod.POST)
 	public String InputConfirm(@Validated @ModelAttribute(THERMO_INP_FORM) ThermoInputForm form, BindingResult result, Model model) {
 		
@@ -94,7 +94,7 @@ class ThermoInputController {
 		}
 		
 		return TO_THERMO_INFO_CONF;
-	}*/
+	}
 	
 	/**
 	 * 検温情報確認画面から結果画面へ
