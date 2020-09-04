@@ -61,7 +61,7 @@
 					</tr>
 				</table>
 			</form>
-			
+		
 		<form class="ui form" th:action="@{/search_info}" th:object="${searchInfo}" method="post">
 			<div class="ui container">
 	​
@@ -98,7 +98,7 @@
 								</span>
 							</td>
 						</tr>
-						<tr><th><font color="red"><th:block th:text="${combi_msg}"></font></th></tr>
+						<tr><th colspan="4"><font color="red"><th:block th:text="${combi_msg}"></font></th></tr>
 					</tbody>
 				</table>
 			</div>
@@ -142,337 +142,76 @@
 								<th width="180" th:text="#{view.tablelabel.other}"></th>
 							</tr>
 						</thead>
-						<tbody>
-							<th:block th:each= "ul,status : ${ulist}">
-								<th:block th:if="${#strings.isEmpty(list[status.index].temperature)}">
+						<th:block th:each="list : ${list}">
+							<th:block th:unless="${list.thermo}">
+								<tbody>
 									<tr>
-										<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.2}" th:text="${list[status.index].date}"></td>
-										<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
-							    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
-							    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
-							    		<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${birth[status.index]}"></td>
-										<th:block th:if="${list}">
-											<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}" style="position:relative">
-												<span class="ui input">
-													<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-													th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
-												</span>
-												<script type="text/javascript">
-													document.getElementById('thermo0').focus();
-												</script>
-												<div th:if="${message}">
-													<br><font color="red"><span th:text="${message[status.index]}"></span></font>
-												</div>
-											</td>
-											<td th:data-label="#{view.tablelabel.taste}">
-												<div th:unless="${list[status.index].taste}">
-													<span class="ui checkbox">
-														<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
-														<label></label>
-													</span>
-												</div>
-												<div th:if="${list[status.index].taste}">
-													<span class="ui checkbox">
-														<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
-														<label></label>
-													</span>
-												</div>
-											</td>
-											<td th:data-label="#{view.tablelabel.smell}">
-												<div th:unless="${list[status.index].smell}">
-													<span class="ui checkbox">
-														<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
-														<label></label>
-													</span>
-												</div>
-												<div th:if="${list[status.index].smell}">
-													<span class="ui checkbox">
-														<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
-														<label></label>
-													</span>
-												</div>
-											</td>
-											<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
-												<div th:unless="${list[status.index].cough}">
-													<span class="ui checkbox">
-														<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
-														<label></label>
-													</span>
-												</div>
-												<div th:if="${list[status.index].cough}">
-													<span class="ui checkbox">
-														<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
-														<label></label>
-													</span>
-												</div>
-											</td>
-											<td th:data-label="#{view.tablelabel.other}" style="position:relative">
-												<span class="ui input">
-													<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-													th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
-												</span>
-												<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
-													<br><span th:text="#{view.errM128}"></span>
-												</span>
-												<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
-												<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
-												<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
-												<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
-												<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
-												<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].date'" th:value="${list[status.index].date}" >
-											</td>
-										</th:block>
+										<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.1}" th:text="${list.regist_date}"></td>
+										<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userInfoEntity.user_name}"></td>
+										<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
+										<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
+										<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
+										<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}"><div>&emsp;&emsp;&emsp;</div>
+										<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
+										<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
+										<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
+										<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}+#{view.blank.1}" th:text="${list.other}"></td>
 									</tr>
-								</th:block>
-								<th:block th:unless="${#strings.isEmpty(list[status.index].temperature)}">
-									<th:block th:if="${list[status.index].temperature} ge 37.0 and ${list[status.index].temperature} lt 37.5">
-										<tr class="warning">
-											<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.2}" th:text="${list[status.index].date}"></td>
-											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
-								    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
-								    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
-								    		<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${birth[status.index]}"></td>
-											<th:block th:if="${list}">
-												<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}" style="position:relative">
-													<span class="ui input">
-														<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-														th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
-													</span>
-													<script type="text/javascript">
-														document.getElementById('thermo0').focus();
-													</script>
-													<div th:if="${message}">
-														<br><font color="red"><span th:text="${message[status.index]}"></span></font>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.taste}">
-													<div th:unless="${list[status.index].taste}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].taste}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.smell}">
-													<div th:unless="${list[status.index].smell}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].smell}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
-													<div th:unless="${list[status.index].cough}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].cough}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.other}" style="position:relative">
-													<span class="ui input">
-														<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-														th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
-													</span>
-													<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
-														<br><span th:text="#{view.errM128}"></span>
-													</span>
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].date'" th:value="${list[status.index].date}" >
-												</td>
-											</th:block>
-										</tr>
-									</th:block>
-									<th:block th:if="${list[status.index].temperature} ge 37.5">
+								</tbody>
+							</th:block>
+							<th:block th:if="${list.thermo}">
+								<th:block th:if="${list.thermo} ge 37.5">
+									<tbody>
 										<tr class="error">
-											<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.2}" th:text="${list[status.index].date}"></td>
-											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
-								    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
-								    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
-								    		<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${birth[status.index]}"></td>
-											<th:block th:if="${list}">
-												<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}" style="position:relative">
-													<span class="ui input">
-														<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-														th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
-													</span>
-													<script type="text/javascript">
-														document.getElementById('thermo0').focus();
-													</script>
-													<div th:if="${message}">
-														<br><font color="red"><span th:text="${message[status.index]}"></span></font>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.taste}">
-													<div th:unless="${list[status.index].taste}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].taste}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.smell}">
-													<div th:unless="${list[status.index].smell}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].smell}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
-													<div th:unless="${list[status.index].cough}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].cough}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.other}" style="position:relative">
-													<span class="ui input">
-														<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-														th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
-													</span>
-													<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
-														<br><span th:text="#{view.errM128}"></span>
-													</span>
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].date'" th:value="${list[status.index].date}" >
-												</td>
-											</th:block>
+											<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.1}" th:text="${list.regist_date}"></td>
+											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userInfoEntity.user_name}"></td>
+											<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
+											<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
+											<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
+											<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></p></td>
+											<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
+											<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
+											<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
+											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}+#{view.blank.1}" th:text="${list.other}"></td>
 										</tr>
-									</th:block>
-									<th:block th:if="${list[status.index].temperature} lt 37.0">
+									</tbody>
+								</th:block>
+								<th:block th:if="${list.thermo} ge 37.0 and ${list.thermo} lt 37.5">
+									<tbody>
+										<tr class="warning">
+											<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.1}" th:text="${list.regist_date}"></td>
+											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userInfoEntity.user_name}"></td>
+											<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
+											<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
+											<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
+											<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></p></td>
+											<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
+											<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
+											<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
+											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}+#{view.blank.1}" th:text="${list.other}"></td>
+										</tr>
+									</tbody>
+								</th:block>
+								<th:block th:if="${list.thermo} lt 37.0">
+									<tbody>
 										<tr>
-											<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.2}" th:text="${list[status.index].date}"></td>
-											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
-								    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
-								    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
-								    		<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${birth[status.index]}"></td>
-											<th:block th:if="${list}">
-												<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}" style="position:relative">
-													<span class="ui input">
-														<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-														th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
-													</span>
-													<script type="text/javascript">
-														document.getElementById('thermo0').focus();
-													</script>
-													<div th:if="${message}">
-														<br><font color="red"><span th:text="${message[status.index]}"></span></font>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.taste}">
-													<div th:unless="${list[status.index].taste}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].taste}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.smell}">
-													<div th:unless="${list[status.index].smell}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].smell}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
-													<div th:unless="${list[status.index].cough}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
-															<label></label>
-														</span>
-													</div>
-													<div th:if="${list[status.index].cough}">
-														<span class="ui checkbox">
-															<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
-															<label></label>
-														</span>
-													</div>
-												</td>
-												<td th:data-label="#{view.tablelabel.other}" style="position:relative">
-													<span class="ui input">
-														<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-														th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
-													</span>
-													<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
-														<br><span th:text="#{view.errM128}"></span>
-													</span>
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
-													<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].date'" th:value="${list[status.index].date}" >
-												</td>
-											</th:block>
+											<td th:data-label="#{view.tablelabel.regist_date}+#{view.blank.1}" th:text="${list.regist_date}"></td>
+											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${list.userInfoEntity.user_name}"></td>
+											<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',list.userInfoEntity.gender)}">
+											<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',list.userInfoEntity.grade)}"></td>
+											<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}"><p th:text="#{view.tablelabel.ageage(${T(com.shantery.thermo.util.ThermoReplaceValue).calcAge(list.userInfoEntity.birthday)})}"></td>
+											<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}"><p th:text="#{view.tablelabel.thermothermo(${list.thermo})}"></p></td>
+											<td th:data-label="#{view.tablelabel.taste}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.taste_disorder)}">
+											<td th:data-label="#{view.tablelabel.smell}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.olfactory_disorder)}">
+											<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}" th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('exist',list.cough)}">
+											<td style="word-break:break-all;" th:data-label="#{view.tablelabel.other}+#{view.blank.1}" th:text="${list.other}"></td>
 										</tr>
-									</th:block>
+									</tbody>
 								</th:block>
 							</th:block>
-						</tbody>
+						</th:block>
 					</table>
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-						<div align="center">
-							<button type="submit" name="input" class="ui inverted blue button" ><p th:text="更新"></button>
-						</div>
+					
 				</div>
 				<div th:unless="${display}">
 					<h3 th:text="${nolist_msg}"></h3>
@@ -555,7 +294,6 @@
 	            onChangeMonthYear: showAdditionalButton
 			});
   		</script>
-  		
   		
   		
   		  <script type="text/javascript"> 

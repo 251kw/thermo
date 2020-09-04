@@ -7,7 +7,13 @@
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    	
+    	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+		<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
 	</head>
 	<body>
 		<!-- 外部ヘッダーファイル読み込み -->
@@ -123,6 +129,9 @@
 				</a>
 			</div>
 		</form>
+		<p id="btm"></p>
+		<p id="pageTop"><a href="/thermoInput"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
 		<br><br><br>
 	</body>
 </html>
