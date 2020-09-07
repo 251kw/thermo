@@ -121,4 +121,11 @@ public class EditUserInfoMultiService {
 			return transition;
 		}
 		
+		public String setErrorMsg(String errormsg) {
+			
+			errormsg = "変更された内容がありません";
+			
+			return errormsg;
+		}
+		
 }

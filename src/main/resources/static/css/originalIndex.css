@@ -134,6 +134,11 @@ div.example  {
 	text-align: center;
 }
 
+/* editUserInfoMultiInput */
+.edituserinfomultiinput_error {
+	color: red;
+}
+
 /* ------------------------------------スマホ用css--------------------------------------*/
 
 @media screen and (max-width: 767px) {
