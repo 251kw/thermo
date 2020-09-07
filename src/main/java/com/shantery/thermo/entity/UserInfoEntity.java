@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -65,7 +66,18 @@ public class UserInfoEntity {
 		this.thermoInfoEntity = thermoInfoEntity;
 	}
 
+	/** GroupMstEntity **/
+	@ManyToOne				    //↓SQLのINSERT文,UPDATE文に含むかどうか指定
+	@JoinColumn(name="group_id", insertable=false, updatable=false)
+	private GroupMstEntity groupMstEntity;
 
+	public GroupMstEntity getUGroupMstEntity() {
+		return groupMstEntity;
+	}
+
+	public void setGroupMstEntity(GroupMstEntity groupMstEntity) {
+		this.groupMstEntity = groupMstEntity;
+	}
 
 	public String getUser_id() {
 		return userId;
