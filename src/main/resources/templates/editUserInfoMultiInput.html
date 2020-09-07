@@ -67,7 +67,7 @@
 	            		</td>
 	            		<td>
 	                		<input type="text" name="user_pass" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="${user.user_pass}">
-	                		<span th:if="${#fields.hasErrors('user.user_pass')}" class="index_input_error"></span>
+	                		<span th:if="${#fields.hasErrors('userList[__${stat.index}__].user_pass')}" class="index_input_error"></span>
 	                		
 	            		</td>
 				        <td>
