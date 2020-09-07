@@ -1,5 +1,8 @@
 package com.shantery.thermo.editUserInfoMulti;
 
+import static com.shantery.thermo.util.ThermoConstants.TO_SEARCH;
+import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -104,6 +107,18 @@ public class EditUserInfoMultiService {
 			
 			}
 			return;
+		}
+		
+		public String setTransition(ArrayList<EditUserInfoMultiForm.contents> updatelist, String transition) {
+			
+			if(updatelist.isEmpty()) {
+				
+				transition = "editUserInfoMultiInput";
+			}else {
+				transition = "editUserInfoMultiConfirm";
+			}
+			
+			return transition;
 		}
 		
 }

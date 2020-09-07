@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.shantery.thermo.editUserInfoMulti.EditUserInfoMultiForm.contents;
 import com.shantery.thermo.entity.UserInfoEntity;
 
 
@@ -66,11 +67,14 @@ class EditUserInfoMultiController {
 		ArrayList<EditUserInfoMultiForm.contents> updatelist = new ArrayList<>();
 		updatelist = service.makeUpdateList(updatelist, form.getUserList(), originallist);
 		
+		String transition = null;
+		transition = service.setTransition(updatelist, transition);
+		
 		session.setAttribute("userlist", form.getUserList());
 		session.setAttribute("updatelist", updatelist);
-
+		
 		// ユーザー情報一括変更画面へ移動
-		return "editUserInfoMultiConfirm";
+		return transition;
 	}
 	
 	// 確認画面から戻る
