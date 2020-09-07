@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shantery.thermo.util.ThermoUtil;
 
 @Controller
-public class UserInfoMultiController {
+class UserInfoMultiController {
 
 	@Autowired
 	UserInfoMultiService uMService; //呼び出すクラス
@@ -42,7 +42,7 @@ public class UserInfoMultiController {
 	 * @throws ParseException
 	 */
 	@RequestMapping(value = USERS_MULTI_SET, method = RequestMethod.GET) // アプリケーションを起動させたとき、もしくは会社のロゴが押されたとき
-	public String userInfoInput(Model model) throws ParseException {
+	String userInfoInput(Model model) throws ParseException {
 
 		return TO_USERS_MULTI_INP;
 	}
@@ -55,7 +55,7 @@ public class UserInfoMultiController {
 	 * @throws ParseException
 	 */
 	@RequestMapping(value = USERS_MULTI_GET, method = RequestMethod.POST)
-	public String getCSVfile(@RequestParam(name = USERS_CSV) MultipartFile usersInfo, Model model)
+	String getCSVfile(@RequestParam(name = USERS_CSV) MultipartFile usersInfo, Model model)
 			throws ParseException {
 		if (session.getAttribute(USERS_INFO_SES) != null) { // もしsessionスコープ内にデータがあるなら削除する
 			session.removeAttribute(USERS_INFO_SES);
@@ -137,7 +137,7 @@ public class UserInfoMultiController {
 	 */
 	@RequestMapping(value = USERS_MULTI_CONF_SUC, method = RequestMethod.POST)
 	//@Transactional
-	public String userInfoConfirm(Model model) throws ParseException {
+	String userInfoConfirm(Model model) throws ParseException {
 		model.addAttribute(USERS_HEAD,uMService.getColumnName());  //ヘッドをmodelにいれる
 		@SuppressWarnings("unchecked")  //未検査のキャストをするため
 		List<String[]> users = (List<String[]>) session.getAttribute(USERS_INFO_SES);  //セッションから登録するユーザー情報を取得

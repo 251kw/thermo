@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table
-public class UserInfoMultiData {
+class UserInfoMultiData {
 
 	@Id
 	@NotEmpty
@@ -30,7 +30,7 @@ public class UserInfoMultiData {
 	private String update_time;
 	
 	
-	public UserInfoMultiData(String[] info) {
+	UserInfoMultiData(String[] info) {
 		this.userId = info[0];
 		this.groupId = info[1];
 		this.userPass = info[2];

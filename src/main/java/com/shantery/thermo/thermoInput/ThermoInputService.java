@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
+import com.shantery.thermo.search.SearchInfoForm;
+
 import static com.shantery.thermo.util.ThermoConstants.*;
 
 @Service
@@ -21,6 +23,8 @@ public class ThermoInputService {
 	ThermoInputRepository repository;
 	@Autowired
 	HttpSession session;
+	@Autowired
+	ThermoInputUserRepository u_repository;
 	
 	
 	/**
@@ -164,10 +168,31 @@ public class ThermoInputService {
 				list.get(i).setSmell(convertCheckReturn(user.getOlfactory_disorder()));
 				list.get(i).setCough(convertCheckReturn(user.getCough()));
 				list.get(i).setWriting(user.getOther());
-				i++;
 			}
+			i++;
 		}
 		
 		return list;
+	}
+	
+	public Iterable<UserInfoEntity> searchUserList(Iterable<UserInfoEntity> ulist, SearchInfoForm form){
+		//ログインユーザー情報取得
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
+		
+		if(!EMPTY.equals(form.getSch_name())) {
+			String rename = form.getSch_name().replaceAll("　", " ").replaceAll(" ", "");
+			ulist = u_repository.findByGroupIdAndUserNameLikeOrderByUpdateTime(loginuser.getGroup_id(), Q_PERCENT+rename+Q_PERCENT);
+			if(!EMPTY.equals(form.getSch_grade())) {
+				ulist = u_repository.findByGroupIdAndUserNameLikeAndGradeOrderByUpdateTime(loginuser.getGroup_id(), Q_PERCENT+rename+Q_PERCENT, form.getSch_grade());
+			}
+		}else if(!EMPTY.equals(form.getSch_grade())) {
+			ulist = u_repository.findByGroupIdAndGradeOrderByUpdateTime(loginuser.getGroup_id(), form.getSch_grade());
+		}
+		
+		if(EMPTY.equals(form.getSch_name())&&EMPTY.equals(form.getSch_grade())) {
+			ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
+		}
+		
+		return ulist;
 	}
 }

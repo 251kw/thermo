@@ -1,4 +1,4 @@
-package com.shantery.thermo.userInfoMulti;
+package com.shantery.thermo.editUserInfo;
 
 import java.util.Optional;
 
@@ -12,13 +12,11 @@ import com.shantery.thermo.entity.GroupMstEntity;
  * sqlを実行し、データ登録を行う
  */
 @Repository
-interface GroupInfoMultiRepository extends JpaRepository<GroupMstEntity, String> {
-	
-	//新規登録のグループIDとグループパスを受け取り、DBで探す
-	Optional<GroupMstEntity> findById(String group_id);
+public interface EditGrInfoRepository extends JpaRepository<GroupMstEntity, String> {
 	
 	//新規登録時のグループIDとグループパスワードを受け取り、一致するか
-	Optional<GroupMstEntity> findByGroupIdAndGroupPass(String group_id, String group_pass);
+	public Optional<GroupMstEntity> findByGroupIdAndGroupPass(String group_id, String group_pass);
 	
+	//ユーザー情報更新時、グループIDを受け取りDBで探す
+	public GroupMstEntity findByGroupId(String group_id);
 }
-

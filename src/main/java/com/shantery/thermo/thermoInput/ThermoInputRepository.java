@@ -15,7 +15,7 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 @Repository
 public interface ThermoInputRepository extends JpaRepository<ThermoInfoEntity, String>{
 
-	//ログインユーザーと同じグループの体温情報を取得する
+	//ユーザーIDと登録日で体温情報を取得する
 	ThermoInfoEntity findByUserIdAndRegistDate(String user_id, String date);
 
 }

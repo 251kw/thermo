@@ -1,8 +1,12 @@
 package com.shantery.thermo.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -28,6 +32,19 @@ public class GroupMstEntity {
 	@Column(name="update_time")
 	private String updateTime;
 
+	/** UserInfoEntity **/
+	@OneToMany					//↓SQLのINSERT文,UPDATE文に含むかどうか指定
+	@JoinColumn(name="user_id", insertable=false, updatable=false)
+	private List<UserInfoEntity> userInfoEntity;
+	
+	public List<UserInfoEntity> getUserInfoEntity() {
+		return userInfoEntity;
+	}
+
+	public void setUserInfoEntity(List<UserInfoEntity> userInfoEntity) {
+		this.userInfoEntity = userInfoEntity;
+	}
+	
 	// getter・setter
 	public String getGroup_id() {
 		return groupId;

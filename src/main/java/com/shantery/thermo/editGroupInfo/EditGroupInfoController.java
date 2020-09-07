@@ -1,4 +1,4 @@
-package com.shantery.thermo.groupUpdate;
+package com.shantery.thermo.editGroupInfo;
 
 import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
 import static com.shantery.thermo.util.ThermoConstants.TO_EDIT_GROUP_INFO_INP;

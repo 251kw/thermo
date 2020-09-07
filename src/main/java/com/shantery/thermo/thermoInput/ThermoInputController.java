@@ -4,6 +4,7 @@ package com.shantery.thermo.thermoInput;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
-
+import com.shantery.thermo.search.SearchInfoForm;
+import com.shantery.thermo.search.SearchService;
 import com.shantery.thermo.util.ThermoReplaceValue;
 import static com.shantery.thermo.util.ThermoConstants.*;
 
@@ -34,6 +36,8 @@ class ThermoInputController {
 	ThermoInputRepository t_repository;
 	@Autowired
 	ThermoInputUserRepository u_repository;
+	@Autowired
+	SearchService schService; //サービスクラス呼び出す
 
 	/**
 	 * 検索のボタンから入力画面へ
@@ -62,6 +66,7 @@ class ThermoInputController {
 		model.addAttribute(THERMO_USER_LIST, ulist);
 		model.addAttribute(THERMO_BIRTH, birth);
 		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
+		model.addAttribute("searchInfo", new SearchInfoForm());
 		session.setAttribute(THERMO_USER_LIST, ulist);
 		session.setAttribute(THERMO_BIRTH, birth);
 		
@@ -115,6 +120,47 @@ class ThermoInputController {
 	}
 	
 	/**
+	 * 検索ボタンが押された時に起動する
+	 * メソッド
+	 * @return 検索画面
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value ="/search" , method = RequestMethod.POST)
+	public String search_info(@ModelAttribute("searchInfo") @Validated SearchInfoForm form, BindingResult result, Model model) {
+		
+		Iterable<UserInfoEntity> ulist = (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST);
+		//errorがなければ検索
+		if(!result.hasErrors()) {
+			ulist = service.searchUserList(ulist, form);
+		}
+		if(ulist==null) {	//検索結果がないとき
+			model.addAttribute("nolist_msg", NOLIST_MSG);
+		}
+		
+		
+		//ログインユーザーが今日すでに登録しているか確認
+		ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);
+		//データベースからとってきたユーザー情報を表示用に変換する 
+		ArrayList<String> birth = new ArrayList<String>();
+		for(UserInfoEntity ul : ulist) {
+			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
+			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
+			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
+		}
+		
+		model.addAttribute(THERMO_LIST , list);
+		model.addAttribute(THERMO_USER_LIST, ulist);
+		model.addAttribute(THERMO_BIRTH, birth);
+		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
+		model.addAttribute("searchInfo", form);
+		session.setAttribute(THERMO_USER_LIST, ulist);
+		session.setAttribute(THERMO_BIRTH, birth);
+	
+		return TO_THERMO_INFO_INP;
+	}
+	
+	
+	/**
 	 * 登録情報入力画面へ戻る
 	 * @return 入力画面
 	 */
@@ -127,6 +173,7 @@ class ThermoInputController {
 		model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
 		model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
 		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
+		model.addAttribute("searchInfo", new SearchInfoForm());
 		
 		return TO_THERMO_INFO_INP;
 	}

@@ -1,4 +1,4 @@
-package com.shantery.thermo.groupUpdate;
+package com.shantery.thermo.editGroupInfo;
 
 import java.util.ArrayList;
 import java.util.Optional;
