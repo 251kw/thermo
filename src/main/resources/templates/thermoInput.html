@@ -26,6 +26,46 @@
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+		<form action="/search" th:object="${searchInfo}" method="post">
+			<div class="ui container">
+	​
+				<div class="ui horizontal divider"><!-- 線を引いてテキストを入れれる --><p th:text="#{view.label.searchinfo}"></div>
+				<p></p>
+				
+				<table class="ui very basic table">
+					<thead class="delete">
+					<tr>
+						<th th:text="#{view.tablelabel.name}">
+						<th th:text="#{view.tablelabel.grade}">
+					</tr>
+					<tbody>
+						<tr>
+							<td th:data-label="#{view.tablelabel.name}+#{view.blank.1}">
+								<div class="ui input">
+								<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" autofocus="autofocus"></div>
+								<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
+							</td>
+							<td th:data-label="#{view.tablelabel.grade}+#{view.blank.1}">
+							<div class="ui input">
+									<div th:insert="selectbox :: gradeAndBlank"></div>
+								</div>
+							</td>
+						</tr>
+						<tr><th><font color="red"><th:block th:text="${combi_msg}"></font></th></tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<p></p>
+			<div class="ui center aligned container"><!-- 中央寄せ -->
+				<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.search}"></button>
+				<button type="button" class="ui inverted primary button" onClick="clearFormAll(); "><p th:text="#{view.btn.clear}"></button>
+			</div>
+		</form>
+		
+		<div class="ui container">
+			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
+		</div>
 		
 		<form action="/thermo_info_inp_suc" method="post" th:object="${thForm}">
 			<div class="ui container center aligned">
