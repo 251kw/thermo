@@ -35,21 +35,12 @@ public class EditUserInfoMultiForm {
 			
 		@Id
 		/** ユーザID **/
-		@NotBlank
-		@Size(min = 4, max = 32)
-		@Pattern(regexp=THERMO_REGEX_PATTERN)
 		@Column(length=32,name="user_id")
 		private String userId;
 		/** ユーザパスワード **/
-		@NotBlank
-		@Size(min = 4, max = 16)
-		@Pattern(regexp=THERMO_REGEX_PATTERN)
 		@Column(length=16,name="user_pass")
 		private String userPass;
 		/** 氏名 **/
-		@NotBlank
-		@Size(min = 1, max = 64)
-		@Pattern(regexp = NAME_PATTERN)
 		@Column(length=64,name="user_name")
 		private String userName;
 		/** 性別 **/
@@ -64,7 +55,7 @@ public class EditUserInfoMultiForm {
 		/** 管理者フラグ **/
 		@Column(length=1,name="admin_flg")
 		private String adminFlg;
-		private String multiChecks;
+		//private String multiChecks;
 		
 		
 		public String getUser_id() {
@@ -109,12 +100,14 @@ public class EditUserInfoMultiForm {
 		public void setAdmin_flg(String adminFlg) {
 			this.adminFlg = adminFlg;
 		}
+		/*
 		public String getMultiChecks() {
 			return multiChecks;
 		}
 		public void setMultiChecks(String multiChecks) {
 			this.multiChecks = multiChecks;
 		}
+		*/
 	}
 	
 }

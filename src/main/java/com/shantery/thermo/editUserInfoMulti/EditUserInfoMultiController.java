@@ -3,6 +3,7 @@ package com.shantery.thermo.editUserInfoMulti;
 
 import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -34,7 +35,6 @@ class EditUserInfoMultiController {
 	// 初期処理
 	@RequestMapping(value = "/editusersmultiset", method = RequestMethod.GET)
 	public String storeInfo(
-			 @ModelAttribute("userlist") EditUserInfoMultiForm form,
 			Model model){
 
 		// sessionを空にする
@@ -45,6 +45,7 @@ class EditUserInfoMultiController {
 			session.removeAttribute("originallist");
 		}
 		
+		ArrayList<String[]> errlist = new ArrayList<>();
 		ArrayList<UserInfoEntity> original = new ArrayList<>();
 		ArrayList<EditUserInfoMultiForm.contents> formlist = new ArrayList<>();
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
@@ -53,9 +54,7 @@ class EditUserInfoMultiController {
 		
 		formlist = service.makeFormList(formlist, original);
 		
-		form.setUserList(formlist);
-		
-		model.addAttribute("userlist", form.getUserList());
+		model.addAttribute("userlist", formlist);
 		session.setAttribute("originallist", formlist);
 
 		// ユーザー情報一括変更画面へ移動
@@ -69,7 +68,9 @@ class EditUserInfoMultiController {
 			BindingResult result,
 			Model model){
 
+		ArrayList<String[]> errlist = new ArrayList<>();
 		String errormsg = null;
+		Boolean nullcheck = false;
 		ArrayList<EditUserInfoMultiForm.contents> originallist;
 		originallist = (ArrayList<EditUserInfoMultiForm.contents>)session.getAttribute("originallist");
 		ArrayList<EditUserInfoMultiForm.contents> updatelist = new ArrayList<>();
@@ -84,7 +85,18 @@ class EditUserInfoMultiController {
 			
 			errormsg = service.setErrorMsg(errormsg);
 			model.addAttribute("errormsg", errormsg);
+		}else {
+			
+			// エラーメッセージリストの作成
+			errlist = service.checkInputList(inputlist, errlist);
+			
+			nullcheck = service.checkNull(errlist, nullcheck);
+			if(nullcheck==false) {
+				transition = "editUserInfoMultiInput";
+				model.addAttribute("errlist", errlist);
+			}
 		}
+		
 		
 		model.addAttribute("userlist", form.getUserList());
 		session.setAttribute("inputlist", inputlist);
@@ -117,7 +129,9 @@ class EditUserInfoMultiController {
 		
 		service.registInfo(registlist);
 		
-		Optional<UserInfoEntity> userinfo = repository.findById(loginuser.getUser_id());
+		Optional<UserInfoEntity> data = repository.findById(loginuser.getUser_id());
+		UserInfoEntity userinfo = data.get();
+		
 		session.setAttribute(LOGIN_USER, userinfo);
 		
 		// ユーザー情報一括変更結果画面へ移動

@@ -25,7 +25,7 @@ public class UserInfoEntity {
 
 	@Id
 	/** ユーザID **/
-	@Column(length=32,name="user_id", insertable=false, updatable=false)
+	@Column(length=32,name="user_id")
 	private String userId;
 	/** グループID **/
 	@Column(length=32,name="group_id")
