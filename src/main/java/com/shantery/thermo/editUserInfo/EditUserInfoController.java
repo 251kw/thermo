@@ -1,6 +1,7 @@
 package com.shantery.thermo.editUserInfo;
 
 import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
@@ -18,14 +19,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.shantery.thermo.ThermoService;
 import com.shantery.thermo.entity.GroupMstEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.userInfo.UserInfoForm;
 import com.shantery.thermo.util.ThermoReplaceValue;
 import com.shantery.thermo.util.ThermoUtil;
-import com.shantery.thermo.userInfo.*;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
