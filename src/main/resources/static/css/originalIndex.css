@@ -137,6 +137,22 @@ div.example  {
 /* editUserInfoMultiInput */
 .edituserinfomultiinput_error {
 	color: red;
+	text-align: center;
+}
+
+.editmultititle {
+	color: red;
+	color:#a2ca0e;/*文字色*/
+	font-weight: bold;
+}
+
+.leftbutten {
+	text-align:center;
+	float: left;
+}
+
+.centerbutten {
+	text-align:center;
 }
 
 /* ------------------------------------スマホ用css--------------------------------------*/

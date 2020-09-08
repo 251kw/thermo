@@ -26,18 +26,17 @@
 		
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
-		<div class="ui center aligned container">
-			<h3 class="edituserinfomultiinput_error" th:text="${errormsg}"></h3>
-		</div>
-		<div class="ui hidden divider"></div>
 		<div class="ui container">
 			<div class="ui center aligned container">
-				<p class="index_ask_input" th:text="#{view.text.inputinfo}"></p>
+				<h3 class="editmultititle" th:text="変更したい情報を入力してください"></h3>
 			</div>
 			<form action="/editusersmulticonfirm" method="POST" class="ui form">
-				<a href="/get_checkbox">
-					<button type="button" class="ui inverted blue button"><p th:text="削除"></button>
-				</a>
+				<div class="leftbutten">
+					<a href="/get_checkbox">
+						<button type="button" class="ui inverted blue button"><p th:text="削除"></button>
+					</a>
+				</div>
+				<h3 class="edituserinfomultiinput_error" th:text="${errormsg}"></h3>
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
@@ -126,15 +125,16 @@
 	        		</tr>
 	        		</th:block>
 				</table>
-				<a href="/get_checkbox">
-					<span th:each="user, stat : ${userlist}">
-						<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].multiChecks'" value="delete">
-					</span>
-					<button type="button" class="ui inverted blue button"><p th:text="削除"></button>
-				</a>
-				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-				<div align="center">
-					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="確認"></button>
+				<div class="leftbutten">
+					<a href="/get_checkbox">
+						<span th:each="user, stat : ${userlist}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].multiChecks'" value="delete">
+						</span>
+						<button type="button" class="ui inverted blue button"><p th:text="削除"></button>
+					</a>
+				</div>
+				<div class="centerbutten">
+					<button type="submit" class="ui inverted blue button editmultisubmit"><p th:text="確認"></button>
 					<a href="/search_return">
 						<button type="button" class="ui inverted blue button"><p th:text="戻る"></button>
 					</a>
