@@ -175,24 +175,52 @@ public class ThermoInputService {
 		return list;
 	}
 	
+	/**
+	 * 検索情報をもらい、条件に合ったユーザーリストを返す
+	 * @param ulist 元々のユーザーリスト
+	 * @param form 検索情報
+	 * @return 変更したユーザーリスト
+	 */
 	public Iterable<UserInfoEntity> searchUserList(Iterable<UserInfoEntity> ulist, SearchInfoForm form){
 		//ログインユーザー情報取得
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
+		//名前検索
 		if(!EMPTY.equals(form.getSch_name())) {
 			String rename = form.getSch_name().replaceAll("　", " ").replaceAll(" ", "");
 			ulist = u_repository.findByGroupIdAndUserNameLikeOrderByUpdateTime(loginuser.getGroup_id(), Q_PERCENT+rename+Q_PERCENT);
+			//名前＋学年検索
 			if(!EMPTY.equals(form.getSch_grade())) {
 				ulist = u_repository.findByGroupIdAndUserNameLikeAndGradeOrderByUpdateTime(loginuser.getGroup_id(), Q_PERCENT+rename+Q_PERCENT, form.getSch_grade());
 			}
+		//学年検索
 		}else if(!EMPTY.equals(form.getSch_grade())) {
 			ulist = u_repository.findByGroupIdAndGradeOrderByUpdateTime(loginuser.getGroup_id(), form.getSch_grade());
 		}
 		
+		//検索情報なし
 		if(EMPTY.equals(form.getSch_name())&&EMPTY.equals(form.getSch_grade())) {
 			ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		}
 		
 		return ulist;
+	}
+	
+	/**
+	 * 体温が3桁の時、間に小数点を入れる
+	 * @param list 入力した検温情報
+	 * @return 変更した検索情報
+	 */
+	public ArrayList<ThermoInputForm.Detail> adjustThermo (ArrayList<ThermoInputForm.Detail> list){
+		for(ThermoInputForm.Detail lt : list) {
+			String check = Normalizer.normalize(lt.getTemperature().trim(),Normalizer.Form.NFKC);
+			if(check.matches("^[0-9０-９]{3}$")) {
+				StringBuilder sb = new StringBuilder(check);
+				sb.insert(2, '.');
+				lt.setTemperature(sb.toString());
+			}
+		}
+		
+		return list;
 	}
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<title th:text="#{view.editUInfoMRes.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+    	<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
+    	
+	</head>
+	<body>
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<br>
+		<div class="komidasi">
+			<h3 th:text="#{view.editUInfoMRes.pagetitle}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		
+		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
+
+		<div class="ui container">
+			<div class="ui center aligned container">
+				<h3 class="editmultititle" th:text="#{view.text.editMultiResult}"></h3>
+			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+			<form action="/editusersmultiset" method="GET" class="ui form">
+				<table class="ui celled table">
+					<thead class="delete">
+						<tr>
+							<th th:text="#{view.tablelabel.uId}"></th>
+							<th th:text="#{view.tablelabel.pass}"></th>
+							<th th:text="#{view.tablelabel.name}"></th>
+							<th th:text="#{view.tablelabel.gender}"></th>
+							<th th:text="#{view.tablelabel.birthday}"></th>
+							<th th:text="#{view.tablelabel.grade}"></th>
+							<th th:text="#{view.tablelabel.adminFlg}"></th>
+						</tr> 
+					</thead>
+				    <tr th:each="user, stat : ${session.updatelist}" th:object="${user}">
+				    	<td th:data-label="#{view.tablelabel.uId}">
+	            			<p th:text="*{user_id}"></p>
+	            		</td>
+	            		<td th:data-label="#{view.tablelabel.pass}">
+	                		<p th:text="*{user_pass}"></p>
+	            		</td>
+				        <td th:data-label="#{view.tablelabel.name}+#{view.blank.3}">
+	                		<p th:text="*{user_name}"></p>
+	            		</td>
+	            		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.3}">
+	            			<p th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',user.gender)}"></p>
+	            		</td>
+	            		<td th:data-label="#{view.tablelabel.birthday}+#{view.blank.1}">
+	            			<p th:text="*{birthday}"></p>
+	            		</td>
+	            		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.3}">
+	            			<p th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',user.grade)}"></p>
+	            		</td>
+	            		<td th:data-label="#{view.tablelabel.adminFlg}">
+	            			<p th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('admin',user.admin_flg)}"></p>
+	            		</td>
+	        		</tr>
+				</table>
+				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+				<div align="center">
+					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
+				</div>
+			</form>
+			<p id="btm"></p>
+		</div>
+		<p id="pageTop"><a href="/editUserInfoMultiResult"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
+		<br><br><br>
+	</body>
+</html>

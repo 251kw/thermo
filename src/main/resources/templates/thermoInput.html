@@ -34,24 +34,28 @@
 				
 				<table class="ui very basic table">
 					<thead class="delete">
-					<tr>
-						<th th:text="#{view.tablelabel.name}">
-						<th th:text="#{view.tablelabel.grade}">
-					</tr>
+						<tr>
+							<th width=15%></th>
+							<th th:text="#{view.tablelabel.name}"></th>
+							<th th:text="#{view.tablelabel.grade}"></th>
+							<th></th>
+						</tr>
+					</thead>
 					<tbody>
 						<tr>
+							<td></td>
 							<td th:data-label="#{view.tablelabel.name}+#{view.blank.1}">
 								<div class="ui input">
-								<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" autofocus="autofocus"></div>
+								<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" ></div>
 								<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 							</td>
 							<td th:data-label="#{view.tablelabel.grade}+#{view.blank.1}">
 							<div class="ui input">
 									<div th:insert="selectbox :: gradeAndBlank"></div>
-								</div>
+							</div>
 							</td>
+							<td></td>
 						</tr>
-						<tr><th><font color="red"><th:block th:text="${combi_msg}"></font></th></tr>
 					</tbody>
 				</table>
 			</div>
@@ -59,7 +63,7 @@
 			<p></p>
 			<div class="ui center aligned container"><!-- 中央寄せ -->
 				<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.search}"></button>
-				<button type="button" class="ui inverted primary button" onClick="clearFormAll(); "><p th:text="#{view.btn.clear}"></button>
+				<button type="button" class="ui inverted primary button clear-button" ><p th:text="#{view.btn.clear}"></button>
 			</div>
 		</form>
 		
@@ -69,107 +73,135 @@
 		
 		<form action="/thermo_info_inp_suc" method="post" th:object="${thForm}">
 			<div class="ui container center aligned">
-			<table class="ui celled table" style="table-layout:fixed">
-				<thead class="delete">
-					<tr>
-						<th width="60" th:text="#{view.tablelabel.name}"></th>
-						<th width="30" th:text="#{view.tablelabel.gender}"></th>
-						<th width="45" th:text="#{view.tablelabel.grade}"></th>
-						<th width="30" th:text="#{view.tablelabel.age}"></th>
-						<th width="77" th:text="#{view.tablelabel.thermo}"></th>
-						<th width="40" th:text="#{view.tablelabel.taste}"></th>
-						<th width="40" th:text="#{view.tablelabel.smell}"></th>
-						<th width="40" th:text="#{view.tablelabel.cough}"></th>
-						<th width="188" th:text="#{view.tablelabel.other}"></th>
-					</tr> 
-				</thead>
-				<tr th:each= "ul,status : ${ulist}">
-		    		<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
-		    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
-		    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
-		    		<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${birth[status.index]}"></td>
-					<th:block th:if="${list}">
-						<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}" style="position:relative">
-							<span class="ui input">
-								<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
-								th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
-							</span>
-							<script type="text/javascript">
-								document.getElementById('thermo0').focus();
-							</script>
-							<div th:if="${message}">
-								<br><font color="red"><span th:text="${message[status.index]}"></span></font>
-							</div>
-						</td>
-						<td th:data-label="#{view.tablelabel.taste}">
-							<div th:unless="${list[status.index].taste}">
-								<span class="ui checkbox">
-									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
-									<label></label>
-								</span>
-							</div>
-							<div th:if="${list[status.index].taste}">
-								<span class="ui checkbox">
-									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
-									<label></label>
-								</span>
-							</div>
-						</td>
-						<td th:data-label="#{view.tablelabel.smell}">
-							<div th:unless="${list[status.index].smell}">
-								<span class="ui checkbox">
-									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
-									<label></label>
-								</span>
-							</div>
-							<div th:if="${list[status.index].smell}">
-								<span class="ui checkbox">
-									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
-									<label></label>
-								</span>
-							</div>
-						</td>
-						<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
-							<div th:unless="${list[status.index].cough}">
-								<span class="ui checkbox">
-									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
-									<label></label>
-								</span>
-							</div>
-							<div th:if="${list[status.index].cough}">
-								<span class="ui checkbox">
-									<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
-									<label></label>
-								</span>
-							</div>
-						</td>
-						<td th:data-label="#{view.tablelabel.other}" style="position:relative">
-							<span class="ui input">
-								<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
-								th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
-							</span>
-							<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
-								<br><span th:text="#{view.errM128}"></span>
-							</span>
-							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
-							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
-							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
-							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
-							<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
-						</td>
-					</th:block>
-				</tr>
-			</table>
+				<div th:unless="${nolist_msg}">
+					<table class="ui celled table" style="table-layout:fixed">
+						<thead class="delete">
+							<tr>
+								<th width="60" th:text="#{view.tablelabel.name}"></th>
+								<th width="30" th:text="#{view.tablelabel.gender}"></th>
+								<th width="45" th:text="#{view.tablelabel.grade}"></th>
+								<th width="30" th:text="#{view.tablelabel.age}"></th>
+								<th width="77" th:text="#{view.tablelabel.thermo}"></th>
+								<th width="40" th:text="#{view.tablelabel.taste}"></th>
+								<th width="40" th:text="#{view.tablelabel.smell}"></th>
+								<th width="40" th:text="#{view.tablelabel.cough}"></th>
+								<th width="188" th:text="#{view.tablelabel.other}"></th>
+							</tr> 
+						</thead>
+						<tr th:each= "ul,status : ${ulist}">
+				    		<td style="word-break:break-all;" th:data-label="#{view.tablelabel.name}+#{view.blank.2}" th:text="${ul.user_name}"></td>
+				    		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.2}" th:text="${ul.gender}"></td>
+				    		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.2}" th:text="${ul.grade}"></td>
+				    		<td th:data-label="#{view.tablelabel.age}+#{view.blank.2}" th:text="${birth[status.index]}"></td>
+							<th:block th:if="${list}">
+								<td th:data-label="#{view.tablelabel.thermo}+#{view.blank.2}" style="position:relative">
+									<span class="ui input">
+										<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].temperature'"
+										th:value="${list[status.index].temperature}" maxlength="4" th:placeholder="#{view.checkPh.thermo}" th:id="thermo+${status.index}"/>
+									</span>
+									<script type="text/javascript">
+										document.getElementById('thermo0').focus();
+									</script>
+									<div th:if="${message}">
+										<br><font color="red"><span th:text="${message[status.index]}"></span></font>
+									</div>
+								</td>
+								<td th:data-label="#{view.tablelabel.taste}">
+									<div th:unless="${list[status.index].taste}">
+										<span class="ui checkbox">
+											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
+											<label></label>
+										</span>
+									</div>
+									<div th:if="${list[status.index].taste}">
+										<span class="ui checkbox">
+											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
+											<label></label>
+										</span>
+									</div>
+								</td>
+								<td th:data-label="#{view.tablelabel.smell}">
+									<div th:unless="${list[status.index].smell}">
+										<span class="ui checkbox">
+											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
+											<label></label>
+										</span>
+									</div>
+									<div th:if="${list[status.index].smell}">
+										<span class="ui checkbox">
+											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
+											<label></label>
+										</span>
+									</div>
+								</td>
+								<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
+									<div th:unless="${list[status.index].cough}">
+										<span class="ui checkbox">
+											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
+											<label></label>
+										</span>
+									</div>
+									<div th:if="${list[status.index].cough}">
+										<span class="ui checkbox">
+											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
+											<label></label>
+										</span>
+									</div>
+								</td>
+								<td th:data-label="#{view.tablelabel.other}" style="position:relative">
+									<span class="ui input">
+										<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
+										th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
+									</span>
+									<span th:if="${#fields.hasErrors('tList[__${status.index}__].writing')}" class="index_input_error">
+										<br><span th:text="#{view.errM128}"></span>
+									</span>
+									<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userName'" th:value="${ul.user_name}" >
+									<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Gender'" th:value="${ul.gender}" >
+									<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].Grade'" th:value="${ul.grade}" >
+									<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].userId'" th:value="${ul.user_id}" >
+									<input type="hidden" th:attr="name='tList[' + __${status.index}__ + '].age'" th:value="${birth[status.index]}" >
+								</td>
+							</th:block>
+						</tr>
+					</table>
+				</div>
+				<div th:if="${nolist_msg}">
+					<h3 th:text="${nolist_msg}"></h3>
+				</div>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div align="center">
-				<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.confirm}"></button>
+				<span th:unless="${nolist_msg}">
+					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.confirm}"></button>
+				</span>
 				<a href="/search_return">
 					<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
 				</a>
 			</div>
 		</form>
 		<p id="btm"></p>
+		<script type="text/javascript">
+		"use strict";
+
+		$(function () {
+		    $(".clear-button").on("click", function () {
+		        clearForm(this.form);
+		    });
+
+		    function clearForm (form) {
+		        $(form)
+		            .find("input, select, textarea")
+		            .not(":button, :submit, :reset, :hidden")
+		            .val("")
+		            .prop("checked", false)
+		            .prop("selected", false)
+		        ;
+
+		        $(form).find(":radio").filter("[data-default]").prop("checked", true);
+		    }
+		});
+		</script>
 		<p id="pageTop"><a href="/thermoInput"><i class="arrow up icon"></i></a></p>
   		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
 		<br><br><br>

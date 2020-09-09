@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 import com.shantery.thermo.search.SearchService;
@@ -85,16 +84,23 @@ class ThermoInputController {
 		
 		//入力情報を取得
 		ArrayList<ThermoInputForm.Detail> list = form.gettList();
+		//体温が3桁の時、小数点を入れる処理
+		list = service.adjustThermo(list);
+		
 		model.addAttribute(THERMO_LIST , list);
 		session.setAttribute(THERMO_LIST , list);
 		
 		//入力チェックをしてエラー文があれば入力画面へ
 		ArrayList<String> message = service.checkInput(list);
 		if(message.contains(THERMO_INP_ER) || message.contains(THERMO_INP_TEMP_ER) || result.hasErrors()) {
-			
 			model.addAttribute("message", message);
 			model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
 			model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
+			model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
+			model.addAttribute("searchInfo", session.getAttribute("shForm"));
+			if(session.getAttribute("shForm")==null) {
+				model.addAttribute("searchInfo", new SearchInfoForm());
+			}
 			return TO_THERMO_INFO_INP;
 		}
 		
@@ -133,7 +139,7 @@ class ThermoInputController {
 		if(!result.hasErrors()) {
 			ulist = service.searchUserList(ulist, form);
 		}
-		if(ulist==null) {	//検索結果がないとき
+		if(((List<UserInfoEntity>)ulist).size()==0) {	//検索結果がないとき
 			model.addAttribute("nolist_msg", NOLIST_MSG);
 		}
 		
@@ -142,17 +148,21 @@ class ThermoInputController {
 		ArrayList<ThermoInputForm.Detail> list = service.checkRegistDate(ulist);
 		//データベースからとってきたユーザー情報を表示用に変換する 
 		ArrayList<String> birth = new ArrayList<String>();
-		for(UserInfoEntity ul : ulist) {
-			ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
-			ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
-			birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
+		if(!result.hasErrors()) {
+			for(UserInfoEntity ul : ulist) {
+				ul.setGender(ThermoReplaceValue.valueToName(KBN_TYPE_GENDER, ul.getGender()));
+				ul.setGrade(ThermoReplaceValue.valueToName(KBN_TYPE_GRADE, ul.getGrade()));
+				birth.add(ThermoReplaceValue.calcAge(ul.getBirthday())+"歳");	
+			}
+		}else {
+			birth = (ArrayList<String>)session.getAttribute(THERMO_BIRTH);
 		}
-		
 		model.addAttribute(THERMO_LIST , list);
 		model.addAttribute(THERMO_USER_LIST, ulist);
 		model.addAttribute(THERMO_BIRTH, birth);
 		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
 		model.addAttribute("searchInfo", form);
+		session.setAttribute("shForm", form);
 		session.setAttribute(THERMO_USER_LIST, ulist);
 		session.setAttribute(THERMO_BIRTH, birth);
 	
@@ -173,7 +183,10 @@ class ThermoInputController {
 		model.addAttribute(THERMO_USER_LIST, (Iterable<UserInfoEntity>)session.getAttribute(THERMO_USER_LIST));
 		model.addAttribute(THERMO_BIRTH, (ArrayList<String>)session.getAttribute(THERMO_BIRTH));
 		model.addAttribute(THERMO_INP_FORM, new ThermoInputForm());
-		model.addAttribute("searchInfo", new SearchInfoForm());
+		model.addAttribute("searchInfo", session.getAttribute("shForm"));
+		if(session.getAttribute("shForm")==null) {
+			model.addAttribute("searchInfo", new SearchInfoForm());
+		}
 		
 		return TO_THERMO_INFO_INP;
 	}

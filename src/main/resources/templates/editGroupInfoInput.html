@@ -32,7 +32,8 @@
 							<tbody>
 								<tr>
 									<td><p th:text="#{view.tablelabel.gId}"></p></td>
-									<td><p th:text="${lg_id}"></p>
+									<td><span th:text="${lg_id}"></span>
+									<br><span class="index_input_error" th:text="#{view.text.gIdAdd}"></span>
 									</td>
 								</tr>
 								<tr>
@@ -72,7 +73,7 @@
 					</table>
 					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.edit}"></button>
+						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
 						<a href="/search_return">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
