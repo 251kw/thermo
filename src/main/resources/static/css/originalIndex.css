@@ -12,9 +12,27 @@
 }
 
 .index_ask_input {
-	color:#a2ca0e;/*文字色*/
+	color:white;/*文字色*/
 	font-size:110%;
 	font-weight: bold;
+	
+	  text-shadow: 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45;
 }
 
 .index_regist_table {
