@@ -46,13 +46,16 @@
 							<td></td>
 							<td th:data-label="#{view.tablelabel.name}+#{view.blank.1}">
 								<div class="ui input">
-								<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" ></div>
+									<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" >
+								</div>
 								<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
 							</td>
 							<td th:data-label="#{view.tablelabel.grade}+#{view.blank.1}">
-							<div class="ui input">
-									<div th:insert="selectbox :: gradeAndBlank"></div>
-							</div>
+								<div class="ui form">
+								<span class="ui input select">
+									<span th:insert="selectbox :: gradeAndBlank"></span>
+								</span>
+								</div>
 							</td>
 							<td></td>
 						</tr>
