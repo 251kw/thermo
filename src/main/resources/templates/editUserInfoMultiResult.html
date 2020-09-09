@@ -46,7 +46,7 @@
 							<th th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
 					</thead>
-				    <tr th:each="user, stat : ${session.updatelist}" th:object="${user}">
+				    <tr th:each="user, stat : ${session.inputlist}" th:object="${user}">
 				    	<td th:data-label="#{view.tablelabel.uId}">
 	            			<p th:text="*{user_id}"></p>
 	            		</td>
