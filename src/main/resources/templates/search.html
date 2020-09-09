@@ -49,8 +49,9 @@
 		
 		<!------------------------------------------- 本体始まり ----------------------------------------------------->
 		
-		<form method="get" class="ui form" name="registform" onsubmit="return check()">
-				<table class="index_regist_table">
+		<div class="ui left aligned  container">
+			<form method="get" class="ui form" name="registform" onsubmit="return check()">
+				<table>
 					<tr>
 						<td>
 							<span class="ui input select">			
@@ -61,6 +62,7 @@
 					</tr>
 				</table>
 			</form>
+		</div>
 		
 		<form class="ui form" th:action="@{/search_info}" th:object="${searchInfo}" method="post">
 			<div class="ui container">
