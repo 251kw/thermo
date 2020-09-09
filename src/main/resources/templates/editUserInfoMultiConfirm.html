@@ -4,14 +4,16 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 		<meta http-equiv="Content-Script-Type" content="text/javascript">
-		<title th:text="変更情報確認"></title>
+		<title th:text="#{view.editUInfoMCon.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
 		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
+    	<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
     	
 	</head>
 	<body>
@@ -20,7 +22,7 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
-			<h3 th:text="ユーザー情報編集"></h3>
+			<h3 th:text="#{view.editUInfoMCon.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		
@@ -28,62 +30,67 @@
 
 		<div class="ui container">
 			<div class="ui center aligned container">
-				<h3 class="editmultititle" th:text="変更内容を確認してください"></h3>
+				<h3 class="editmultititle" th:text="#{view.text.editMultiConfirm}"></h3>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<form action="/editusersmultiresult" method="POST" class="ui form">
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
-							<th th:text="ユーザーID"></th>
-							<th th:text="パスワード"></th>
-							<th th:text="名前"></th>
-							<th th:text="性別"></th>
-							<th th:text="生年月日"></th>
-							<th th:text="学年"></th>
-							<th th:text="オプション"></th>
+							<th th:text="#{view.tablelabel.uId}"></th>
+							<th th:text="#{view.tablelabel.pass}"></th>
+							<th th:text="#{view.tablelabel.name}"></th>
+							<th th:text="#{view.tablelabel.gender}"></th>
+							<th th:text="#{view.tablelabel.birthday}"></th>
+							<th th:text="#{view.tablelabel.grade}"></th>
+							<th th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
 					</thead>
 				    <tr th:each="user, stat : ${session.updatelist}" th:object="${user}">
-				    	<td>
+				    	<td th:data-label="#{view.tablelabel.uId}">
 	            			<p th:text="*{user_id}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="*{user_id}">
 	            		</td>
-	            		<td>
+	            		<td th:data-label="#{view.tablelabel.pass}">
 	                		<p th:text="*{user_pass}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="*{user_pass}">
 	            		</td>
-				        <td>
+				        <td th:data-label="#{view.tablelabel.name}+#{view.blank.3}">
 	                		<p th:text="*{user_name}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="*{user_name}">
 	            		</td>
-	            		<td>
+	            		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.3}">
 	            			<p th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('gender',user.gender)}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].gender'" th:value="*{gender}">
 	            		</td>
-	            		<td>
+	            		<td th:data-label="#{view.tablelabel.birthday}+#{view.blank.1}">
 	            			<p th:text="*{birthday}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="*{birthday}">
 	            		</td>
-	            		<td>
+	            		<td th:data-label="#{view.tablelabel.grade}+#{view.blank.3}">
 	            			<p th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('grade',user.grade)}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].grade'" th:value="*{grade}">
 	            		</td>
-	            		<td>
+	            		<td th:data-label="#{view.tablelabel.adminFlg}">
 	            			<p th:text="${T(com.shantery.thermo.util.ThermoReplaceValue).valueToName('admin',user.admin_flg)}"></p>
-	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].admin_flg'" th:value="*{admin_flg}">
 	            		</td>
 	        		</tr>
 				</table>
 				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 				<div align="center">
-					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="更新"></button>
+					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.edit}"></button>
 					<a href="/editusersmultireturn">
-						<button type="button" class="ui inverted blue button"><p th:text="戻る"></button>
+						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.return}"></button>
+						<span th:each="user, stat : ${session.updatelist}" th:object="${user}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="*{user_id}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="*{user_pass}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="*{user_name}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].gender'" th:value="*{gender}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="*{birthday}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].grade'" th:value="*{grade}">
+							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].admin_flg'" th:value="*{admin_flg}">
+						</span>
 					</a>
 				</div>
 			</form>
+			<p id="btm"></p>
 		</div>
+		<p id="pageTop"><a href="/editUserInfoMultiConfirm"><i class="arrow up icon"></i></a></p>
+  		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
 		<br><br><br>
 	</body>
 </html>

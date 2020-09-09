@@ -1,25 +1,20 @@
 package com.shantery.thermo.editUserInfoMulti;
 
-import static com.shantery.thermo.util.ThermoConstants.NAME_PATTERN;
-import static com.shantery.thermo.util.ThermoConstants.THERMO_REGEX_PATTERN;
 
 import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 
-
+/**
+ * @author k.takahashi
+ * editUserInfoMultiパッケージ内で使うform
+ */
 public class EditUserInfoMultiForm {
 
-	@Valid
+
 	private ArrayList<contents> userList;
 	
-
 	public ArrayList<contents> getUserList() {
 		return userList;
 	}

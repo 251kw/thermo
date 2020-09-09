@@ -137,22 +137,34 @@ div.example  {
 /* editUserInfoMultiInput */
 .edituserinfomultiinput_error {
 	color: red;
-	text-align: center;
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
 }
 
 .editmultititle {
-	color: red;
+
 	color:#a2ca0e;/*文字色*/
-	font-weight: bold;
 }
 
 .leftbutten {
-	text-align:center;
 	float: left;
 }
 
+.lefttopbutten {
+	text-align : left;
+	margin-bottom: 14px;
+}
+
+
 .centerbutten {
-	text-align:center;
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
 }
 
 /* ------------------------------------スマホ用css--------------------------------------*/
@@ -208,6 +220,58 @@ div.example  {
 	  margin-right: 10px;
 	}
 }
+
+
+@media screen and (max-width: 411px) {
+	/* editUserInfoMultiInput */
+.edituserinfomultiinput_error {
+		color: red;
+		position: absolute;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    -webkit-transform: translateX(-50%);
+	    -ms-transform: translateX(-50%);
+	    font-size: 12px;
+	}
+	
+.editmultititle {
+	    font-size: 16px;
+		color:#a2ca0e;/*文字色*/
+	}
+	
+	
+.centerbutten {
+		text-align: right;
+		position: relative;
+	    left: 0%;
+	    transform: translateX(0%);
+	    -webkit-transform: translateX(0%);
+	    -ms-transform: translateX(0%);
+	}
+	
+}
+
+
+@media screen and (max-width: 320px) {
+	/* editUserInfoMultiInput */
+.edituserinfomultiinput_error {
+		color: red;
+		position: absolute;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    -webkit-transform: translateX(-50%);
+	    -ms-transform: translateX(-50%);
+	    font-size: 11px;
+	}
+	
+.editmultititle {
+	    font-size: 16px;
+		color:#a2ca0e;/*文字色*/
+	}
+	
+}
+
+
 
 /*-----------------------------------------------------------*/
 input[type=checkbox] {//チェックボックスとしての機能
