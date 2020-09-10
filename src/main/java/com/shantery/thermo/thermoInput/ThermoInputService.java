@@ -40,7 +40,7 @@ public class ThermoInputService {
 		//登録日時
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		//thermoIDを自動採番で決める
-		int thermoId = (1+(int)repository.count());
+		//int thermoId = (1+(int)repository.count());
 		
 		//updateuserとしてsessionからログインユーザーをとってくる
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
@@ -53,11 +53,11 @@ public class ThermoInputService {
 			ThermoInfoEntity user = repository.findByUserIdAndRegistDate(list.get(i).getUserId(), day.format(calendar.getTime()));
 			if(user != null) {
 				//ThermoIdを消すものと入れ替える
-				thEn.setThermo_id(user.getThermo_id());
+				//thEn.setThermo_id(user.getThermo_id());
 				repository.delete(user);
 			}else {
-				thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
-				thermoId++;
+				//thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
+				//thermoId++;
 			}
 			thEn.setThermo(convertThermo(list.get(i).getTemperature()));
 			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
