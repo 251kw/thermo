@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
 .headerback {
-	background-color:#ffe600;
+	background-color:rgb(84 184 1 / 73%);
 	height: 90px;
 }
 
 .header {
- 	color:#0db8d9;
-	text-shadow:
+ 	color:white;
+	/*text-shadow:
        2px  2px 1px #ffffff,
       -2px  2px 1px #ffffff,
        2px -2px 1px #ffffff,
@@ -15,7 +15,53 @@
        2px  0px 1px #ffffff,
        0px  2px 1px #ffffff,
       -2px  0px 1px #ffffff,
-       0px -2px 1px #ffffff;
+       0px -2px 1px #ffffff;*/
+       
+    /*text-shadow: 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d, 
+    	1px 1px 1px #1b1c1d;*/
+    	
+    */text-shadow: 
+    		 0 0 3px #21ba45,
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45, 
+			 0 0 3px #21ba45;*/
+			 
+	    text-shadow: 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45, 
+	    	0 0 3px #21ba45;
 	font-size: 45px;
 }
 
@@ -38,11 +84,29 @@
 }
 
 .komidasi h3 {
-  color:#a2ca0e;/*文字色*/
+  color:white;/*文字色*/
   padding: 0.5em 0;/*上下の余白*/
   text-align: center;/*中央揃え*/
-  border-top: solid 3px #ffe600;/*上線*/
-  border-bottom: solid 3px #ffe600;/*下線*/
+  border-top: solid 5px rgb(84 184 1 / 73%);/*上線*/
+  border-bottom: solid 5px rgb(84 184 1 / 73%);/*下線*/
+  
+  text-shadow: 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45, 
+  	0 0 3px #21ba45;
 
 }
 

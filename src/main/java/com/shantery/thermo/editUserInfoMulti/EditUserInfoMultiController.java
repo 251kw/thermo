@@ -104,16 +104,8 @@ class EditUserInfoMultiController {
 		// ２つのリストを比較して変更されたユーザーのみを取得
 		updatelist = service.makeUpdateList(updatelist, inputlist, originallist);
 			
-		// updateリストの中身がない場合
-		if(updatelist.isEmpty()) {
-			
-			// 変更箇所なしという旨のエラーメッセージを取得して、入力画面に戻る
-			errormsg = service.setErrorMsg(errormsg);
-			model.addAttribute("errormsg", errormsg);
-			transition = "editUserInfoMultiInput";
-		
 		// updatelistの中身がある場合
-		}else {
+		if(!(updatelist.isEmpty())) {
 			
 			// 変更箇所を入力チェックして、エラーメッセージリストを作成
 			errlist = service.checkInputList(inputlist, errlist);
@@ -130,8 +122,12 @@ class EditUserInfoMultiController {
 			}else {
 				transition = "editUserInfoMultiConfirm";
 			}
+			
+		// updatelistの中身がない場合
+		}else {
+			// そのまま確認画面へ
+			transition = "editUserInfoMultiConfirm";
 		}
-		
 		
 		model.addAttribute("userlist", form.getUserList());
 		session.setAttribute("inputlist", inputlist);

@@ -46,7 +46,7 @@
 							<th th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
 					</thead>
-				    <tr th:each="user, stat : ${session.updatelist}" th:object="${user}">
+				    <tr th:each="user, stat : ${session.inputlist}" th:object="${user}">
 				    	<td th:data-label="#{view.tablelabel.uId}">
 	            			<p th:text="*{user_id}"></p>
 	            		</td>
@@ -75,7 +75,7 @@
 					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.edit}"></button>
 					<a href="/editusersmultireturn">
 						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.return}"></button>
-						<span th:each="user, stat : ${session.updatelist}" th:object="${user}">
+						<span th:each="user, stat : ${session.inputlist}" th:object="${user}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="*{user_id}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="*{user_pass}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="*{user_name}">
