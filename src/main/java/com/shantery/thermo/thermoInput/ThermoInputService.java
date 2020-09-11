@@ -98,7 +98,7 @@ public class ThermoInputService {
 		thermo = thermo.trim();
 		thermo = Normalizer.normalize(thermo,Normalizer.Form.NFKC);
 		//空文字をnullにする
-		if(thermo == EMPTY) {
+		if(thermo.equals(EMPTY)) {
 			thermo = null;
 		}
 		//小数第一位に０を付ける
@@ -132,7 +132,7 @@ public class ThermoInputService {
 		ArrayList<String> message = new ArrayList<String>();
 		for(ThermoInputForm.Detail lt : list) {
 			String check = Normalizer.normalize(lt.getTemperature().trim(),Normalizer.Form.NFKC);
-			if(check.matches("^\\d+\\.?\\d{0,1}$") || check.equals(EMPTY)) {
+			if(check.matches("^[0-9 ０-９]{1,4}([.][0-9 ０-９])?$") || check.equals(EMPTY)) {
 				if(check.matches("^[3-4][0-9]([.][0-9])?$") || check.equals(EMPTY)) {
 					message.add(null);
 				}else {
@@ -207,8 +207,9 @@ public class ThermoInputService {
 			if(check.matches("^[0-9０-９]{3}$")) {
 				StringBuilder sb = new StringBuilder(check);
 				sb.insert(2, '.');
-				lt.setTemperature(sb.toString());
+				check=sb.toString();
 			}
+			lt.setTemperature(check);
 		}
 		
 		return list;
