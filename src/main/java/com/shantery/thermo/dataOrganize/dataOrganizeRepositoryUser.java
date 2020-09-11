@@ -18,7 +18,7 @@ public interface dataOrganizeRepositoryUser extends JpaRepository<UserInfoEntity
 			+" FROM user_info LEFT JOIN thermo_info"
 			+" ON user_info.user_id = thermo_info.user_id"
 			+" WHERE user_info.user_id=?1"
-			+" AND thermo_info.thermo_id IS NULL"
+			+" AND thermo_info.regist_date IS NULL"
 			+" AND user_info.update_time < now() - INTERVAL 1 YEAR"
             ,nativeQuery = true)
 	public void userDel(String user_id);
@@ -33,7 +33,7 @@ public interface dataOrganizeRepositoryUser extends JpaRepository<UserInfoEntity
 			+" FROM user_info LEFT JOIN thermo_info"
 			+" ON user_info.user_id = thermo_info.user_id"
 			+" WHERE admin_flg != 2"
-			+" AND thermo_info.thermo_id IS NULL"
+			+" AND thermo_info.regist_date IS NULL"
 			+" AND user_info.update_time < now() - INTERVAL 1 YEAR"
             ,nativeQuery = true)
 	public void thermoNullList();
