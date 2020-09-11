@@ -133,7 +133,7 @@ public class ThermoInputService {
 		for(ThermoInputForm.Detail lt : list) {
 			String check = Normalizer.normalize(lt.getTemperature().trim(),Normalizer.Form.NFKC);
 			if(check.matches("^\\d+\\.?\\d{0,1}$") || check.equals(EMPTY)) {
-				if(check.matches("^[3-4][0-9](.[0-9])?$") || check.equals(EMPTY)) {
+				if(check.matches("^[3-4][0-9]([.][0-9])?$") || check.equals(EMPTY)) {
 					message.add(null);
 				}else {
 					message.add(THERMO_INP_TEMP_ER);
