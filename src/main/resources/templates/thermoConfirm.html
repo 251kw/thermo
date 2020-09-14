@@ -22,13 +22,17 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
-			<h3 th:text="#{view.text.thermoInfoCon}"></h3>
+			<h3 th:text="#{view.thermoInfoCon.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
-		
+		<div class="ui container">
 		<form action="/thermo_info_conf_suc" method="post" >
+			<div class="ui center aligned container">
+				<h3 class="index_ask_input" th:text="#{view.text.thermoInfoCon}"></h3>
+			</div>
+			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div class="ui container center aligned">
 			<table class="ui celled table thtable" style="table-layout:fixed">
 				<thead class="delete">
@@ -78,5 +82,6 @@
 		<p id="pageTop"><a href="/thermoConfirm"><i class="arrow up icon"></i></a></p>
   		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
 		<br><br><br>
+		</div>
 	</body>
 </html>
