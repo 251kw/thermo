@@ -19,7 +19,7 @@
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 		<!-- 小見出しを各々のページで書き換え -->
-		<br>
+		<br>　
 		<div class="komidasi">
 			<h3 th:text="#{view.text.thermoInfoIn}"></h3>
 		</div>
@@ -33,31 +33,20 @@
 				<p></p>
 				
 				<table class="ui very basic table">
-					<thead class="delete">
+					
 						<tr>
-							<th width=15%></th>
-							<th th:text="#{view.tablelabel.name}"></th>
-							<th th:text="#{view.tablelabel.grade}"></th>
-							<th></th>
+							<th class="center aligned" th:text="#{view.tablelabel.grade}"></th>
 						</tr>
-					</thead>
+					
 					<tbody>
 						<tr>
-							<td></td>
-							<td th:data-label="#{view.tablelabel.name}+#{view.blank.1}">
-								<div class="ui input">
-									<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" >
-								</div>
-								<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
-							</td>
-							<td th:data-label="#{view.tablelabel.grade}+#{view.blank.1}">
+							<td class="center aligned">
 								<div class="ui form">
 								<span class="ui input select">
 									<span th:insert="selectbox :: gradeAndBlank"></span>
 								</span>
 								</div>
 							</td>
-							<td></td>
 						</tr>
 					</tbody>
 				</table>

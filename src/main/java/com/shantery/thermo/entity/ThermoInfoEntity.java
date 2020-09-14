@@ -24,10 +24,6 @@ public class ThermoInfoEntity {
 	@Id
 	@Column(length=32,name="user_id")
 	private String userId;
-	/** サーモID **/
-	@Id
-	@Column(length=32,name="thermo_id")
-	private String thermoId;
 	/** 体温 **/
 	@Column
 	private String thermo;
@@ -44,6 +40,7 @@ public class ThermoInfoEntity {
 	@Column(length=128)
 	private String other;
 	/** 登録日 **/
+	@Id
 	@Column(name="regist_date")
 	private String registDate;
 	/** 登録者 **/
@@ -75,14 +72,6 @@ public class ThermoInfoEntity {
 
 	public void setUser_id(String user_id) {
 		this.userId = user_id;
-	}
-
-	public String getThermo_id() {
-		return thermoId;
-	}
-
-	public void setThermo_id(String thermo_id) {
-		this.thermoId = thermo_id;
 	}
 
 	public String getThermo() {
@@ -156,7 +145,6 @@ public class ThermoInfoEntity {
 	public List<String> getThermoList() {
 		List<String> thermoList = new ArrayList<>();
 		thermoList.add(getUser_id());
-		thermoList.add(getThermo_id());
 		thermoList.add(getThermo());
 		thermoList.add(getTaste_disorder());
 		thermoList.add(getOlfactory_disorder());

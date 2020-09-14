@@ -40,7 +40,7 @@ public class ThermoInputService {
 		//登録日時
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		//thermoIDを自動採番で決める
-		int thermoId = (1+(int)repository.count());
+		//int thermoId = (1+(int)repository.count());
 		
 		//updateuserとしてsessionからログインユーザーをとってくる
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
@@ -53,11 +53,11 @@ public class ThermoInputService {
 			ThermoInfoEntity user = repository.findByUserIdAndRegistDate(list.get(i).getUserId(), day.format(calendar.getTime()));
 			if(user != null) {
 				//ThermoIdを消すものと入れ替える
-				thEn.setThermo_id(user.getThermo_id());
+				//thEn.setThermo_id(user.getThermo_id());
 				repository.delete(user);
 			}else {
-				thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
-				thermoId++;
+				//thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
+				//thermoId++;
 			}
 			thEn.setThermo(convertThermo(list.get(i).getTemperature()));
 			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
@@ -98,7 +98,7 @@ public class ThermoInputService {
 		thermo = thermo.trim();
 		thermo = Normalizer.normalize(thermo,Normalizer.Form.NFKC);
 		//空文字をnullにする
-		if(thermo == EMPTY) {
+		if(thermo.equals(EMPTY)) {
 			thermo = null;
 		}
 		//小数第一位に０を付ける
@@ -132,8 +132,8 @@ public class ThermoInputService {
 		ArrayList<String> message = new ArrayList<String>();
 		for(ThermoInputForm.Detail lt : list) {
 			String check = Normalizer.normalize(lt.getTemperature().trim(),Normalizer.Form.NFKC);
-			if(check.matches("^\\d+\\.?\\d{0,1}$") || check.equals(EMPTY)) {
-				if(check.matches("^[3-4][0-9](.[0-9])?$") || check.equals(EMPTY)) {
+			if(check.matches("^[0-9 ０-９]{1,4}([.][0-9 ０-９])?$") || check.equals(EMPTY)) {
+				if(check.matches("^[3-4][0-9]([.][0-9])?$") || check.equals(EMPTY)) {
 					message.add(null);
 				}else {
 					message.add(THERMO_INP_TEMP_ER);
@@ -185,21 +185,11 @@ public class ThermoInputService {
 		//ログインユーザー情報取得
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		
-		//名前検索
-		if(!EMPTY.equals(form.getSch_name())) {
-			String rename = form.getSch_name().replaceAll("　", " ").replaceAll(" ", "");
-			ulist = u_repository.findByGroupIdAndUserNameLikeOrderByUpdateTime(loginuser.getGroup_id(), Q_PERCENT+rename+Q_PERCENT);
-			//名前＋学年検索
-			if(!EMPTY.equals(form.getSch_grade())) {
-				ulist = u_repository.findByGroupIdAndUserNameLikeAndGradeOrderByUpdateTime(loginuser.getGroup_id(), Q_PERCENT+rename+Q_PERCENT, form.getSch_grade());
-			}
 		//学年検索
-		}else if(!EMPTY.equals(form.getSch_grade())) {
+		if(!EMPTY.equals(form.getSch_grade())) {
 			ulist = u_repository.findByGroupIdAndGradeOrderByUpdateTime(loginuser.getGroup_id(), form.getSch_grade());
-		}
-		
 		//検索情報なし
-		if(EMPTY.equals(form.getSch_name())&&EMPTY.equals(form.getSch_grade())) {
+		}else {
 			ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		}
 		
@@ -217,8 +207,9 @@ public class ThermoInputService {
 			if(check.matches("^[0-9０-９]{3}$")) {
 				StringBuilder sb = new StringBuilder(check);
 				sb.insert(2, '.');
-				lt.setTemperature(sb.toString());
+				check=sb.toString();
 			}
+			lt.setTemperature(check);
 		}
 		
 		return list;
