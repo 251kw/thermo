@@ -44,6 +44,9 @@
 										<br><span th:text="#{view.errM432}"></span>
 										<br><span th:text="#{view.errEng}"></span>
 									</span>
+									<span th:if="${grIdError}">
+										<br><span th:text="${grIdError}" class="index_input_error"></span>
+									</span>
 								</td>
 							</tr>
 							<tr>
@@ -65,7 +68,6 @@
 										</span>
 										<span th:if="${grError}">
 											<br><span th:text="${grError}" class="index_input_error"></span>
-											<br><span th:text="${grError2}" class="index_input_error"></span>
 										</span>
 									</div>	
 								</td>
