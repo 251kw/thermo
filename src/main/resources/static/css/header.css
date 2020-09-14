@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .headerback {
-	background-color:rgba(84, 184, 1, 0.73);
+	background-color:rgb(100, 184, 2);
 	height: 90px;
 }
 
@@ -110,6 +110,16 @@
 
 }
 
+p.header span {
+	text-align: left !important;
+	padding-top: 3px !important;
+	padding-left: 5px !important;
+}
+.logo {
+	text-align: left !important;
+	padding-top: 3px !important;
+	padding-left: 5px !important;
+}
   
 @media screen and (max-width: 450px) {
 	 .header p {
