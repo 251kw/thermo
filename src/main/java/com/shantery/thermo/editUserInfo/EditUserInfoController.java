@@ -9,7 +9,7 @@ import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
 import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_ADMIN;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_AGE_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER2;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ID_ER;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -83,6 +83,8 @@ class EditUserInfoController {
 	public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
 			BindingResult result,Model model,BindingResult bindRes) {
 
+		//グループ存在チェック
+		Optional<GroupMstEntity> grId = eUService.getGrId(userInfoForm.getGroupId());
 		//グループ正誤調査
 		Optional<GroupMstEntity> grList = eUService.getGrInfo(userInfoForm.getGroupId(),userInfoForm.getGroupPass());
 		userInfoForm.setErrGPass(grList);//グループ正誤調査結果をFormにセット
@@ -110,10 +112,12 @@ class EditUserInfoController {
 			return "editUserInfoConfirm";//更新確認画面に遷移
 			
 		}else {
-			if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
-				//グループIDがない、もしくはグループパスワードが間違いの場合、エラー文をset
+			if(!(userInfoForm.getGroupId().isEmpty()) && !(grId.isPresent())){
+				//グループIDがDBに存在していない場合、エラー文をセット
+				model.addAttribute("grIdError", USER_INP_GR_ID_ER);
+			}else if(grList.orElse(null) == null && !(userInfoForm.getGroupId().isEmpty()) && !(userInfoForm.getGroupPass().isEmpty())) {
+				//グループパスワードが間違っている場合、エラー文をset
 				model.addAttribute("grError", USER_INP_GR_ER);
-				model.addAttribute("grError2", USER_INP_GR_ER2);
 			}else if(age == false) {
 				//年齢が120歳以上の場合、エラー文をset
 				model.addAttribute("ageError", USER_INP_AGE_ER);

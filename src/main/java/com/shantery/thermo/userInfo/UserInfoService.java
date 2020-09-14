@@ -49,4 +49,12 @@ public class UserInfoService {
 		uInfoRepository.saveAndFlush(uInfoData);
 	}
 
+	/**
+	 * 入力されたグループIDがDBに登録されているか検索
+	 * @param group_Id		新規登録時入力されたグループID
+	 * @return	検索結果(存在している場合、該当グループのデータがリストで返却される)
+	 */
+	public Optional<GroupMstEntity> getGrId(String group_Id){
+		return gInfoRepojitory.findById(group_Id);
+	}
 }
