@@ -25,7 +25,9 @@
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
 		<div class="ui container center aligned">
-
+		<div class="ui center aligned container">
+			<h3 class="index_ask_input" th:text="#{view.text.userInfoRes}"></h3>
+		</div>
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
@@ -87,7 +89,7 @@
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<p id="btm"></p>
 			<form action="#" th:action="@{./}" method="get">
-				<input type="submit" class="ui inverted primary button" th:value="#{view.btn.returnLogin}">
+				<input type="submit" class="ui inverted primary button" th:value="#{view.btn.return}">
 			</form>
 			
 		</div>
