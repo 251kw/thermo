@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 		<meta http-equiv="Content-Script-Type" content="text/javascript">
-		<title th:text="#{view.editUInfoMCon.pagetitle}"></title>
+		<title th:text="#{view.editUInfoMDCon.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
@@ -22,15 +22,17 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
-			<h3 th:text="ユーザー削除"></h3>
+			<h3 th:text="#{view.label.userInfoDelConf}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
 		<div class="ui container">
-			<div class="ui center aligned container">
-				<h3 class="editmultititle" th:text="以下のユーザーを削除します"></h3>
+			<div class="ui text container">
+				<div class="ui center aligned container">
+					<h3 class="index_ask_input" th:text="#{view.text.editMultiDelConfirm}"></h3>
+				</div>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<form action="/editusersmulti/result" method="POST" class="ui form">
