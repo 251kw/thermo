@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.shantery.thermo.ThermoForm;
 
 @Controller
-public class EditUserInfoMultiController2 {
+public class EditUserInfoMultiLogout{
 	@Autowired
 	HttpSession session; 
 	/**
