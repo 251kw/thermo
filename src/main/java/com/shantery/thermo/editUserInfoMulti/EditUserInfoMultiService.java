@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.shantery.thermo.entity.UserInfoEntity;
@@ -21,7 +23,6 @@ public class EditUserInfoMultiService {
 
 	@Autowired
 	EditUserInfoMultiRepository repository;
-
 		/**
 		 * ログイン中のユーザーと同じグループ内のユーザー情報を取得する
 		 * @param groupid
@@ -319,4 +320,9 @@ public class EditUserInfoMultiService {
 			return nullcheck;
 		}
 		
+		public String CheckBoxCheck() {
+				String result = "";
+						result = "checked = \"checked\" ";
+				return result;
+		}
 }

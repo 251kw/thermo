@@ -68,7 +68,9 @@
 			<select name="edit" id="edit">
 				<option value="editgroup" th:text="#{view.indexselect.group}"></option>
 				<option value="edituser" th:text="#{view.indexselect.user}"></option>
-				<option value="editmultiuser" th:text="#{view.indexselect.multiuser}"></option>
+				<th:block th:if="${adminbtn}==1">
+					<option value="editmultiuser" th:text="#{view.indexselect.multiuser}"></option>
+				</th:block>
 				<th:block th:if="${adminbtn}==2">
 					<option value="editsuperuser" th:text="#{view.indexselect.superuser}"></option>
 				</th:block>

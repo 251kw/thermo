@@ -1,9 +1,16 @@
 package com.shantery.thermo.editUserInfoMulti;
 
 
+import java.lang.module.ModuleDescriptor.Opens;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
+
+import com.shantery.thermo.entity.UserInfoEntity;
+
 
 
 /**
@@ -23,7 +30,15 @@ public class EditUserInfoMultiForm {
 		this.userList = userList;
 	}
 	
+	private String[] inputMultiCheck;
 	
+	public String[] getInputMultiCheck() {
+		return inputMultiCheck;
+	}
+	
+	public void setInputMultiCheck(String[] inputMultiCheck) {
+		this.inputMultiCheck = inputMultiCheck;
+	}
 
 	public static class contents {
 		

@@ -33,7 +33,7 @@
 				<h3 class="editmultititle" th:text="#{view.text.editMultiConfirm}"></h3>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			<form action="/editusersmultiresult" method="POST" class="ui form">
+			<form action="/editusersmulti/uresult" method="POST" class="ui form">
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
@@ -73,8 +73,10 @@
 				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 				<div align="center">
 					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.edit}"></button>
-					<a href="/editusersmultireturn">
-						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.return}"></button>
+					
+					<button type="submit" name="return" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
+						
+						<input type="hidden" th:name="inputMultiCheck" th:field="*{form.inputMultiCheck}">	
 						<span th:each="user, stat : ${session.inputlist}" th:object="${user}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="*{user_id}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="*{user_pass}">
@@ -84,7 +86,7 @@
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].grade'" th:value="*{grade}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].admin_flg'" th:value="*{admin_flg}">
 						</span>
-					</a>
+					
 				</div>
 			</form>
 			<p id="btm"></p>

@@ -33,18 +33,16 @@
 				<h3 class="editmultititle" th:text="#{view.text.editMultiInput}"></h3>
 				<h3 class="edituserinfomultiinput_error" th:text="${errormsg}"></h3>
 			</div>
-			<form action="/editusersmulticonfirm" method="POST" class="ui form">
+			<form action="/editusersmulti/confirm" th:object="${editUserInfoMultiForm}"  method="POST" class="ui form" name="form">
 				<div class="lefttopbutten">
-					<a href="/get_checkbox">
-						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.del}"></button>
-					</a>
+					<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
 				</div>
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
 							<th>
 								<span class="ui checkbox">
-									<input type="checkbox" id="check_all" name="check_all"/>
+									    <input type="checkbox" name="all" onClick="AllChecked();" />
 									<label></label>
 								</span>
 							</th>
@@ -60,10 +58,9 @@
 					<th:block th:if="${errlist}" th:each="user, stat : ${userlist}">
 				    <tr>
 						<td>
-							<span class="ui checkbox">
-								  <input type="checkbox" value="delete" th:name="'userList[' + __${stat.index}__ + '].multiChecks'">
-								  <input type="hidden" name="_multiChecks" value="on">
-								  <label for="multiChecks' + __${stat.index}__ + '"></label>
+							<span class="ui checkbox">		
+								<input type="checkbox" th:value="${user.user_id}" th:name="inputMultiCheck" th:field="*{inputMultiCheck}" >
+								<label for="multiChecks' + __${stat.index}__ + '"></label>
 							</span>
 						</td>
 						<td th:data-label="#{view.tablelabel.uId}">
@@ -97,11 +94,11 @@
 	        		<tr th:each="user, stat : ${userlist}">
 						<td>
 							<span class="ui checkbox">
-								  <input type="checkbox" value="delete" th:name="'userList[' + __${stat.index}__ + '].multiChecks'">
-								  <input type="hidden" name="_multiChecks" value="on">
-								  <label for="multiChecks' + __${stat.index}__ + '"></label>
+								<input type="checkbox" th:value="${user.user_id}" th:name="inputMultiCheck" th:field="*{inputMultiCheck}" >
+								<label for="multiChecks' + __${stat.index}__ + '"></label>
 							</span>
 						</td>
+						
 						<td th:data-label="#{view.tablelabel.uId}">
 	            			<p th:text="${user.user_id}"></p>
 	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="${user.user_id}">
@@ -116,7 +113,7 @@
 	            			<div th:insert="selectbox :: editgender"></div>
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.birthday}">
-	            			<input type="text" class="datepicker" placeholder="#{view.ph.birthday}" readonly="readonly" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="${user.birthday}">
+	            			<input type="text" class="datepicker" placeholder="#{view.ph.birthday}" readonly="readonly" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="${user.birthday}" onClick="DisChecked();">
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.grade}">
 	                		<div th:insert="selectbox :: editgrade"></div>
@@ -128,15 +125,12 @@
 	        		</th:block>
 				</table>
 				<div class="leftbutten">
-					<a href="/get_checkbox">
-						<span th:each="user, stat : ${userlist}">
-							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].multiChecks'" value="delete">
-						</span>
-						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.del}"></button>
-					</a>
+					<div class="lefttopbutten">
+						<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
+					</div>
 				</div>
 				<div class="centerbutten">
-					<button type="submit" class="ui inverted blue button editmultisubmit"><p th:text="#{view.btn.confirm}"></button>
+					<button type="submit" class="ui inverted blue button editmultisubmit" name="update"><p th:text="#{view.btn.confirm}"></button>
 					<a href="/search_return">
 						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.return}"></button>
 					</a>
@@ -147,25 +141,30 @@
 		<p id="pageTop"><a href="/editUserInfoMultiInput"><i class="arrow up icon"></i></a></p>
   		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
 		<br><br><br>
-		
-<script type="text/javascript">
-	$('.datepicker').datepicker();
+		<script type="text/javascript">
+		  // 「全て選択」チェックで全てにチェック付く
+		  function AllChecked(){
+		    var all = document.form.all.checked;
+		    for (var i=0; i<document.form.inputMultiCheck.length; i++){
+		      document.form.inputMultiCheck[i].checked = all;
+		    }
+		  }
 	
-	$('#check_all').on('change', function() {
-		// 「選択肢」のチェック状態を切替える
-		$('.item').prop('checked', $(this).is(':checked'));
-	});
-	
-	$('.item').on('change', function() {
-		// 「全選択」のチェック状態を切替える
-		if ($('#items :checked').length == $('#items :input').length){
-		    $('#check_all').prop('checked', true);
-		}else{
-		    $('#check_all').prop('checked', false);
-		}
-	});
-</script>
-
-
+		  // 一つでもチェックを外すと「全て選択」のチェック外れる
+		  function　DisChecked(){
+		    var checks = document.form.inputMultiCheck;
+		    var checksCount = 0;
+		    for (var i=0; i<checks.length; i++){
+		      if(checks[i].checked == false){
+		        document.form.all.checked = false;
+		      }else{
+		        checksCount += 1;
+		        if(checksCount == checks.length){
+		          document.form.all.checked = true;
+		        }
+		      }
+		    }
+		  }
+		</script>
 	</body>
 </html>
