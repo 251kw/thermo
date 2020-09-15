@@ -3,9 +3,9 @@ package com.shantery.thermo.editUserInfoMulti;
 
 import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
 import static com.shantery.thermo.util.ThermoConstants.THERMO_FORM;
-import static com.shantery.thermo.util.ThermoConstants.TO_TOP;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -89,7 +89,7 @@ class EditUserInfoMultiController {
 	}
 
 	/**
-	 * 確認画面へ遷移
+	 * 削除確認画面へ遷移
 	 * チェックされたユーザーの情報を渡す
 	 * @param form
 	 * @param model
@@ -111,22 +111,26 @@ class EditUserInfoMultiController {
 		// ２つのリストを比較して変更されたユーザーのみを取得
 		updatelist = service.makeUpdateList(updatelist, inputlist, originallist);
 		
+		//チェックされたユーザーの情報保持
 		String[] deluser = form.getInputMultiCheck();
 		String errormsg = null;
 		ArrayList<UserInfoEntity> delUserList = new ArrayList<>();
+		//削除されるユーザーの有無を確認
 		if(deluser == null || deluser.length == 0) {
-			errormsg = "チェックボックスを入力してください";
-			
+			errormsg = "チェックボックスを入力してください";	
 			// データを格納
 			model.addAttribute("userlist", form.getUserList());	
 			model.addAttribute("errormsg",errormsg);
+			//削除されるユーザーを選択していない場合Input画面へ遷移
 			return "editUserInfoMultiInput";
 		}else{
+			//削除されるユーザーの情報のリストを作成
 			for (int i = 0; i <= deluser.length - 1; i++) {
 				delUserList.addAll(0, repository.UserDelList(form.getInputMultiCheck()[i]));
 			}
-			session.setAttribute("delusers", deluser);
-			session.setAttribute("delUserList",delUserList);
+			Collections.reverse(delUserList); // lst自体を変更
+			session.setAttribute("delusers", deluser); //削除用
+			session.setAttribute("delUserList",delUserList); //確認・完了画面表示用
 			model.addAttribute("form",form);
 			session.setAttribute("inputlist", inputlist);
 			session.setAttribute("updatelist", updatelist);
@@ -144,7 +148,7 @@ class EditUserInfoMultiController {
 	@RequestMapping(value = "/result",method = RequestMethod.POST)
 	public String deleteresult(@ModelAttribute("userlist") EditUserInfoMultiForm form,
 			Model model) {
-		String[] delusers = (String[]) session.getAttribute("delusers");
+		String[] delusers = (String[]) session.getAttribute("delusers"); //削除されるユーザーのログインID
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		int flag = 0;
 		//削除するユーザーにログインユーザーがいないか調べる
@@ -174,12 +178,6 @@ class EditUserInfoMultiController {
 	@RequestMapping(value = "/result", params="back", method = RequestMethod.POST)
 	public String returnuerdel(
 			Model model,EditUserInfoMultiForm form){
-
-		ArrayList<UserInfoEntity> original = new ArrayList<>();
-		ArrayList<EditUserInfoMultiForm.contents> formlist = new ArrayList<>();
-		
-		// 取得したデータをformに詰め替える
-		formlist = service.makeFormList(formlist, original);
 		
 		// 値保持のために入力情報が全て格納されているリストをバインド
 		model.addAttribute("userlist", form.getUserList());
@@ -191,6 +189,7 @@ class EditUserInfoMultiController {
 		// ユーザー情報一括変更画面へ移動
 		return "editUserInfoMultiInput";
 	}	
+	
 	/**
 	 * ログインユーザーを削除しログイン画面に遷移する場合
 	 * @return
@@ -204,6 +203,13 @@ class EditUserInfoMultiController {
 		return "index";
 	}
 	
+	/**
+	 * ユーザー更新確認画面へ遷移する
+	 * @param form
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "confirm", params = "update", method = RequestMethod.POST)
 	public String receiveInfo(
@@ -211,7 +217,6 @@ class EditUserInfoMultiController {
 			BindingResult result,
 			Model model){
 		ArrayList<String[]> errlist = new ArrayList<>();
-		String errormsg = null;
 		Boolean nullcheck = false;
 		String transition = null;
 		ArrayList<EditUserInfoMultiForm.contents> originallist;
@@ -250,13 +255,11 @@ class EditUserInfoMultiController {
 		}else {
 			// そのまま確認画面へ
 			transition = "editUserInfoMultiConfirm";
-		}
-		
+		}	
 		model.addAttribute("form",form);
 		model.addAttribute("userlist", form.getUserList());
 		session.setAttribute("inputlist", inputlist);
-		session.setAttribute("updatelist", updatelist);
-		
+		session.setAttribute("updatelist", updatelist);	
 		// 画面移動
 		return transition;
 	}

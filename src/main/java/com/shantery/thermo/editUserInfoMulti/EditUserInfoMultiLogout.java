@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shantery.thermo.ThermoForm;
 
+/**
+ * @author d.ito
+ *ログインユーザーが削除されて、ログアウトする際の処理
+ */
 @Controller
 public class EditUserInfoMultiLogout{
 	@Autowired
