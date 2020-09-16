@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.shantery.thermo.entity.UserInfoEntity;
@@ -20,4 +21,10 @@ public interface EditUserInfoMultiRepository extends JpaRepository<UserInfoEntit
 	
 	// ログイン中のユーザー情報を取得する用
 	public Optional<UserInfoEntity> findById(String user_id);
+	
+	@Query(value="SELECT *"
+			+" FROM user_info"
+			+" WHERE user_id=?1"
+            ,nativeQuery = true)
+	ArrayList<UserInfoEntity> UserDelList(String user_id);
 }

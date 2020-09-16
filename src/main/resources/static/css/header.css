@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .headerback {
-	background-color:rgba(84, 184, 1, 0.73);
+	background-color:rgb(100, 184, 2);
 	height: 90px;
 }
 
@@ -63,19 +63,16 @@
 	    	0 0 3px #21ba45, 
 	    	0 0 3px #21ba45;
 	font-size: 45px;
+	padding-right: 65px;
 }
 
 .header p {
 	text-align: center;
 	position: relative;
-	top: 0%;
-    right: 0%;
-    bottom: 0%;
-    left: 2%;
-  	width: 1%;
-  	height: 90px;
-  	display:table-cell;
-  	vertical-align: middle;
+	top: 14px;
+    right: 0px;
+    bottom: 0px;
+    left: 24px;
 }
 
 .header i{
@@ -89,7 +86,7 @@
   text-align: center;/*中央揃え*/
   border-top: solid 5px rgba(84, 184, 1, 0.73);/*上線*/
   border-bottom: solid 5px rgba(84, 184, 1, 0.73);/*下線*/
-  
+
   text-shadow: 
   	0 0 3px #21ba45, 
   	0 0 3px #21ba45, 
@@ -110,18 +107,53 @@
 
 }
 
-  
-@media screen and (max-width: 450px) {
+.logo {
+	text-align: left !important;
+	padding-top: 3px !important;
+	padding-left: 5px !important;
+}
+
+.example03-box {
+　　width: 400px;
+　　overflow: hidden;
+　　_zoom: 1; /*IE6バグ対策*/
+　　
+}
+.example03-box .img {
+	text-align: left;
+	padding-top: 8px;
+	position: relative;
+	top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 10%;
+	float: left;
+}
+.example03-box .txt {
+　　overflow: hidden;
+　　_zoom: 1; /*IE6バグ対策*/
+}
+
+@media screen and (max-width: 540px) {
 	 .header p {
 		text-align: center;
 		position: relative;
-		top: 0%;
-	    right: 0%;
-	    bottom: 0%;
-	    left: 6%;
-	  	width: 1%;
-	  	height: 90px;
-	  	display:table-cell;
-	  	vertical-align: middle;
+		top: 14px;
+	    right: 0px;
+	    bottom: 0px;
+	    left: 25px;
+	    white-space: nowrap;
   }
+
+  .example03-box .img {
+	text-align: left;
+	padding-top: 8px;
+	position: relative;
+	top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+	float: left;
+	}
 }
+

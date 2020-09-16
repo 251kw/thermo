@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 		<meta http-equiv="Content-Script-Type" content="text/javascript">
-		<title th:text="#{view.editUInfoMCon.pagetitle}"></title>
+		<title th:text="#{view.editUInfoMDCon.pagetitle}"></title>
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
-			<h3 th:text="#{view.editUInfoMCon.pagetitle}"></h3>
+			<h3 th:text="#{view.label.userInfoDelConf}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		
@@ -31,11 +31,11 @@
 		<div class="ui container">
 			<div class="ui text container">
 				<div class="ui center aligned container">
-					<h3 class="index_ask_input" th:text="#{view.text.UGInfoCon}"></h3>
+					<h3 class="index_ask_input" th:text="#{view.text.editMultiDelConfirm}"></h3>
 				</div>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			<form action="/editusersmulti/uresult" method="POST" class="ui form">
+			<form action="/editusersmulti/result" method="POST" class="ui form">
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
@@ -48,7 +48,7 @@
 							<th th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
 					</thead>
-				    <tr th:each="user, stat : ${session.inputlist}" th:object="${user}">
+				    <tr th:each="user, stat : ${session.delUserList}" th:object="${user}">
 				    	<td th:data-label="#{view.tablelabel.uId}">
 	            			<p th:text="*{user_id}"></p>
 	            		</td>
@@ -74,12 +74,9 @@
 				</table>
 				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 				<div align="center">
-					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.edit}"></button>
-					
-					<button type="submit" name="return" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
-						
-						<input type="hidden" th:name="inputMultiCheck" th:field="*{form.inputMultiCheck}">	
-						<span th:each="user, stat : ${session.inputlist}" th:object="${user}">
+					<button type="submit"  class="ui inverted blue button" ><p th:text="#{view.btn.del}"></button>
+					<input type="hidden" th:name="inputMultiCheck" th:field="*{form.inputMultiCheck}">	
+					<span th:each="user, stat : ${session.inputlist}" th:object="${user}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="*{user_id}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="*{user_pass}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="*{user_name}">
@@ -88,7 +85,7 @@
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].grade'" th:value="*{grade}">
 							<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].admin_flg'" th:value="*{admin_flg}">
 						</span>
-					
+					<button type="submit" name="back" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
 				</div>
 			</form>
 			<p id="btm"></p>

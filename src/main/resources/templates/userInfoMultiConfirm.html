@@ -25,7 +25,9 @@
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
 		<div class="ui container center aligned">
-
+			<div class="ui center aligned container">
+				<div class="index_ask_input"><h3 style="font-size: 110%;" th:text="#{view.text.UGInfoCon}"></h3></div>
+			</div>
 			<table class="ui celled table">
 				<thead class="delete">
 					<tr>
@@ -96,7 +98,7 @@
 					
 					<td class="rightorigin">
 									<form action="#" th:action="@{./users_multi_set}" method="get">
-						<input type="submit" class="ui inverted primary button" th:value=#{view.btn.cancel}>
+						<input type="submit" class="ui inverted primary button" th:value=#{view.btn.return}>
 					</form>
 					</td>
 				</tr>

@@ -17,14 +17,16 @@
 		<!-- 小見出しを各々のページで書き換え -->
 		<br>
 		<div class="komidasi">
-			<h3 th:text="#{view.label.userInfoAddConp}"></h3>
+			<h3 th:text="#{view.editUInfoRes.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui container">
 			<div class="ui text container">
 				<form action="#" th:action="@{/search}" th:object="${userInfoForm}" method="get">
-					<div class="ui center aligned container">
-						<h3 class="index_ask_input" th:text="#{view.text.userInfoRes}"></h3>
+					<div class="ui text container">
+						<div class="ui center aligned container">
+							<h3 class="index_ask_input" th:text="#{view.text.userInfoERes}"></h3>
+						</div>
 					</div>
 					<table class="ui celled table" style="table-layout:fixed">
 						<tbody>

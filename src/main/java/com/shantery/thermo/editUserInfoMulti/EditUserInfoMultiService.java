@@ -21,7 +21,6 @@ public class EditUserInfoMultiService {
 
 	@Autowired
 	EditUserInfoMultiRepository repository;
-
 		/**
 		 * ログイン中のユーザーと同じグループ内のユーザー情報を取得する
 		 * @param groupid
@@ -319,4 +318,9 @@ public class EditUserInfoMultiService {
 			return nullcheck;
 		}
 		
+		public String CheckBoxCheck() {
+				String result = "";
+						result = "checked = \"checked\" ";
+				return result;
+		}
 }
