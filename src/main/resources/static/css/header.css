@@ -28,7 +28,7 @@
     	1px 1px 1px #1b1c1d, 
     	1px 1px 1px #1b1c1d;*/
     	
-    */text-shadow: 
+    /*text-shadow: 
     		 0 0 3px #21ba45,
 			 0 0 3px #21ba45, 
 			 0 0 3px #21ba45, 
@@ -135,6 +135,22 @@
 　　_zoom: 1; /*IE6バグ対策*/
 }
 
+.loginfo{
+	/*display:block;*/
+	/*text-align: center;*/
+	white-space: nowrap;
+	width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.center{
+	text-align: center;
+}
+
+.center span{
+	display: inline-block;
+}
 @media screen and (max-width: 540px) {
 	 .header p {
 		text-align: center;
