@@ -118,7 +118,6 @@
 　　width: 400px;
 　　overflow: hidden;
 　　_zoom: 1; /*IE6バグ対策*/
-　　
 }
 .example03-box .img {
 	text-align: left;
@@ -146,6 +145,7 @@
 
 .center{
 	text-align: center;
+	padding-top: 3px;
 }
 
 .center span{
