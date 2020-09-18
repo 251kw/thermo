@@ -16,11 +16,10 @@
     	<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
     	
 	</head>
-	<body>
+	<body style="overflow-y:scroll;">
 		<!-- 外部ヘッダーファイル読み込み -->
 		<div th:insert="header :: header"></div>
 		<!-- 小見出しを各々のページで書き換え -->
-		<br>
 		<div class="komidasi">
 			<h3 th:text="#{view.label.userInfoDelConf}"></h3>
 		</div>

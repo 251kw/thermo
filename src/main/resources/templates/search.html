@@ -15,12 +15,12 @@
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
 		<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
 		
-	<body>
+	<body style="overflow-y:scroll;">
 	
 		<!--外部ヘッダーファイル読み込み-->
 		<div th:insert="header :: header"></div>
 		<!--ページで書き換え -->
-		<br>
+		
 		<div class="komidasi">
 			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
 		</div>

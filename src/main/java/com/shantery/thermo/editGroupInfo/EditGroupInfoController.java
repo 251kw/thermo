@@ -127,6 +127,9 @@ class EditGroupInfoController {
 		model.addAttribute("groupId" , session.getAttribute("loginGroupId"));
 		model.addAttribute("groupName" , groupUpdateForm.getGroupName());
 		model.addAttribute("groupPass" , groupUpdateForm.getGroupPass());
+		
+		//sessionオブジェクトのグループ名を変更する
+		session.setAttribute("login_group", groupUpdateForm.getGroupName());
 
 		//sessionオブジェクトの"gForm"を削除する
 		session.removeAttribute("guForm");

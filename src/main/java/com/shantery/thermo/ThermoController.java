@@ -111,6 +111,7 @@ class ThermoController {
 		if(check==true) { // 正常なユーザーの場合
 			// ログイン中のユーザーの情報を保持
 			session.setAttribute(LOGIN_USER, userinfo);
+			session.setAttribute("login_group", userinfo.getUGroupMstEntity().getGroup_name());
 			
 			List<ThermoInfoEntity> schlist = schRepository.searchCurDate(userinfo.getGroup_id());	//今日の日付で検索	//group_idで絞る
 			
