@@ -31,14 +31,14 @@
 			<div class="ui text container">
 				<div class="ui center aligned container">
 					<h3 class="index_ask_input" th:text="#{view.text.UInfoAdd}"></h3>
-					<h3 class="edituserinfomultiinput_error" th:text="${errormsg}"></h3>
+					<h3 class="index_error" th:text="${errormsg}"></h3>
 				</div>
 			</div>
 			<form action="/editusersmulti/confirm" th:object="${editUserInfoMultiForm}"  method="POST" class="ui form" name="form">
 				<div class="lefttopbutten">
 					<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
 					<input type="checkbox" id="toggle-checkbox"name="all" onClick="AllChecked();">
-					<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox">全選択</label>
+					<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox" id="allbtn" style="padding: 14px 18px 13px 18px ;position: relative; right: 32px;"><span th:text="全選択"></span></label>
 				</div>
 				<table class="ui celled table">
 					<thead class="delete">
@@ -126,7 +126,7 @@
 					<div class="lefttopbutten">
 						<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
 						<input type="checkbox" id="toggle-checkbox"name="all2" onClick="AllChecked2();">
-						<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox">全選択</label>
+						<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox" style="padding: 14px 18px 13px 18px ;position: relative; right: 32px;">全選択</label>
 					</div>
 				</div>
 				<div class="centerbutten">
