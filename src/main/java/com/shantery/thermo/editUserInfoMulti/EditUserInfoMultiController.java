@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shantery.thermo.ThermoForm;
 import com.shantery.thermo.entity.UserInfoEntity;
+import com.shantery.thermo.util.ThermoReplaceValue;
 
 
 /**
@@ -225,10 +226,12 @@ class EditUserInfoMultiController {
 		
 		// セッションから比較用リストを取得
 		originallist = (ArrayList<EditUserInfoMultiForm.contents>)session.getAttribute("originallist");
-
+		for (int i = 0; i <= form.getUserList().size() - 1; i++) {
+			form.getUserList().get(i).setUser_name(ThermoReplaceValue.trimBlank(form.getUserList().get(i).getUser_name()));;
+		}
 		// 入力画面の情報を全て取得
 		inputlist = form.getUserList();
-		
+			
 		// ２つのリストを比較して変更されたユーザーのみを取得
 		updatelist = service.makeUpdateList(updatelist, inputlist, originallist);
 			
@@ -290,9 +293,11 @@ class EditUserInfoMultiController {
 	 * @return 結果画面
 	 */
 	@RequestMapping(value = "/uresult", method = RequestMethod.POST)
-	public String updateInfo(@ModelAttribute("userlist") EditUserInfoMultiForm form){
+	public String updateInfo(@ModelAttribute("userlist") EditUserInfoMultiForm form, Model model){
 		
 		ArrayList<UserInfoEntity> registlist = new ArrayList<>();
+		//ログインユーザーの管理者権限を判定
+		boolean adminflag = true;
 		
 		// ログイン中のユーザー情報を取得
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
@@ -306,6 +311,11 @@ class EditUserInfoMultiController {
 		// ログイン中のユーザー情報が変更されている可能性があるため、再取得
 		Optional<UserInfoEntity> data = repository.findById(loginuser.getUser_id());
 		UserInfoEntity userinfo = data.get();
+		//ログインユーザーが管理者でない場合
+		if(userinfo.getAdmin_flg().equals("0")) {
+			adminflag = false;
+		}
+		model.addAttribute("flag",adminflag);
 		session.setAttribute(LOGIN_USER, userinfo);
 		
 		// ユーザー情報一括変更結果画面へ移動

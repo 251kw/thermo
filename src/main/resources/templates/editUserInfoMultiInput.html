@@ -37,16 +37,13 @@
 			<form action="/editusersmulti/confirm" th:object="${editUserInfoMultiForm}"  method="POST" class="ui form" name="form">
 				<div class="lefttopbutten">
 					<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
+					<input type="checkbox" id="toggle-checkbox"name="all" onClick="AllChecked();">
+					<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox">全選択</label>
 				</div>
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
-							<th>
-								<span class="ui checkbox">
-									    <input type="checkbox" name="all" onClick="AllChecked();" />
-									<label></label>
-								</span>
-							</th>
+							<th th:text="#{view.blank.1}"></th>
 							<th th:text="#{view.tablelabel.uId}"></th>
 							<th th:text="#{view.tablelabel.pass}"></th>
 							<th th:text="#{view.tablelabel.name}"></th>
@@ -114,7 +111,7 @@
 	            			<div th:insert="selectbox :: editgender"></div>
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.birthday}">
-	            			<input type="text" class="datepicker" placeholder="#{view.ph.birthday}" readonly="readonly" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="${user.birthday}" onClick="DisChecked();">
+	            			<input type="text" class="datepicker" placeholder="#{view.ph.birthday}" readonly="readonly" th:name="'userList[' + __${stat.index}__ + '].birthday'" th:value="${user.birthday}" >
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.grade}">
 	                		<div th:insert="selectbox :: editgrade"></div>
@@ -128,6 +125,8 @@
 				<div class="leftbutten">
 					<div class="lefttopbutten">
 						<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
+						<input type="checkbox" id="toggle-checkbox"name="all2" onClick="AllChecked2();">
+						<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox">全選択</label>
 					</div>
 				</div>
 				<div class="centerbutten">
@@ -166,6 +165,18 @@
 		      }
 		    }
 		  }
+		  // 「全て選択」チェックで全てにチェック付く
+		  function AllChecked2(){
+		    var all2 = document.form.all2.checked;
+		    for (var i=0; i<document.form.inputMultiCheck.length; i++){
+		      document.form.inputMultiCheck[i].checked = all2;
+		    }
+		  }
+		</script>
+		<script type="text/javascript">
+			jQuery(function($) {
+				$('.datepicker').datepicker();
+			});
 		</script>
 	</body>
 </html>

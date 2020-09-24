@@ -82,7 +82,8 @@ class EditUserInfoController {
 	@RequestMapping(value = "/editUserInfoConfirm", method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
 			BindingResult result,Model model,BindingResult bindRes) {
-
+		//ログインユーザー情報の取得
+		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
 		//グループ存在チェック
 		Optional<GroupMstEntity> grId = eUService.getGrId(userInfoForm.getGroupId());
 		//グループ正誤調査
@@ -93,8 +94,11 @@ class EditUserInfoController {
 		if(!(userInfoForm.getBirthday().isEmpty())) {
 			age = ThermoUtil.ageLimit(userInfoForm.getBirthday());
 			}
-		
-		if(grList.orElse(null) != null && bindRes.hasErrors() == false && age == true) {
+		Boolean admin = true;//変数adminの初期化
+		if(loginuser.getAdmin_flg().equals("0") && userInfoForm.getAdminFlg().equals("1")) {
+			admin = false;
+		}
+		if(grList.orElse(null) != null && bindRes.hasErrors() == false && age == true && admin == true) {
 			//グループIDとグループパスワードが正しい＆入力チェックがエラーじゃないとき
 			
 			//氏名の前後の空白を除去し、Formに詰め替える
@@ -121,6 +125,8 @@ class EditUserInfoController {
 			}else if(age == false) {
 				//年齢が120歳以上の場合、エラー文をset
 				model.addAttribute("ageError", USER_INP_AGE_ER);
+			}else if(admin == false) {
+				model.addAttribute("adminError", "※管理者以外は変更できません");
 			}
 			//ユーザー情報更新入力画面に遷移"
 			return "editUserInfoInput";

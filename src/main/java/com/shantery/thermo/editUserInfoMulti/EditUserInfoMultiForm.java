@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+import com.shantery.thermo.userInfo.UserInfoForm;
+
 /**
  * @author k.takahashi
  * editUserInfoMultiパッケージ内で使うform
@@ -111,5 +113,4 @@ public class EditUserInfoMultiForm {
 		}
 		*/
 	}
-	
 }
