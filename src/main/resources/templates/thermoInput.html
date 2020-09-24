@@ -139,7 +139,7 @@
 										</span>
 									</div>
 								</td>
-								<td th:data-label="#{view.tablelabel.other}" style="position:relative">
+								<td th:data-label="#{view.tablelabel.other}+#{view.blank.1}" style="position:relative">
 									<span class="ui input">
 										<input type="text" style="width:100%; box-sizing:border-box" th:attr="name='tList[' + __${status.index}__ + '].writing'"
 										th:value="${list[status.index].writing}" size="43" maxlength="128" th:placeholder="#{view.checkPh.other}" />
