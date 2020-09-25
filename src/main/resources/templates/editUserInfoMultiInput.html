@@ -62,7 +62,7 @@
 							</span>
 						</td>
 						<td th:data-label="#{view.tablelabel.uId}+#{view.blank.1}">
-	            			<p th:text="${user.user_id}"></p>
+	            			<p style="word-break:break-all;" th:text="${user.user_id}"></p>
 	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="${user.user_id}">
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
@@ -110,7 +110,7 @@
 						</td>
 						
 						<td th:data-label="#{view.tablelabel.uId}+#{view.blank.1}">
-	            			<p th:text="${user.user_id}"></p>
+	            			<p style="word-break:break-all;" th:text="${user.user_id}"></p>
 	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="${user.user_id}">
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
