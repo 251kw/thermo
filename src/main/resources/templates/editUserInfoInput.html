@@ -146,6 +146,9 @@
 										<span class="ui input select">
 											<span th:insert="selectbox :: adminFlg"></span>
 										</span>
+										<span th:if="${adminError}">
+											<br><font size="3"><span th:text="${adminError}" class="index_input_error"></span></font>
+										</span>
 									</div>
 								</td>
 							</tr>

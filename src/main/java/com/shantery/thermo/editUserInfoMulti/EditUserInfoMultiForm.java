@@ -102,14 +102,5 @@ public class EditUserInfoMultiForm {
 		public void setAdmin_flg(String adminFlg) {
 			this.adminFlg = adminFlg;
 		}
-		/*
-		public String getMultiChecks() {
-			return multiChecks;
-		}
-		public void setMultiChecks(String multiChecks) {
-			this.multiChecks = multiChecks;
-		}
-		*/
 	}
-	
 }

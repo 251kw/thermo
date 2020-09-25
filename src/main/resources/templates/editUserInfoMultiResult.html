@@ -52,7 +52,7 @@
 	            			<p th:text="*{user_id}"></p>
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
-	                		<p th:text="*{user_pass}"></p>
+	                		<p th:text="#{view.Scr}"></p>
 	            		</td>
 				        <td th:data-label="#{view.tablelabel.name}+#{view.blank.3}">
 	                		<p th:text="*{user_name}"></p>
@@ -72,8 +72,15 @@
 	        		</tr>
 				</table>
 				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-				<div align="center">
-					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
+				<div th:if="${flag}" align="center">
+					<div align="center">
+						<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
+					</div>
+				</div>
+				<div th:unless="${flag}" align="center">
+					<a href="/search_return">
+						<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
+					</a>
 				</div>
 			</form>
 			<p id="btm"></p>
