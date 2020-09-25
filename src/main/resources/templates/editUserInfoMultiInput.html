@@ -146,19 +146,19 @@
 	        		</tr>
 	        		</th:block>
 				</table>
-				<div class="leftbutten">
+				<div class="leftbutten">	
 					<div class="lefttopbutten">
 						<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
 						<input type="checkbox" id="toggle-checkbox"name="all2" onClick="AllChecked2();">
 						<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox" style="padding: 14px 18px 13px 18px ;position: relative; right: 32px;"><span th:text="全選択"></span></label>
 					</div>
 				</div>
-				<div class="centerbutten">
+				<span class="testbutten">
 					<button type="submit" class="ui inverted blue button editmultisubmit" name="update"><p th:text="#{view.btn.confirm}"></button>
 					<a href="/search_return">
 						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.return}"></button>
 					</a>
-				</div>
+				</span>
 			</form>
 			<p id="btm"></p>
 		</div>
