@@ -182,13 +182,11 @@ div.example  {
 	text-align : left;
 	margin-bottom: 14px;
 }
-
-@media screen and (min-width: 1025px) {
-	.testbutten {
+.testbutten {
 		position: relative;
-		left: 300px;
+		left: 28%;
 	}
-}
+
 @media screen and (max-width: 1024px) {
 	.testbutten {
 		position: relative;
