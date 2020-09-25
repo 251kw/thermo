@@ -40,17 +40,17 @@
 					<input type="checkbox" id="toggle-checkbox"name="all" onClick="AllChecked();">
 					<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox" id="allbtn" style="padding: 14px 18px 13px 18px ;position: relative; right: 32px;"><span th:text="全選択"></span></label>
 				</div>
-				<table class="ui celled table">
+				<table class="ui celled table" style="table-layout:fixed">
 					<thead class="delete">
 						<tr>
-							<th th:text="#{view.blank.1}"></th>
-							<th th:text="#{view.tablelabel.uId}"></th>
-							<th th:text="#{view.tablelabel.pass}"></th>
-							<th th:text="#{view.tablelabel.name}"></th>
-							<th th:text="#{view.tablelabel.gender}"></th>
-							<th th:text="#{view.tablelabel.birthday}"></th>
-							<th th:text="#{view.tablelabel.grade}"></th>
-							<th th:text="#{view.tablelabel.adminFlg}"></th>
+							<th width="1"th:text="#{view.blank.1}"></th>
+							<th width="50"th:text="#{view.tablelabel.uId}"></th>
+							<th width="80"th:text="#{view.tablelabel.pass}"></th>
+							<th width="80" th:text="#{view.tablelabel.name}"></th>
+							<th width="49" th:text="#{view.tablelabel.gender}"></th>
+							<th width="65" th:text="#{view.tablelabel.birthday}"></th>
+							<th width="60" th:text="#{view.tablelabel.grade}"></th>
+							<th width="55" th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
 					</thead>
 					<th:block th:if="${errlist}" th:each="user, stat : ${userlist}">
