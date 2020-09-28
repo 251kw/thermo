@@ -293,8 +293,15 @@ div.example  {
 	  margin-right: 10px;
 	}
 }
-
-
+@media screen and (max-width: 1024px) {
+	th.other{
+		width: 80px;
+	}
+@media screen and (min-width: 1025px) {
+	th.other{
+		width: 180px;
+	}
+}
 @media screen and (max-width: 411px) {
 	/* editUserInfoMultiInput */
 .edituserinfomultiinput_error {
