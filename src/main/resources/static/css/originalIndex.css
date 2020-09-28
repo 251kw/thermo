@@ -297,6 +297,7 @@ div.example  {
 	th.other{
 		width: 80px;
 	}
+}
 @media screen and (min-width: 1025px) {
 	th.other{
 		width: 180px;
