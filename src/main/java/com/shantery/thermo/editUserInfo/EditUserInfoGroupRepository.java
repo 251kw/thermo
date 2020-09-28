@@ -13,7 +13,7 @@ import com.shantery.thermo.entity.GroupMstEntity;
 @Repository
 public interface EditUserInfoGroupRepository extends JpaRepository<GroupMstEntity, String> {
 	
-	//新規登録のグループIDとグループパスを受け取り、DBで探す
+	//グループIDを受け取り、DBで探す
 	public Optional<GroupMstEntity> findById(String Group_id);
 	
 	
