@@ -193,7 +193,7 @@ div.example  {
 		left: 200px;
 	}
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 769px) {
 	.testbutten {
 		position: relative;
 		left: 120px;
@@ -225,7 +225,7 @@ div.example  {
 }
 /* ------------------------------------スマホ用css--------------------------------------*/
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
 
 	/* index.html */
 	.index_error {
