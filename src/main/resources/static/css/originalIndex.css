@@ -167,25 +167,62 @@ div.example  {
 
 	color:#a2ca0e;/*文字色*/
 }
-
-.leftbutten {
-	float: left;
+@media screen and (min-width: 361px) {
+	.leftbutten {
+		float: left;
+	}
+}
+@media screen and (max-width: 360px) {
+	.leftbutten {
+	
+	}
 }
 
 .lefttopbutten {
 	text-align : left;
 	margin-bottom: 14px;
 }
+.testbutten {
+		position: relative;
+		left: 28%;
+	}
 
-
-.centerbutten {
-	position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
+@media screen and (max-width: 1024px) {
+	.testbutten {
+		position: relative;
+		left: 200px;
+	}
 }
-
+@media screen and (max-width: 768px) {
+	.testbutten {
+		position: relative;
+		left: 120px;
+	}
+}
+@media screen and (max-width: 480px) {
+	.testbutten {
+		position: relative;
+		left: 10px;
+	}
+}
+@media screen and (max-width: 414px) {
+	.testbutten {
+		position: relative;
+		left: 40px;
+	}
+}
+@media screen and (max-width: 375px) {
+	.testbutten {
+		position: relative;
+		left: 5px;
+	}
+}
+@media screen and (max-width: 360px) {
+	.testbutten {
+		position: relative;
+		left: 0px;
+	}
+}
 /* ------------------------------------スマホ用css--------------------------------------*/
 
 @media screen and (max-width: 767px) {

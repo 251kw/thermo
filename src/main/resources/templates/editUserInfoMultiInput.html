@@ -40,17 +40,17 @@
 					<input type="checkbox" id="toggle-checkbox"name="all" onClick="AllChecked();">
 					<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox" id="allbtn" style="padding: 14px 18px 13px 18px ;position: relative; right: 32px;"><span th:text="全選択"></span></label>
 				</div>
-				<table class="ui celled table">
+				<table class="ui celled table" style="table-layout:fixed">
 					<thead class="delete">
 						<tr>
-							<th th:text="#{view.blank.1}"></th>
-							<th th:text="#{view.tablelabel.uId}"></th>
-							<th th:text="#{view.tablelabel.pass}"></th>
-							<th th:text="#{view.tablelabel.name}"></th>
-							<th th:text="#{view.tablelabel.gender}"></th>
-							<th th:text="#{view.tablelabel.birthday}"></th>
-							<th th:text="#{view.tablelabel.grade}"></th>
-							<th th:text="#{view.tablelabel.adminFlg}"></th>
+							<th width="1"th:text="#{view.blank.1}"></th>
+							<th width="50"th:text="#{view.tablelabel.uId}"></th>
+							<th width="80"th:text="#{view.tablelabel.pass}"></th>
+							<th width="80" th:text="#{view.tablelabel.name}"></th>
+							<th width="49" th:text="#{view.tablelabel.gender}"></th>
+							<th width="65" th:text="#{view.tablelabel.birthday}"></th>
+							<th width="60" th:text="#{view.tablelabel.grade}"></th>
+							<th width="55" th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
 					</thead>
 					<th:block th:if="${errlist}" th:each="user, stat : ${userlist}">
@@ -62,7 +62,7 @@
 							</span>
 						</td>
 						<td th:data-label="#{view.tablelabel.uId}+#{view.blank.1}">
-	            			<p th:text="${user.user_id}"></p>
+	            			<p style="word-break:break-all;" th:text="${user.user_id}"></p>
 	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="${user.user_id}">
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
@@ -110,7 +110,7 @@
 						</td>
 						
 						<td th:data-label="#{view.tablelabel.uId}+#{view.blank.1}">
-	            			<p th:text="${user.user_id}"></p>
+	            			<p style="word-break:break-all;" th:text="${user.user_id}"></p>
 	                		<input type="hidden" th:name="'userList[' + __${stat.index}__ + '].user_id'" th:value="${user.user_id}">
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
@@ -146,19 +146,19 @@
 	        		</tr>
 	        		</th:block>
 				</table>
-				<div class="leftbutten">
+				<div class="leftbutten">	
 					<div class="lefttopbutten">
 						<button type="submit" class="ui inverted blue button editmultisubmit" name="delete"><p th:text="#{view.btn.del}"></button>
 						<input type="checkbox" id="toggle-checkbox"name="all2" onClick="AllChecked2();">
 						<label class="ui inverted blue button editmultisubmit" for="toggle-checkbox" style="padding: 14px 18px 13px 18px ;position: relative; right: 32px;"><span th:text="全選択"></span></label>
 					</div>
 				</div>
-				<div class="centerbutten">
+				<span class="testbutten">
 					<button type="submit" class="ui inverted blue button editmultisubmit" name="update"><p th:text="#{view.btn.confirm}"></button>
 					<a href="/search_return">
 						<button type="button" class="ui inverted blue button"><p th:text="#{view.btn.return}"></button>
 					</a>
-				</div>
+				</span>
 			</form>
 			<p id="btm"></p>
 		</div>
@@ -169,26 +169,15 @@
 		  // 「全て選択」チェックで全てにチェック付く
 		  function AllChecked(){
 		    var all = document.form.all.checked;
-		    for (var i=0; i<document.form.inputMultiCheck.length; i++){
-		      document.form.inputMultiCheck[i].checked = all;
+		    if(document.form.inputMultiCheck.length == null){
+		    	document.form.inputMultiCheck.checked = all;
+		    }else{
+			    for (var i=0; i<=document.form.inputMultiCheck.length - 1; i++){
+			      document.form.inputMultiCheck[i].checked = all;
+			    }
 		    }
 		  }
-	
-		  // 一つでもチェックを外すと「全て選択」のチェック外れる
-		  function　DisChecked(){
-		    var checks = document.form.inputMultiCheck;
-		    var checksCount = 0;
-		    for (var i=0; i<checks.length; i++){
-		      if(checks[i].checked == false){
-		        document.form.all.checked = false;
-		      }else{
-		        checksCount += 1;
-		        if(checksCount == checks.length){
-		          document.form.all.checked = true;
-		        }
-		      }
-		    }
-		  }
+
 		  // 「全て選択」チェックで全てにチェック付く
 		  function AllChecked2(){
 		    var all2 = document.form.all2.checked;
