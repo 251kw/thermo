@@ -169,26 +169,15 @@
 		  // 「全て選択」チェックで全てにチェック付く
 		  function AllChecked(){
 		    var all = document.form.all.checked;
-		    for (var i=0; i<document.form.inputMultiCheck.length; i++){
-		      document.form.inputMultiCheck[i].checked = all;
+		    if(document.form.inputMultiCheck.length == null){
+		    	document.form.inputMultiCheck.checked = all;
+		    }else{
+			    for (var i=0; i<=document.form.inputMultiCheck.length - 1; i++){
+			      document.form.inputMultiCheck[i].checked = all;
+			    }
 		    }
 		  }
-	
-		  // 一つでもチェックを外すと「全て選択」のチェック外れる
-		  function　DisChecked(){
-		    var checks = document.form.inputMultiCheck;
-		    var checksCount = 0;
-		    for (var i=0; i<checks.length; i++){
-		      if(checks[i].checked == false){
-		        document.form.all.checked = false;
-		      }else{
-		        checksCount += 1;
-		        if(checksCount == checks.length){
-		          document.form.all.checked = true;
-		        }
-		      }
-		    }
-		  }
+
 		  // 「全て選択」チェックで全てにチェック付く
 		  function AllChecked2(){
 		    var all2 = document.form.all2.checked;
