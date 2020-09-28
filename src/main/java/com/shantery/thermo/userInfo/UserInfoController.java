@@ -15,6 +15,7 @@ import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_AGE_ER;
 import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ID_ER;
+import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER_2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -115,7 +116,8 @@ class UserInfoController {
 			//既に登録されているユーザIDの場合、エラー文をset
 			if(test2List.orElse(null) != null) {
 				model.addAttribute("uIdError", USER_INP_ID_ER);
-			
+				model.addAttribute("uIdError2", USER_INP_ID_ER_2);
+		
 			}else if(!(userInfoForm.getGroupId().isEmpty()) && !(grId.isPresent())){
 				//グループIDがDBに存在していない場合、エラー文をセット
 				model.addAttribute("grIdError", USER_INP_GR_ID_ER);
