@@ -44,11 +44,11 @@
 					<thead class="delete">
 						<tr>
 							<th width="1"th:text="#{view.blank.1}"></th>
-							<th width="50"th:text="#{view.tablelabel.uId}"></th>
-							<th width="80"th:text="#{view.tablelabel.pass}"></th>
-							<th width="80" th:text="#{view.tablelabel.name}"></th>
+							<th width="45"th:text="#{view.tablelabel.uId}"></th>
+							<th width="90"th:text="#{view.tablelabel.pass}"></th>
+							<th width="100" th:text="#{view.tablelabel.name}"></th>
 							<th width="49" th:text="#{view.tablelabel.gender}"></th>
-							<th width="65" th:text="#{view.tablelabel.birthday}"></th>
+							<th width="55" th:text="#{view.tablelabel.birthday}"></th>
 							<th width="60" th:text="#{view.tablelabel.grade}"></th>
 							<th width="55" th:text="#{view.tablelabel.adminFlg}"></th>
 						</tr> 
@@ -56,7 +56,7 @@
 					<th:block th:if="${errlist}" th:each="user, stat : ${userlist}">
 				    <tr>
 						<td>
-							<span class="ui checkbox">		
+							<span class="ui checkbox">
 								<input type="checkbox" th:value="${user.user_id}" th:name="inputMultiCheck" th:field="*{inputMultiCheck}" >
 								<label for="multiChecks' + __${stat.index}__ + '"></label>
 							</span>
@@ -67,13 +67,13 @@
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
 	            			<span class="ui input">
-	                			<input type="text" name="user_pass" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="${user.user_pass}">
+	                			<input type="text" name="user_pass" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="${user.user_pass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
 	                		</span>
 	                		<span th:if="${errlist[__${stat.index}__][0]}" th:text="${errlist[__${stat.index}__][0]}" class="index_input_error"></span>
 	            		</td>
 				        <td th:data-label="#{view.tablelabel.name}+#{view.blank.3}">
 							<span class="ui input">
-	                			<input type="text" name="user_name" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="${user.user_name}">
+	                			<input type="text" name="user_name" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="${user.user_name}" th:placeholder="#{view.checkPh.name}" maxlength="64">
 	                		</span>
 	                		<span th:if="${errlist[__${stat.index}__][1]}" th:text="${errlist[__${stat.index}__][1]}" class="index_input_error"></span>
 	            		</td>
@@ -115,12 +115,12 @@
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.pass}">
 	            			<span class="ui input">
-	                			<input type="text" name="user_pass" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="${user.user_pass}">
+	                			<input type="text" name="user_pass" th:name="'userList[' + __${stat.index}__ + '].user_pass'" th:value="${user.user_pass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
 	                		</span>
 	            		</td>
 				        <td th:data-label="#{view.tablelabel.name}+#{view.blank.3}">
 							<span class="ui input">
-	                			<input type="text" name="user_name" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="${user.user_name}">
+	                			<input type="text" name="user_name" th:name="'userList[' + __${stat.index}__ + '].user_name'" th:value="${user.user_name}" th:placeholder="#{view.checkPh.name}" maxlength="64">
 	                		</span>
 	            		</td>
 	            		<td th:data-label="#{view.tablelabel.gender}+#{view.blank.3}">
@@ -187,10 +187,18 @@
 		  }
 		</script>
 		<script type="text/javascript">
+			//カレンダー機能
 			jQuery(function($) {
 				$('.datepicker').datepicker();
 			});
+			//cell型checkbox用のscript
+			$('[name=inputMultiCheck]').click(function(e){
+			    e.stopPropagation();
+			}).parents('td').click(function(){
+			    $(this).find('[name=inputMultiCheck]').prop('checked', !$(this).find('[name=inputMultiCheck]').prop('checked'));
+			});
 		</script>
+		
 		<br></br>
 	</body>
 </html>
