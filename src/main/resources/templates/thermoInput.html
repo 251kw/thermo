@@ -94,7 +94,9 @@
 										document.getElementById('thermo0').focus();
 									</script>
 									<div th:if="${message}">
-										<br><font color="red"><span th:text="${message[status.index]}"></span></font>
+										<div th:if="${message[status.index]}">
+											<font color="red"><span th:text="${message[status.index]}"></span></font>
+										</div>
 									</div>
 								</td>
 								<td th:data-label="#{view.tablelabel.taste}">
