@@ -94,19 +94,21 @@
 										document.getElementById('thermo0').focus();
 									</script>
 									<div th:if="${message}">
-										<br><font color="red"><span th:text="${message[status.index]}"></span></font>
+										<div th:if="${message[status.index]}">
+											<font color="red"><span th:text="${message[status.index]}"></span></font>
+										</div>
 									</div>
 								</td>
 								<td th:data-label="#{view.tablelabel.taste}">
 									<div th:unless="${list[status.index].taste}">
 										<span class="ui checkbox">
-											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
+											<input th:name="inputMultiCheck" type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" />
 											<label></label>
 										</span>
 									</div>
 									<div th:if="${list[status.index].taste}">
 										<span class="ui checkbox">
-											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
+											<input th:name="inputMultiCheck" type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].taste'" checked/>
 											<label></label>
 										</span>
 									</div>
@@ -114,13 +116,13 @@
 								<td th:data-label="#{view.tablelabel.smell}">
 									<div th:unless="${list[status.index].smell}">
 										<span class="ui checkbox">
-											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
+											<input th:name="inputMultiCheck" type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" />
 											<label></label>
 										</span>
 									</div>
 									<div th:if="${list[status.index].smell}">
 										<span class="ui checkbox">
-											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
+											<input th:name="inputMultiCheck" type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].smell'" checked/>
 											<label></label>
 										</span>
 									</div>
@@ -128,13 +130,13 @@
 								<td th:data-label="#{view.tablelabel.cough}+#{view.blank.3}">
 									<div th:unless="${list[status.index].cough}">
 										<span class="ui checkbox">
-											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
+											<input th:name="inputMultiCheck" type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" />
 											<label></label>
 										</span>
 									</div>
 									<div th:if="${list[status.index].cough}">
 										<span class="ui checkbox">
-											<input type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
+											<input th:name="inputMultiCheck" type="checkbox" th:attr="name='tList[' + __${status.index}__ + '].cough'" checked/>
 											<label></label>
 										</span>
 									</div>
@@ -191,6 +193,12 @@
 
 		        $(form).find(":radio").filter("[data-default]").prop("checked", true);
 		    }
+		});
+		//cell型checkbox用のscript
+		$('[name=inputMultiCheck]').click(function(e){
+		    e.stopPropagation();
+		}).parents('td').click(function(){
+		    $(this).find('[name=inputMultiCheck]').prop('checked', !$(this).find('[name=inputMultiCheck]').prop('checked'));
 		});
 		</script>
 		<p id="pageTop"><a href="/thermoInput"><i class="arrow up icon"></i></a></p>
