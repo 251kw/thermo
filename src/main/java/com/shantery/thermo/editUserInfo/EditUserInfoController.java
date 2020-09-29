@@ -36,6 +36,8 @@ class EditUserInfoController {
 	@Autowired
 	private EditUserInfoService eUService; //呼び出すクラス
 	@Autowired
+	private EditUserInfoGroupRepository eUgRepository; //呼び出すクラス
+	@Autowired
 	MessageSource messagesource; //messages.propertiesの利用
 	@Autowired
 	HttpSession session;
@@ -154,6 +156,9 @@ class EditUserInfoController {
 		
 		//T更新後、sessionのログイン情報新しく書き換える
 		session.setAttribute(LOGIN_USER, uInEn);
+		
+		//sessionオブジェクトのグループ名を変更する
+		session.setAttribute("login_group", eUgRepository.findById(uInEn.getGroup_id()).get().getGroup_name());
 		
 		//sessionオブジェクトを削除する
 		session.removeAttribute("uslist");

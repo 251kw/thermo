@@ -298,7 +298,8 @@ public class ThermoConstants {
 	// UserInfoInput,GroupInfoInputでしか使わない定義
 		public static final String USER_INP_GR_ER = "※グループパスワードが間違っています";
 		public static final String USER_INP_GR_ID_ER = "※存在しないグループIDです";
-		public static final String USER_INP_ID_ER= "※既に登録されているユーザーIDです";
+		public static final String USER_INP_ID_ER= "※システム内で既に";
+		public static final String USER_INP_ID_ER_2= "　登録されているユーザーIDです";
 		public static final String GRO_INP_ID_ER= "※既に登録されているグループIDです";
 		public static final String USER_INP_AGE_ER= "※年齢が120歳を超えています";
 }

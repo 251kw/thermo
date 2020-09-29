@@ -193,7 +193,7 @@ div.example  {
 		left: 200px;
 	}
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 769px) {
 	.testbutten {
 		position: relative;
 		left: 120px;
@@ -225,7 +225,7 @@ div.example  {
 }
 /* ------------------------------------スマホ用css--------------------------------------*/
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
 
 	/* index.html */
 	.index_error {
@@ -293,8 +293,16 @@ div.example  {
 	  margin-right: 10px;
 	}
 }
-
-
+@media screen and (max-width: 1024px) {
+	th.other{
+		width: 80px;
+	}
+}
+@media screen and (min-width: 1025px) {
+	th.other{
+		width: 180px;
+	}
+}
 @media screen and (max-width: 411px) {
 	/* editUserInfoMultiInput */
 .edituserinfomultiinput_error {
