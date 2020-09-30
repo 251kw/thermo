@@ -55,6 +55,8 @@ public class ThermoConstants {
 	public static final String SEARCH_INFO = "/search_info";
 	/**　セッションがタイムアウトしたとき **/
 	public static final String SESSION_TIMEOUT = "/timeout";
+	/** エクセル化機能を呼び出す **/
+	public static final String EXCEL_INFO = "/excel";
 	/**　グループ登録画面に遷移するとき **/
 	public static final String GROUP_INFO_INP= "/groupInfoInput";
 	/**　データ整備画面に遷移するとき **/

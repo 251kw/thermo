@@ -3,6 +3,8 @@ package com.shantery.thermo.print;
 
 import javax.servlet.http.HttpSession;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class ExcelController {
 	 * search.htmlの"印刷"ボタンから遷移
 	 * @return
 	 */
-	@RequestMapping("/excel") 
+	@RequestMapping(EXCEL_INFO) 
 	public  ExcelView excel(ExcelView mav) {
 			return mav; 
 	} 
