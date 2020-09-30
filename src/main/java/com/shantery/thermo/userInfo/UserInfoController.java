@@ -5,17 +5,7 @@ import java.util.Optional;
 
 
 import javax.servlet.http.HttpSession;
-import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
-import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
-import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_ADMIN;
-import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_INP;
-import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_CONF;
-import static com.shantery.thermo.util.ThermoConstants.TO_USER_INFO_RES;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_AGE_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ID_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_ID_ER_2;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -50,7 +40,7 @@ class UserInfoController {
 	 * @param model
 	 * @return 新規登録入力ページ
 	 */
-	@RequestMapping(value = "/userInfoInput", method = RequestMethod.GET)
+	@RequestMapping(value = USER_INFO_INP, method = RequestMethod.GET)
 	public String input(Model model){
 		//もしユーザ情報確認画面から戻ってきた際の処理
 		try {
@@ -77,7 +67,7 @@ class UserInfoController {
 	 * @param bindRes　入力エラー項目情報
 	 * @return　エラーがあればuserInfoInputへ、なければuserInfoConfirmへ遷移
 	 */
-	@RequestMapping(value = "/userInfoConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = USER_INFO_CONF_SUC, method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
 			BindingResult result,Model model,BindingResult bindRes) {
 		
@@ -140,7 +130,7 @@ class UserInfoController {
 	 * @param uInEn FormからEntityに変換したユーザ情報
 	 * @return 登録完了画面
 	 */
-	@RequestMapping(value = "/userInfoResult", method = RequestMethod.POST)
+	@RequestMapping(value = USER_INFO_REZ, method = RequestMethod.POST)
 	public String userInfoResult(@Validated @ModelAttribute("userInfoForm") UserInfoForm uInfoData, 
 			Model model,UserInfoEntity uInEn) {
 		

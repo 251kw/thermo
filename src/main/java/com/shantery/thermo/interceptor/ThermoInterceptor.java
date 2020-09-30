@@ -30,8 +30,8 @@ public class ThermoInterceptor extends HandlerInterceptorAdapter {
 		// ユーザー一括登録処理の場合
 		if (TOP.equals(requestUri) ||
 			LOGIN.equals(requestUri) ||
-			TO_GROUP_INFO_INP.equals(requestUri) ||
-			TO_USER_INFO_INP.equals(requestUri) ||
+			GROUP_INFO_INP.equals(requestUri) ||
+			USER_INFO_INP.equals(requestUri) ||
 			USERS_MULTI_SET.equals(requestUri) ||
 			SESSION_TIMEOUT.equals(requestUri)) {
 			// 当条件の場合、セッションが存在しない為、タイムアウト処理は行わない

@@ -2,11 +2,8 @@ package com.shantery.thermo.groupInfo;
 
 import java.util.Optional;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
 
-import static com.shantery.thermo.util.ThermoConstants.GRO_INP_ID_ER;
-import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_INP;
-import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_CONF;
-import static com.shantery.thermo.util.ThermoConstants.TO_GROUP_INFO_RES;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -39,7 +36,7 @@ class GroupInfoController {
 	 * @param model
 	 * @return グループ新規登録入力ページ
 	 */
-	@RequestMapping(value = "/groupInfoInput", method = RequestMethod.GET)
+	@RequestMapping(value = GROUP_INFO_INP, method = RequestMethod.GET)
 	public String input(Model model){
 		//もしグループ情報確認画面から戻ってきた際の処理
 		try {
