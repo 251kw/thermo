@@ -37,8 +37,12 @@ public class ThermoConstants {
 	public static final String USER_INFO_CONF_SUC = "/userInfoConfirm";
 	/** ユーザー新規登録の確認画面で登録ボタンを押されたとき **/
 	public static final String USER_INFO_REZ = "/userInfoResult";
-	/** グループ新規登録の確認画面で修正ボタンを押されたとき **/
-	public static final String GROUP_INFO_CONF_BACK = "/group_info_conf_back";
+	/** グループ新規登録の入力画面で確認ボタンを押されたとき **/
+	public static final String GROUP_INFO_CONF = "/groupInfoConfirm";
+	/** グループ新規登録の確認画面で確認ボタンを押されたとき **/
+	public static final String GROUP_INFO_REZ = "/groupInfoResult";
+	/** 体温情報登録の入力画面へ遷移 **/
+	public static final String THERMO_INFO_INP = "/from";
 	/** 体温情報登録の入力画面で確認ボタンを押されたとき **/
 	public static final String THERMO_INFO_INP_SUC = "/thermo_info_inp_suc";
 	/** 体温情報登録の確認画面で登録ボタンを押されたとき **/
@@ -53,9 +57,49 @@ public class ThermoConstants {
 	public static final String SESSION_TIMEOUT = "/timeout";
 	/**　グループ登録画面に遷移するとき **/
 	public static final String GROUP_INFO_INP= "/groupInfoInput";
-	
-	
-	
+	/**　データ整備画面に遷移するとき **/
+	public static final String DATA_ORGANIZE_INP= "/dataOrganizeInput";
+	/**　データ整備画面で削除ボタンが押されたとき **/
+	public static final String DATA_ORGANIZE_CONF= "/dataOrganizeConfirm";
+	/**　データ整備確認画面で削除ボタンが押されたとき **/
+	public static final String DATA_ORGANIZE_REZ= "/dataOrganizeResult";
+	/** グループ情報更新の入力画面へ遷移 **/
+	public static final String EDIT_GROUP_INFO_INP = "/editGroupInfoInput";
+	/** グループ情報更新の入力画面で確認ボタンを押したとき **/
+	public static final String EDIT_GROUP_INFO_CONF = "/groupUpdateConfirm";
+	/** グループ情報更新の入力画面で戻るボタンを押したとき **/
+	public static final String EDIT_GROUP_INFO_CONF_RETURN = "/guInput_return";
+	/** グループ情報更新の確認画面で確認ボタンを押したとき **/
+	public static final String EDIT_GROUP_INFO_REZ = "/groupUpdateResult";
+	/** ユーザー情報更新の入力画面へ遷移 **/
+	public static final String EDIT_USER_INFO_INP = "/editUserInfoInput";
+	/** ユーザー情報更新の入力画面で更新ボタンを押す **/
+	public static final String EDIT_USER_INFO_CONF = "/editUserInfoConfirm";
+	/** ユーザー情報更新の確認画面で更新ボタンを押す **/
+	public static final String EDIT_USER_INFO_REZ = "/editUserInfoResult";
+	/** ユーザー情報一括更新の入力画面へ遷移 **/
+	public static final String EDIT_USER_INFO_MULTI_INP = "editusersmulti";
+	/** ユーザー情報一括更新の入力画面へ遷移 **/
+	public static final String EDIT_USER_INFO_MULTI_SET =  "/set";
+	/** ユーザー情報一括削除・更新の入力画面で削除・確認ボタンを押す **/
+	public static final String EDIT_USER_INFO_MULTI_CONF =  "confirm";
+	/** ユーザー情報一括削除の確認画面で確認ボタンを押す **/
+	public static final String EDIT_USER_INFO_MULTI_DEL_REZ =  "/result";
+	/** ユーザー情報一括更新の確認画面で確認ボタンを押す **/
+	public static final String EDIT_USER_INFO_MULTI_REZ =  "/uresult";
+	/** ログインユーザー削除された場合のログアウト **/
+	public static final String LOGIN_USER_DELETED =  "/editlogout";
+	/**  ユーザー情報一括更新の入力画面から削除画面へ遷移 **/
+	public static final String EDIT_USER_INFO_MULTI_DELETED =  "delete";
+	/**  ユーザー情報一括削除の確認画面から戻るが押されたとき **/
+	public static final String EDIT_USER_INFO_MULTI_DEL_BACK =  "back";
+	/**  ログインユーザーが削除されたときのログアウト **/
+	public static final String EDIT_USER_INFO_MULTI_DEL_LOGOUT = "logout";
+	/** ユーザー情報一括更新の入力画面で確認ボタンを押す **/
+	public static final String EDIT_USER_INFO_MULTI_CONF_UPDATE =  "update";
+	/** ユーザー情報一括更新の確認画面で戻るボタンを押す **/
+	public static final String EDIT_USER_INFO_MULTI_CONF_RETURN =  "return";
+
 	// 遷移先を示す変数
 	/** TOPページの遷移先 **/
 	public static final String TO_TOP = "index";
@@ -93,8 +137,28 @@ public class ThermoConstants {
 	public static final String TO_EDIT_GROUP_INFO_RES = "editGroupInfoResult";
 	/** タイムアウト画面へ遷移 **/
 	public static final String TO_TIMEOUT_PAGE = "timeOutPage";
-	
-	
+	/**　データ整備画面のINPUTへ遷移する **/
+	public static final String TO_DATA_ORGANIZE_INP= "dataOrganizeInput";
+	/**　データ整備画面のCONFIRMへ遷移 **/
+	public static final String TO_DATA_ORGANIZE_CONF= "dataOrganizeConfirm";
+	/**　データ整備画面のRESULTへ遷移 **/
+	public static final String TO_DATA_ORGANIZE_REZ= "dataOrganizeResult";
+	/** ユーザー情報更新のINPUTへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_INP = "editUserInfoInput";
+	/** ユーザー情報更新のCONFIRMへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_COMF = "editUserInfoConfirm";
+	/** ユーザー情報更新のRESULTへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_RES = "editUserInfoResult";
+	/** ユーザー情報一括更新のINPUTへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_MULTI_INP =  "editUserInfoMultiInput";
+	/** ユーザー情報一括更新のCONFIRMへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_MULTI_COMF = "editUserInfoMultiConfirm";
+	/** ユーザー情報一括更新のRESULTへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_MULTI_RES = "editUserInfoMultiResult";
+	/** ユーザー情報一括削除のCONFIRMへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_MULTI_DEL_COMF = "editUserInfoMultiDeleteConfirm";
+	/** ユーザー情報一括削除のRESULTへの遷移 **/
+	public static final String TO_EDIT_USER_INFO_MULTI_DEL_RES = "editUserInfoMultiDeleteResult";
 	
 	// キーを示す変数
 	/** ユーザー情報のCSVファイルをinputするときのキー **/

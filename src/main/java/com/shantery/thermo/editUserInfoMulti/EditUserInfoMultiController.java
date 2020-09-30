@@ -1,8 +1,7 @@
 package com.shantery.thermo.editUserInfoMulti;
 
 
-import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
-import static com.shantery.thermo.util.ThermoConstants.THERMO_FORM;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +27,7 @@ import com.shantery.thermo.util.ThermoReplaceValue;
  * ユーザー情報一括変更画面での処理
  */
 @Controller
-@RequestMapping("editusersmulti")
+@RequestMapping(EDIT_USER_INFO_MULTI_INP)
 class EditUserInfoMultiController {
 
 	@Autowired
@@ -48,7 +47,7 @@ class EditUserInfoMultiController {
 	 * @param model
 	 * @return 入力画面
 	 */
-	@RequestMapping(value = "/set", method = RequestMethod.GET)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_SET, method = RequestMethod.GET)
 	public String storeInfo(
 			Model model,EditUserInfoMultiForm form){
 
@@ -86,7 +85,7 @@ class EditUserInfoMultiController {
 		session.setAttribute("originallist", formlist);	// 比較用
 
 		// ユーザー情報一括変更画面へ移動
-		return "editUserInfoMultiInput";
+		return TO_EDIT_USER_INFO_MULTI_INP;
 	}
 
 	/**
@@ -97,7 +96,7 @@ class EditUserInfoMultiController {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "confirm", params = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_CONF, params = EDIT_USER_INFO_MULTI_DELETED, method = RequestMethod.POST)
 	public String deleteconf(EditUserInfoMultiForm form,
 			Model model) {
 		ArrayList<EditUserInfoMultiForm.contents> originallist;
@@ -123,7 +122,7 @@ class EditUserInfoMultiController {
 			model.addAttribute("userlist", form.getUserList());	
 			model.addAttribute("errormsg",errormsg);
 			//削除されるユーザーを選択していない場合Input画面へ遷移
-			return "editUserInfoMultiInput";
+			return TO_EDIT_USER_INFO_MULTI_INP;
 		}else{
 			//削除されるユーザーの情報のリストを作成
 			for (int i = 0; i <= deluser.length - 1; i++) {
@@ -135,7 +134,7 @@ class EditUserInfoMultiController {
 			model.addAttribute("form",form);
 			session.setAttribute("inputlist", inputlist);
 			session.setAttribute("updatelist", updatelist);
-			return "editUserInfoMultiDeleteConfirm";
+			return TO_EDIT_USER_INFO_MULTI_DEL_COMF;
 		}
 	}
 	
@@ -146,7 +145,7 @@ class EditUserInfoMultiController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/result",method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_DEL_REZ,method = RequestMethod.POST)
 	public String deleteresult(@ModelAttribute("userlist") EditUserInfoMultiForm form,
 			Model model) {
 		String[] delusers = (String[]) session.getAttribute("delusers"); //削除されるユーザーのログインID
@@ -167,7 +166,7 @@ class EditUserInfoMultiController {
 			repository.deleteById(delusers[i]);
 		}
 		model.addAttribute("flag", flag);
-		return "editUserInfoMultiDeleteResult";
+		return TO_EDIT_USER_INFO_MULTI_DEL_RES;
 	}
 	
 	/**
@@ -176,7 +175,7 @@ class EditUserInfoMultiController {
 	 * @param form
 	 * @return
 	 */
-	@RequestMapping(value = "/result", params="back", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_DEL_REZ, params= EDIT_USER_INFO_MULTI_DEL_BACK, method = RequestMethod.POST)
 	public String returnuerdel(
 			Model model,EditUserInfoMultiForm form){
 		
@@ -188,20 +187,20 @@ class EditUserInfoMultiController {
 		session.removeAttribute("inputlist");
 
 		// ユーザー情報一括変更画面へ移動
-		return "editUserInfoMultiInput";
+		return TO_EDIT_USER_INFO_MULTI_INP;
 	}	
 	
 	/**
 	 * ログインユーザーを削除しログイン画面に遷移する場合
 	 * @return
 	 */
-	@RequestMapping(value = "/set",params = "logout", method = RequestMethod.GET)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_SET,params = EDIT_USER_INFO_MULTI_DEL_LOGOUT, method = RequestMethod.GET)
 	public String backlogin(@ModelAttribute(THERMO_FORM) ThermoForm FormValue) {
 		//session一括削除
 		session.invalidate();	
 		
 		// トップページへ移動
-		return "index";
+		return TO_TOP;
 	}
 	
 	/**
@@ -212,7 +211,7 @@ class EditUserInfoMultiController {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "confirm", params = "update", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_CONF, params = EDIT_USER_INFO_MULTI_CONF_UPDATE, method = RequestMethod.POST)
 	public String receiveInfo(
 			@Validated  EditUserInfoMultiForm form,
 			BindingResult result,
@@ -246,18 +245,18 @@ class EditUserInfoMultiController {
 			
 			// errlistが空でなかったのなら入力画面に戻す
 			if(nullcheck==false) {
-				transition = "editUserInfoMultiInput";
+				transition = TO_EDIT_USER_INFO_MULTI_INP;
 				model.addAttribute("errlist", errlist);
 				
 			// errlistが空なら確認画面へ移動
 			}else {
-				transition = "editUserInfoMultiConfirm";
+				transition = TO_EDIT_USER_INFO_MULTI_COMF;
 			}
 			
 		// updatelistの中身がない場合
 		}else {
 			// そのまま確認画面へ
-			transition = "editUserInfoMultiConfirm";
+			transition = TO_EDIT_USER_INFO_MULTI_COMF;
 		}	
 		model.addAttribute("form",form);
 		model.addAttribute("userlist", form.getUserList());
@@ -272,7 +271,7 @@ class EditUserInfoMultiController {
 	 * @param model
 	 * @return 入力画面
 	 */
-	@RequestMapping(value = "/uresult",params="return", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_REZ,params=EDIT_USER_INFO_MULTI_CONF_RETURN, method = RequestMethod.POST)
 	public String returnInfo(
 			Model model,EditUserInfoMultiForm form){
 		
@@ -284,7 +283,7 @@ class EditUserInfoMultiController {
 		session.removeAttribute("inputlist");
 		
 		// ユーザー情報一括入力画面へ移動
-		return "editUserInfoMultiInput";
+		return TO_EDIT_USER_INFO_MULTI_INP;
 	}
 	
 	/**
@@ -292,7 +291,7 @@ class EditUserInfoMultiController {
 	 * @param form
 	 * @return 結果画面
 	 */
-	@RequestMapping(value = "/uresult", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_MULTI_REZ, method = RequestMethod.POST)
 	public String updateInfo(@ModelAttribute("userlist") EditUserInfoMultiForm form, Model model){
 		
 		ArrayList<UserInfoEntity> registlist = new ArrayList<>();
@@ -319,6 +318,6 @@ class EditUserInfoMultiController {
 		session.setAttribute(LOGIN_USER, userinfo);
 		
 		// ユーザー情報一括変更結果画面へ移動
-		return "editUserInfoMultiResult";
+		return TO_EDIT_USER_INFO_MULTI_RES;
 	}
 }

@@ -43,7 +43,7 @@ class ThermoInputController {
 	 * @param model
 	 * @return 入力画面
 	 */
-	@RequestMapping(value = "/from"/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.POST)
+	@RequestMapping(value = THERMO_INFO_INP/*FROM_SEARCH_BUTTON*/ , method = RequestMethod.POST)
 	public String Input(Model model) {
 			
 		//ログインユーザーと同じグループIDのユーザー情報受け取る

@@ -2,6 +2,7 @@ package com.shantery.thermo.dataOrganize;
 
 import javax.servlet.http.HttpSession;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +28,9 @@ public class dataOrganizeController {
 	 * @return
 	 * 検索画面からデータ整備画面に遷移
 	 */
-	@RequestMapping(value = "/dataOrganizeInput", method = RequestMethod.GET)
+	@RequestMapping(value = DATA_ORGANIZE_INP, method = RequestMethod.GET)
 	public String thermoDelInput(Model model){
-		return "dataOrganizeInput";		
+		return TO_DATA_ORGANIZE_INP;		
 	}	
 	
 	/**
@@ -37,9 +38,9 @@ public class dataOrganizeController {
 	 * @return
 	 * データ整備画面からデータ整備確認画面に遷移
 	 */
-	@RequestMapping(value = "/dataOrganizeConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = DATA_ORGANIZE_CONF, method = RequestMethod.POST)
 	public String thermoDelConfirm(Model model){
-		return "dataOrganizeConfirm";		
+		return TO_DATA_ORGANIZE_CONF;		
 	}	
 	
 	/**
@@ -49,7 +50,7 @@ public class dataOrganizeController {
 	 * 一括削除処理を行う
 	 * データ整備完了画面へ
 	 */
-	@RequestMapping(value = "/dataOrganizeResult", method = RequestMethod.POST)
+	@RequestMapping(value = DATA_ORGANIZE_REZ, method = RequestMethod.POST)
 	public String thermoDel(Model model){
 		//最終更新から一年以上経過した検温情報を削除
 		do_service.thrmodelete();
@@ -60,7 +61,7 @@ public class dataOrganizeController {
 		//ユーザー情報を持たないかつ、更新日が一年以上前のグループを削除する	
 		dog_repository.groupDel();
 		//do_service.groupDelete();
-		return "dataOrganizeResult";		
+		return TO_DATA_ORGANIZE_REZ;		
 	}	
 
 }

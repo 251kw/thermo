@@ -3,13 +3,7 @@ package com.shantery.thermo.editUserInfo;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GENDER;
-import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_GRADE;
-import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
-import static com.shantery.thermo.util.ThermoConstants.KBN_TYPE_ADMIN;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_AGE_ER;
-import static com.shantery.thermo.util.ThermoConstants.USER_INP_GR_ID_ER;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -47,7 +41,7 @@ class EditUserInfoController {
 	 * @param model
 	 * @return ユーザー情報更新入力画面
 	 */
-	@RequestMapping(value = "/editUserInfoInput", method = RequestMethod.GET)
+	@RequestMapping(value = EDIT_USER_INFO_INP, method = RequestMethod.GET)
 	public String input(Model model,UserInfoForm uInFm){
 		try {
 			if(!(session.getAttribute("uForm").equals(null))) {	 
@@ -70,7 +64,7 @@ class EditUserInfoController {
 			//モデルへセット
 			model.addAttribute("userInfoForm", uInFm);
 		}
-		return "editUserInfoInput";//ユーザー情報更新入力画面へ遷移
+		return TO_EDIT_USER_INFO_INP;//ユーザー情報更新入力画面へ遷移
 	}	
 	
 	
@@ -81,7 +75,7 @@ class EditUserInfoController {
 	 * @param bindRes　入力チェックエラー
 	 * @return　エラーがあれば入力画面へ、なければ確認画面へ遷移
 	 */
-	@RequestMapping(value = "/editUserInfoConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_CONF, method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("userInfoForm") UserInfoForm userInfoForm, 
 			BindingResult result,Model model,BindingResult bindRes) {
 		//ログインユーザー情報の取得
@@ -115,7 +109,7 @@ class EditUserInfoController {
 			session.setAttribute("uslist", uslist);
 			session.setAttribute("uForm", userInfoForm);
 			
-			return "editUserInfoConfirm";//更新確認画面に遷移
+			return TO_EDIT_USER_INFO_COMF;//更新確認画面に遷移
 			
 		}else {
 			if(!(userInfoForm.getGroupId().isEmpty()) && !(grId.isPresent())){
@@ -131,7 +125,7 @@ class EditUserInfoController {
 				model.addAttribute("adminError", "※管理者以外は変更できません");
 			}
 			//ユーザー情報更新入力画面に遷移"
-			return "editUserInfoInput";
+			return TO_EDIT_USER_INFO_INP;
 		}
 	}
 		
@@ -143,7 +137,7 @@ class EditUserInfoController {
 	 * @param uInEn　ユーザーエンティティクラス
 	 * @return 登録完了画面
 	 */
-	@RequestMapping(value = "/editUserInfoResult", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_USER_INFO_REZ , method = RequestMethod.POST)
 	public String userInfoResult(@Validated @ModelAttribute("userInfoAddForm") UserInfoForm uInfoAddData, 
 			Model model,UserInfoEntity uInEn) {
 		//セッション内のuslist(表示用に変換したリスト)を取得、モデルにセット
@@ -164,7 +158,7 @@ class EditUserInfoController {
 		session.removeAttribute("uslist");
 		session.removeAttribute("uForm");
 		
-		return "editUserInfoResult";//ユーザ情報更新完了画面に遷移
+		return TO_EDIT_USER_INFO_RES;//ユーザ情報更新完了画面に遷移
 		
 	}
 	

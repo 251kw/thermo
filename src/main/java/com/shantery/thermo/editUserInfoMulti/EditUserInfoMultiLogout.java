@@ -1,7 +1,6 @@
 package com.shantery.thermo.editUserInfoMulti;
 
-import static com.shantery.thermo.util.ThermoConstants.THERMO_FORM;
-
+import static com.shantery.thermo.util.ThermoConstants.*;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,12 @@ public class EditUserInfoMultiLogout{
 	 * ログインユーザーを削除しログイン画面に遷移する場合
 	 * @return
 	 */
-	@RequestMapping(value = "/editlogout",method = RequestMethod.GET)
+	@RequestMapping(value = LOGIN_USER_DELETED,method = RequestMethod.GET)
 	public String backlogin(@ModelAttribute(THERMO_FORM) ThermoForm FormValue) {
 		//session一括削除
 		session.invalidate();	
 		
 		// トップページへ移動
-		return "index";
+		return TO_TOP;
 	}
 }

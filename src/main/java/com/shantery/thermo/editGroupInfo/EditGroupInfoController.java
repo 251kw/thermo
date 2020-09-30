@@ -1,9 +1,6 @@
 package com.shantery.thermo.editGroupInfo;
 
-import static com.shantery.thermo.util.ThermoConstants.LOGIN_USER;
-import static com.shantery.thermo.util.ThermoConstants.TO_EDIT_GROUP_INFO_INP;
-import static com.shantery.thermo.util.ThermoConstants.TO_EDIT_GROUP_INFO_COMF;
-import static com.shantery.thermo.util.ThermoConstants.TO_EDIT_GROUP_INFO_RES;
+import static com.shantery.thermo.util.ThermoConstants.*;
 
 import java.util.List;
 
@@ -44,7 +41,7 @@ class EditGroupInfoController {
 	 * @param groupUpdateForm
 	 * @return
 	 */
-	@RequestMapping(value = "/editGroupInfoInput", method = RequestMethod.GET)
+	@RequestMapping(value = EDIT_GROUP_INFO_INP, method = RequestMethod.GET)
 	public String input(Model model, EditGroupInfoForm groupUpdateForm){		
 		//ログインユーザーと同じグループIDのユーザー情報受け取る
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
@@ -71,7 +68,7 @@ class EditGroupInfoController {
 	 * @param groupUpdateForm　//入力」情報を保持
 	 * @return
 	 */
-	@RequestMapping(value = "/guInput_return", method = RequestMethod.GET)
+	@RequestMapping(value = EDIT_GROUP_INFO_CONF_RETURN , method = RequestMethod.GET)
 	public String input_return( Model model, GroupMstEntity gUpEn, EditGroupInfoForm groupUpdateForm){
 		EditGroupInfoForm groupUpdatedata = (EditGroupInfoForm) session.getAttribute("guForm");
 		//入力された情報をセットする
@@ -88,7 +85,7 @@ class EditGroupInfoController {
 	 * @param bindRes
 	 * @return
 	 */
-	@RequestMapping(value = "/groupUpdateConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_GROUP_INFO_CONF, method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("groupUpdateForm") EditGroupInfoForm groupUpdateForm, 
 			BindingResult result, Model model,BindingResult bindRes) {
 			//エラーチェック
@@ -117,7 +114,7 @@ class EditGroupInfoController {
 	 * @param gUpEn
 	 * @return
 	 */
-	@RequestMapping(value = "/groupUpdateResult", method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_GROUP_INFO_REZ, method = RequestMethod.POST)
 	public String groupInfoResult(@Validated @ModelAttribute("groupUpdateForm") EditGroupInfoForm groupUpdateForm, 
 			Model model,GroupMstEntity gUpEn) {	
 		//Formに入っているユーザ情報をEntityに変換

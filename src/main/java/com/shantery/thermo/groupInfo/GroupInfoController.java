@@ -64,7 +64,7 @@ class GroupInfoController {
 	 * @param bindRes	入力エラー項目情報
 	 * @return　エラーがあればgroupInfoInputへ、なければgroupInfoConfirmへ遷移
 	 */
-	@RequestMapping(value = "/groupInfoConfirm", method = RequestMethod.POST)
+	@RequestMapping(value = GROUP_INFO_CONF, method = RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm groupInfoForm, 
 			BindingResult result, Model model,BindingResult bindRes) {
 		
@@ -96,7 +96,7 @@ class GroupInfoController {
 	 * @param gInEn　 FormからEntityに変換したユーザ情報
 	 * @return　登録完了画面
 	 */
-	@RequestMapping(value = "/groupInfoResult", method = RequestMethod.POST)
+	@RequestMapping(value = GROUP_INFO_REZ, method = RequestMethod.POST)
 	public String groupInfoResult(@Validated @ModelAttribute("groupInfoForm") GroupInfoForm gInfoData, 
 			Model model,GroupMstEntity gInEn) {
 		
