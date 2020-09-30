@@ -20,6 +20,9 @@
 				<span class="loginfo" th:text="'ユーザー名 : '+${session.loginuser.user_name}"></span>
 				</div>
 			</div>
+			<div th:unless="${session.loginuser}">
+				<div style="padding-top:7px;"></div>
+			</div>
 		</div>
 	</body>
 </html>
