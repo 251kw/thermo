@@ -53,6 +53,8 @@ public class ThermoConstants {
 	public static final String SEARCH_RETURN = "/search_return";
 	/** 体温検索画面で検索ボタンが押されたとき **/
 	public static final String SEARCH_INFO = "/search_info";
+	/**　セッションがタイムアウトしたとき **/
+	public static final String SESSION_TIMEOUT = "/timeout";
 	
 	
 	
@@ -91,6 +93,8 @@ public class ThermoConstants {
 	public static final String TO_EDIT_GROUP_INFO_COMF = "editGroupInfoConfirm";
 	/** グループ情報更新のRESULTへの遷移 **/
 	public static final String TO_EDIT_GROUP_INFO_RES = "editGroupInfoResult";
+	/** タイムアウト画面へ遷移 **/
+	public static final String TO_TIMEOUT_PAGE = "timeOutPage";
 	
 	
 	

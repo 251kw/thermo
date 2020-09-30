@@ -146,6 +146,14 @@ class ThermoController {
 		return logintransition;
 		
 	}
-	
+	/**
+	 * タイムアウトした際の遷移
+	 * @return
+	 */
+	@RequestMapping(value = SESSION_TIMEOUT, method = RequestMethod.GET)
+	public String timeout(){	
+		// トップページへ移動
+		return TO_TIMEOUT_PAGE;
+	}
 }
 

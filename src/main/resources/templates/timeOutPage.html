@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+		<title th:text="#{view.sessiontimeout.pagetitle}"></title>
+		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+    	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	</head>
+	<body style="overflow-y:scroll;">
+		<!-- 外部ヘッダーファイル読み込み -->
+		<div th:insert="header :: header"></div>
+		<!-- 小見出しを各々のページで書き換え -->
+		<div class="komidasi">
+			<h3 th:text="#{view.label.timeout}"></h3>
+		</div>
+		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
+		<div class="ui container">
+			<div class="ui text container">
+				<form action="/"  method="GET">
+					<div class="ui center aligned container">
+						<h3 class="index_ask_input" th:text="#{view.text.returnlogininput}"></h3>
+					</div>			
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+					<div class="ui center aligned container">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.return}"></button>	
+					</div>
+				</form>
+			</div>
+		</div>
+		<br><br><br>
+	</body>
+</html>

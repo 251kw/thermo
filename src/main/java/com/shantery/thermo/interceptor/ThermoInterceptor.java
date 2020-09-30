@@ -32,7 +32,8 @@ public class ThermoInterceptor extends HandlerInterceptorAdapter {
 			LOGIN.equals(requestUri) ||
 			TO_GROUP_INFO_INP.equals(requestUri) ||
 			TO_USER_INFO_INP.equals(requestUri) ||
-			USERS_MULTI_SET.equals(requestUri)) {
+			USERS_MULTI_SET.equals(requestUri) ||
+			SESSION_TIMEOUT.equals(requestUri)) {
 			// 当条件の場合、セッションが存在しない為、タイムアウト処理は行わない
 			return true;
 		}
@@ -40,7 +41,7 @@ public class ThermoInterceptor extends HandlerInterceptorAdapter {
 		// セッションタイムアウトの場合
 		if (isSessionTimeout(request)) {
 			// ログアウト処理を行う
-			response.sendRedirect(TOP);
+			response.sendRedirect(SESSION_TIMEOUT);
 			return false;
 		}
 		return true;
