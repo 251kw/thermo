@@ -37,13 +37,13 @@ public class ThermoInterceptor extends HandlerInterceptorAdapter {
 			// 当条件の場合、セッションが存在しない為、タイムアウト処理は行わない
 			return true;
 		}
-
+		// TODO 2020/10/15:タイムアウト対応をAWSで行う
 		// セッションタイムアウトの場合
-		if (isSessionTimeout(request)) {
+		/*if (isSessionTimeout(request)) {
 			// ログアウト処理を行う
 			response.sendRedirect(SESSION_TIMEOUT);
 			return false;
-		}
+		}*/
 		return true;
 	}
 

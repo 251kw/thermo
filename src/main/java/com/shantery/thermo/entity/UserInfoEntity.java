@@ -3,7 +3,6 @@ package com.shantery.thermo.entity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,7 +19,7 @@ import com.shantery.thermo.userInfo.UserInfoForm;
  * user_infoデータベースのエンティティクラス
  */
 @Entity
-@Table(name = "user_info") 
+@Table(name = "user_info")
 public class UserInfoEntity {
 
 	@Id
@@ -51,13 +50,13 @@ public class UserInfoEntity {
 	/** 更新時間 **/
 	@Column(name="update_time")
 	private String updateTime;
-	
-	
+
+
 	/** ThermoInfoEntity **/
 	@OneToMany					//↓SQLのINSERT文,UPDATE文に含むかどうか指定
 	@JoinColumn(name="user_id", insertable=false, updatable=false)
 	private List<ThermoInfoEntity> thermoInfoEntity;
-	
+
 	public List<ThermoInfoEntity> getThermoInfoEntity() {
 		return thermoInfoEntity;
 	}
@@ -184,23 +183,23 @@ public class UserInfoEntity {
 		userInfoList.add(getGrade());
 		userInfoList.add(getAdmin_flg());
 		userInfoList.add(getUpdate_time());
-		
+
 		return userInfoList;
 	}
-	
+
 	public String[] getHead() {
 		String[] head = {"a"};
-	
+
 	return head;
-	
+
 	}
-	
+
 	/**
 	 * 一括登録された情報をセットする
 	 * @param userInfo ユーザー情報
 	 */
 	public void setUserInfo(String[] userInfo) {
-		
+
 		this.userId = userInfo[2];
 		this.groupId = userInfo[0];
 		this.userPass = userInfo[3];
@@ -213,9 +212,9 @@ public class UserInfoEntity {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.updateTime = sdf.format(calendar.getTime());
-		
+
 	}
-	
+
 	/**
 	 * Entityで受け取った情報をFormに変換する
 	 * @author h.komatsu
@@ -223,7 +222,7 @@ public class UserInfoEntity {
 	 */
 	public UserInfoForm _toConvertUserInfoForm(){
 		UserInfoForm uInFm = new UserInfoForm();
-		
+
 		uInFm.setGroupId(getGroup_id());
 		uInFm.setUserId(getUser_id());
 		uInFm.setUserPass(getUser_pass());
@@ -235,5 +234,5 @@ public class UserInfoEntity {
 		uInFm.setUpdateTime(getUpdate_time());
 	    return uInFm;
 	 }
-	
+
 }
