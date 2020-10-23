@@ -9,24 +9,24 @@
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-		
+
 		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
 		<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
-		
+
 	<body style="overflow-y:scroll;">
-	
+
 		<!--外部ヘッダーファイル読み込み-->
 		<div th:insert="header :: header"></div>
 		<!--ページで書き換え -->
-		
+
 		<div class="komidasi">
 			<h3><th:block  th:text="#{view.search.pagetitle}"></h3>
 		</div>
 		<p></p>
 		<div class="ui right aligned container">
-			<a href="/logout">
+			<a th:href="@{/logout}">
 						<button type="submit" class="ui inverted primary button" style="float:right;">
 								<p th:text="#{view.btn.logout}"></p>
 						</button>
@@ -34,7 +34,7 @@
 		</div>
 		<div class="ui left aligned  container">
 			<p></p>
-			<form method="post" action="/from">
+			<form action="/" th:action="@{/from}" method="post" >
 					<div th:if="${adminbtn}">
 						<button type="submit" class="ui inverted primary button">
 							<p th:text="#{view.btn.thermoinfo}"></p>
@@ -46,30 +46,30 @@
 			</form>
 		</div>
 		<p></p>
-		
+
 		<!------------------------------------------- 本体始まり ----------------------------------------------------->
-		
+
 		<div class="ui left aligned  container">
 			<form method="get" class="ui form" name="registform" onsubmit="return check()">
 				<table>
 					<tr>
 						<td>
-							<span class="ui input select">			
+							<span class="ui input select">
 								<span th:insert="selectbox :: edit"></span>
-							</span> 
+							</span>
 							<input class="ui inverted blue button" type="submit" th:value="#{view.btn.edit}" />
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
-		
+
 		<form class="ui form" th:action="@{/search_info}" th:object="${searchInfo}" method="post">
 			<div class="ui container">
 	​
 				<div class="ui horizontal divider"><!-- 線を引いてテキストを入れれる --><p th:text="#{view.label.searchinfo}"></div>
 				<p></p>
-				
+
 				<table class="ui very basic table">
 					<thead class="delete">
 					<tr>
@@ -87,7 +87,7 @@
 								<div class="ui input">
 								<input type="text" th:field="*{sch_name}" maxlength='64' placeholder="64文字以内" autofocus="autofocus"></div>
 								<div th:if="${#fields.hasErrors('sch_name')}" th:errors="*{sch_name}" th:errorclass="index_input_error"></div>
-							
+
 							<td th:data-label="#{view.tablelabel.grade}+#{view.blank.1}">
 		  						<div class="ui input">
 									<div th:insert="selectbox :: gradeAndBlank"></div>
@@ -95,11 +95,11 @@
 							</td>
 							<td>
 								<span class="ui checkbox">
-								
+
 									<input type="checkbox" name="highthermo" th:field="*{sch_high}" value="high" id="labelcheck">
-									
+
 									<label for="labelcheck" th:text="#{view.label.searchthermo}"></label>
-							
+
 								</span>
 							</td>
 						</tr>
@@ -107,28 +107,28 @@
 					</tbody>
 				</table>
 			</div>
-			
+
 			<p></p>
 			<div class="ui center aligned container"><!-- 中央寄せ -->
 				<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.search}"></button>
 				<button type="button" class="ui inverted primary button" onClick="clearFormAll(); "><p th:text="#{view.btn.clear}"></button>
 			</div>
-		
+
 		</form>
-		
+
 		<div class="ui container">
 			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
 		</div>
-		
+
 		<div th:if="${display}">
 			<div class="ui right aligned  container"><!-- 右寄せ -->
-				<form method="post" action="/excel">
+				<form action="/" th:action="@{/excel}" method="post">
 					<button type="submit" class="ui inverted primary button"><p th:text="#{view.btn.copy}"></button>
 				</form>
 			</div>
 		</div>
-		
-		<form action="/thermo_info_inp_suc" method="post" th:object="${thForm}">
+
+		<form action="/" th:action="@{/thermo_info_inp_suc}" method="post" th:object="${thForm}">
 			<div class="ui container center aligned">
 		​		<div th:if="${display}">
 				<h3 th:text="${overlist_msg}"></h3>
@@ -216,16 +216,16 @@
 							</th:block>
 						</th:block>
 					</table>
-					
+
 				</div>
 				<div th:unless="${display}">
 					<h3 th:text="${nolist_msg}"></h3>
 				</div>
 			</div>
 		</form>
-		
+
 		<p id="btm"></p>
-		
+
 		<script type="text/javascript">
 			//form内の値（入力情報）をすべてクリアにする
 			function clearFormAll() {
@@ -265,7 +265,7 @@
 			        default:
 			    }
 			}
-			
+
 			//カレンダーのクリアボタンの実装
 			var showAdditionalButton = function (input) {
 	            setTimeout(function () {
@@ -295,21 +295,21 @@
 			$('#datepicker').datepicker({
 				minDate:"-13d",
 				showButtonPanel: true,
-	            beforeShow: showAdditionalButton,       
+	            beforeShow: showAdditionalButton,
 	            onChangeMonthYear: showAdditionalButton
 			});
   		</script>
-  		
-  		
-  		  <script type="text/javascript"> 
+
+
+  		  <script type="text/javascript">
 
 			// 送り先がgetかpostかどっちで受け取っているか確認しましょう
 			function check(){
 			 //actionメソッドに遷移先のURLを代入する
-			 
+
 			 	var select = document.getElementById("edit").value;// registはselect(html)のid属性
 			 	var transition;
-			 	
+
 				switch (select){	// selectは86行目で定義している変数
 				  case "editgroup":		// caseにselect（html）のvalueを指定
 				    transition = "./editGroupInfoInput";
@@ -319,18 +319,18 @@
 				    break;
 				  case "editmultiuser":
 				    transition = "./editusersmulti/set";
-				    break;			    
+				    break;
 				  case "editsuperuser":
 				    transition = "./dataOrganizeInput";
 				    break;
 				}
-				
+
 			 	document.registform.action = transition;	// registformはformのname属性
 			}
 	</script>
-	
-	
-	
+
+
+
   		<p id="pageTop"><a href="/search"><i class="arrow up icon"></i></a></p>
   		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>
   		<br><br><br>

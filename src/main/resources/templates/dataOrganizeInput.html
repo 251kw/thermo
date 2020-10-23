@@ -26,11 +26,11 @@
 						<h3 class="index_input_error" th:text="#{view.text.dataOrganizeInUser}"></h3>
 						<h3 class="index_input_error" th:text="#{view.text.dataOrganizeInGroup}"></h3>
 					</div>
-					
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.del}"></button>	
-						<a href="/search_return">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.del}"></button>
+						<a th:href="@{/search_return}">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
 							</button>

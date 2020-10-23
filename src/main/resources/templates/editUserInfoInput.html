@@ -50,7 +50,7 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-								<td>		
+								<td>
 									<div class="toggle">
 										<span class="ui input" Style="width:85%">
 											<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
@@ -68,7 +68,7 @@
 										<span th:if="${grError}">
 											<br><span th:text="${grError}" class="index_input_error"></span>
 										</span>
-									</div>	
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -81,11 +81,11 @@
 										<br><span th:text="#{view.errEng}"></span>
 									</span>
 									<br><span th:text="${uIdError}" class="index_input_error"></span>
-								</td>	
+								</td>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-								<td>		
+								<td>
 									<div class="toggle">
 										<span class="ui input" Style="width:85%">
 											<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
@@ -100,7 +100,7 @@
 											<br><span th:text="#{view.errM416}"></span>
 											<br><span th:text="#{view.errEng}"></span>
 										</span>
-									</div>	
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -157,7 +157,7 @@
 					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
 						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.confirm}"></button>
-						<a href="/search_return">
+						<a th:href="@{/search_return}">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
 							</button>
@@ -167,7 +167,7 @@
 				<p id="btm"></p>
 				<!-- パスワードの表示/非表示切替 -->
 				<script type="text/javascript">
-				//groupPassの表示切り替え 
+				//groupPassの表示切り替え
 				$("span#gp").on("change", function () {
 					$(this).next('.btns').slideToggle();
 					const passwordToggle = document.querySelector('.js-password-toggle-a');
@@ -181,8 +181,8 @@
 				      passwordLabel.innerHTML = '<i class="fa fa-eye"></i>';
 				    }
 				    password.focus();
-				  }); 
-				//userPassの表示切り替え 
+				  });
+				//userPassの表示切り替え
 				$("span#up").on("change", function () {
 					$(this).next('.btns').slideToggle();
 					const passwordToggle = document.querySelector('.js-password-toggle-b');

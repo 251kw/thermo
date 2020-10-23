@@ -39,13 +39,13 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<input type="hidden" th:field="*{groupName}"/>
 					<input type="hidden" th:field="*{groupPass}"/>
 					<input type="hidden" th:field="${groupUpdateForm}"/>
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.edit}"></button>	
-						<a href="/guInput_return">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.edit}"></button>
+						<a th:href="@{/guInput_return}">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
 							</button>

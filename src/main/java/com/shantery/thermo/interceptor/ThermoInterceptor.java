@@ -22,28 +22,27 @@ public class ThermoInterceptor extends HandlerInterceptorAdapter {
 			                 HttpServletResponse response,
 			                 Object handler) throws Exception {
 
-		String requestUri = request.getRequestURI();
+		String servletPath = request.getServletPath();
 		// 初期アクセスの場合または
 		// ログイン処理の場合または
 		// グループ登録処理の場合または
 		// ユーザー登録処理の場合または
 		// ユーザー一括登録処理の場合
-		if (TOP.equals(requestUri) ||
-			LOGIN.equals(requestUri) ||
-			GROUP_INFO_INP.equals(requestUri) ||
-			USER_INFO_INP.equals(requestUri) ||
-			USERS_MULTI_SET.equals(requestUri) ||
-			SESSION_TIMEOUT.equals(requestUri)) {
+		if (TOP.equals(servletPath) ||
+			LOGIN.equals(servletPath) ||
+			GROUP_INFO_INP.equals(servletPath) ||
+			USER_INFO_INP.equals(servletPath) ||
+			USERS_MULTI_SET.equals(servletPath) ||
+			SESSION_TIMEOUT.equals(servletPath)) {
 			// 当条件の場合、セッションが存在しない為、タイムアウト処理は行わない
 			return true;
 		}
-		// TODO 2020/10/15:タイムアウト対応をAWSで行う
 		// セッションタイムアウトの場合
-		/*if (isSessionTimeout(request)) {
+		if (isSessionTimeout(request)) {
 			// ログアウト処理を行う
-			response.sendRedirect(SESSION_TIMEOUT);
+			response.sendRedirect(request.getContextPath() + SESSION_TIMEOUT);
 			return false;
-		}*/
+		}
 		return true;
 	}
 

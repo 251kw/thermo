@@ -20,17 +20,17 @@
 			<h3 th:text="#{view.label.index}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		
+
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
-		
+
 		<div class="ui text container">
 			<form method="get" class="ui form" name="registform" onsubmit="return check()">
 				<table class="index_regist_table">
 					<tr>
 						<td>
-							<span class="ui input select">			
+							<span class="ui input select">
 								<span th:insert="selectbox :: regist"></span>
-							</span> 
+							</span>
 							<input class="ui inverted blue button" type="submit" th:value="#{view.btn.signup}" />
 						</td>
 					</tr>
@@ -44,7 +44,7 @@
 				<p class="index_error" th:text="${login_error}"></p>
 			</div>
 			<br>
-			<form action="/login" method="post" class="ui large form" th:object="${ThermoForm}">
+			<form action="#" th:action="@{/login}" method="post" class="ui large form" th:object="${ThermoForm}">
 				<table class="ui table">
 					<tr>
 						<td>
@@ -74,18 +74,18 @@
 				</table>
 			</form>
 		</div>
-		
+
 <!---------------------------- 以下、javascript ----------------------------------->
 
-<script type="text/javascript"> 
+<script type="text/javascript">
 
 	// 送り先がgetかpostかどっちで受け取っているか確認しましょう
 	function check(){
 	 //actionメソッドに遷移先のURLを代入する
-	 
+
 	 	var select = document.getElementById("regist").value;// registはselect(html)のid属性
 	 	var transition;
-	 	
+
 		switch (select){	// selectは86行目で定義している変数
 		  case "group":		// caseにselect（html）のvalueを指定
 		    transition = "./groupInfoInput";
@@ -97,10 +97,10 @@
 		    transition = "./users_multi_set";
 		    break;
 		}
-		
+
 	 	document.registform.action = transition;	// registformはformのname属性
 	}
 </script>
-		
+
 	</body>
 </html>

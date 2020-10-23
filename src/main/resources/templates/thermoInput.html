@@ -26,7 +26,7 @@
 
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 		<div class="ui container">
-			<form action="/search" th:object="${searchInfo}" method="post">
+			<form action="/" th:action="@{/search}" th:object="${searchInfo}" method="post">
 				<div class="ui text container">
 					<div class="ui center aligned container">
 						<h3 class="index_ask_input" th:text="#{view.text.thermoInfoIn}"></h3>
@@ -62,7 +62,7 @@
 			<div class="ui divider"></div> <!-- テーブルの上のただの線 -->
 		</div>
 
-		<form action="/thermo_info_inp_suc" method="post" th:object="${thForm}">
+		<form action="/" th:action="@{/thermo_info_inp_suc}" method="post" th:object="${thForm}">
 			<div class="ui container center aligned">
 				<div th:unless="${nolist_msg}">
 					<table class="ui celled table" style="table-layout:fixed">
@@ -168,7 +168,7 @@
 				<span th:unless="${nolist_msg}">
 					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.confirm}"></button>
 				</span>
-				<a href="/search_return">
+				<a th:href="@{/search_return}">
 					<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
 				</a>
 			</div>

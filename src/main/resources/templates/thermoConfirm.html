@@ -10,7 +10,7 @@
     	<link th:href="@{/css/originalInput.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    	
+
     	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
@@ -24,10 +24,10 @@
 			<h3 th:text="#{view.thermoInfoCon.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		
+
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 		<div class="ui container">
-		<form action="/thermo_info_conf_suc" method="post" >
+		<form action="/" th:action="@{/thermo_info_conf_suc}" method="post" >
 		<div class="ui text container">
 			<div class="ui center aligned container">
 				<h3 class="index_ask_input" th:text="#{view.text.thermoInfoCon}"></h3>
@@ -74,7 +74,7 @@
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div align="center">
 				<button type="submit" name="input" class="ui inverted blue button " ><p th:text="#{view.btn.reg}"></button>
-				<a href="/thermo_info_conf_back">
+				<a th:href="@{/thermo_info_conf_back}">
 					<button type="button" class="ui inverted blue button " ><p th:text="#{view.btn.return}"></button>
 				</a>
 			</div>

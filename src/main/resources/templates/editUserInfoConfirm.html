@@ -65,7 +65,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<input type="hidden" th:field="*{groupId}"/>
 					<input type="hidden" th:field="*{groupPass}"/>
 					<input type="hidden" th:field="*{userId}"/>
@@ -74,12 +74,12 @@
 					<input type="hidden" th:field="*{gender}"/>
 					<input type="hidden" th:field="*{birthday}"/>
 					<input type="hidden" th:field="*{grade}"/>
-					<input type="hidden" th:field="*{adminFlg}"/>			
+					<input type="hidden" th:field="*{adminFlg}"/>
 					<input type="hidden" th:field="${uslist}"/>
 					<input type="hidden" th:field="${userInfoForm}"/>
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.edit}"></button>	
-						<a href="/editUserInfoInput">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.edit}"></button>
+						<a th:href="@{/editUserInfoInput}">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
 							</button>

@@ -22,8 +22,8 @@
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 		<div class="ui container">
-			<div class="ui text container">	
-					<form action="#" th:action="@{/groupUpdateConfirm}" th:object="${groupUpdateForm}" method="post">	
+			<div class="ui text container">
+					<form action="#" th:action="@{/groupUpdateConfirm}" th:object="${groupUpdateForm}" method="post">
 						<div class="ui center aligned container">
 						<h3 class="index_ask_input" th:text="#{view.text.UInfoAdd}"></h3>
 					</div>
@@ -45,12 +45,12 @@
 									<span th:if="${#fields.hasErrors('groupName')}" class="index_input_error">
 										<br><span th:text="#{view.errNameM}"></span>
 										<br><span th:text="#{view.errNameS}"></span>
-									</span>						
+									</span>
 									</td>
 								</tr>
 								<tr>
 									<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></div></td>
-									<td>		
+									<td>
 										<div class="toggle">
 											<span class="ui input" Style="width:85%">
 												<input class="field js-password form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
@@ -64,16 +64,16 @@
 											<span th:if="${#fields.hasErrors('groupPass')}" class="index_input_error">
 												<br><span th:text="#{view.errM416}"></span>
 												<br><span th:text="#{view.errEng}"></span>
-											</span>	
-										</div>	
+											</span>
+										</div>
 									</td>
-								</tr>			
+								</tr>
 							</tbody>
 					</table>
 					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
 						<button type="submit" class="ui inverted primary button" th:text="#{view.btn.confirm}"></button>
-						<a href="/search_return">
+						<a th:href="@{/search_return}">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
 							</button>
@@ -95,7 +95,7 @@
 				      passwordLabel.innerHTML = '<i class="fa fa-eye"></i>';
 				    }
 				    password.focus();
-				  });				
+				  });
 				</script>
 			</div>
 		</div>

@@ -22,11 +22,11 @@
 				<form action="/" th:action="@{/dataOrganizeResult}" method="POST">
 					<div class="ui center aligned container">
 						<h3 class="index_ask_input" th:text="#{view.text.dataOrganizeCon}"></h3>
-					</div>				
-					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->	
+					</div>
+					<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 					<div class="ui center aligned container">
-						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.del}"></button>	
-						<a href="/dataOrganizeInput">
+						<button type="submit" class="ui inverted primary button center" th:text="#{view.btn.del}"></button>
+						<a th:href="@{/dataOrganizeInput}">
 							<button type="button" class="ui inverted primary button center">
 								<th:block th:text="#{view.btn.return}"></th:block>
 							</button>

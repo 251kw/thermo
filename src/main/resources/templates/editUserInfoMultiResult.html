@@ -14,7 +14,7 @@
 		<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
     	<script type="text/javascript" th:src="@{/js/datepicker-ja.js}"></script>
     	<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
-    	
+
 	</head>
 	<body style="overflow-y:scroll;">
 		<!-- 外部ヘッダーファイル読み込み -->
@@ -24,7 +24,7 @@
 			<h3 th:text="#{view.editUInfoMRes.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		
+
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
 		<div class="ui container">
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			<form action="/editusersmulti/set" method="GET" class="ui form">
+			<form action="/" th:action="@{/editusersmulti/set}" method="GET" class="ui form">
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
@@ -45,7 +45,7 @@
 							<th th:text="#{view.tablelabel.birthday}"></th>
 							<th th:text="#{view.tablelabel.grade}"></th>
 							<th th:text="#{view.tablelabel.adminFlg}"></th>
-						</tr> 
+						</tr>
 					</thead>
 				    <tr th:each="user, stat : ${session.inputlist}" th:object="${user}">
 				    	<td th:data-label="#{view.tablelabel.uId}">
@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div th:unless="${flag}" align="center">
-					<a href="/search_return">
+					<a th:href="@{/search_return}">
 						<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
 					</a>
 				</div>
