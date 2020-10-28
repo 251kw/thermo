@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-			<form action="/" th:action="@{/editusersmulti/set}" method="GET" class="ui form">
+			<form action="/" th:action="@{/search_return}" method="GET" class="ui form">
 				<table class="ui celled table">
 					<thead class="delete">
 						<tr>
@@ -72,15 +72,8 @@
 	        		</tr>
 				</table>
 				<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-				<div th:if="${flag}" align="center">
-					<div align="center">
-						<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
-					</div>
-				</div>
-				<div th:unless="${flag}" align="center">
-					<a th:href="@{/search_return}">
-						<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
-					</a>
+				<div align="center">
+					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
 				</div>
 			</form>
 			<p id="btm"></p>
