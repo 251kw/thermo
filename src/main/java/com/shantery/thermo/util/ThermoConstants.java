@@ -11,7 +11,7 @@ public class ThermoConstants {
 	/** インスタンス生成禁止 **/
 	private ThermoConstants() {
 	}
-	
+
 	// URLのパラメータを示す変数
 	/** 起動時やTOPページに戻るときに使う変数 **/
 	public static final String TOP = "/";
@@ -91,6 +91,8 @@ public class ThermoConstants {
 	public static final String EDIT_USER_INFO_MULTI_REZ =  "/uresult";
 	/** ログインユーザー削除された場合のログアウト **/
 	public static final String LOGIN_USER_DELETED =  "/editlogout";
+	/** ユーザーマニュアルダウンロード **/
+	public static final String MANUAL_DOWNLOAD =  "/manualdownload";
 	/**  ユーザー情報一括更新の入力画面から削除画面へ遷移 **/
 	public static final String EDIT_USER_INFO_MULTI_DELETED =  "delete";
 	/**  ユーザー情報一括削除の確認画面から戻るが押されたとき **/
@@ -161,7 +163,7 @@ public class ThermoConstants {
 	public static final String TO_EDIT_USER_INFO_MULTI_DEL_COMF = "editUserInfoMultiDeleteConfirm";
 	/** ユーザー情報一括削除のRESULTへの遷移 **/
 	public static final String TO_EDIT_USER_INFO_MULTI_DEL_RES = "editUserInfoMultiDeleteResult";
-	
+
 	// キーを示す変数
 	/** ユーザー情報のCSVファイルをinputするときのキー **/
 	public static final String USERS_CSV = "users_csv";
@@ -181,7 +183,7 @@ public class ThermoConstants {
 	public static final String LOGIN_ERROR = "login_error";
 	/** 検索結果Listをセッションに入れるときのキー**/
 	public static final String SCH_LIST = "schlist";
-	
+
 	//ユーザー情報一括登録の配列を使うときの数値
 	public static final int M_GID = 0;
 	public static final int M_GPASS = 1;
@@ -192,31 +194,31 @@ public class ThermoConstants {
 	public static final int M_BIRTH = 6;
 	public static final int M_GRADE = 7;
 	public static final int M_FLG = 8;
-	
+
 	//イコールメソッドで比べる定数
 	/** 何も選択しない場合を判別 **/
 	public static final String NO_SEND = "";
 	/** 拡張子がcsvファイルであることを判別 **/
 	public static final String CSV_SEND = "csv";
-	
+
 	// @RequestParamのname属性
-	
+
 	//空文字
 		public static final String EMPTY = "";
-		
+
 	// ThermoReplaceValueで使う定数
 		// calcAge
 		public static final String HYPHEN = "-";
 		public static final String SLASH = "/";
 		public static final String DATE_PATTERN = "yyyy/M/d";
-		
+
 		// valueToName
 		/** 区分の種類 **/
 		public static final String KBN_TYPE_GRADE = "grade";
 		public static final String KBN_TYPE_ADMIN = "admin";
 		public static final String KBN_TYPE_GENDER = "gender";
 		public static final String KBN_TYPE_EXISTENCE = "exist";
-		
+
 		/** 学年区分の区分値 **/
 		public static final String KBN_VALUE_GRADE_ZERO = "0";
 		public static final String KBN_VALUE_GRADE_ONE = "1";
@@ -228,7 +230,7 @@ public class ThermoConstants {
 		public static final String KBN_VALUE_GRADE_A = "A";
 		public static final String KBN_VALUE_GRADE_B = "B";
 		public static final String KBN_VALUE_GRADE_C = "C";
-		
+
 		/** 学年区分の区分名 **/
 		public static final String KBN_NAME_GRADE_ZERO = "なし";
 		public static final String KBN_NAME_GRADE_ONE = "小学1年生";
@@ -240,37 +242,37 @@ public class ThermoConstants {
 		public static final String KBN_NAME_GRADE_A = "中学1年生";
 		public static final String KBN_NAME_GRADE_B = "中学2年生";
 		public static final String KBN_NAME_GRADE_C = "中学3年生";
-		
+
 		/** 管理者権限の区分値 **/
 		public static final String KBN_VALUE_ADMIN_ON = "1";
 		public static final String KBN_VALUE_ADMIN_OFF = "0";
-		
+
 		/** 管理者権限の区分名 **/
 		public static final String KBN_NAME_ADMIN_ON = "管理者";
 		public static final String KBN_NAME_ADMIN_OFF = "一般";
-		
+
 		/** 有無の区分値 **/
 		public static final String KBN_VALUE_WITH = "1";
 		public static final String KBN_VALUE_WITHOUT = "0";
-		
+
 		/** 有無の区分名 **/
 		public static final String KBN_NAME_WITH = "あり";
 		public static final String KBN_NAME_WITHOUT = "なし";
-		
+
 		/** 性別の区分値 **/
 		public static final String KBN_VALUE_GENDER_MALE = "M";
 		public static final String KBN_VALUE_GENDER_FEMALE = "F";
-		
+
 		/** 性別の区分名 **/
 		public static final String KBN_NAME_GENDER_MALE = "男性";
 		public static final String KBN_NAME_GENDER_FEMALE = "女性";
-		
+
 		// trimBlank
 		/** 半角スペース **/
 		public static final String HALF_SPACE = " ";
 		/** 全角スペース **/
 		public static final String FULL_SPACE = "　";
-		
+
 		// makeSelect
 		/** セレクトボックスの種類を決めるdivisionの値 **/
 		public static final String SELECT_TYPE_GRADE = "grade";
@@ -278,7 +280,7 @@ public class ThermoConstants {
 		public static final String SELECT_TYPE_GENDER = "gender";
 		public static final String SELECT_TYPE_REGIST = "regist";
 		public static final String SELECT_TYPE_ADMINFLG = "adminFlg";
-		
+
 		/** mapのvalue **/
 		public static final String SELECT_REGIST_VALUE_GROUP = "グループ";
 		public static final String SELECT_REGIST_VALUE_USER = "ユーザー（個人）";
@@ -297,7 +299,7 @@ public class ThermoConstants {
 		public static final String SELECT_GRADE_VALUE_C = "中学3年生";
 		public static final String SELECT_ADMINFLG_VALUE_NORMAL = "一般";
 		public static final String SELECT_ADMINFLG_VALUE_ADMIN = "管理者";
-		
+
 		/** mapのkey **/
 		public static final String SELECT_REGIST_KEY_GROUP = "group";
 		public static final String SELECT_REGIST_KEY_USER = "user";
@@ -316,7 +318,7 @@ public class ThermoConstants {
 		public static final String SELECT_GRADE_KEY_C = "C";
 		public static final String SELECT_ADMINFLG_KEY_NORMAL = "0";
 		public static final String SELECT_ADMINFLG_KEY_ADMIN = "1";
-		
+
 		public static final String SELECT_HTML_PARTS_A1 = "<select name='";
 		public static final String SELECT_HTML_PARTS_A2 = "<select id='sch_grade' name='sch_grade";
 		public static final String SELECT_HTML_PARTS_B = "'";
@@ -327,11 +329,11 @@ public class ThermoConstants {
 		public static final String SELECT_HTML_PARTS_G = "<option value='";
 		public static final String SELECT_HTML_PARTS_H = "'>";
 		public static final String SELECT_HTML_PARTS_I = "</option>";
-		
+
 	// その他thermoパッケージでしか使わなさそうな定数
 		/** ログイン画面から受け取るパラメータを格納する **/
 		public static final String THERMO_FORM = "ThermoForm";
-		
+
 	//バリデーションで使用する定数
 		public static final String THERMO_REGEX_PATTERN = "[a-zA-Z0-9]*";
 		public static final String SCH_INFO_REGEX_PATTERN = "[a-zA-Z0-9０-９ａ-ｚＡ-Ｚぁ-んァ-ヶー一-龠々〆〇〻㐂-頻 　]*$";
@@ -339,8 +341,8 @@ public class ThermoConstants {
 		public static final String GENDER_PATTERN ="[MF]";
 		public static final String GRADE_PATTERN ="[A-C0-6]";
 		public static final String FLAG_PATTERN ="[0-1]";
-		
-		
+
+
 	// ThermoInputパッケージでしか使わない定数
 		public static final String THERMO_INP_ER = "※半角数字で小数第一位まで入力してください";
 		public static final String THERMO_INP_TEMP_ER = "※体温は30.0～49.9の範囲で入力してください";
@@ -349,7 +351,7 @@ public class ThermoConstants {
 		public static final String THERMO_USER_LIST = "ulist";
 		public static final String THERMO_BIRTH = "birth";
 		public static final String THERMO_INP_FORM = "thForm";
-		
+
 	// Searchパッケージで使用する定数
 		public static final String COMBI_MSG = "※チェックボックスは単体で使用してください。";
 		public static final String NOLIST_MSG = "検索結果がありませんでした。";
@@ -359,9 +361,9 @@ public class ThermoConstants {
 		public static final String NAME_OVER_ERROR = "※64文字以内で入力してください。";
 		public static final String MAX_SCH_LISTSTR = "100";
 		public static final int MAX_SCH_LISTINT = 100;
-		
+
 		public static final String Q_PERCENT = "%";
-		
+
 
 	// UserInfoInput,GroupInfoInputでしか使わない定義
 		public static final String USER_INP_GR_ER = "※グループパスワードが間違っています";

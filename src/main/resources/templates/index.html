@@ -24,6 +24,11 @@
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
 		<div class="ui text container">
+			<a th:href="@{/pdf/user_manual.pdf}"  target="_blank">
+				<button type="button" class="ui inverted primary button center">
+					<th:block th:text="#{view.btn.manual}"></th:block>
+				</button>
+			</a>
 			<form method="get" class="ui form" name="registform" onsubmit="return check()">
 				<table class="index_regist_table">
 					<tr>
