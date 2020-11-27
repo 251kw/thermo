@@ -7,6 +7,8 @@
 		<link th:href="@{/css/semantic.min.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/css/themes/default/assets/images/favicon.ico}" rel="shortcut icon" type="image/vnd.microsoft.icon">
+		<link th:href="@{/css/themes/default/assets/images/favicon.ico}" rel="icon" type="image/vnd.microsoft.icon">
     	<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 	</head>
 	<body style="overflow-y:scroll;">
@@ -19,11 +21,11 @@
 			<h3 th:text="#{view.userInfoMulIn.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		
+
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
-		
+
 		<div class="ui text container">
-		
+
 			<form action="#" th:action="@{./users_multi_get}" enctype="multipart/form-data" method="post">
 				<table class="inner">
 					<tr>
@@ -37,7 +39,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr>	
+					<tr>
 						<td class="centerorigin">
 							<input type="submit" class="ui inverted primary button center" th:value="#{view.selectSend}">
 							<a href="./">
@@ -57,9 +59,9 @@
 					</th:block>
 				</div>
 			</th:block>
-			
+
 		</div>
-		
+
 		<br><br><br>
 	</body>
 </html>

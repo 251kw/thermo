@@ -8,6 +8,8 @@
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/css/themes/default/assets/images/favicon.ico}" rel="shortcut icon" type="image/vnd.microsoft.icon">
+		<link th:href="@{/css/themes/default/assets/images/favicon.ico}" rel="icon" type="image/vnd.microsoft.icon">
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
     	<script type="text/javascript" th:src="@{/js/scroll.js}"></script>
 	</head>
@@ -21,7 +23,7 @@
 			<h3 th:text="#{view.userInfoMulCon.pagetitle}"></h3>
 		</div>
 		<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
-		
+
 		<!---------------------------- 以下、本体-------------------------------------------------------------------------->
 
 		<div class="ui container center aligned">
@@ -95,7 +97,7 @@
 							<input type="submit" class="ui inverted primary button right aligned" th:value="#{view.btn.reg}">
 						</form>
 					</td>
-					
+
 					<td class="rightorigin">
 									<form action="#" th:action="@{./users_multi_set}" method="get">
 						<input type="submit" class="ui inverted primary button" th:value=#{view.btn.return}>
@@ -103,7 +105,7 @@
 					</td>
 				</tr>
 			</table>
-			
+
 		</div>
 		<p id="pageTop"><a href="/userInfoMultiConfirm"><i class="arrow up icon"></i></a></p>
   		<p id="pageBottom"><a href="#btm"><i class="arrow down icon"></i></a></p>

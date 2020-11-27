@@ -9,6 +9,8 @@
     	<link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/originalIndex.css}" rel="stylesheet" type="text/css" />
     	<link th:href="@{/css/topbottom.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/css/themes/default/assets/images/favicon.ico}" rel="shortcut icon" type="image/vnd.microsoft.icon">
+		<link th:href="@{/css/themes/default/assets/images/favicon.ico}" rel="icon" type="image/vnd.microsoft.icon">
     	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 
     	<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" type="text/css" />
@@ -51,7 +53,7 @@
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.gPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-								<td>		
+								<td>
 									<div class="toggle">
 										<span class="ui input" Style="width:85%">
 											<input class="field js-password-a form-control" type="password" name="groupPass" id="groupPass" th:value="*{groupPass}" th:placeholder="#{view.checkPh.groupPass}" maxlength="16">
@@ -69,7 +71,7 @@
 										<span th:if="${grError}">
 											<br><span th:text="${grError}" class="index_input_error"></span>
 										</span>
-									</div>	
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -81,11 +83,11 @@
 									</span>
 									<br><span th:text="${uIdError}" class="index_input_error"></span>
 									<br><span th:text="${uIdError2}" class="index_input_error"></span>
-								</td>	
+								</td>
 							</tr>
 							<tr>
 								<td><p th:text="#{view.tablelabel.uPass}"></p><div class= error><p th:text="#{view.text.halfChar}"></p></div></td>
-								<td>		
+								<td>
 									<div class="toggle">
 										<span class="ui input" Style="width:85%">
 											<input class="field js-password-b form-control" type="password" name="userPass" id="userPass" th:value="*{userPass}" th:placeholder="#{view.checkPh.userPass}" maxlength="16">
@@ -100,7 +102,7 @@
 											<br><span th:text="#{view.errM416}"></span>
 											<br><span th:text="#{view.errEng}"></span>
 										</span>
-									</div>	
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -164,7 +166,7 @@
 				<p id="btm"></p>
 				<!-- パスワードの表示/非表示切替 -->
 				<script type="text/javascript">
-				//groupPassの表示切り替え 
+				//groupPassの表示切り替え
 				$("span#gp").on("change", function () {
 					$(this).next('.btns').slideToggle();
 					const passwordToggle = document.querySelector('.js-password-toggle-a');
@@ -178,8 +180,8 @@
 				      passwordLabel.innerHTML = '<i class="fa fa-eye"></i>';
 				    }
 				    password.focus();
-				  }); 
-				//userPassの表示切り替え 
+				  });
+				//userPassの表示切り替え
 				$("span#up").on("change", function () {
 					$(this).next('.btns').slideToggle();
 					const passwordToggle = document.querySelector('.js-password-toggle-b');
