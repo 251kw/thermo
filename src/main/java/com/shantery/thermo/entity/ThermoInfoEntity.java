@@ -55,6 +55,7 @@ public class ThermoInfoEntity {
 	@ManyToOne				    //↓SQLのINSERT文,UPDATE文に含むかどうか指定
 	@JoinColumn(name="user_id", insertable=false, updatable=false)
 	private UserInfoEntity userInfoEntity;
+	private String thermoId;
 
 	public UserInfoEntity getUserInfoEntity() {
 		return userInfoEntity;
@@ -74,10 +75,16 @@ public class ThermoInfoEntity {
 		this.userId = user_id;
 	}
 
+	public void setThermo_id(String thermo_id) {
+		this.thermoId = thermo_id;
+	}
+	public String getThermo_id() {
+		return thermoId;
+	}
+
 	public String getThermo() {
 		return thermo;
 	}
-
 	public void setThermo(String thermo) {
 		this.thermo = thermo;
 	}
