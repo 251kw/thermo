@@ -69,9 +69,9 @@ public class ThermoInputService {
 			thEn.setUpdate_time(time.format(calendar.getTime()));
 
 			repository.saveAndFlush(thEn);
-
 		}
 	}
+
 
 	/**
 	 * チェックボックスの値を変換

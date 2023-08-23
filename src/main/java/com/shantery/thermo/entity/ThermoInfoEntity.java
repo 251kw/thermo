@@ -77,18 +77,17 @@ public class ThermoInfoEntity {
 		this.userId = user_id;
 	}
 
-	public String getThermo_id() {
-		return thermoId;
+	public void setThermo_id(String thermo_id) {
+		this.thermoId = thermo_id;
 	}
 
-	public void setThermo_id(String thermoId) {
-		this.thermoId = thermoId;
+	public String getThermo_id() {
+		return thermoId;
 	}
 
 	public String getThermo() {
 		return thermo;
 	}
-
 	public void setThermo(String thermo) {
 		this.thermo = thermo;
 	}
