@@ -24,6 +24,9 @@ public class ThermoInfoEntity {
 	@Id
 	@Column(length=32,name="user_id")
 	private String userId;
+	@Id
+	@Column(length=32,name="thermo_id")
+	private String thermoId;
 	/** 体温 **/
 	@Column
 	private String thermo;
@@ -72,6 +75,14 @@ public class ThermoInfoEntity {
 
 	public void setUser_id(String user_id) {
 		this.userId = user_id;
+	}
+
+	public String getThermo_id() {
+		return thermoId;
+	}
+
+	public void setThermo_id(String thermoId) {
+		this.thermoId = thermoId;
 	}
 
 	public String getThermo() {

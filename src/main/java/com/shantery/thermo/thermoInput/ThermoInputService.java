@@ -1,5 +1,7 @@
 package com.shantery.thermo.thermoInput;
 
+import static com.shantery.thermo.util.ThermoConstants.*;
+
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,8 +16,6 @@ import com.shantery.thermo.entity.ThermoInfoEntity;
 import com.shantery.thermo.entity.UserInfoEntity;
 import com.shantery.thermo.search.SearchInfoForm;
 
-import static com.shantery.thermo.util.ThermoConstants.*;
-
 @Service
 public class ThermoInputService {
 
@@ -25,14 +25,14 @@ public class ThermoInputService {
 	HttpSession session;
 	@Autowired
 	ThermoInputUserRepository u_repository;
-	
-	
+
+
 	/**
 	 * エンティティにセットして登録する
 	 * @param list Formに入った登録したい情報
 	 */
 	public void registAll(ArrayList<ThermoInputForm.Detail> list) {
-		
+
 		//現在日時の取得と日付の書式設定
 		Calendar calendar = Calendar.getInstance();
 		//登録時間
@@ -40,11 +40,11 @@ public class ThermoInputService {
 		//登録日時
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		//thermoIDを自動採番で決める
-		//int thermoId = (1+(int)repository.count());
-		
+		int thermoId = (1+(int)repository.count());
+
 		//updateuserとしてsessionからログインユーザーをとってくる
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
-		
+
 		//一人ひとり登録
 		for(int i=0; i<list.size(); i++) {
 			ThermoInfoEntity thEn = new ThermoInfoEntity();
@@ -53,11 +53,11 @@ public class ThermoInputService {
 			ThermoInfoEntity user = repository.findByUserIdAndRegistDate(list.get(i).getUserId(), day.format(calendar.getTime()));
 			if(user != null) {
 				//ThermoIdを消すものと入れ替える
-				//thEn.setThermo_id(user.getThermo_id());
+				thEn.setThermo_id(user.getThermo_id());
 				repository.delete(user);
 			}else {
-				//thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
-				//thermoId++;
+				thEn.setThermo_id(THERMO_ID+Integer.toString(thermoId));
+				thermoId++;
 			}
 			thEn.setThermo(convertThermo(list.get(i).getTemperature()));
 			thEn.setTaste_disorder(convertCheck(list.get(i).getTaste()));
@@ -65,14 +65,14 @@ public class ThermoInputService {
 			thEn.setCough(convertCheck(list.get(i).getCough()));
 			thEn.setOther(list.get(i).getWriting());
 			thEn.setRegist_date(day.format(calendar.getTime()));
-			thEn.setUpdate_user(loginuser.getUser_id());			
+			thEn.setUpdate_user(loginuser.getUser_id());
 			thEn.setUpdate_time(time.format(calendar.getTime()));
-			
+
 			repository.saveAndFlush(thEn);
-			
+
 		}
 	}
-	
+
 	/**
 	 * チェックボックスの値を変換
 	 * @param check チェックボックスの値
@@ -84,10 +84,10 @@ public class ThermoInputService {
 		}else {
 			check = KBN_VALUE_WITHOUT;
 		}
-		
+
 		return check;
 	}
-	
+
 	/**
 	 * 体温を変換
 	 * @param thermo 体温
@@ -109,7 +109,7 @@ public class ThermoInputService {
 		}
 		return thermo;
 	}
-	
+
 	/**
 	 * 空文字をnullに変換する
 	 * @param check チェックしたい値
@@ -119,10 +119,10 @@ public class ThermoInputService {
 		if(check.equals(KBN_VALUE_WITHOUT)) {
 			check = null;
 		}
-		
+
 		return check;
 	}
-	
+
 	/**
 	 * 体温の入力チェックをする
 	 * @param list チェックしたい体温情報の入った入力情報
@@ -142,10 +142,10 @@ public class ThermoInputService {
 				message.add(THERMO_INP_ER);
 			}
 		}
-		
+
 		return message;
 	}
-	
+
 	/**
 	 * ユーザー情報を元に、そのユーザーの体温情報を取得する
 	 * @param ulist ユーザー情報
@@ -155,7 +155,7 @@ public class ThermoInputService {
 		//現在日時の取得と日付の書式設定
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
-		//すでに登録している情報取得 
+		//すでに登録している情報取得
 		ArrayList<ThermoInputForm.Detail> list = new ArrayList<ThermoInputForm.Detail>();
 		int i = 0;
 		for(UserInfoEntity ul : ulist) {
@@ -171,10 +171,10 @@ public class ThermoInputService {
 			}
 			i++;
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * 検索情報をもらい、条件に合ったユーザーリストを返す
 	 * @param ulist 元々のユーザーリスト
@@ -184,7 +184,7 @@ public class ThermoInputService {
 	public Iterable<UserInfoEntity> searchUserList(Iterable<UserInfoEntity> ulist, SearchInfoForm form){
 		//ログインユーザー情報取得
 		UserInfoEntity loginuser = (UserInfoEntity)session.getAttribute(LOGIN_USER);
-		
+
 		//学年検索
 		if(!EMPTY.equals(form.getSch_grade())) {
 			ulist = u_repository.findByGroupIdAndGradeOrderByUpdateTime(loginuser.getGroup_id(), form.getSch_grade());
@@ -192,10 +192,10 @@ public class ThermoInputService {
 		}else {
 			ulist = u_repository.findByGroupIdOrderByUpdateTime(loginuser.getGroup_id());
 		}
-		
+
 		return ulist;
 	}
-	
+
 	/**
 	 * 体温が3桁の時、間に小数点を入れる
 	 * @param list 入力した検温情報
@@ -211,7 +211,7 @@ public class ThermoInputService {
 			}
 			lt.setTemperature(check);
 		}
-		
+
 		return list;
 	}
 }
