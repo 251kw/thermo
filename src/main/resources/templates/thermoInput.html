@@ -168,7 +168,9 @@
 			<div class="ui hidden divider"></div><!-- 一行スペース入れてる -->
 			<div align="center">
 				<span th:unless="${nolist_msg}">
-					<button type="submit" name="input" class="ui inverted blue button" ><p th:text="#{view.btn.confirm}"></button>
+					<button type="submit" name="input" class="ui inverted blue button" >
+					<p th:text="#{view.btn.confirm}">
+					</button>
 				</span>
 				<a th:href="@{/search_return}">
 					<button type="button" class="ui inverted blue button" ><p th:text="#{view.btn.return}"></button>
